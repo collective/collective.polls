@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2011-12-09 04:08+0000\n"
+"POT-Creation-Date: 2011-12-09 19:02+0000\n"
 "PO-Revision-Date: 2011-12-09 01:11-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -17,10 +17,6 @@ msgstr ""
 "Domain: collective.polls\n"
 "Language: es\n"
 "X-Generator: Lokalize 1.2\n"
-
-#: collective/polls/profiles/default/types/collective.polls.polls.xml
-msgid "A container for polls"
-msgstr "Un contenedor de encuestas"
 
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
@@ -75,10 +71,6 @@ msgstr "Resultados parciales"
 msgid "Poll"
 msgstr "Encuesta"
 
-#: collective/polls/profiles/default/types/collective.polls.polls.xml
-msgid "Polls"
-msgstr "Encuestas"
-
 #: collective/polls/content/poll_templates/view.pt:36
 msgid "Results:"
 msgstr "Resultados:"
@@ -108,5 +100,4 @@ msgstr "Qué encuesta mostrar en el portlet."
 #: collective/polls/content/poll_templates/view.pt:14
 msgid "Yes"
 msgstr "Si"
-
 
