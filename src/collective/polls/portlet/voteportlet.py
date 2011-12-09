@@ -193,7 +193,11 @@ class Renderer(base.Renderer):
         pm = getToolByName(self.context, 'portal_membership')
         if pm.isAnonymousUser() and not self.getCurrentPoll().allow_anonymous:
             view = False
-            
+
+        # If we have already voted and we we should not see partial results
+        # do not show the portlet either
+        if self.hasAlreadyVoted() and not self.getVotingResults():
+            view = False
         return view
 
         
