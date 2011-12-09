@@ -1,0 +1,7 @@
+collective.polls contributors
+=============================
+
+- Franco Pellegrini (frapell@gmail.com)
+
+- Héctor Velarde (hector.velarde@gmail.com)
+
