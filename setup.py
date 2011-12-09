@@ -11,7 +11,7 @@ setup(name='collective.polls',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Framework :: Plone :: 4.1",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
