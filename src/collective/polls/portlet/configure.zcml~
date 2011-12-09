@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.polls">
+
+     <!-- Register the portlet -->
+
+     <plone:portlet
+         name="collective.polls.voteportlet.NewsPortlet"
+         interface=".voteportlet.INewsPortlet"
+         assignment=".voteportlet.Assignment"
+         view_permission="cmf.ManagePortal"
+         edit_permission="cmf.ManagePortal"
+         renderer=".voteportlet.Renderer"
+         addview=".voteportlet.AddForm"
+         editview=".voteportlet.EditForm"
+         />
+
+</configure>

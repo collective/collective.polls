@@ -1,0 +1,69 @@
+<dl class="portlet votePortlet"
+    i18n:domain="collective.polls">
+
+    <dt class="portletHeader" tal:condition="view/getHeader">
+        <span class="portletTopLeft"></span>
+        <span tal:content="view/getHeader" />
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem odd"
+        tal:define="current_poll view/getCurrentPoll;
+                    toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
+        tal:condition="nocall:current_poll">
+
+        <h3 tal:content="current_poll/Title"/>
+        
+        <tal:block condition="view/hasAlreadyVoted">
+            <tal:current_results define="results view/getVotingResults;"
+                         condition="nocall:results">
+            <h4 i18n:translate="">Partial results</h4>
+            <p tal:repeat="result results">
+                <span tal:content="python: result[0]" />:
+                <span tal:content="python: result[1]" />
+            </p>
+            </tal:current_results>
+        </tal:block>
+
+        <tal:voting condition="not:view/hasAlreadyVoted">
+
+            <form action="#" method="post"
+                    tal:attributes="action context/absolute_url">
+
+                <!--<tal:one_choice repeat="answer current_poll/answers"
+                                condition="not:current_poll/multivalue">-->
+                    <tal:one_choice repeat="answer current_poll/answers">
+                    <input type="radio"
+                            name="#"
+                            value="#"
+                            tal:attributes="name string:answer.${answer};
+                                            value answer;"
+                            />
+                            <span tal:content="answer" />
+                            <br/>
+                </tal:one_choice>
+
+                <!-- Comment out for now
+                <tal:multi_choice repeat="answer current_poll/answers"
+                                condition="current_poll/multivalue">
+                    <input type="checkbox"
+                            name="answers:list"
+                            value="#"
+                            tal:attributes="value answer;"
+                            />
+                            <span tal:content="answer" />
+                            <br/>
+                </tal:multi_choice>-->
+
+                <input type="submit" name="poll.submit" value="Submit" i18n:translate="" />
+            </form>
+        </tal:voting>
+
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>
