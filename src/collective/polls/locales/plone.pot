@@ -1,0 +1,59 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-12-09 19:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Active"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "In this state, a poll can receive votes"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "In this state, a poll cannot receive votes"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Inactive"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Makes a poll active"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Makes a poll inactive"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Poll Workflow"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Poll Workflow is intended to be used with polls"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Start"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Stop"
+msgstr ""
+
