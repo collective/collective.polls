@@ -1,4 +1,4 @@
 Introduction
 ============
 
-A content type, workflow, and portlet for conduction online polls, for anonymous and logged-in users.
+A content type, workflow, and portlet for conducting online polls, for anonymous and logged-in users.
