@@ -132,7 +132,11 @@ class Renderer(base.Renderer):
                         # If he's anonymous, let's set a cookie
                         self.request.RESPONSE.setCookie('collective.poll',
                                                         IUUID(poll))
-                        
+
+                # If the poll was submitted, let's redirect to make the changes
+                # visible
+                self.request.RESPONSE.redirect(self.context.absolute_url())
+            
         return pt(self)
         
     def getHeader(self):
