@@ -5,3 +5,6 @@ collective.polls contributors
 
 - Héctor Velarde (hector.velarde@gmail.com)
 
+- Érico Andrei (erico@simplesconsultoria.com.br)
+
+- WebDesignerDepot (www.webdesignerdepot.com) - icon

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="poll_workflow" meta_type="Workflow" remove=""/>
+ <bindings>
+  <type type_id="collective.polls.poll" remove="" />
+ </bindings>
+</object>
