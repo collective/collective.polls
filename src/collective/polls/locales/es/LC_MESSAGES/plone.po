@@ -2,43 +2,42 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2011-12-09 19:18+0000\n"
-"PO-Revision-Date: 2011-12-09 13:25-0600\n"
-"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2011-12-13 04:49+0000\n"
+"PO-Revision-Date: 2011-12-13 02:03-0300\n"
+"Last-Translator: Franco Pellegrini\n"
+"Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "Language-Code: es\n"
 "Language-Name: Español\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
-"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv "
+"es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+"Language: es\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Active"
-msgstr "Activo"
+msgid "Closed"
+msgstr "Cerrada"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "In this state, a poll can receive votes"
-msgstr "En este estado, una encuesta puede recibir votos"
+msgid "Member retracts submission"
+msgstr "El miembro retrae la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "In this state, a poll cannot receive votes"
-msgstr "En este estado, una encuesta no puede recibir votos"
+msgid "Member submits content for publication"
+msgstr "El miembro propone la encuesta para ser publicada"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Inactive"
-msgstr "Inactivo"
+msgid "Open"
+msgstr "Abierta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Makes a poll active"
-msgstr "Activar la encuesta"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Makes a poll inactive"
-msgstr "Desactivar la encuesta"
+msgid "Pending review"
+msgstr "Pendiente de revisión"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow"
@@ -49,10 +48,15 @@ msgid "Poll Workflow is intended to be used with polls"
 msgstr "Un flujo de trabajo para utilizarse en encuestas."
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Start"
-msgstr "Iniciar"
+msgid "Private"
+msgstr "Privado"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Stop"
-msgstr "Detener"
+msgid "Reviewer publishes content"
+msgstr "El revisor publica el contenido"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Site admin closes the poll"
+msgstr "El administrador del sitio cierra la encuesta"
+
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-09 19:18+0000\n"
+"POT-Creation-Date: 2011-12-13 04:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,23 @@ msgstr ""
 "Domain: plone\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Active"
+msgid "Closed"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "In this state, a poll can receive votes"
+msgid "Member retracts submission"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "In this state, a poll cannot receive votes"
+msgid "Member submits content for publication"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Inactive"
+msgid "Open"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Makes a poll active"
-msgstr ""
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Makes a poll inactive"
+msgid "Pending review"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
@@ -50,10 +46,15 @@ msgid "Poll Workflow is intended to be used with polls"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Start"
+msgid "Private"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Stop"
+msgid "Reviewer publishes content"
 msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Site admin closes the poll"
+msgstr ""
+
 

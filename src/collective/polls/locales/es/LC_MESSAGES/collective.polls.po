@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2011-12-09 19:02+0000\n"
-"PO-Revision-Date: 2011-12-09 01:11-0300\n"
+"POT-Creation-Date: 2011-12-13 04:49+0000\n"
+"PO-Revision-Date: 2011-12-13 01:45-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,8 @@ msgid "Header"
 msgstr "Cabecera"
 
 #: collective/polls/portlet/voteportlet.py:30
-msgid "Latest active poll"
-msgstr "La encuesta activa más reciente"
+msgid "Latest open poll"
+msgstr "La encuesta abierta más reciente"
 
 #: collective/polls/content/poll_templates/view.pt:16
 msgid "No"

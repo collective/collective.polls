@@ -25,9 +25,9 @@ from zope.security import checkPermission
 
 def PossiblePolls(context):
     catalog = getToolByName(context, 'portal_catalog')
-    polls = catalog(portal_type="collective.polls.poll", review_state="active")
+    polls = catalog(portal_type="collective.polls.poll", review_state="open")
     
-    values = [SimpleTerm(value="latest", title=_(u"Latest active poll"))]
+    values = [SimpleTerm(value="latest", title=_(u"Latest open poll"))]
     if polls:
         for i in polls:
             values.append(SimpleTerm(value=i.UID, title=i.Title))
@@ -151,9 +151,9 @@ class Renderer(base.Renderer):
 
         uid = self.data.poll
         if uid == 'latest':
-            # We should get the latest active poll to use in the portlet
+            # We should get the latest open poll to use in the portlet
             poll = catalog(portal_type="collective.polls.poll",
-                           review_state="active",
+                           review_state="open",
                            sort_on="created",
                            sort_order="reverse")
         else:
