@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 from five import grok
-from zope.interface import implements
 
 from Products.CMFPlone.interfaces import INonInstallable
 
