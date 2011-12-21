@@ -8,7 +8,8 @@
 <body>
 
 <metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core">
+  <metal:content-core define-macro="content-core"
+    tal:define="results view/getResults">
 
   <h3 i18n:translate="" >Allow anonymous votes</h3>
   <span tal:condition="context/allow_anonymous"
@@ -33,13 +34,15 @@
     </li>
   </ul>
 
+  <tal:results tal:condition="results">
   <h2 i18n:translate="">Results:</h2>
   <ul>
-    <li tal:repeat="results view/getResults">
-        <span tal:content="python: results[0]" />: 
-        <span tal:content="python: results[1]" />
+    <li tal:repeat="option_result results">
+        <span tal:content="python: option_result[0]" />: 
+        <span tal:content="python: option_result[1]" />
     </li>
   </ul>
+  </tal:results>
 
     
   </metal:content-core>
