@@ -6,6 +6,8 @@ from zope import interface
 
 from zope.annotation.interfaces import IAnnotations
 
+from z3c.form.interfaces import HIDDEN_MODE
+
 from plone.directives import dexterity
 from plone.directives import form
 
@@ -74,13 +76,46 @@ class Poll(dexterity.Item):
             all_votes.append((answer, votes))
         return all_votes
 
+class PollAddForm(dexterity.AddForm):
+    """ Form to handle creation of new Polls
+    """
+
+    grok.name('collective.polls.poll')
+
+    def updateFields(self):
+        ''' Update form fields to set options to use DataGridFieldFactory '''
+        super(PollAddForm, self).updateFields()
+        self.fields['options'].widgetFactory = DataGridFieldFactory
+
+    def datagridUpdateWidgets(self, subform, widgets, widget):
+        ''' Hides the widgets in the datagrid subform '''
+        widgets['option_id'].mode = HIDDEN_MODE
+
+    def updateWidgets(self):
+        ''' Update form widgets to hide column option_id from end user '''
+        super(PollAddForm, self).updateWidgets()
+        self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
+
 
 class PollEditForm(dexterity.EditForm):
+    """ Form to handle edition of existing Polls
+    """
 
     grok.context(IPoll)
 
-    def render(self):
-        return super(PollEditForm, self).render()
+    def updateFields(self):
+        ''' Update form fields to set options to use DataGridFieldFactory '''
+        super(PollEditForm, self).updateFields()
+        self.fields['options'].widgetFactory = DataGridFieldFactory
+
+    def datagridUpdateWidgets(self, subform, widgets, widget):
+        ''' Hides the widgets in the datagrid subform '''
+        widgets['option_id'].mode = HIDDEN_MODE
+
+    def updateWidgets(self):
+        ''' Update form widgets to hide column option_id from end user '''
+        super(PollEditForm, self).updateWidgets()
+        self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
 
 
 class View(grok.View):
