@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from five import grok
 from plone.directives import dexterity, form
 
