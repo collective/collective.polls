@@ -1,13 +1,13 @@
 # -*- coding:utf-8 -*-
 from five import grok
-from plone.directives import dexterity, form
 
 from zope import schema
 
-from collective.polls import MessageFactory as _
-
 from zope.annotation.interfaces import IAnnotations
 
+from plone.directives import dexterity, form
+
+from collective.polls import MessageFactory as _
 
 class IPoll(form.Schema):
     """
