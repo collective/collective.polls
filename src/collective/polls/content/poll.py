@@ -2,13 +2,27 @@
 from five import grok
 
 from zope import schema
+from zope import interface
 
 from zope.annotation.interfaces import IAnnotations
 
 from plone.directives import dexterity
 from plone.directives import form
 
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import DictRow
+
 from collective.polls import MessageFactory as _
+
+
+class IOption(interface.Interface):
+    ''' An option in a poll '''
+
+    option_id = schema.Int(title=u"Option Id",
+                           required=False)
+
+    description = schema.TextLine(title=_(u"Description"),
+                                  required=True)
 
 
 class IPoll(form.Schema):
@@ -34,11 +48,10 @@ class IPoll(form.Schema):
 
     answers = schema.List(
         title = _(u"Answers"),
-        value_type = schema.Text(
-                        title=_(u'Option'),
-                        default=u''),
+        value_type = DictRow(title=_(u'Option'),
+                             schema=IOption),
         default=[],
-        required=False)
+        required=True)
 
 
 class Poll(dexterity.Item):
