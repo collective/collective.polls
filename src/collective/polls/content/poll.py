@@ -97,6 +97,12 @@ class PollAddForm(dexterity.AddForm):
         super(PollAddForm, self).updateWidgets()
         self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
 
+    def create(self, data):
+        options = data['options']
+        for (index,option) in enumerate(options):
+            option['option_id'] = index
+        return super(PollAddForm, self).create(data)
+
 
 class PollEditForm(dexterity.EditForm):
     """ Form to handle edition of existing Polls
@@ -118,6 +124,11 @@ class PollEditForm(dexterity.EditForm):
         super(PollEditForm, self).updateWidgets()
         self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
 
+    def applyChanges(self, data):
+        options = data['options']
+        for (index,option) in enumerate(options):
+            option['option_id'] = index
+        super(PollEditForm, self).applyChanges(data)
 
 class View(grok.View):
 
