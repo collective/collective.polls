@@ -29,7 +29,7 @@
   <h2 i18n:translate="">Options:</h2>
   <ul>
     <li tal:repeat="option view/getOptions">
-        <span tal:content="option" />
+        <span tal:content="option/description" />
     </li>
   </ul>
 
