@@ -1,10 +1,12 @@
 # -*- coding:utf-8 -*-
+from Acquisition import aq_inner
 from five import grok
 
 from zope import schema
 from zope import interface
 
 from zope.annotation.interfaces import IAnnotations
+from zope.component import getMultiAdapter
 
 from z3c.form.interfaces import HIDDEN_MODE
 
@@ -142,10 +144,22 @@ class View(grok.View):
 
     grok.name('view')
 
+    def update(self):
+        super(View, self).update()
+        context = aq_inner(self.context)
+        self.state = getMultiAdapter((context, self.request),
+                                      name=u'plone_context_state')
+        self.wf_state = self.state.workflow_state()
+
     def getOptions(self):
         ''' Returns available options '''
         return self.context.getOptions()
 
     def getResults(self):
-        ''' Returns results so far '''
-        return self.context.getResults()
+        ''' Returns results so far if allowed'''
+        show_results = False
+        if self.wf_state == 'open':
+            show_results = show_results or self.context.show_results
+        elif self.wf_state == 'closed':
+            show_results = True
+        return (show_results and self.context.getResults()) or None
