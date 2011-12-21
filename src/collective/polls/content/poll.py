@@ -76,6 +76,7 @@ class Poll(dexterity.Item):
             all_votes.append((answer, votes))
         return all_votes
 
+
 class PollAddForm(dexterity.AddForm):
     """ Form to handle creation of new Polls
     """
