@@ -12,8 +12,7 @@ from collective.polls import MessageFactory as _
 
 
 class IPoll(form.Schema):
-    """
-    A poll
+    """ A Poll in a Plone site
     """
 
     allow_anonymous = schema.Bool(
@@ -43,6 +42,8 @@ class IPoll(form.Schema):
 
 
 class Poll(dexterity.Item):
+    """ A Poll in a Plone site
+    """
 
     grok.implements(IPoll)
 
