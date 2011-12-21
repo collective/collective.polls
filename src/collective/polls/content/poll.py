@@ -71,9 +71,11 @@ class Poll(dexterity.Item):
         ''' Returns results so far '''
         annotations = IAnnotations(self)
         all_votes = []
-        for (index, option) in enumerate(self.getOptions()):
-            votes = annotations.get("answer.%s"%index, 0)
-            all_votes.append((option['description'], votes))
+        for option in self.getOptions():
+            index = option.get('option_id')
+            description = option.get('description')
+            votes = annotations.get("option.%02d" % index, 0)
+            all_votes.append((description, votes))
         return all_votes
 
 
