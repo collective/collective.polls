@@ -46,8 +46,8 @@ class IPoll(form.Schema):
                          "voted."),
         )
 
-    answers = schema.List(
-        title = _(u"Answers"),
+    options = schema.List(
+        title = _(u"Available Options"),
         value_type = DictRow(title=_(u'Option'),
                              schema=IOption),
         default=[],
@@ -60,8 +60,8 @@ class Poll(dexterity.Item):
 
     grok.implements(IPoll)
 
-    def getAnswers(self):
-        return self.answers
+    def getOptions(self):
+        return self.options
 
     def getResults(self):
         annotations = IAnnotations(self)
@@ -87,8 +87,8 @@ class View(grok.View):
 
     grok.name('view')
 
-    def getAnswers(self):
-        return self.context.getAnswers()
+    def getOptions(self):
+        return self.context.getOptions()
 
     def getResults(self):
         return self.context.getResults()

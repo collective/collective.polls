@@ -26,9 +26,9 @@
   <span tal:condition="not:context/show_results"
         i18n:translate="">No</span>
   
-  <h2 i18n:translate="">Answers:</h2>
+  <h2 i18n:translate="">Options:</h2>
   <ul>
-    <li tal:repeat="option view/getAnswers">
+    <li tal:repeat="option view/getOptions">
         <span tal:content="option" />
     </li>
   </ul>
