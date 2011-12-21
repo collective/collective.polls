@@ -95,11 +95,12 @@ class PollAddForm(dexterity.AddForm):
     def updateWidgets(self):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollAddForm, self).updateWidgets()
+        self.widgets['options'].allow_reorder = True
         self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
 
     def create(self, data):
         options = data['options']
-        for (index,option) in enumerate(options):
+        for (index, option) in enumerate(options):
             option['option_id'] = index
         return super(PollAddForm, self).create(data)
 
@@ -122,13 +123,15 @@ class PollEditForm(dexterity.EditForm):
     def updateWidgets(self):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollEditForm, self).updateWidgets()
+        self.widgets['options'].allow_reorder = True
         self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
 
     def applyChanges(self, data):
         options = data['options']
-        for (index,option) in enumerate(options):
+        for (index, option) in enumerate(options):
             option['option_id'] = index
         super(PollEditForm, self).applyChanges(data)
+
 
 class View(grok.View):
 
