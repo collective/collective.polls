@@ -10,6 +10,7 @@ from plone.directives import form
 
 from collective.polls import MessageFactory as _
 
+
 class IPoll(form.Schema):
     """
     A poll
