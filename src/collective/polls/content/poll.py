@@ -61,9 +61,12 @@ class Poll(dexterity.Item):
     grok.implements(IPoll)
 
     def getOptions(self):
-        return self.options
+        ''' Returns available options '''
+        options = self.options
+        return options
 
     def getResults(self):
+        ''' Returns results so far '''
         annotations = IAnnotations(self)
         all_votes = []
         for (index, answer) in enumerate(self.getAnswers()):
@@ -88,7 +91,9 @@ class View(grok.View):
     grok.name('view')
 
     def getOptions(self):
+        ''' Returns available options '''
         return self.context.getOptions()
 
     def getResults(self):
+        ''' Returns results so far '''
         return self.context.getResults()
