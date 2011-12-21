@@ -5,7 +5,8 @@ from zope import schema
 
 from zope.annotation.interfaces import IAnnotations
 
-from plone.directives import dexterity, form
+from plone.directives import dexterity
+from plone.directives import form
 
 from collective.polls import MessageFactory as _
 
