@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<rolemap>
+ <permissions>
+  <permission name="collective.polls: Add Poll" acquire="True">
+   <role name="Manager"/>
+   <role name="Site Administrator"/>
+   <role name="Owner"/>
+   <role name="Contributor"/>
+  </permission>
+ </permissions>
+</rolemap>

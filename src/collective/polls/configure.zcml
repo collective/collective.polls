@@ -10,6 +10,11 @@
   <!-- Include configuration for dependencies listed in setup.py -->
   <includeDependencies package="." />
 
+  <permission
+    id="collective.polls.AddPoll"
+    title="collective.polls: Add Poll"
+    />
+        
   <!-- Grok the package to initialise schema interfaces and content classes -->
   <grok:grok package="." />
   
