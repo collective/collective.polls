@@ -16,6 +16,8 @@ from plone.directives import form
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 
+from collective.polls.config import VOTE_ANNO_KEY
+
 from collective.polls import MessageFactory as _
 
 
@@ -76,7 +78,7 @@ class Poll(dexterity.Item):
         for option in self.getOptions():
             index = option.get('option_id')
             description = option.get('description')
-            votes = annotations.get("option.%02d" % index, 0)
+            votes = annotations.get(VOTE_ANNO_KEY % index, 0)
             all_votes.append((description, votes))
         return all_votes
 
