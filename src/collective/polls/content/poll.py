@@ -66,6 +66,10 @@ class Poll(dexterity.Item):
 
     grok.implements(IPoll)
 
+    @property
+    def annotations(self):
+        return IAnnotations(self)
+
     def getOptions(self):
         ''' Returns available options '''
         options = self.options
@@ -73,14 +77,37 @@ class Poll(dexterity.Item):
 
     def getResults(self):
         ''' Returns results so far '''
-        annotations = IAnnotations(self)
         all_votes = []
         for option in self.getOptions():
             index = option.get('option_id')
             description = option.get('description')
-            votes = annotations.get(VOTE_ANNO_KEY % index, 0)
+            votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
             all_votes.append((description, votes))
         return all_votes
+
+    def _validateVote(self, options=[]):
+        ''' Check if passed options are available here '''
+        available_options = [o['option_id'] for o in self.getOptions()]
+        if isinstance(options, str):
+            # TODO: Allow multiple options
+            # multivalue = self.multivalue
+            return False
+        elif isinstance(options, str):
+            return options in available_options
+
+    def setVote(self, options=[]):
+        ''' Set a vote on this poll '''
+        annotations = self.annotations
+        if not self._validateVote(options):
+            return False
+        if isinstance(options, str):
+            options = [options, ]
+        # set vote in annotation storage
+        for option in options:
+            vote_key = VOTE_ANNO_KEY % index
+            votes = annotations.get(vote_key, 0)
+            annotations[vote_key] = votes + 1
+        return True
 
 
 class PollAddForm(dexterity.AddForm):
