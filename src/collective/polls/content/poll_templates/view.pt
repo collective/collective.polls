@@ -8,7 +8,9 @@
 <body>
 
 <metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core"  tal:define="results view/getResults">
+  <metal:content-core define-macro="content-core" 
+         tal:define="results view/getResults;
+                     has_voted view/has_voted;">
 
   <tal:editing tal:condition="view/can_edit">
   <h2 i18n:translate="">Available Options:</h2>
@@ -39,7 +41,7 @@
       </form>
   </tal:vote>
   
-  <tal:results tal:condition="results">
+  <tal:results tal:condition="python:has_voted and results">
   <h2 i18n:translate="">Results:</h2>
   <ul>
     <li tal:repeat="option_result results">
