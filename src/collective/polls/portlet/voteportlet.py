@@ -29,14 +29,14 @@ from collective.polls import MessageFactory as _
 def PossiblePolls(context):
     catalog = getToolByName(context, 'portal_catalog')
     polls = catalog(portal_type="collective.polls.poll", review_state="open")
-    
+
     values = [SimpleTerm(value="latest", title=_(u"Latest open poll"))]
     if polls:
         for i in polls:
             values.append(SimpleTerm(value=i.UID, title=i.Title))
 
     vocab = SimpleVocabulary(values)
-    
+
     return vocab
 
 
@@ -45,21 +45,20 @@ alsoProvides(PossiblePolls, IContextSourceBinder)
 
 class IVotePortlet(IPortletDataProvider):
     """A portlet
-
     It inherits from IPortletDataProvider because for this portlet, the
     data that is being rendered and the portlet assignment itself are the
     same.
     """
 
     header = schema.TextLine(title=_(u'Header'),
-                                    description=_(u"The header for the portlet. Leave empty for none."),
-                                    required=False)
+                             description=_(u'''The header for the portlet.
+                                               Leave empty for none.'''),
+                             required=False)
 
     poll = schema.Choice(title=_(u'Poll'),
                          description=_(u"Which poll to show in the portlet."),
                          required=True,
                          source=PossiblePolls)
-                         
 
 
 class Assignment(base.Assignment):
@@ -73,7 +72,7 @@ class Assignment(base.Assignment):
 
     header = u""
     poll = None
-    
+
     def __init__(self, poll, header = u""):
         self.header = header
         self.poll = poll
@@ -115,7 +114,7 @@ class Renderer(base.Renderer):
                     poll = self.getCurrentPoll()
                     answers = poll.getAnswers()
                     index = answers.index(answer.decode('utf-8'))
-                    
+
                     annotations = IAnnotations(poll)
 
                     votes = annotations.get(VOTE_ANNO_KEY % index, 0)
@@ -139,9 +138,9 @@ class Renderer(base.Renderer):
                 # If the poll was submitted, let's redirect to make the changes
                 # visible
                 self.request.RESPONSE.redirect(self.context.absolute_url())
-            
+
         return pt(self)
-        
+
     def getHeader(self):
         """
         Returns the header for the portlet
@@ -191,7 +190,7 @@ class Renderer(base.Renderer):
             return poll.getResults()
         else:
             return None
-            
+
     @property
     def available(self):
         view = True
@@ -207,7 +206,7 @@ class Renderer(base.Renderer):
             view = False
         return view
 
-        
+
 class AddForm(base.AddForm):
     """Portlet add form.
 
