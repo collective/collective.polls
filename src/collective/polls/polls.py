@@ -34,8 +34,11 @@ class IPolls(Interface):
     def voted_in_a_poll(poll):
         ''' check if current user already voted '''
 
+    def allowed_to_edit(poll):
+        ''' is member allowed to edit a poll '''
+
     def allowed_to_view(poll):
-        ''' vote in a poll '''
+        ''' Is user allowed to view this poll '''
 
     def allowed_to_vote(poll):
         ''' vote in a poll '''
@@ -116,6 +119,11 @@ class Polls(grok.GlobalUtility):
         else:
             # If we cannot be sure, we will block this user from voting again
             return True
+
+    def allowed_to_edit(self, poll):
+        ''' Is user allowed to edit this poll '''
+        return (self.mt.checkPermission('Modify portal content', poll) 
+                and True) or False
 
     def allowed_to_view(self, poll):
         ''' Is user allowed to view this poll '''
