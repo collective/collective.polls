@@ -2,6 +2,8 @@
 from zope import schema
 from zope.formlib import form
 
+from zope.component import queryUtility
+
 from zope.interface import implements
 from zope.interface import alsoProvides
 
@@ -22,6 +24,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import VOTE_ANNO_KEY
+
+from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
 
