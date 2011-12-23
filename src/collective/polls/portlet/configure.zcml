@@ -7,7 +7,7 @@
      <!-- Register the portlet -->
 
      <plone:portlet
-         name="collective.polls.voteportlet.NewsPortlet"
+         name="collective.polls.VotePortlet"
          interface=".voteportlet.IVotePortlet"
          assignment=".voteportlet.Assignment"
          view_permission="cmf.ManagePortal"

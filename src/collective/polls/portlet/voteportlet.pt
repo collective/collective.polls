@@ -8,38 +8,43 @@
     </dt>
 
     <dd class="portletItem odd"
-        tal:define="current_poll view/getCurrentPoll;
+        tal:define="poll view/poll;
+                    can_vote view/can_vote;
+                    results view/getVotingResults;
                     toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
-        tal:condition="nocall:current_poll">
+        tal:condition="nocall:poll">
 
-        <h3 tal:content="current_poll/Title"/>
+        <h3 tal:content="poll/Title"/>
         
-        <tal:block condition="view/hasAlreadyVoted">
-            <tal:current_results define="results view/getVotingResults;"
-                         condition="nocall:results">
+        <tal:results condition="python:(not can_vote) and results">
+            <tal:poll_results condition="nocall:results">
             <h4 i18n:translate="">Partial results</h4>
             <p tal:repeat="result results">
                 <span tal:content="python: result[0]" />:
                 <span tal:content="python: result[1]" />
             </p>
-            </tal:current_results>
-        </tal:block>
+            </tal:poll_results>
+        </tal:results>
 
-        <tal:voting condition="not:view/hasAlreadyVoted">
+        <tal:no_results condition="python:not (can_vote or results)">
+            <h4 i18n:translate="">Nothing to see here</h4>
+        </tal:no_results>
+
+        <tal:voting condition="view/can_vote">
 
             <form action="#" method="post"
-                    tal:attributes="action context/absolute_url">
+                    tal:attributes="action poll/absolute_url">
 
                 <!--<tal:one_choice repeat="answer current_poll/answers"
                                 condition="not:current_poll/multivalue">-->
-                    <tal:one_choice repeat="answer current_poll/answers">
+                    <tal:one_choice repeat="option poll/options">
                     <input type="radio"
                             name="#"
                             value="#"
-                            tal:attributes="name string:answer.${answer};
-                                            value answer;"
+                            tal:attributes="name string:options;
+                                            value option/option_id;"
                             />
-                            <span tal:content="answer" />
+                            <span tal:content="option/description" />
                             <br/>
                 </tal:one_choice>
 
@@ -55,6 +60,8 @@
                             <br/>
                 </tal:multi_choice>-->
 
+                <input type="hidden" name="poll.uuid" value=""
+                       tal:attributes="value view/poll_uid" />
                 <input type="submit" name="poll.submit" value="Submit" i18n:translate="" />
             </form>
         </tal:voting>

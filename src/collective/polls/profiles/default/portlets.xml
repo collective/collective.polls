@@ -4,7 +4,7 @@
     i18n:domain="collective.polls">
 
  <portlet title="Voting portlet"
-    addview="collective.polls.voteportlet.NewsPortlet"
+    addview="collective.polls.VotePortlet"
     description="A portlet to allow voting on a specific poll"
     i18n:attributes="title; description">
   <for interface="plone.app.portlets.interfaces.IColumn" />

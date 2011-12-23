@@ -1,28 +1,48 @@
+# -*- coding:utf-8 -*-
+from AccessControl import Unauthorized
+from Acquisition import aq_inner
 from five import grok
-from plone.directives import dexterity, form
 
 from zope import schema
+from zope import interface
 
-from z3c.form import group, field
-from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
+from zope.annotation.interfaces import IAnnotations
+from zope.component import getMultiAdapter
+from zope.component import queryUtility
+
+from z3c.form.interfaces import HIDDEN_MODE
+
+from plone.directives import dexterity
+from plone.directives import form
+
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import DictRow
+
+from Products.statusmessages.interfaces import IStatusMessage
+
+from collective.polls.config import COOKIE_KEY
+from collective.polls.config import MEMBERS_ANNO_KEY
+from collective.polls.config import VOTE_ANNO_KEY
+
+from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
 
-from zope.annotation.interfaces import IAnnotations
 
-# Interface class; used to define content-type schema.
+class IOption(interface.Interface):
+    ''' An option in a poll '''
+
+    option_id = schema.Int(title=u"Option Id",
+                           required=False)
+
+    description = schema.TextLine(title=_(u"Description"),
+                                  required=True)
+
 
 class IPoll(form.Schema):
+    """ A Poll in a Plone site
     """
-    A poll
-    """
-    
-    # If you want a schema-defined interface, delete the form.model
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/poll.xml to define the content type
-    # and add directives here as necessary.
-    
+
     allow_anonymous = schema.Bool(
         title = _(u"Allow anonymous"),
         description = _(u"Allow not logged in users to vote."),
@@ -40,72 +60,237 @@ class IPoll(form.Schema):
                          "voted."),
         )
 
-    answers = schema.List(
-        title = _(u"Answers"),
-        value_type = schema.Text(
-                        title=_(u'Option'),
-                        default=u''),
+    options = schema.List(
+        title = _(u"Available Options"),
+        value_type = DictRow(title=_(u'Option'),
+                             schema=IOption),
         default=[],
-        required=False)
-                            
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
+        required=True)
+
 
 class Poll(dexterity.Item):
-    grok.implements(IPoll)
-    
-    # Add your class methods and properties here
+    """ A Poll in a Plone site
+    """
 
-    def getAnswers(self):
-        return self.answers
+    grok.implements(IPoll)
+
+    @property
+    def annotations(self):
+        return IAnnotations(self)
+
+    @property
+    def utility(self):
+        utility = queryUtility(IPolls, name='collective.polls')
+        return utility
+
+    def getOptions(self):
+        ''' Returns available options '''
+        options = self.options
+        return options
 
     def getResults(self):
-        annotations = IAnnotations(self)
+        ''' Returns results so far '''
         all_votes = []
-        for (index, answer) in enumerate(self.getAnswers()):
-            votes = annotations.get("answer.%s"%index, 0)
-            all_votes.append((answer, votes))
+        for option in self.getOptions():
+            index = option.get('option_id')
+            description = option.get('description')
+            votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
+
+            all_votes.append((description, votes))
         return all_votes
 
-# View class
-# The view will automatically use a similarly named template in
-# poll_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
+    def _validateVote(self, options=[]):
+        ''' Check if passed options are available here '''
+        available_options = [o['option_id'] for o in self.getOptions()]
+        if isinstance(options, list):
+            # TODO: Allow multiple options
+            # multivalue = self.multivalue
+            return False
+        else:
+            return options in available_options
+
+    def _setVoter(self, request=None):
+        ''' Mark this user as a voter '''
+        utility = self.utility
+        annotations = self.annotations
+        member = utility.member
+        member_id = member.getId()
+        if member_id:
+            voters = self.voters()
+            voters.append(member_id)
+            annotations[MEMBERS_ANNO_KEY] = voters
+        elif request:
+            poll_uid = utility.uid_for_poll(self)
+            request.response[COOKIE_KEY] = poll_uid
+            request.response.setCookie(COOKIE_KEY, poll_uid)
+        else:
+            return False
+        return True
+
+    def voters(self):
+        annotations = self.annotations
+        voters = annotations.get(MEMBERS_ANNO_KEY, [])
+        return voters
+
+    def setVote(self, options=[], request=None):
+        ''' Set a vote on this poll '''
+        annotations = self.annotations
+        utility = self.utility
+        try:
+            if not utility.allowed_to_vote(self, request):
+                return False
+        except Unauthorized:
+            raise Unauthorized
+        if not self._validateVote(options):
+            return False
+        if not isinstance(options, list):
+            options = [options, ]
+        if not self._setVoter(request):
+            # We failed to set voter, so we will not compute its votes
+            return False
+        # set vote in annotation storage
+        for option in options:
+            vote_key = VOTE_ANNO_KEY % option
+            votes = annotations.get(vote_key, 0)
+            annotations[vote_key] = votes + 1
+        return True
+
+
+class PollAddForm(dexterity.AddForm):
+    """ Form to handle creation of new Polls
+    """
+
+    grok.name('collective.polls.poll')
+
+    def updateFields(self):
+        ''' Update form fields to set options to use DataGridFieldFactory '''
+        super(PollAddForm, self).updateFields()
+        self.fields['options'].widgetFactory = DataGridFieldFactory
+
+    def datagridUpdateWidgets(self, subform, widgets, widget):
+        ''' Hides the widgets in the datagrid subform '''
+        widgets['option_id'].mode = HIDDEN_MODE
+
+    def updateWidgets(self):
+        ''' Update form widgets to hide column option_id from end user '''
+        super(PollAddForm, self).updateWidgets()
+        self.widgets['options'].allow_reorder = True
+        self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
+
+    def create(self, data):
+        options = data['options']
+        for (index, option) in enumerate(options):
+            option['option_id'] = index
+        return super(PollAddForm, self).create(data)
 
 
 class PollEditForm(dexterity.EditForm):
+    """ Form to handle edition of existing Polls
+    """
+
     grok.context(IPoll)
 
-    def render(self):
-        return super(PollEditForm, self).render()
+    def updateFields(self):
+        ''' Update form fields to set options to use DataGridFieldFactory '''
+        super(PollEditForm, self).updateFields()
+        self.fields['options'].widgetFactory = DataGridFieldFactory
+
+    def datagridUpdateWidgets(self, subform, widgets, widget):
+        ''' Hides the widgets in the datagrid subform '''
+        widgets['option_id'].mode = HIDDEN_MODE
+
+    def updateWidgets(self):
+        ''' Update form widgets to hide column option_id from end user '''
+        super(PollEditForm, self).updateWidgets()
+        self.widgets['options'].allow_reorder = True
+        self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
+
+    def applyChanges(self, data):
+        options = data['options']
+        for (index, option) in enumerate(options):
+            option['option_id'] = index
+        super(PollEditForm, self).applyChanges(data)
 
 
-#class PollViewForm(dexterity.DisplayForm):
-    #grok.context(IPoll)
-    #grok.require('zope2.View')
-
-    #def render(self):
-        #return super(PollViewForm, self).render()
-        
-#class View(dexterity.DisplayForm):
-    #grok.context(IPoll)
-    #grok.require('zope2.View')
-    
 class View(grok.View):
+
     grok.context(IPoll)
     grok.require('zope2.View')
-    
+
     grok.name('view')
 
-    def getAnswers(self):
-        return self.context.getAnswers()
+    def update(self):
+        super(View, self).update()
+        messages = IStatusMessage(self.request)
+        context = aq_inner(self.context)
+        self.context = context
+        self.state = getMultiAdapter((context, self.request),
+                                      name=u'plone_context_state')
+        self.wf_state = self.state.workflow_state()
+        self.utility = context.utility
+
+        # Handle vote
+        form = self.request.form
+        self.errors = []
+        self.messages = []
+
+        INVALID_OPTION = _(u'Invalid option')
+        if 'poll.submit' in form:
+            options = form.get('options', '')
+            if isinstance(options, list):
+                self.errors.append(INVALID_OPTION)
+            elif isinstance(options, str):
+                if not options.isdigit():
+                    self.errors.append(INVALID_OPTION)
+                else:
+                    options = int(options)
+            if not self.errors:
+                # Let's vote
+                try:
+                    self.context.setVote(options)
+                    self.messages.append(_(u'Thanks for your vote'))
+                except Unauthorized:
+                    self.errors.append(_(u'You are not authorized to vote'))
+        # Update status messages
+        for error in self.errors:
+            messages.addStatusMessage(error, type="warn")
+        for msg in self.messages:
+            messages.addStatusMessage(msg, type="info")
+
+    @property
+    def can_vote(self):
+        utility = self.utility
+        try:
+            return utility.allowed_to_vote(self.context)
+        except Unauthorized:
+            return False
+
+    @property
+    def can_edit(self):
+        utility = self.utility
+        return utility.allowed_to_edit(self.context)
+
+    @property
+    def has_voted(self):
+        ''' has the current user voted in this poll? '''
+        utility = self.utility
+        voted = utility.voted_in_a_poll(self.context)
+        return voted
+
+    def poll_uid(self):
+        ''' Return uid for current poll '''
+        utility = self.utility
+        return utility.uid_for_poll(self.context)
+
+    def getOptions(self):
+        ''' Returns available options '''
+        return self.context.getOptions()
 
     def getResults(self):
-        return self.context.getResults()
+        ''' Returns results so far if allowed'''
+        show_results = False
+        if self.wf_state == 'open':
+            show_results = show_results or self.context.show_results
+        elif self.wf_state == 'closed':
+            show_results = True
+        return (show_results and self.context.getResults()) or None
