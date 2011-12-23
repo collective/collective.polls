@@ -40,6 +40,10 @@ class IPolls(Interface):
         ''' check if current user already voted '''
         pass
 
+    def allowed_to_view(poll):
+        ''' vote in a poll '''
+        pass
+
     def allowed_to_vote(poll):
         ''' vote in a poll '''
         pass
@@ -121,10 +125,14 @@ class Polls(grok.GlobalUtility):
             # If we cannot be sure, we will block this user from voting again
             return True
 
+    def allowed_to_view(self, poll):
+        ''' Is user allowed to view this poll '''
+        return self.mt.checkPermission('View', poll)
+
     def allowed_to_vote(self, poll, request=None):
         ''' is current user allowed to vote in this poll ?'''
         review_state = self.wt.getInfoFor(poll, 'review_state')
-        canView = self.mt.checkPermission('View', poll)
+        canView = self.allowed_to_view()
         if (canView and (review_state in ['open', ])):
             # User must view the poll
             # and poll must be open to allow votes
