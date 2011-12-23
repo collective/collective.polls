@@ -127,7 +127,7 @@ class Polls(grok.GlobalUtility):
 
     def allowed_to_view(self, poll):
         ''' Is user allowed to view this poll '''
-        return self.mt.checkPermission('View', poll)
+        return (self.mt.checkPermission('View', poll) and True) or False
 
     def allowed_to_vote(self, poll, request=None):
         ''' is current user allowed to vote in this poll ?'''
