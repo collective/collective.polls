@@ -122,15 +122,14 @@ class IntegrationTest(unittest.TestCase):
         poll.setVote(0)
         self.failUnless(utility.voted_in_a_poll(poll)==True)
 
-    def test_allowed_to_vote(self):
+    def test_error_voted_in_a_poll(self):
         ''' test if a user voted in a poll '''
+        logout()
         utility = queryUtility(IPolls, name='collective.polls')
         # Published Poll, allowed to vote
         poll = self.subfolder['p5']
-        self.failUnless(utility.allowed_to_vote(poll)==True)
-        # Unpuclished poll, not allowed to vote
-        poll = self.subfolder['p6']
-        self.assertRaises(Unauthorized, utility.allowed_to_vote, poll)
+        # Anonymous user and we do not pass a request
+        self.failUnless(utility.voted_in_a_poll(poll)==True)
 
     def test_allowed_to_vote(self):
         ''' test if a user voted in a poll '''
