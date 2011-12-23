@@ -10,6 +10,7 @@ from zope.component import queryUtility
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.app.testing import logout
 
 from plone.uuid.interfaces import IUUID
 
@@ -130,6 +131,39 @@ class IntegrationTest(unittest.TestCase):
         # Unpuclished poll, not allowed to vote
         poll = self.subfolder['p6']
         self.assertRaises(Unauthorized, utility.allowed_to_vote, poll)
+
+    def test_allowed_to_vote(self):
+        ''' test if a user voted in a poll '''
+        utility = queryUtility(IPolls, name='collective.polls')
+        # Published Poll, allowed to vote
+        poll = self.subfolder['p5']
+        self.failUnless(utility.allowed_to_vote(poll)==True)
+        # Unpuclished poll, not allowed to vote
+        poll = self.subfolder['p6']
+        self.assertRaises(Unauthorized, utility.allowed_to_vote, poll)
+
+    def test_allowed_to_view(self):
+        ''' Member can view a published poll '''
+        utility = queryUtility(IPolls, name='collective.polls')
+        # Published Poll, member can view
+        poll = self.subfolder['p5']
+        self.failUnless(utility.allowed_to_view(poll)==True)
+
+    def test_anonymous_allowed_to_view(self):
+        ''' Anonymous can view a published poll '''
+        logout()
+        utility = queryUtility(IPolls, name='collective.polls')
+        # Published Poll, member can view
+        poll = self.subfolder['p5']
+        self.failUnless(utility.allowed_to_view(poll)==True)
+
+    def test_anonymous_not_allowed_to_view(self):
+        ''' Anonymous cannot view a private poll '''
+        logout()
+        utility = queryUtility(IPolls, name='collective.polls')
+        # Published Poll, member can view
+        poll = self.subfolder['p6']
+        self.failIf(utility.allowed_to_view(poll)==True)
 
 
 def test_suite():
