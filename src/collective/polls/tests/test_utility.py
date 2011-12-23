@@ -148,6 +148,20 @@ class IntegrationTest(unittest.TestCase):
         poll = self.subfolder['p5']
         self.failUnless(utility.allowed_to_view(poll)==True)
 
+    def test_allowed_to_edit(self):
+        ''' test if member can edit a poll '''
+        utility = queryUtility(IPolls, name='collective.polls')
+        # Private Poll, member can edit
+        poll = self.subfolder['p6']
+        self.failUnless(utility.allowed_to_edit(poll)==True)
+
+    def test_not_allowed_to_edit(self):
+        ''' test if member can edit a poll '''
+        utility = queryUtility(IPolls, name='collective.polls')
+        # Published Poll, member cannot edit
+        poll = self.subfolder['p5']
+        self.failUnless(utility.allowed_to_edit(poll)==False)
+
     def test_anonymous_allowed_to_view(self):
         ''' Anonymous can view a published poll '''
         logout()
