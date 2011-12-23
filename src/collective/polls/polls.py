@@ -8,12 +8,9 @@ from zope.site.hooks import getSite
 
 from plone.uuid.interfaces import IUUID
 
-from zope.annotation.interfaces import IAnnotations
-
 from Products.CMFCore.utils import getToolByName
 
 from collective.polls.config import COOKIE_KEY
-from collective.polls.config import MEMBERS_ANNO_KEY
 
 
 class IPolls(Interface):
@@ -46,6 +43,7 @@ class IPolls(Interface):
     def allowed_to_vote(poll):
         ''' vote in a poll '''
         pass
+
 
 class Polls(grok.GlobalUtility):
     ''' Utility methods for dealing with polls '''
@@ -127,7 +125,7 @@ class Polls(grok.GlobalUtility):
         ''' is current user allowed to vote in this poll ?'''
         review_state = self.wt.getInfoFor(poll, 'review_state')
         canView = self.mt.checkPermission('View', poll)
-        if (canView and (review_state in ['open',])):
+        if (canView and (review_state in ['open', ])):
             # User must view the poll
             # and poll must be open to allow votes
             if not self.voted_in_a_poll(poll, request):

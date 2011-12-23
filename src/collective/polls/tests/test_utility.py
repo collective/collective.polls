@@ -6,7 +6,6 @@ from AccessControl import Unauthorized
 
 from zope.site.hooks import setSite
 
-from zope.component import createObject
 from zope.component import queryUtility
 
 from plone.app.testing import TEST_USER_ID
@@ -15,7 +14,7 @@ from plone.app.testing import setRoles
 from plone.uuid.interfaces import IUUID
 
 from collective.polls.polls import IPolls
-from collective.polls.content.poll import IPoll
+
 from collective.polls.testing import INTEGRATION_TESTING
 
 
@@ -93,7 +92,6 @@ class IntegrationTest(unittest.TestCase):
         base_poll = self.subfolder['p5']
         uid = IUUID(base_poll)
         utility = queryUtility(IPolls, name='collective.polls')
-        context = self.subfolder
         poll = utility.poll_by_uid(uid=uid)
         self.assertEquals(poll, base_poll)
 
@@ -102,7 +100,6 @@ class IntegrationTest(unittest.TestCase):
         base_poll = self.subfolder['p5']
         uid = 'latest'
         utility = queryUtility(IPolls, name='collective.polls')
-        context = self.subfolder
         poll = utility.poll_by_uid(uid=uid)
         self.assertEquals(poll, base_poll)
 
@@ -118,7 +115,7 @@ class IntegrationTest(unittest.TestCase):
         ''' test if a user voted in a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
         poll = self.subfolder['p5']
-        poll.options = [{'option_id':0, 'description':'Option 1'},]
+        poll.options = [{'option_id':0, 'description':'Option 1'}, ]
         self.failUnless(utility.voted_in_a_poll(poll)==False)
         # Vote in a poll
         poll.setVote(0)
