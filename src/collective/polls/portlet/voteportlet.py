@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+from AccessControl import Unauthorized
+
 from zope import schema
 from zope.formlib import form
 
@@ -7,13 +9,10 @@ from zope.component import queryUtility
 from zope.interface import implements
 from zope.interface import alsoProvides
 
-from zope.annotation.interfaces import IAnnotations
-
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from plone.memoize.instance import memoize
-from plone.uuid.interfaces import IUUID
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
@@ -21,9 +20,6 @@ from plone.app.portlets.portlets import base
 from Products.CMFCore.utils import getToolByName
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from collective.polls.config import MEMBERS_ANNO_KEY
-from collective.polls.config import VOTE_ANNO_KEY
 
 from collective.polls.polls import IPolls
 
@@ -97,51 +93,29 @@ class Renderer(base.Renderer):
     of this class. Other methods can be added and referenced in the template.
     """
 
+    @property
+    def utility(self):
+        ''' Access to IPolls utility '''
+        utility = queryUtility(IPolls, name='collective.polls')
+        return utility
+
     def render(self):
+        utility = self.utility
+        poll = self.poll()
         pt = ViewPageTemplateFile('voteportlet.pt')
 
+        # Handle post
         poll_submitted = 'poll.submit' in self.request.form
-
         if poll_submitted:
             # Let's recheck that the user hasn't already voted
-            already_voted = self.hasAlreadyVoted()
-
-            if not already_voted:
+            if not utility.voted_in_a_poll(poll, self.request):
                 # First we need to save the voted option
-                answer = None
-                for i in self.request.form:
-                    if i.startswith('answer.'):
-                        answer = self.request.form[i]
-
-                if answer:
-                    # If there's actually a proper answer
-                    poll = self.getCurrentPoll()
-                    answers = poll.getAnswers()
-                    index = answers.index(answer.decode('utf-8'))
-
-                    annotations = IAnnotations(poll)
-
-                    votes = annotations.get(VOTE_ANNO_KEY % index, 0)
-                    votes+=1
-                    annotations["answer.%s"%index] = votes
-
-                    # Now we need to mark the user so it cannot vote again
-                    pm = getToolByName(self.context, 'portal_membership')
-                    if not pm.isAnonymousUser():
-                        member = pm.getAuthenticatedMember()
-                        mem_ids = annotations.get(MEMBERS_ANNO_KEY,
-                                                  [])
-                        mem_ids.append(member.id)
-                        annotations[MEMBERS_ANNO_KEY] = mem_ids
-
-                    else:
-                        # If he's anonymous, let's set a cookie
-                        self.request.RESPONSE.setCookie('collective.poll',
-                                                        IUUID(poll))
-
+                options = self.request.form.get('options')
+                # Just vote, handle errors later
+                status = poll.setVote(options)
                 # If the poll was submitted, let's redirect to make the changes
                 # visible
-                self.request.RESPONSE.redirect(self.context.absolute_url())
+                self.request.response.redirect(self.context.absolute_url())
 
         return pt(self)
 
@@ -152,63 +126,39 @@ class Renderer(base.Renderer):
         return self.data.header
 
     @memoize
-    def getCurrentPoll(self):
-        catalog = getToolByName(self.context, 'portal_catalog')
-
+    def poll(self):
+        utility = self.utility
         uid = self.data.poll
-        if uid == 'latest':
-            # We should get the latest open poll to use in the portlet
-            poll = catalog(portal_type="collective.polls.poll",
-                           review_state="open",
-                           sort_on="created",
-                           sort_order="reverse")
-        else:
-            poll = catalog(UID=uid)
+        poll = utility.poll_by_uid(uid)
+        return poll
 
-        if poll:
-            return poll[0].getObject()
-        else:
-            return None
-
-    def hasAlreadyVoted(self):
-        voted = False
-        pm = getToolByName(self.context, 'portal_membership')
-        poll = self.getCurrentPoll()
-        if poll:
-            annotations = IAnnotations(poll)
-            if not pm.isAnonymousUser():
-                member = pm.getAuthenticatedMember()
-                mem_ids = annotations.get(MEMBERS_ANNO_KEY, [])
-                if member.id in mem_ids:
-                    voted = True
-            else:
-                poll_uid = self.request.cookies.get('collective.poll')
-                if poll_uid and IUUID(poll) == poll_uid:
-                    voted = True
-
-        return voted
+    def poll_uid(self):
+        ''' Return uid for current poll '''
+        utility = self.utility
+        return utility.uid_for_poll(self.poll())
 
     def getVotingResults(self):
-        poll = self.getCurrentPoll()
+        poll = self.poll()
         if poll.show_results:
             return poll.getResults()
         else:
             return None
 
     @property
-    def available(self):
-        view = True
-        # Check if the poll accept anonymous voting, if not, do not show
-        # the portlet
-        pm = getToolByName(self.context, 'portal_membership')
-        if pm.isAnonymousUser() and not self.getCurrentPoll().allow_anonymous:
-            view = False
+    def can_vote(self):
+        utility = self.utility
+        poll = self.poll()
+        try:
+            return utility.allowed_to_vote(poll)
+        except Unauthorized:
+            return False
 
-        # If we have already voted and we we should not see partial results
-        # do not show the portlet either
-        if self.hasAlreadyVoted() and not self.getVotingResults():
-            view = False
-        return view
+    @property
+    def available(self):
+        utility = self.utility
+        poll = self.poll()
+        can_view = utility.allowed_to_view(poll)
+        return can_view
 
 
 class AddForm(base.AddForm):
