@@ -26,10 +26,8 @@
             </tal:poll_results>
         </tal:results>
 
-        <tal:no_results condition="python:not (can_vote and results)">
-            <tal:poll_results condition="nocall:results">
-                <h4 i18n:translate="">Nothing to see here</h4>
-            </tal:poll_results>
+        <tal:no_results condition="python:not (can_vote or results)">
+            <h4 i18n:translate="">Nothing to see here</h4>
         </tal:no_results>
 
         <tal:voting condition="view/can_vote">
