@@ -44,9 +44,9 @@
                             name="#"
                             value="#"
                             tal:attributes="name string:options;
-                                            value option;"
+                                            value option/option_id;"
                             />
-                            <span tal:content="answer" />
+                            <span tal:content="option/description" />
                             <br/>
                 </tal:one_choice>
 
