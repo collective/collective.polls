@@ -18,9 +18,10 @@ from zope.annotation.interfaces import IAnnotations
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from collective.polls import MessageFactory as _
+from collective.polls.config import MEMBERS_ANNO_KEY
+from collective.polls.config import VOTE_ANNO_KEY
 
-from zope.security import checkPermission
+from collective.polls import MessageFactory as _
 
 
 def PossiblePolls(context):
@@ -115,7 +116,7 @@ class Renderer(base.Renderer):
                     
                     annotations = IAnnotations(poll)
 
-                    votes = annotations.get("answer.%s"%index, 0)
+                    votes = annotations.get(VOTE_ANNO_KEY % index, 0)
                     votes+=1
                     annotations["answer.%s"%index] = votes
 
@@ -123,10 +124,10 @@ class Renderer(base.Renderer):
                     pm = getToolByName(self.context, 'portal_membership')
                     if not pm.isAnonymousUser():
                         member = pm.getAuthenticatedMember()
-                        mem_ids = annotations.get('already_voted_member_ids',
+                        mem_ids = annotations.get(MEMBERS_ANNO_KEY,
                                                   [])
                         mem_ids.append(member.id)
-                        annotations['already_voted_member_ids'] = mem_ids
+                        annotations[MEMBERS_ANNO_KEY] = mem_ids
 
                     else:
                         # If he's anonymous, let's set a cookie
@@ -172,7 +173,7 @@ class Renderer(base.Renderer):
             annotations = IAnnotations(poll)
             if not pm.isAnonymousUser():
                 member = pm.getAuthenticatedMember()
-                mem_ids = annotations.get('already_voted_member_ids', [])
+                mem_ids = annotations.get(MEMBERS_ANNO_KEY, [])
                 if member.id in mem_ids:
                     voted = True
             else:
