@@ -93,7 +93,7 @@ class Poll(dexterity.Item):
             index = option.get('option_id')
             description = option.get('description')
             votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
-            
+
             all_votes.append((description, votes))
         return all_votes
 
