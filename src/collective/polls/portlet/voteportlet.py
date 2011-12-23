@@ -21,8 +21,6 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from Products.statusmessages.interfaces import IStatusMessage
-
 from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
