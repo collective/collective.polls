@@ -1,20 +1,22 @@
-from plone.memoize.instance import memoize
-from plone.uuid.interfaces import IUUID
+# -*- coding:utf-8 -*-
+from zope import schema
+from zope.formlib import form
 
 from zope.interface import implements
 from zope.interface import alsoProvides
 
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-from zope.schema.interfaces import IContextSourceBinder
+from zope.annotation.interfaces import IAnnotations
 
+from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-from zope import schema
-from zope.formlib import form
-from Products.CMFCore.utils import getToolByName
+from plone.memoize.instance import memoize
+from plone.uuid.interfaces import IUUID
 
-from zope.annotation.interfaces import IAnnotations
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.app.portlets.portlets import base
+
+from Products.CMFCore.utils import getToolByName
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
