@@ -21,6 +21,8 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from Products.statusmessages.interfaces import IStatusMessage
+
 from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
@@ -112,10 +114,15 @@ class Renderer(base.Renderer):
                 # First we need to save the voted option
                 options = self.request.form.get('options')
                 # Just vote, handle errors later
-                status = poll.setVote(options)
+                try:
+                    poll.setVote(options)
+                except Unauthorized:
+                    msg = IStatusMessage(self.request)
+                    msg.addStatusMessage(_(u'You are not authorized to vote'),
+                                         type="warn")
                 # If the poll was submitted, let's redirect to make the changes
                 # visible
-                self.request.response.redirect(self.context.absolute_url())
+                self.request.response.redirect(poll.absolute_url())
 
         return pt(self)
 
