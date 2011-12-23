@@ -35,7 +35,7 @@
         <tal:voting condition="view/can_vote">
 
             <form action="#" method="post"
-                    tal:attributes="action context/absolute_url">
+                    tal:attributes="action poll/absolute_url">
 
                 <!--<tal:one_choice repeat="answer current_poll/answers"
                                 condition="not:current_poll/multivalue">-->
