@@ -139,8 +139,11 @@ class Renderer(base.Renderer):
     def available(self):
         utility = self.utility
         poll = self.poll()
-        can_view = utility.allowed_to_view(poll)
-        return can_view
+        if poll:
+            can_view = utility.allowed_to_view(poll)
+            # Do not show this portlet in the poll context
+            return can_view and not (poll == self.context)
+        return False
 
 
 class AddForm(base.AddForm):
