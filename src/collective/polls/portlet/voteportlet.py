@@ -93,36 +93,13 @@ class Renderer(base.Renderer):
     of this class. Other methods can be added and referenced in the template.
     """
 
+    render = ViewPageTemplateFile('voteportlet.pt')
+
     @property
     def utility(self):
         ''' Access to IPolls utility '''
         utility = queryUtility(IPolls, name='collective.polls')
         return utility
-
-    def render(self):
-        utility = self.utility
-        poll = self.poll()
-        pt = ViewPageTemplateFile('voteportlet.pt')
-
-        # Handle post
-        poll_submitted = 'poll.submit' in self.request.form
-        if poll_submitted:
-            # Let's recheck that the user hasn't already voted
-            if not utility.voted_in_a_poll(poll, self.request):
-                # First we need to save the voted option
-                options = self.request.form.get('options')
-                # Just vote, handle errors later
-                try:
-                    poll.setVote(options)
-                except Unauthorized:
-                    msg = IStatusMessage(self.request)
-                    msg.addStatusMessage(_(u'You are not authorized to vote'),
-                                         type="warn")
-                # If the poll was submitted, let's redirect to make the changes
-                # visible
-                self.request.response.redirect(poll.absolute_url())
-
-        return pt(self)
 
     def getHeader(self):
         """
