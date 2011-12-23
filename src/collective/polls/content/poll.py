@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from five import grok
 
@@ -7,6 +8,7 @@ from zope import interface
 
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
+from zope.component import queryUtility
 
 from z3c.form.interfaces import HIDDEN_MODE
 
@@ -16,7 +18,11 @@ from plone.directives import form
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 
+from collective.polls.config import COOKIE_KEY
+from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import VOTE_ANNO_KEY
+
+from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
 
@@ -70,6 +76,11 @@ class Poll(dexterity.Item):
     def annotations(self):
         return IAnnotations(self)
 
+    @property
+    def utility(self):
+        utility = queryUtility(IPolls, name='collective.polls')
+        return utility
+
     def getOptions(self):
         ''' Returns available options '''
         options = self.options
@@ -82,29 +93,62 @@ class Poll(dexterity.Item):
             index = option.get('option_id')
             description = option.get('description')
             votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
+            
             all_votes.append((description, votes))
         return all_votes
 
     def _validateVote(self, options=[]):
         ''' Check if passed options are available here '''
         available_options = [o['option_id'] for o in self.getOptions()]
-        if isinstance(options, str):
+        if isinstance(options, list):
             # TODO: Allow multiple options
             # multivalue = self.multivalue
             return False
-        elif isinstance(options, str):
+        else:
             return options in available_options
 
-    def setVote(self, options=[]):
+    def _setVoter(self, request=None):
+        ''' Mark this user as a voter '''
+        utility = self.utility
+        annotations = self.annotations
+        member = utility.member
+        member_id = member.getId()
+        if member_id:
+            voters = self.voters()
+            voters.append(member_id)
+            annotations[MEMBERS_ANNO_KEY] = voters
+        elif request:
+            poll_uid = utility.uid_for_poll(self)
+            request.response[COOKIE_KEY] = poll_uid
+            request.response.setCookie(COOKIE_KEY, poll_uid)
+        else:
+            return False
+        return True
+
+    def voters(self):
+        annotations = self.annotations
+        voters = annotations.get(MEMBERS_ANNO_KEY, [])
+        return voters
+
+    def setVote(self, options=[], request=None):
         ''' Set a vote on this poll '''
         annotations = self.annotations
+        utility = self.utility
+        try:
+            if not utility.allowed_to_vote(self, request):
+                return False
+        except Unauthorized:
+            raise Unauthorized
         if not self._validateVote(options):
             return False
-        if isinstance(options, str):
+        if not isinstance(options, list):
             options = [options, ]
+        if not self._setVoter(request):
+            # We failed to set voter, so we will not compute its votes
+            return False
         # set vote in annotation storage
         for option in options:
-            vote_key = VOTE_ANNO_KEY % index
+            vote_key = VOTE_ANNO_KEY % option
             votes = annotations.get(vote_key, 0)
             annotations[vote_key] = votes + 1
         return True
