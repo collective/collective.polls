@@ -18,35 +18,27 @@ class IPolls(Interface):
 
     def recent_polls(show_all=False, limit=5, kw={}):
         ''' Return recent polls'''
-        pass
 
     def recent_polls_in_context(context, show_all=False, limit=5, kw={}):
         ''' Return recent polls in a given context '''
-        pass
 
     def uid_for_poll(poll):
         ''' Return a uid for a poll '''
-        pass
 
     def poll_by_uid(uid):
         ''' Return the poll for the given uid '''
-        pass
 
     def voters_in_a_poll(poll):
         ''' list of voters in a poll '''
-        pass
 
     def voted_in_a_poll(poll):
         ''' check if current user already voted '''
-        pass
 
     def allowed_to_view(poll):
         ''' vote in a poll '''
-        pass
 
     def allowed_to_vote(poll):
         ''' vote in a poll '''
-        pass
 
 
 class Polls(grok.GlobalUtility):
