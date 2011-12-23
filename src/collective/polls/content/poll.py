@@ -18,6 +18,8 @@ from plone.directives import form
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 
+from Products.statusmessages.interfaces import IStatusMessage
+
 from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import VOTE_ANNO_KEY
@@ -219,10 +221,66 @@ class View(grok.View):
 
     def update(self):
         super(View, self).update()
+        messages = IStatusMessage(self.request)
         context = aq_inner(self.context)
+        self.context = context
         self.state = getMultiAdapter((context, self.request),
                                       name=u'plone_context_state')
         self.wf_state = self.state.workflow_state()
+        self.utility = context.utility
+
+        # Handle vote
+        form = self.request.form
+        self.errors = []
+        self.messages = []
+
+        INVALID_OPTION = _(u'Invalid option')
+        if 'poll.submit' in form:
+            options = form.get('options', '')
+            if isinstance(options, list):
+                self.errors.append(INVALID_OPTION)
+            elif isinstance(options, str):
+                if not options.isdigit():
+                    self.errors.append(INVALID_OPTION)
+                else:
+                    options = int(options)
+            if not self.errors:
+                # Let's vote
+                try:
+                    self.context.setVote(options)
+                    self.messages.append(_(u'Thanks for your vote'))
+                except Unauthorized:
+                    self.errors.append(_(u'You are not authorized to vote'))
+        # Update status messages
+        for error in self.errors:
+            messages.addStatusMessage(error, type="warn")
+        for msg in self.messages:
+            messages.addStatusMessage(msg, type="info")
+
+    @property
+    def can_vote(self):
+        utility = self.utility
+        try:
+            return utility.allowed_to_vote(self.context)
+        except Unauthorized:
+            return False
+
+    @property
+    def can_edit(self):
+        utility = self.utility
+        return utility.allowed_to_edit(self.context)
+
+    @property
+    def has_voted(self):
+        ''' has the current user voted in this poll? '''
+        utility = self.utility
+        voted = utility.voted_in_a_poll(self.context)
+        return voted
+
+    def poll_uid(self):
+        ''' Return uid for current poll '''
+        utility = self.utility
+        return utility.uid_for_poll(self.context)
 
     def getOptions(self):
         ''' Returns available options '''

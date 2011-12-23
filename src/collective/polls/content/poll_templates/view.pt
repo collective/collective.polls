@@ -8,32 +8,37 @@
 <body>
 
 <metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core"
-    tal:define="results view/getResults">
+  <metal:content-core define-macro="content-core"  tal:define="results view/getResults">
 
-  <h3 i18n:translate="" >Allow anonymous votes</h3>
-  <span tal:condition="context/allow_anonymous"
-        i18n:translate="">Yes</span>
-  <span tal:condition="not:context/allow_anonymous"
-        i18n:translate="">No</span>
-<!--  <h3 i18n:translate="" >Multivalues</h3>
-  <span tal:condition="context/multivalue"
-        i18n:translate="">Yes</span>
-  <span tal:condition="not:context/multivalue"
-        i18n:translate="">No</span>-->
-  <h3 i18n:translate="" >Show partial results</h3>
-  <span tal:condition="context/show_results"
-        i18n:translate="">Yes</span>
-  <span tal:condition="not:context/show_results"
-        i18n:translate="">No</span>
-  
-  <h2 i18n:translate="">Options:</h2>
+  <tal:editing tal:condition="view/can_edit">
+  <h2 i18n:translate="">Available Options:</h2>
   <ul>
     <li tal:repeat="option view/getOptions">
         <span tal:content="option/description" />
     </li>
   </ul>
-
+  </tal:editing>
+  
+  <tal:vote tal:condition="view/can_vote">
+  <h2 i18n:translate="">Vote!</h2>
+      <form action="#" method="post"
+              tal:attributes="action context/absolute_url">
+              <tal:one_choice repeat="option context/options">
+              <input type="radio"
+                      name="#"
+                      value="#"
+                      tal:attributes="name string:options;
+                                      value option/option_id;"
+                      />
+                      <span tal:content="option/description" />
+                      <br/>
+          </tal:one_choice>
+          <input type="hidden" name="poll.uuid" value=""
+                 tal:attributes="value view/poll_uid" />
+          <input type="submit" name="poll.submit" value="Submit" i18n:translate="" />
+      </form>
+  </tal:vote>
+  
   <tal:results tal:condition="results">
   <h2 i18n:translate="">Results:</h2>
   <ul>
