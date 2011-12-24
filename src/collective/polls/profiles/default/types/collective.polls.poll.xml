@@ -31,8 +31,7 @@
    <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>
-  <property name="add_permission">cmf.AddPortalContent</property>
-
+  <property name="add_permission">collective.polls.AddPoll</property>
 
   <!-- Method aliases -->
   <alias from="(Default)" to="(dynamic view)" />
