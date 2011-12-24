@@ -33,7 +33,7 @@ class IntegrationTest(unittest.TestCase):
     def test_adding(self):
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         p1 = self.folder['p1']
-        self.failUnless(IPoll.providedBy(p1))
+        self.assertTrue(IPoll.providedBy(p1))
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
@@ -48,7 +48,7 @@ class IntegrationTest(unittest.TestCase):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
         factory = fti.factory
         new_object = createObject(factory)
-        self.failUnless(IPoll.providedBy(new_object))
+        self.assertTrue(IPoll.providedBy(new_object))
 
     def test_is_referenceable(self):
         self.folder.invokeFactory('collective.polls.poll', 'p1')
@@ -105,33 +105,33 @@ class VotingTest(unittest.TestCase):
         self.assertRaises(Unauthorized, self.p1.setVote, options)
 
         results = self.p1.getResults()
-        self.failUnless(results[options][1]==0)
+        self.assertEqual(results[options][1], 0)
 
     def test_vote_open_poll(self):
         options = 2
         voted = self.p2.setVote(options)
-        self.failUnless(voted)
+        self.assertTrue(voted)
         results = self.p2.getResults()
-        self.failUnless(results[options][1]==1)
+        self.assertEqual(results[options][1], 1)
 
     def test_vote_same_user_twice(self):
         options = 2
         voted = self.p2.setVote(options)
-        self.failUnless(voted)
+        self.assertTrue(voted)
 
         self.assertRaises(Unauthorized, self.p1.setVote, options)
 
         results = self.p2.getResults()
-        self.failUnless(results[options][1]==1)
+        self.assertEqual(results[options][1], 1)
 
     def test_invalid_option(self):
         options = 5
         voted = self.p2.setVote(options)
-        self.failIf(voted)
+        self.assertFalse(voted)
 
         results = self.p2.getResults()
         votes = sum([option[1] for option in results])
-        self.failUnless(votes == 0)
+        self.assertEqual(votes, 0)
 
     def test_anonymous_closed_poll(self):
         logout()
@@ -140,7 +140,7 @@ class VotingTest(unittest.TestCase):
         self.assertRaises(Unauthorized, self.p1.setVote, options)
 
         results = self.p1.getResults()
-        self.failUnless(results[options][1]==0)
+        self.assertEqual(results[options][1], 0)
 
     def test_anonymous_open_restricted_poll(self):
         logout()
@@ -149,27 +149,27 @@ class VotingTest(unittest.TestCase):
         self.assertRaises(Unauthorized, self.p1.setVote, options)
 
         results = self.p2.getResults()
-        self.failUnless(results[options][1]==0)
+        self.assertEqual(results[options][1], 0)
 
     def test_anonymous_open_poll(self):
         logout()
         options = 1
         voted = self.p3.setVote(options, self.request)
-        self.failUnless(voted)
+        self.assertTrue(voted)
         results = self.p3.getResults()
-        self.failUnless(results[options][1]==1)
+        self.assertEqual(results[options][1], 1)
 
     def test_anonymous_twice_open_poll(self):
         logout()
         options = 1
         voted = self.p3.setVote(options, self.request)
-        self.failUnless(voted)
+        self.assertTrue(voted)
         self._set_request_cookies(self.request)
 
         self.assertRaises(Unauthorized, self.p1.setVote, options)
 
         results = self.p3.getResults()
-        self.failUnless(results[options][1]==1)
+        self.assertEqual(results[options][1], 1)
 
 
 def test_suite():
