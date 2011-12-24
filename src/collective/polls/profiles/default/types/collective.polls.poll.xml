@@ -18,6 +18,8 @@
   <property name="schema">collective.polls.content.poll.IPoll</property>
   <property name="klass">collective.polls.content.poll.Poll</property>
 
+  <property name="add_permission">collective.polls.AddPoll</property>
+
   <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
      <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
@@ -28,11 +30,10 @@
   <property name="link_target"></property>
   <property name="immediate_view">view</property>
   <property name="default_view">view</property>
+  <property name="default_view_fallback">False</property>
   <property name="view_methods">
    <element value="view"/>
   </property>
-  <property name="default_view_fallback">False</property>
-  <property name="add_permission">collective.polls.AddPoll</property>
 
   <!-- Method aliases -->
   <alias from="(Default)" to="(dynamic view)" />
