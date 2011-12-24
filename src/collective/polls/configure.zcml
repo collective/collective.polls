@@ -7,23 +7,20 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.polls">
 
-  <!-- Include configuration for dependencies listed in setup.py -->
   <includeDependencies package="." />
+  <i18n:registerTranslations directory="locales" />
 
   <permission
     id="collective.polls.AddPoll"
     title="collective.polls: Add poll"
     />
-        
-  <!-- Grok the package to initialise schema interfaces and content classes -->
+
   <grok:grok package="." />
-  
+
   <i18n:registerTranslations directory="locales" />
 
   <include package=".portlet" />
 
-  <!-- Register an extension profile to make the product installable
-       in Plone -->
   <genericsetup:registerProfile
       name="default"
       title="collective.polls"
@@ -39,7 +36,5 @@
         description="Uninstall profile for the collective.polls package."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
-
-  <!-- -*- extra stuff goes here -*- -->
 
 </configure>
