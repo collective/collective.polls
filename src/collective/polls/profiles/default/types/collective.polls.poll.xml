@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <object name="collective.polls.poll"
    meta_type="Dexterity FTI"
-   i18n:domain="collective.polls" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+   i18n:domain="collective.polls"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">Poll</property>
-  <property name="description"
-    i18n:translate="">A poll</property>
+  <property name="description" i18n:translate="">A poll</property>
   <property name="icon_expr">string:${portal_url}/++resource++collective.polls/poll_icon.png</property>
   <property name="factory">collective.polls.poll</property>
   <property name="global_allow">True</property>
