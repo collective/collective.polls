@@ -13,6 +13,8 @@ from plone.app.testing import logout
 
 from plone.dexterity.interfaces import IDexterityFTI
 
+from Products.Archetypes.interfaces.referenceable import IReferenceable
+
 from collective.polls.content.poll import IPoll
 from collective.polls.testing import INTEGRATION_TESTING
 
@@ -47,6 +49,11 @@ class IntegrationTest(unittest.TestCase):
         factory = fti.factory
         new_object = createObject(factory)
         self.failUnless(IPoll.providedBy(new_object))
+
+    def test_is_referenceable(self):
+        self.folder.invokeFactory('collective.polls.poll', 'p1')
+        p1 = self.folder['p1']
+        self.assertTrue(IReferenceable.providedBy(p1))
 
 
 class VotingTest(unittest.TestCase):
