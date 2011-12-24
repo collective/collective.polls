@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+PROJECTNAME = 'collective.polls'
 COOKIE_KEY = 'collective.poll'
 MEMBERS_ANNO_KEY = 'voters_members_id'
 VOTE_ANNO_KEY = 'option.%02d'
