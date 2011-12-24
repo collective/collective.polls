@@ -11,9 +11,9 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from plone.app.testing import logout
 
+from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
-
-from Products.Archetypes.interfaces.referenceable import IReferenceable
+from plone.uuid.interfaces import IAttributeUUID
 
 from collective.polls.content.poll import IPoll
 from collective.polls.testing import INTEGRATION_TESTING
@@ -54,6 +54,7 @@ class IntegrationTest(unittest.TestCase):
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         p1 = self.folder['p1']
         self.assertTrue(IReferenceable.providedBy(p1))
+        self.assertTrue(IAttributeUUID.providedBy(p1))
 
 
 class VotingTest(unittest.TestCase):
