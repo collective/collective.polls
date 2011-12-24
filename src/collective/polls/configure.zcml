@@ -12,7 +12,7 @@
 
   <permission
     id="collective.polls.AddPoll"
-    title="collective.polls: Add Poll"
+    title="collective.polls: Add poll"
     />
         
   <!-- Grok the package to initialise schema interfaces and content classes -->
