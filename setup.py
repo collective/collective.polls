@@ -31,6 +31,7 @@ setup(name='collective.polls',
       install_requires=[
         'setuptools',
         'plone.app.dexterity>=1.1',
+        'plone.app.referenceablebehavior',
         'collective.z3cform.datagridfield'
         ],
       extras_require={
