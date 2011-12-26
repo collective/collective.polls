@@ -20,7 +20,7 @@ class InstallTest(unittest.TestCase):
 
     def test_installed(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
-        self.failUnless(qi.isProductInstalled(PROJECTNAME))
+        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
     def test_add_permissions(self):
         permission = 'collective.polls: Add poll'
@@ -41,7 +41,7 @@ class UninstallTest(unittest.TestCase):
     def test_uninstalled(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.failIf(qi.isProductInstalled(PROJECTNAME))
+        self.assertFalse(qi.isProductInstalled(PROJECTNAME))
 
 
 def test_suite():
