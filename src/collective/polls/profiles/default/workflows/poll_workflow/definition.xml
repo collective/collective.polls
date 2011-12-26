@@ -12,6 +12,7 @@
  <permission>Access contents information</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
+ <permission>collective.polls: Vote</permission>
 
  <state state_id="closed" title="Closed"  i18n:attributes="title">
   <permission-map name="Access contents information" acquired="False">
@@ -21,6 +22,8 @@
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Anonymous</permission-role>
+  </permission-map>
+  <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
  </state>
  <state state_id="open" title="Open"  i18n:attributes="title">
@@ -32,6 +35,16 @@
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Anonymous</permission-role>
+  </permission-map>
+  <permission-map name="collective.polls: Vote" acquired="True">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Member</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+
   </permission-map>
  </state>
  <state state_id="pending" title="Pending review"  i18n:attributes="title">
@@ -51,6 +64,8 @@
    <permission-role>Manager</permission-role>
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
  </state>
  <state state_id="private" title="Private"  i18n:attributes="title">
@@ -73,6 +88,8 @@
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
  </state>
  <transition transition_id="close" title="Site admin closes the poll"

@@ -7,5 +7,6 @@
    <role name="Owner"/>
    <role name="Contributor"/>
   </permission>
+  <permission name="collective.polls: Vote" acquire="True" />
  </permissions>
 </rolemap>
