@@ -89,8 +89,8 @@ class PortletRegistrationTest(BasePortlet):
     def test_interfaces(self):
         portlet = voteportlet.Assignment(header='Polls',
                                          poll='latest')
-        self.failUnless(IPortletAssignment.providedBy(portlet))
-        self.failUnless(IPortletDataProvider.providedBy(portlet.data))
+        self.assertTrue(IPortletAssignment.providedBy(portlet))
+        self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
     def test_invoke_addview(self):
         portal = self.portal
@@ -106,7 +106,7 @@ class PortletRegistrationTest(BasePortlet):
         addview.createAndAdd(data={'header': 'Polls', 'poll': 'latest'})
 
         self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0],
+        self.assertTrue(isinstance(mapping.values()[0],
                                    voteportlet.Assignment))
 
     def test_invoke_editview(self):
@@ -117,14 +117,14 @@ class PortletRegistrationTest(BasePortlet):
                                          poll='latest')
         editview = getMultiAdapter((mapping['foo'], request),
                                     name='edit')
-        self.failUnless(isinstance(editview, voteportlet.EditForm))
+        self.assertTrue(isinstance(editview, voteportlet.EditForm))
 
     def test_vocab_possible_polls(self):
         ''' test vocabulary source for possible polls '''
         portal = self.portal
         vocab = voteportlet.PossiblePolls(portal)
         # We should list here 2 open polls + latest as options
-        self.failUnless(len(vocab)==3)
+        self.assertTrue(len(vocab)==3)
 
     def test_renderer(self):
         context = self.folder
@@ -138,7 +138,7 @@ class PortletRegistrationTest(BasePortlet):
 
         renderer = getMultiAdapter((context, request, view, manager, assignment),
                                     IPortletRenderer)
-        self.failUnless(isinstance(renderer, voteportlet.Renderer))
+        self.assertTrue(isinstance(renderer, voteportlet.Renderer))
 
 
 class PortletRendererTest(BasePortlet):

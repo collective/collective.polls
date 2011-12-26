@@ -30,12 +30,12 @@ class WorkflowTest(unittest.TestCase):
 
     def test_workflow_installed(self):
         ids = self.workflow_tool.getWorkflowIds()
-        self.failUnless(workflow_id in ids)
+        self.assertTrue(workflow_id in ids)
 
     def test_default_workflow(self):
         chain = self.workflow_tool.getChainForPortalType(self.obj.portal_type)
-        self.failUnless(len(chain) == 1)
-        self.failUnless(chain[0] == workflow_id)
+        self.assertTrue(len(chain) == 1)
+        self.assertTrue(chain[0] == workflow_id)
 
     def test_workflow_initial_state(self):
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
