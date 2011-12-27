@@ -28,7 +28,7 @@ msgstr "Um portlet para permitir voto numa enquete específica"
 
 #: collective/polls/content/poll.py:47
 msgid "Allow anonymous"
-msgstr "Permitir anônimo"
+msgstr "Permitir voto anônimo"
 
 #: collective/polls/content/poll.py:48
 msgid "Allow not logged in users to vote."
@@ -48,7 +48,7 @@ msgstr "Descrição"
 
 #: collective/polls/portlet/voteportlet.py:53
 msgid "Header"
-msgstr "Cabeça"
+msgstr "Título"
 
 #: collective/polls/content/poll.py:237
 msgid "Invalid option"

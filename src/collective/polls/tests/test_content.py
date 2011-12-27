@@ -18,6 +18,8 @@ from plone.uuid.interfaces import IAttributeUUID
 from collective.polls.content.poll import IPoll
 from collective.polls.testing import INTEGRATION_TESTING
 
+from collective.polls.config import PERMISSION_VOTE
+
 
 class IntegrationTest(unittest.TestCase):
 
@@ -77,7 +79,8 @@ class VotingTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
 
     def setUpPolls(self):
-        wt = self.portal.portal_workflow
+        self.wt = self.portal.portal_workflow
+        wt = self.wt
         # Create 3 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         self.folder.invokeFactory('collective.polls.poll', 'p2')
@@ -101,6 +104,47 @@ class VotingTest(unittest.TestCase):
         self.p2 = p2
         self.p3 = p3
 
+    def _active_roles(self, roles):
+        return [r['name'] for r in roles if r['selected']]
+
+    def test_permission_to_vote_private_poll(self):
+        poll = self.p1
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles), [])
+
+    def test_permission_to_vote_pending_poll(self):
+        wt = self.wt
+        poll = self.p1
+        wt.doActionFor(poll, 'submit')
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles), [])
+
+    def test_permission_to_vote_open_poll(self):
+        # Poll without allow_anonymous set
+        poll = self.p2
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles),
+                         ['Contributor', 'Editor', 'Manager', 'Member',
+                          'Reader', 'Reviewer', 'Site Administrator']
+                        )
+
+    def test_permission_to_vote_open_poll_anon(self):
+        # Poll with allow_anonymous set
+        poll = self.p3
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles),
+                         ['Anonymous', 'Contributor', 'Editor', 'Manager',
+                          'Member', 'Reader', 'Reviewer', 'Site Administrator']
+                        )
+
+    def test_permission_to_vote_closed_poll(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        wt = self.wt
+        poll = self.p3
+        wt.doActionFor(poll, 'close')
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles), [])
+
     def test_vote_closed_poll(self):
         options = 2
         self.assertRaises(Unauthorized, self.p1.setVote, options)
@@ -108,12 +152,17 @@ class VotingTest(unittest.TestCase):
         results = self.p1.getResults()
         self.assertEqual(results[options][1], 0)
 
+        total = self.p1.total_votes
+        self.assertEqual(total, 0)
+
     def test_vote_open_poll(self):
         options = 2
         voted = self.p2.setVote(options)
         self.assertTrue(voted)
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p2.total_votes
+        self.assertEqual(total, 1)
 
     def test_vote_same_user_twice(self):
         options = 2
@@ -124,15 +173,17 @@ class VotingTest(unittest.TestCase):
 
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p2.total_votes
+        self.assertEqual(total, 1)
 
     def test_invalid_option(self):
         options = 5
         voted = self.p2.setVote(options)
         self.assertFalse(voted)
 
-        results = self.p2.getResults()
-        votes = sum([option[1] for option in results])
-        self.assertEqual(votes, 0)
+        total = self.p2.total_votes
+        self.assertEqual(total, 0)
+        
 
     def test_anonymous_closed_poll(self):
         logout()
@@ -142,6 +193,8 @@ class VotingTest(unittest.TestCase):
 
         results = self.p1.getResults()
         self.assertEqual(results[options][1], 0)
+        total = self.p1.total_votes
+        self.assertEqual(total, 0)
 
     def test_anonymous_open_restricted_poll(self):
         logout()
@@ -151,6 +204,8 @@ class VotingTest(unittest.TestCase):
 
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 0)
+        total = self.p2.total_votes
+        self.assertEqual(total, 0)
 
     def test_anonymous_open_poll(self):
         logout()
@@ -159,6 +214,8 @@ class VotingTest(unittest.TestCase):
         self.assertTrue(voted)
         results = self.p3.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p3.total_votes
+        self.assertEqual(total, 1)
 
     def test_anonymous_twice_open_poll(self):
         logout()
@@ -171,6 +228,38 @@ class VotingTest(unittest.TestCase):
 
         results = self.p3.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p3.total_votes
+        self.assertEqual(total, 1)
+
+    def test_percentage_vote_report(self):
+        poll = self.p3
+        # Vote as logged user
+        options = 2
+        voted = poll.setVote(options, self.request)
+        self.assertTrue(voted)
+
+        total = poll.total_votes
+        self.assertEqual(total, 1)
+
+        results = poll.getResults()
+        # One vote
+        self.assertEqual(results[options][1], 1)
+        # 100%
+        self.assertEqual(results[options][2], 1.0)
+
+        logout()
+        options = 1
+        voted = poll.setVote(options, self.request)
+        self.assertTrue(voted)
+
+        total = poll.total_votes
+        self.assertEqual(total, 2)
+
+        results = poll.getResults()
+        # One vote
+        self.assertEqual(results[options][1], 1)
+        # 50%
+        self.assertEqual(results[options][2], 0.5)
 
 
 def test_suite():

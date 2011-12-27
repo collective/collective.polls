@@ -15,6 +15,11 @@
     title="collective.polls: Add poll"
     />
 
+  <permission
+    id="collective.polls.Vote"
+    title="collective.polls: Vote"
+    />
+
   <grok:grok package="." />
 
   <i18n:registerTranslations directory="locales" />
