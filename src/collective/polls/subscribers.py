@@ -5,6 +5,8 @@ from Products.CMFCore.interfaces import IActionSucceededEvent
 
 from collective.polls.content.poll import IPoll
 
+from collective.polls.config import PERMISSION_VOTE
+
 ALL_ROLES = ['Anonymous', 'Contributor', 'Editor', 'Manager', 'Member',
              'Reader', 'Reviewer', 'Site Administrator']
 
@@ -18,6 +20,6 @@ def fix_permissions(poll, event):
         # Poll has been opened
         allow_anonymous = poll.allow_anonymous
         if allow_anonymous:
-            poll.manage_permission('collective.polls: Vote',
+            poll.manage_permission(PERMISSION_VOTE,
                                    ALL_ROLES,
                                    acquire=0)
