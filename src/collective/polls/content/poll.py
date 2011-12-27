@@ -74,6 +74,11 @@ class Poll(dexterity.Item):
 
     grok.implements(IPoll)
 
+    __ac_permissions__ = (
+        ('collective.polls: Vote',
+         ('setVote', '_setVoter', )),
+        )
+
     @property
     def annotations(self):
         return IAnnotations(self)
