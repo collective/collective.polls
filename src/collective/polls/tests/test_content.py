@@ -18,6 +18,8 @@ from plone.uuid.interfaces import IAttributeUUID
 from collective.polls.content.poll import IPoll
 from collective.polls.testing import INTEGRATION_TESTING
 
+from collective.polls.config import PERMISSION_VOTE
+
 
 class IntegrationTest(unittest.TestCase):
 
@@ -77,7 +79,8 @@ class VotingTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
 
     def setUpPolls(self):
-        wt = self.portal.portal_workflow
+        self.wt = self.portal.portal_workflow
+        wt = self.wt
         # Create 3 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         self.folder.invokeFactory('collective.polls.poll', 'p2')
@@ -100,6 +103,47 @@ class VotingTest(unittest.TestCase):
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
+
+    def _active_roles(self, roles):
+        return [r['name'] for r in roles if r['selected']]
+
+    def test_permission_to_vote_private_poll(self):
+        poll = self.p1
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles), [])
+
+    def test_permission_to_vote_pending_poll(self):
+        wt = self.wt
+        poll = self.p1
+        wt.doActionFor(poll, 'submit')
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles), [])
+
+    def test_permission_to_vote_open_poll(self):
+        # Poll without allow_anonymous set
+        poll = self.p2
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles),
+                         ['Contributor', 'Editor', 'Manager', 'Member',
+                          'Reader', 'Reviewer', 'Site Administrator']
+                        )
+
+    def test_permission_to_vote_open_poll_anon(self):
+        # Poll with allow_anonymous set
+        poll = self.p3
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles),
+                         ['Anonymous', 'Contributor', 'Editor', 'Manager',
+                          'Member', 'Reader', 'Reviewer', 'Site Administrator']
+                        )
+
+    def test_permission_to_vote_closed_poll(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        wt = self.wt
+        poll = self.p3
+        wt.doActionFor(poll, 'close')
+        roles = poll.rolesOfPermission(PERMISSION_VOTE)
+        self.assertEqual(self._active_roles(roles), [])
 
     def test_vote_closed_poll(self):
         options = 2
