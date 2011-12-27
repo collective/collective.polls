@@ -276,8 +276,11 @@ class View(grok.View):
             if not self.errors:
                 # Let's vote
                 try:
-                    self.context.setVote(options)
+                    self.context.setVote(options, self.request)
                     self.messages.append(_(u'Thanks for your vote'))
+                    # We do this to avoid redirecting anonymous user as 
+                    # we just sent them the cookie
+                    self._has_voted = True
                 except Unauthorized:
                     self.errors.append(_(u'You are not authorized to vote'))
         # Update status messages
@@ -288,9 +291,12 @@ class View(grok.View):
 
     @property
     def can_vote(self):
+        if self.has_voted:
+            # This is mainly to avoid anonymous users seeing the form again
+            return False
         utility = self.utility
         try:
-            return utility.allowed_to_vote(self.context)
+            return utility.allowed_to_vote(self.context, self.request)
         except Unauthorized:
             return False
 
@@ -302,8 +308,10 @@ class View(grok.View):
     @property
     def has_voted(self):
         ''' has the current user voted in this poll? '''
+        if hasattr(self, '_has_voted') and self._has_voted:
+            return True
         utility = self.utility
-        voted = utility.voted_in_a_poll(self.context)
+        voted = utility.voted_in_a_poll(self.context, self.request)
         return voted
 
     def poll_uid(self):
