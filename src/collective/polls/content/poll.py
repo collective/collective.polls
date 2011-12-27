@@ -291,7 +291,7 @@ class View(grok.View):
 
     @property
     def can_vote(self):
-        if self.has_voted:
+        if hasattr(self, '_has_voted') and self._has_voted:
             # This is mainly to avoid anonymous users seeing the form again
             return False
         utility = self.utility
