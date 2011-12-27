@@ -24,6 +24,8 @@ from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import VOTE_ANNO_KEY
 
+from collective.polls.config import PERMISSION_VOTE
+
 from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
@@ -75,7 +77,7 @@ class Poll(dexterity.Item):
     grok.implements(IPoll)
 
     __ac_permissions__ = (
-        ('collective.polls: Vote',
+        (PERMISSION_VOTE,
          ('setVote', '_setVoter', )),
         )
 
