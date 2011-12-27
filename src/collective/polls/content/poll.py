@@ -24,6 +24,8 @@ from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import VOTE_ANNO_KEY
 
+from collective.polls.config import PERMISSION_VOTE
+
 from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
@@ -74,6 +76,11 @@ class Poll(dexterity.Item):
 
     grok.implements(IPoll)
 
+    __ac_permissions__ = (
+        (PERMISSION_VOTE,
+         ('setVote', '_setVoter', )),
+        )
+
     @property
     def annotations(self):
         return IAnnotations(self)
@@ -88,16 +95,32 @@ class Poll(dexterity.Item):
         options = self.options
         return options
 
-    def getResults(self):
-        ''' Returns results so far '''
-        all_votes = []
+    def _getVotes(self):
+        ''' Return votes in a dict format '''
+        votes = {'options': [],
+                 'total': 0}
         for option in self.getOptions():
             index = option.get('option_id')
             description = option.get('description')
-            votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
+            option_votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
+            votes['options'].append({'description': description,
+                                     'votes': option_votes,
+                                     'percentage': 0.0})
+            votes['total'] = votes['total'] + option_votes
+        for option in votes['options']:
+            if option['votes']:
+                option['percentage'] = option['votes'] / float(votes['total'])
+        return votes
 
-            all_votes.append((description, votes))
-        return all_votes
+    def getResults(self):
+        ''' Returns results so far '''
+        votes = self._getVotes()
+        all_results = []
+        for item in votes['options']:
+            all_results.append((item['description'],
+                                item['votes'],
+                                item['percentage']))
+        return all_results
 
     def _validateVote(self, options=[]):
         ''' Check if passed options are available here '''
@@ -131,6 +154,12 @@ class Poll(dexterity.Item):
         annotations = self.annotations
         voters = annotations.get(MEMBERS_ANNO_KEY, [])
         return voters
+
+    @property
+    def total_votes(self):
+        ''' Return the # of votes so far'''
+        votes = self._getVotes()
+        return votes['total']
 
     def setVote(self, options=[], request=None):
         ''' Set a vote on this poll '''

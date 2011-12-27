@@ -131,9 +131,11 @@ class Polls(grok.GlobalUtility):
 
     def allowed_to_vote(self, poll, request=None):
         ''' is current user allowed to vote in this poll ?'''
-        review_state = self.wt.getInfoFor(poll, 'review_state')
-        canView = self.allowed_to_view(poll)
-        if (canView and (review_state in ['open', ])):
+
+        canVote = (self.mt.checkPermission('collective.polls: Vote', poll) 
+                   and True) or False
+
+        if canVote:
             # User must view the poll
             # and poll must be open to allow votes
             if not self.voted_in_a_poll(poll, request):

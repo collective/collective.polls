@@ -27,7 +27,7 @@ msgstr "Membro retrai submissão"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits content for publication"
-msgstr "O membro apresenta conteúdo para publicação"
+msgstr "O membro envia conteúdo para publicação"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Open"
@@ -35,7 +35,7 @@ msgstr "Aberta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Pending review"
-msgstr "Pendente de revisão"
+msgstr "Pendente"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow"
@@ -43,7 +43,7 @@ msgstr "Workflow de enquete"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow is intended to be used with polls"
-msgstr "Um workflow destinado a ser usado com enquetes"
+msgstr "Wworkflow a ser utilizado com enquetes"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
