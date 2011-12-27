@@ -58,19 +58,19 @@ class IntegrationTest(unittest.TestCase):
         ''' List 5 recent polls, including closed ones '''
         utility = queryUtility(IPolls, name='collective.polls')
         polls = utility.recent_polls(show_all=True)
-        self.assertEquals(len(polls), 5)
+        self.assertEqual(len(polls), 5)
 
     def test_recent_polls_expand_limit(self):
         ''' List all recent polls, including closed ones '''
         utility = queryUtility(IPolls, name='collective.polls')
         polls = utility.recent_polls(show_all=True, limit=10)
-        self.assertEquals(len(polls), 6)
+        self.assertEqual(len(polls), 6)
 
     def test_open_recent_polls(self):
         ''' List open recent polls'''
         utility = queryUtility(IPolls, name='collective.polls')
         polls = utility.recent_polls(show_all=False)
-        self.assertEquals(len(polls), 2)
+        self.assertEqual(len(polls), 2)
 
     def test_polls_context(self):
         ''' List for polls in subfolder context '''
@@ -78,7 +78,7 @@ class IntegrationTest(unittest.TestCase):
         context = self.subfolder
         polls = utility.recent_polls_in_context(context=context,
                                                 show_all=True)
-        self.assertEquals(len(polls), 3)
+        self.assertEqual(len(polls), 3)
 
     def test_open_polls_context(self):
         ''' List for open polls in subfolder context '''
@@ -86,7 +86,7 @@ class IntegrationTest(unittest.TestCase):
         context = self.subfolder
         polls = utility.recent_polls_in_context(context=context,
                                                 show_all=False)
-        self.assertEquals(len(polls), 1)
+        self.assertEqual(len(polls), 1)
 
     def test_poll_by_uid(self):
         ''' Get poll for a given UID '''
@@ -94,7 +94,7 @@ class IntegrationTest(unittest.TestCase):
         uid = IUUID(base_poll)
         utility = queryUtility(IPolls, name='collective.polls')
         poll = utility.poll_by_uid(uid=uid)
-        self.assertEquals(poll, base_poll)
+        self.assertEqual(poll, base_poll)
 
     def test_latest_poll(self):
         ''' Get poll the latest open poll '''
@@ -102,7 +102,7 @@ class IntegrationTest(unittest.TestCase):
         uid = 'latest'
         utility = queryUtility(IPolls, name='collective.polls')
         poll = utility.poll_by_uid(uid=uid)
-        self.assertEquals(poll, base_poll)
+        self.assertEqual(poll, base_poll)
 
     def test_uid_for_poll(self):
         ''' Get uid for a poll '''
@@ -110,17 +110,17 @@ class IntegrationTest(unittest.TestCase):
         poll = self.subfolder['p5']
         uid = IUUID(poll)
         poll_uid = utility.uid_for_poll(poll=poll)
-        self.assertEquals(uid, poll_uid)
+        self.assertEqual(uid, poll_uid)
 
     def test_voted_in_a_poll(self):
         ''' test if a user voted in a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
         poll = self.subfolder['p5']
         poll.options = [{'option_id':0, 'description':'Option 1'}, ]
-        self.assertTrue(utility.voted_in_a_poll(poll)==False)
+        self.assertFalse(utility.voted_in_a_poll(poll))
         # Vote in a poll
         poll.setVote(0)
-        self.assertTrue(utility.voted_in_a_poll(poll)==True)
+        self.assertTrue(utility.voted_in_a_poll(poll))
 
     def test_error_voted_in_a_poll(self):
         ''' test if a user voted in a poll '''
@@ -129,14 +129,14 @@ class IntegrationTest(unittest.TestCase):
         # Published Poll, allowed to vote
         poll = self.subfolder['p5']
         # Anonymous user and we do not pass a request
-        self.assertTrue(utility.voted_in_a_poll(poll)==True)
+        self.assertTrue(utility.voted_in_a_poll(poll))
 
     def test_allowed_to_vote(self):
         ''' test if a user voted in a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
         # Published Poll, allowed to vote
         poll = self.subfolder['p5']
-        self.assertTrue(utility.allowed_to_vote(poll)==True)
+        self.assertTrue(utility.allowed_to_vote(poll))
         # Unpuclished poll, not allowed to vote
         poll = self.subfolder['p6']
         self.assertRaises(Unauthorized, utility.allowed_to_vote, poll)
@@ -146,21 +146,21 @@ class IntegrationTest(unittest.TestCase):
         utility = queryUtility(IPolls, name='collective.polls')
         # Published Poll, member can view
         poll = self.subfolder['p5']
-        self.assertTrue(utility.allowed_to_view(poll)==True)
+        self.assertTrue(utility.allowed_to_view(poll))
 
     def test_allowed_to_edit(self):
         ''' test if member can edit a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
         # Private Poll, member can edit
         poll = self.subfolder['p6']
-        self.assertTrue(utility.allowed_to_edit(poll)==True)
+        self.assertTrue(utility.allowed_to_edit(poll))
 
     def test_not_allowed_to_edit(self):
         ''' test if member can edit a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
         # Published Poll, member cannot edit
         poll = self.subfolder['p5']
-        self.assertTrue(utility.allowed_to_edit(poll)==False)
+        self.assertFalse(utility.allowed_to_edit(poll))
 
     def test_anonymous_allowed_to_view(self):
         ''' Anonymous can view a published poll '''
@@ -168,7 +168,7 @@ class IntegrationTest(unittest.TestCase):
         utility = queryUtility(IPolls, name='collective.polls')
         # Published Poll, member can view
         poll = self.subfolder['p5']
-        self.assertTrue(utility.allowed_to_view(poll)==True)
+        self.assertTrue(utility.allowed_to_view(poll))
 
     def test_anonymous_not_allowed_to_view(self):
         ''' Anonymous cannot view a private poll '''
@@ -176,7 +176,7 @@ class IntegrationTest(unittest.TestCase):
         utility = queryUtility(IPolls, name='collective.polls')
         # Published Poll, member can view
         poll = self.subfolder['p6']
-        self.assertFalse(utility.allowed_to_view(poll)==True)
+        self.assertFalse(utility.allowed_to_view(poll))
 
 
 def test_suite():

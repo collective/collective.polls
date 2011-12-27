@@ -34,8 +34,8 @@ class WorkflowTest(unittest.TestCase):
 
     def test_default_workflow(self):
         chain = self.workflow_tool.getChainForPortalType(self.obj.portal_type)
-        self.assertTrue(len(chain) == 1)
-        self.assertTrue(chain[0] == workflow_id)
+        self.assertEqual(len(chain), 1)
+        self.assertEqual(chain[0], workflow_id)
 
     def test_workflow_initial_state(self):
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
@@ -79,7 +79,7 @@ class WorkflowTest(unittest.TestCase):
 
         # We can however, retract it
         self.workflow_tool.doActionFor(self.obj, 'retract')
-        
+
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'private')
 
@@ -109,11 +109,10 @@ class WorkflowTest(unittest.TestCase):
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
                           self.obj, 'submit')
-                          
+
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
                           self.obj, 'publish')
-
 
     def test_workflow_permissions(self):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
@@ -144,7 +143,7 @@ class WorkflowTest(unittest.TestCase):
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.workflow_tool.doActionFor(self.obj, 'close')
-        
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

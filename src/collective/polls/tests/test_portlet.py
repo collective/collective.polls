@@ -70,19 +70,20 @@ class BasePortlet(unittest.TestCase):
         self.p2 = p2
         self.p3 = p3
 
+
 class PortletRegistrationTest(BasePortlet):
 
     def test_portlet_registered(self):
         portlet = queryUtility(IPortletType,
                                name='collective.polls.VotePortlet')
-        self.assertEquals(portlet.addview, 'collective.polls.VotePortlet')
+        self.assertEqual(portlet.addview, 'collective.polls.VotePortlet')
 
     def test_registered_interfaces(self):
         portlet = queryUtility(IPortletType,
                                name='collective.polls.VotePortlet')
         registered_interfaces = [_getDottedName(i) for i in portlet.for_]
         registered_interfaces.sort()
-        self.assertEquals(['plone.app.portlets.interfaces.IColumn',
+        self.assertEqual(['plone.app.portlets.interfaces.IColumn',
                            'plone.app.portlets.interfaces.IDashboard'],
                           registered_interfaces)
 
@@ -105,7 +106,7 @@ class PortletRegistrationTest(BasePortlet):
 
         addview.createAndAdd(data={'header': 'Polls', 'poll': 'latest'})
 
-        self.assertEquals(len(mapping), 1)
+        self.assertEqual(len(mapping), 1)
         self.assertTrue(isinstance(mapping.values()[0],
                                    voteportlet.Assignment))
 
@@ -124,7 +125,7 @@ class PortletRegistrationTest(BasePortlet):
         portal = self.portal
         vocab = voteportlet.PossiblePolls(portal)
         # We should list here 2 open polls + latest as options
-        self.assertTrue(len(vocab)==3)
+        self.assertEqual(len(vocab), 3)
 
     def test_renderer(self):
         context = self.folder
@@ -143,7 +144,7 @@ class PortletRegistrationTest(BasePortlet):
 
 class PortletRendererTest(BasePortlet):
 
-    def renderer(self, context=None, request=None, view=None, 
+    def renderer(self, context=None, request=None, view=None,
                  manager=None, assignment=None):
         context = context or self.folder
         request = request or self.folder.REQUEST
@@ -160,7 +161,7 @@ class PortletRendererTest(BasePortlet):
         poll_uid = IUUID(self.p3)
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
                                                             poll=poll_uid))
-        self.assertEquals(True, r.available)
+        self.assertEqual(True, r.available)
 
     def test_available_anonymous(self):
         # Use a published poll
@@ -168,7 +169,7 @@ class PortletRendererTest(BasePortlet):
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
                                                             poll=poll_uid))
         logout()
-        self.assertEquals(True, r.available)
+        self.assertEqual(True, r.available)
 
     def test_not_available(self):
         # Use a non-published poll
@@ -176,12 +177,12 @@ class PortletRendererTest(BasePortlet):
         logout()
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
                                                             poll=poll_uid))
-        self.assertEquals(False, r.available)
+        self.assertEqual(False, r.available)
 
     def test_options(self):
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
                                                             poll='latest'))
-        self.assertEquals(3, len(r.poll().options))
+        self.assertEqual(3, len(r.poll().options))
 
 
 def test_suite():
