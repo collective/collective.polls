@@ -36,7 +36,7 @@
   <permission-map name="View" acquired="False">
    <permission-role>Anonymous</permission-role>
   </permission-map>
-  <permission-map name="collective.polls: Vote" acquired="True">
+  <permission-map name="collective.polls: Vote" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
