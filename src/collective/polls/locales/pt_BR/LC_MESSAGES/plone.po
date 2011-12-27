@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
 "POT-Creation-Date: 2011-12-13 04:49+0000\n"
-"PO-Revision-Date: 2011-12-24 10:32-0600\n"
+"PO-Revision-Date: 2011-12-27 00:58-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "Workflow de enquete"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow is intended to be used with polls"
-msgstr "Wworkflow a ser utilizado com enquetes"
+msgstr "Workflow a ser utilizado com enquetes"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
