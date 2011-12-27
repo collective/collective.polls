@@ -152,12 +152,17 @@ class VotingTest(unittest.TestCase):
         results = self.p1.getResults()
         self.assertEqual(results[options][1], 0)
 
+        total = self.p1.total_votes
+        self.assertEqual(total, 0)
+
     def test_vote_open_poll(self):
         options = 2
         voted = self.p2.setVote(options)
         self.assertTrue(voted)
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p2.total_votes
+        self.assertEqual(total, 1)
 
     def test_vote_same_user_twice(self):
         options = 2
@@ -168,15 +173,17 @@ class VotingTest(unittest.TestCase):
 
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p2.total_votes
+        self.assertEqual(total, 1)
 
     def test_invalid_option(self):
         options = 5
         voted = self.p2.setVote(options)
         self.assertFalse(voted)
 
-        results = self.p2.getResults()
-        votes = sum([option[1] for option in results])
-        self.assertEqual(votes, 0)
+        total = self.p2.total_votes
+        self.assertEqual(total, 0)
+        
 
     def test_anonymous_closed_poll(self):
         logout()
@@ -186,6 +193,8 @@ class VotingTest(unittest.TestCase):
 
         results = self.p1.getResults()
         self.assertEqual(results[options][1], 0)
+        total = self.p1.total_votes
+        self.assertEqual(total, 0)
 
     def test_anonymous_open_restricted_poll(self):
         logout()
@@ -195,6 +204,8 @@ class VotingTest(unittest.TestCase):
 
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 0)
+        total = self.p2.total_votes
+        self.assertEqual(total, 0)
 
     def test_anonymous_open_poll(self):
         logout()
@@ -203,6 +214,8 @@ class VotingTest(unittest.TestCase):
         self.assertTrue(voted)
         results = self.p3.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p3.total_votes
+        self.assertEqual(total, 1)
 
     def test_anonymous_twice_open_poll(self):
         logout()
@@ -215,6 +228,38 @@ class VotingTest(unittest.TestCase):
 
         results = self.p3.getResults()
         self.assertEqual(results[options][1], 1)
+        total = self.p3.total_votes
+        self.assertEqual(total, 1)
+
+    def test_percentage_vote_report(self):
+        poll = self.p3
+        # Vote as logged user
+        options = 2
+        voted = poll.setVote(options, self.request)
+        self.assertTrue(voted)
+
+        total = poll.total_votes
+        self.assertEqual(total, 1)
+
+        results = poll.getResults()
+        # One vote
+        self.assertEqual(results[options][1], 1)
+        # 100%
+        self.assertEqual(results[options][2], 1.0)
+
+        logout()
+        options = 1
+        voted = poll.setVote(options, self.request)
+        self.assertTrue(voted)
+
+        total = poll.total_votes
+        self.assertEqual(total, 2)
+
+        results = poll.getResults()
+        # One vote
+        self.assertEqual(results[options][1], 1)
+        # 50%
+        self.assertEqual(results[options][2], 0.5)
 
 
 def test_suite():
