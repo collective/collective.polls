@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+ <javascript id="++resource++collective.polls/js/raphael-min.js" compression="none" expression="" />
+ <javascript id="++resource++collective.polls/js/g.raphael-min.js" compression="none" expression="" />
+ <javascript id="++resource++collective.polls/js/g.pie-min.js" compression="none" expression="" />
+ <javascript id="++resource++collective.polls/js/g.bar-min.js" compression="none" expression="" />
+ <javascript id="++resource++collective.polls/js/collective.poll.js" compression="full" expression="" />
+</object>

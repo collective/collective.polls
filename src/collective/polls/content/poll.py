@@ -10,6 +10,8 @@ from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
 
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
 from z3c.form.interfaces import HIDDEN_MODE
 
 from plone.directives import dexterity
@@ -29,6 +31,11 @@ from collective.polls.config import PERMISSION_VOTE
 from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
+
+
+graph_options = SimpleVocabulary(
+    [SimpleTerm(value=u'bar', title=_(u'Bar Chart')),
+     SimpleTerm(value=u'pie', title=_(u'Pie Chart'))])
 
 
 class IOption(interface.Interface):
@@ -61,6 +68,12 @@ class IPoll(form.Schema):
         description = _(u"Show partial results after a voter has already "
                          "voted."),
         )
+
+    results_graph = schema.Choice(title=_(u'Graph'),
+                         description=_(u"Format to show the graph results."),
+                         default='bar',
+                         required=True,
+                         source=graph_options)
 
     options = schema.List(
         title = _(u"Available Options"),
@@ -136,19 +149,25 @@ class Poll(dexterity.Item):
         ''' Mark this user as a voter '''
         utility = self.utility
         annotations = self.annotations
+        voters = self.voters()
         member = utility.member
         member_id = member.getId()
+        if not member_id and request:
+            poll_uid = utility.uid_for_poll(self)
+            cookie = COOKIE_KEY % str(poll_uid)
+            expires = 'Wed, 19 Feb 2020 14:28:00 GMT'
+            vote_id = str(utility.anonymous_vote_id())
+            request.response[cookie] = vote_id
+            request.response.setCookie(cookie,
+                                       vote_id,
+                                       path='/',
+                                       expires=expires)
+            member_id = 'Anonymous-%s' % vote_id
+
         if member_id:
-            voters = self.voters()
             voters.append(member_id)
             annotations[MEMBERS_ANNO_KEY] = voters
-        elif request:
-            poll_uid = utility.uid_for_poll(self)
-            request.response[COOKIE_KEY] = poll_uid
-            request.response.setCookie(COOKIE_KEY, poll_uid)
-        else:
-            return False
-        return True
+            return True
 
     def voters(self):
         annotations = self.annotations
@@ -276,8 +295,11 @@ class View(grok.View):
             if not self.errors:
                 # Let's vote
                 try:
-                    self.context.setVote(options)
+                    self.context.setVote(options, self.request)
                     self.messages.append(_(u'Thanks for your vote'))
+                    # We do this to avoid redirecting anonymous user as
+                    # we just sent them the cookie
+                    self._has_voted = True
                 except Unauthorized:
                     self.errors.append(_(u'You are not authorized to vote'))
         # Update status messages
@@ -288,9 +310,12 @@ class View(grok.View):
 
     @property
     def can_vote(self):
+        if hasattr(self, '_has_voted') and self._has_voted:
+            # This is mainly to avoid anonymous users seeing the form again
+            return False
         utility = self.utility
         try:
-            return utility.allowed_to_vote(self.context)
+            return utility.allowed_to_vote(self.context, self.request)
         except Unauthorized:
             return False
 
@@ -302,8 +327,10 @@ class View(grok.View):
     @property
     def has_voted(self):
         ''' has the current user voted in this poll? '''
+        if hasattr(self, '_has_voted') and self._has_voted:
+            return True
         utility = self.utility
-        voted = utility.voted_in_a_poll(self.context)
+        voted = utility.voted_in_a_poll(self.context, self.request)
         return voted
 
     def poll_uid(self):
