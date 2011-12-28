@@ -284,7 +284,7 @@ class View(grok.View):
                 try:
                     self.context.setVote(options, self.request)
                     self.messages.append(_(u'Thanks for your vote'))
-                    # We do this to avoid redirecting anonymous user as 
+                    # We do this to avoid redirecting anonymous user as
                     # we just sent them the cookie
                     self._has_voted = True
                 except Unauthorized:
