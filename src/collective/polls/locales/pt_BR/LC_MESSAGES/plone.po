@@ -43,7 +43,7 @@ msgstr "Workflow de enquete"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow is intended to be used with polls"
-msgstr "Wworkflow a ser utilizado com enquetes"
+msgstr "Workflow a ser utilizado com enquetes"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
