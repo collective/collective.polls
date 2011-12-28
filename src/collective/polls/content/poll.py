@@ -10,6 +10,8 @@ from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
 
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
 from z3c.form.interfaces import HIDDEN_MODE
 
 from plone.directives import dexterity
@@ -29,6 +31,11 @@ from collective.polls.config import PERMISSION_VOTE
 from collective.polls.polls import IPolls
 
 from collective.polls import MessageFactory as _
+
+
+graph_options = SimpleVocabulary(
+    [SimpleTerm(value=u'bar', title=_(u'Bar Chart')),
+     SimpleTerm(value=u'pie', title=_(u'Pie Chart'))])
 
 
 class IOption(interface.Interface):
@@ -61,6 +68,12 @@ class IPoll(form.Schema):
         description = _(u"Show partial results after a voter has already "
                          "voted."),
         )
+
+    results_graph = schema.Choice(title=_(u'Graph'),
+                         description=_(u"Format to show the graph results."),
+                         default='bar',
+                         required=True,
+                         source=graph_options)
 
     options = schema.List(
         title = _(u"Available Options"),
