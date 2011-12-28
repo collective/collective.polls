@@ -130,7 +130,7 @@ class Polls(grok.GlobalUtility):
 
     def allowed_to_edit(self, poll):
         ''' Is user allowed to edit this poll '''
-        return (self.mt.checkPermission('Modify portal content', poll) 
+        return (self.mt.checkPermission('Modify portal content', poll)
                 and True) or False
 
     def allowed_to_view(self, poll):
@@ -139,7 +139,7 @@ class Polls(grok.GlobalUtility):
 
     def allowed_to_vote(self, poll, request=None):
         ''' is current user allowed to vote in this poll ?'''
-        canVote = (self.mt.checkPermission('collective.polls: Vote', poll) 
+        canVote = (self.mt.checkPermission('collective.polls: Vote', poll)
                    and True) or False
         if canVote:
             # User must view the poll
@@ -152,6 +152,5 @@ class Polls(grok.GlobalUtility):
 
     def anonymous_vote_id(self):
         ''' return a identifier for vote_id '''
-        vote_id = int(time.time() * 10000000) + random.randint(0,99)
+        vote_id = int(time.time() * 10000000) + random.randint(0, 99)
         return vote_id
-        
