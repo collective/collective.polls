@@ -43,15 +43,28 @@
   
   <tal:results tal:condition="python:has_voted and results">
   <h2 i18n:translate="">Results:</h2>
-  <ul>
+  <div id="pollresultholder"></div>
+  <ul id="results">
     <li tal:repeat="option_result results">
-        <span tal:content="python: option_result[0]" />: 
-        <span tal:content="python: option_result[1]" />
+        <span class="option_description" tal:content="python: option_result[0]" />: 
+        <span class="option_result" tal:content="python: option_result[1]" />
     </li>
   </ul>
+      <tal:barchart condition="python:context.results_graph=='bar'">
+      <script>
+        jQuery(function(){
+                barChart();
+            });
+      </script>
+      </tal:barchart>
+      <tal:piechart condition="python:context.results_graph=='pie'">
+      <script>
+        jQuery(function(){
+                pieChart();
+            });
+      </script>
+      </tal:piechart>
   </tal:results>
-
-    
   </metal:content-core>
 </metal:main>
 
