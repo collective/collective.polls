@@ -19,10 +19,18 @@
         <tal:results condition="python:(not can_vote) and results">
             <tal:poll_results condition="nocall:results">
             <h4 i18n:translate="">Partial results</h4>
-            <p tal:repeat="result results">
-                <span tal:content="python: result[0]" />:
-                <span tal:content="python: result[1]" />
-            </p>
+            <div id="portletresultholder"></div>
+            <ul id="results">
+              <li tal:repeat="option_result results">
+                  <span class="option_description" tal:content="python: option_result[0]" />: 
+                  <span class="option_result" tal:content="python: option_result[1]" />
+              </li>
+            </ul>
+                <script>
+                  jQuery(function(){
+                          barChartPortlet();
+                      });
+                </script>
             </tal:poll_results>
         </tal:results>
 
