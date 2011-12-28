@@ -136,19 +136,25 @@ class Poll(dexterity.Item):
         ''' Mark this user as a voter '''
         utility = self.utility
         annotations = self.annotations
+        voters = self.voters()
         member = utility.member
         member_id = member.getId()
+        if not member_id and request:
+            poll_uid = utility.uid_for_poll(self)
+            cookie = COOKIE_KEY % str(poll_uid)
+            expires = 'Wed, 19 Feb 2020 14:28:00 GMT'
+            vote_id = str(utility.anonymous_vote_id())
+            request.response[cookie] = vote_id
+            request.response.setCookie(cookie,
+                                       vote_id,
+                                       path='/',
+                                       expires=expires)
+            member_id = 'Anonymous-%s' % vote_id
+
         if member_id:
-            voters = self.voters()
             voters.append(member_id)
             annotations[MEMBERS_ANNO_KEY] = voters
-        elif request:
-            poll_uid = utility.uid_for_poll(self)
-            request.response[COOKIE_KEY] = poll_uid
-            request.response.setCookie(COOKIE_KEY, poll_uid)
-        else:
-            return False
-        return True
+            return True
 
     def voters(self):
         annotations = self.annotations
