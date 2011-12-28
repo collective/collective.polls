@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+import time
+import random
+
 from AccessControl import Unauthorized
 
 from five import grok
@@ -42,6 +45,9 @@ class IPolls(Interface):
 
     def allowed_to_vote(poll):
         ''' vote in a poll '''
+
+    def anonymous_vote_id(poll_uid):
+        ''' return a identifier for vote_id '''
 
 
 class Polls(grok.GlobalUtility):
@@ -108,14 +114,16 @@ class Polls(grok.GlobalUtility):
     def voted_in_a_poll(self, poll, request=None):
         ''' check if current user already voted '''
         anonymous_allowed = poll.allow_anonymous
+        poll_uid = self.uid_for_poll(poll)
         member = self.member
         member_id = member.getId()
+        voters = poll.voters()
         if member_id:
-            voters = poll.voters()
             return member_id in voters
         elif anonymous_allowed and request:
-            poll_uid = request.cookies.get(COOKIE_KEY)
-            return poll_uid and (self.uid_for_poll(poll) == poll_uid)
+            cookie = COOKIE_KEY % poll_uid
+            value = request.cookies.get(cookie, '')
+            return value and True or False
         else:
             # If we cannot be sure, we will block this user from voting again
             return True
@@ -141,3 +149,9 @@ class Polls(grok.GlobalUtility):
                 return True
         # All other cases shall not pass
         raise Unauthorized
+
+    def anonymous_vote_id(self):
+        ''' return a identifier for vote_id '''
+        vote_id = int(time.time() * 10000000) + random.randint(0,99)
+        return vote_id
+        
