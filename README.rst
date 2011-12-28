@@ -1,8 +1,9 @@
-.. contents:: Table of Contents
-   :depth: 2
-
+**************************************************************
 collective.polls
 **************************************************************
+
+.. contents:: Table of Contents
+   :depth: 2
 
 Overview
 --------
