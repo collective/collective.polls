@@ -24,7 +24,7 @@ Requirements
 Installation
 ------------
 
-To enable this product,on a buildout based installation:
+To enable this product in a buildout-based installation:
 
     1. Edit your buildout.cfg and add ``collective.polls``
        to the list of eggs to install ::
@@ -35,16 +35,13 @@ To enable this product,on a buildout based installation:
             collective.polls
 
 
-After updating the configuration you need to run the ''bin/buildout'',
+After updating the configuration you need to run ''bin/buildout'',
 which will take care of updating your system.
 
-Go to the 'Site Setup' page in the Plone interface and click on the
-'Add/Remove Products' link.
+Go to the 'Site Setup' page in a Plone site and click on the
+'Add-ons' link.
 
-Choose the product (check its checkbox) and click the 'Install' button.
-
-Uninstall -- This can be done from the same management screen, but only
-if you installed it from the quick installer.
+Check the box next to ''collective.polls'' and click the 'Activate' button.
 
 Note: You may have to empty your browser cache and save your resource
 registries in order to see the effects of the product installation.
@@ -57,7 +54,7 @@ Features
 
     * Voting can take place in the object or in a voting portlet
 
-    * The voting portlet shows automatically the latest open poll or an
+    * The voting portlet shows automatically the latest open poll or a
       specific open poll
 
     * Users can see partial results of the poll
@@ -87,8 +84,8 @@ review, Open and Closed.
     * When the poll is Open, people can only vote; nobody can modify the poll
       in any way
 
-    * An Open poll can be sent to Private or Closed by Manager or Site
+    * An Open poll can be sent to Private or Closed state by Manager or Site
       Administrator roles
 
-    * When a poll is Closed nobody can modify anything, neither to vote; there
+    * When a poll is Closed nobody can modify it, nor can anyone vote on it; there
       is no way to reopen a closed poll
