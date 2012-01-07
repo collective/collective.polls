@@ -131,7 +131,7 @@ class Renderer(base.Renderer):
         utility = self.utility
         poll = self.poll()
         try:
-            return utility.allowed_to_vote(poll)
+            return utility.allowed_to_vote(poll, self.request)
         except Unauthorized:
             return False
 
