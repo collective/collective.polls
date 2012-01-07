@@ -50,39 +50,45 @@ Note: You may have to empty your browser cache and save your resource
 registries in order to see the effects of the product installation.
 
 
+Features
+--------
+
+    * Polls can be open for anonymous users to vote
+
+    * Voting can take place in the object or in a voting portlet
+
+    * The voting portlet shows automatically the latest open poll or an
+      specific open poll
+
+    * Users can see partial results of the poll
+
+    * Results can be shown using a bar chart, a pie chart, or just by number
+      of votes
+
+
 Workflow description
 --------------------
 
-The workflow associated with a poll has the following states: Private, Pending
+The workflow associated with polls has the following states: Private, Pending
 review, Open and Closed.
 
     * Polls are created in Private state; only Owner, Manager, Editor or Site
       Administrator roles can modify them
-    * When a poll is in Private state, it can be sent to Pending review or
-      directly to Open state, if the user has permission to do so
-    * When a poll is Pending review, it can be edited by Manager, Reviewer or
+
+    * When a poll is Private it can be sent to Pending review or directly to
+      Open, if the user has the proper role
+
+    * When a poll is Pending review it can be edited by Manager, Reviewer or
       Site Administrator roles
-    * A poll in Pending review can be send to Open, with "Review portal
+
+    * A poll in Pending review can be sent to Open, with "Review portal
       content" permission, or to Private, with "Request review" permission
+
     * When the poll is Open, people can only vote; nobody can modify the poll
       in any way
-    * An Open poll can be sent to Private or Closed state by Manager or Site
+
+    * An Open poll can be sent to Private or Closed by Manager or Site
       Administrator roles
+
     * When a poll is Closed nobody can modify anything, neither to vote; there
       is no way to reopen a closed poll
-
-
-You can modify the workflow associated with a poll through the Type Settings
-section in Plone Configuration.
-
-
-Credits
--------
-
-    * Franco Pellegrini (frapell@gmail.com)
-
-    * Héctor Velarde (hector.velarde@gmail.com)
-
-    * Érico Andrei (erico@simplesconsultoria.com.br)
-
-    * WebDesignerDepot (www.webdesignerdepot.com) - icon

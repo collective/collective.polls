@@ -8,6 +8,7 @@ setup(name='collective.polls',
       description="A content type, workflow, and portlet for conducting "
                   "online polls, for anonymous and logged-in users",
       long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "CREDITS.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -16,6 +17,7 @@ setup(name='collective.polls',
         "Operating System :: OS Independent",
         "Programming Language :: JavaScript",
         "Programming Language :: Python",
+        "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='plone dexterity polls',
       author='Franco Pellegrini',
