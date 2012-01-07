@@ -19,6 +19,7 @@ Requirements
     * Plone >= 4.1.x (http://plone.org/products/plone)
 
     * Dexterity >= 1.1 (http://plone.org/products/dexterity)
+      Note: you may need to use known good versions of eggs for Dexterity; see http://plone.org/products/dexterity/documentation/how-to/install
 
 
 Installation
