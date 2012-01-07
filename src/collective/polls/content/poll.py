@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+
 from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from five import grok
@@ -42,11 +43,13 @@ graph_options = SimpleVocabulary(
 class IOption(interface.Interface):
     ''' An option in a poll '''
 
-    option_id = schema.Int(title=u"Option Id",
-                           required=False)
+    option_id = schema.Int(
+        title=u"Option Id",
+        required=False)
 
-    description = schema.TextLine(title=_(u"Description"),
-                                  required=True)
+    description = schema.TextLine(
+        title=_(u"Description"),
+        required=True)
 
 
 class IPoll(form.Schema):
@@ -54,9 +57,9 @@ class IPoll(form.Schema):
     """
 
     allow_anonymous = schema.Bool(
-        title = _(u"Allow anonymous"),
-        description = _(u"Allow not logged in users to vote."),
-        default = True,
+        title=_(u"Allow anonymous"),
+        description=_(u"Allow not logged in users to vote."),
+        default=True,
         )
 
     #multivalue = schema.Bool(
@@ -66,22 +69,23 @@ class IPoll(form.Schema):
         #)
 
     show_results = schema.Bool(
-        title = _(u"Show partial results"),
-        description = _(u"Show partial results after a voter has already "
-                         "voted."),
-        default = True,
+        title=_(u"Show partial results"),
+        description=_(u"Show partial results after a voter has already "
+                       "voted."),
+        default=True,
         )
 
-    results_graph = schema.Choice(title=_(u'Graph'),
-                         description=_(u"Format to show the graph results."),
-                         default='bar',
-                         required=True,
-                         source=graph_options)
+    results_graph = schema.Choice(
+        title=_(u'Graph'),
+        description=_(u"Format to show the results."),
+        default='bar',
+        required=True,
+        source=graph_options)
 
     options = schema.List(
-        title = _(u"Available Options"),
-        value_type = DictRow(title=_(u'Option'),
-                             schema=IOption),
+        title=_(u"Available options"),
+        value_type=DictRow(title=_(u'Option'),
+                           schema=IOption),
         default=[],
         required=True)
 
@@ -226,7 +230,7 @@ class PollAddForm(dexterity.AddForm):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollAddForm, self).updateWidgets()
         self.widgets['options'].allow_reorder = True
-        self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
+        self.widgets['options'].columns[0]['mode'] = HIDDEN_MODE
 
     def create(self, data):
         options = data['options']
@@ -254,7 +258,7 @@ class PollEditForm(dexterity.EditForm):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollEditForm, self).updateWidgets()
         self.widgets['options'].allow_reorder = True
-        self.widgets['options'].columns[0]['mode']= HIDDEN_MODE
+        self.widgets['options'].columns[0]['mode'] = HIDDEN_MODE
 
     def applyChanges(self, data):
         options = data['options']
