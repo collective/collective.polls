@@ -5,13 +5,12 @@ version = '1.0'
 
 setup(name='collective.polls',
       version=version,
-      description="A product for creating polls",
+      description="A content type, workflow, and portlet for conducting "
+                  "online polls, for anonymous and logged-in users",
       long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from
-      # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Framework :: Plone :: 4.1",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
