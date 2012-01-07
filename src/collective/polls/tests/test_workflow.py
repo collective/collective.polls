@@ -96,7 +96,13 @@ class WorkflowTest(unittest.TestCase):
                           self.workflow_tool.doActionFor,
                           self.obj, 'submit')
 
-        # We only can close it
+        # We can however send it back only as a site administrator or manager
+        self.workflow_tool.doActionFor(self.obj, 'send_back')
+        review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
+        self.assertEqual(review_state, 'private')
+
+        # Finally, let's open it again, so we can close it
+        self.workflow_tool.doActionFor(self.obj, 'publish')
         self.workflow_tool.doActionFor(self.obj, 'close')
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'closed')
@@ -141,7 +147,22 @@ class WorkflowTest(unittest.TestCase):
                           self.workflow_tool.doActionFor,
                           self.obj, 'close')
 
+        # Now, only Site Administrator or Manager can send it back
+        setRoles(self.portal, TEST_USER_ID, ['Owner',
+                                             'Member',
+                                             'Editor',
+                                             'Reviewer'])
+        self.assertRaises(WorkflowException,
+                          self.workflow_tool.doActionFor,
+                          self.obj, 'send_back')
+
+        # Manager is already tested in previous test
+        setRoles(self.portal, TEST_USER_ID, ['Site Administrator'])
+        self.workflow_tool.doActionFor(self.obj, 'send_back')
+                          
+        # Finally, let's get Manager role, and publish and close
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.workflow_tool.doActionFor(self.obj, 'publish')
         self.workflow_tool.doActionFor(self.obj, 'close')
 
 

@@ -28,6 +28,7 @@
  </state>
  <state state_id="open" title="Open"  i18n:attributes="title">
   <exit-transition transition_id="close"/>
+  <exit-transition transition_id="send_back"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Anonymous</permission-role>
   </permission-map>
@@ -119,11 +120,23 @@
              trigger="USER"
              before_script=""
              after_script=""
-              i18n:attributes="title">
+             i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
   <guard>
    <guard-permission>Request review</guard-permission>
    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="send_back" title="Admin retracts poll"
+             new_state="private"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="%(content_url)s/content_status_modify?workflow_action=send_back" category="workflow" icon="">Retract</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
  </transition>
  <transition transition_id="submit" title="Member submits content for publication"
