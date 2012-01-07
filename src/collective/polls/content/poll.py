@@ -35,7 +35,8 @@ from collective.polls import MessageFactory as _
 
 graph_options = SimpleVocabulary(
     [SimpleTerm(value=u'bar', title=_(u'Bar Chart')),
-     SimpleTerm(value=u'pie', title=_(u'Pie Chart'))])
+     SimpleTerm(value=u'pie', title=_(u'Pie Chart')),
+     SimpleTerm(value=u'numbers', title=_(u'Numbers Only'))])
 
 
 class IOption(interface.Interface):

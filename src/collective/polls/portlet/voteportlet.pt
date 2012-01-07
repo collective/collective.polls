@@ -26,7 +26,7 @@
                   <span class="option_result" tal:content="python: option_result[1]" />
               </li>
             </ul>
-                <script>
+                <script tal:condition="python:poll.results_graph != 'numbers'">
                   jQuery(function(){
                           barChartPortlet();
                       });
