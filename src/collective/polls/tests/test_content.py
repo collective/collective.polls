@@ -37,6 +37,12 @@ class IntegrationTest(unittest.TestCase):
         p1 = self.folder['p1']
         self.assertTrue(IPoll.providedBy(p1))
 
+    def test_default_values_for_checkboxes(self):
+        self.folder.invokeFactory('collective.polls.poll', 'p1')
+        p1 = self.folder['p1']
+        self.assertTrue(p1.allow_anonymous)
+        self.assertTrue(p1.show_results)
+
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
         self.assertNotEquals(None, fti)
@@ -94,9 +100,9 @@ class VotingTest(unittest.TestCase):
         p1.options = options
         p2 = self.folder['p2']
         p2.options = options
+        p2.allow_anonymous = False
         p3 = self.folder['p3']
         p3.options = options
-        p3.allow_anonymous = True
         # Open p2 and p3
         wt.doActionFor(self.folder['p2'], 'publish')
         wt.doActionFor(self.folder['p3'], 'publish')

@@ -55,6 +55,7 @@ class IPoll(form.Schema):
     allow_anonymous = schema.Bool(
         title = _(u"Allow anonymous"),
         description = _(u"Allow not logged in users to vote."),
+        default = True,
         )
 
     #multivalue = schema.Bool(
@@ -67,6 +68,7 @@ class IPoll(form.Schema):
         title = _(u"Show partial results"),
         description = _(u"Show partial results after a voter has already "
                          "voted."),
+        default = True,
         )
 
     results_graph = schema.Choice(title=_(u'Graph'),
