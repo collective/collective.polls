@@ -8,19 +8,19 @@
 <body>
 
 <metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core" 
+  <metal:content-core define-macro="content-core"
          tal:define="results view/getResults;
                      has_voted view/has_voted;">
 
   <tal:editing tal:condition="view/can_edit">
-  <h2 i18n:translate="">Available Options:</h2>
+  <h2 i18n:translate="">Available options:</h2>
   <ul>
     <li tal:repeat="option view/getOptions">
         <span tal:content="option/description" />
     </li>
   </ul>
   </tal:editing>
-  
+
   <tal:vote tal:condition="view/can_vote">
   <h2 i18n:translate="">Vote!</h2>
       <form action="#" method="post"
@@ -40,13 +40,13 @@
           <input type="submit" name="poll.submit" value="Submit" i18n:translate="" />
       </form>
   </tal:vote>
-  
+
   <tal:results tal:condition="python:has_voted and results">
   <h2 i18n:translate="">Results:</h2>
   <div id="pollresultholder"></div>
   <ul id="results">
     <li tal:repeat="option_result results">
-        <span class="option_description" tal:content="python: option_result[0]" />: 
+        <span class="option_description" tal:content="python: option_result[0]" />:
         <span class="option_result" tal:content="python: option_result[1]" />
     </li>
   </ul>
