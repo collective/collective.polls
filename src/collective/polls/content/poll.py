@@ -39,6 +39,10 @@ graph_options = SimpleVocabulary(
      SimpleTerm(value=u'pie', title=_(u'Pie Chart')),
      SimpleTerm(value=u'numbers', title=_(u'Numbers Only'))])
 
+format_options = SimpleVocabulary(
+    [SimpleTerm(value=u'percentage', title=_(u'Percentage')),
+     SimpleTerm(value=u'numbers', title=_(u'Numbers'))])
+
 
 class IOption(interface.Interface):
     ''' An option in a poll '''
@@ -81,6 +85,13 @@ class IPoll(form.Schema):
         default='bar',
         required=True,
         source=graph_options)
+
+    results_format = schema.Choice(
+        title=_(u'Results Format'),
+        description=_(u"Format to show the numbers."),
+        default='numbers',
+        required=True,
+        source=format_options)
 
     options = schema.List(
         title=_(u"Available options"),
@@ -140,6 +151,7 @@ class Poll(dexterity.Item):
             all_results.append((item['description'],
                                 item['votes'],
                                 item['percentage']))
+
         return all_results
 
     def _validateVote(self, options=[]):
