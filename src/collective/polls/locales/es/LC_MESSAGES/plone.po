@@ -9,12 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
-"Language-Code: es\n"
-"Language-Name: Español\n"
-"Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
-"Language: es\n"
 "X-Generator: Lokalize 1.2\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
