@@ -5,22 +5,25 @@ collective.polls
 .. contents:: Table of Contents
    :depth: 2
 
+
 Overview
 --------
 
-A content type, workflow, and portlet for conducting online polls, for 
+A content type, workflow, and portlet for conducting online polls, for
 anonymous and logged-in users.
+
 
 Requirements
 ------------
 
-    * Plone >=4.0.x (http://plone.org/products/plone)
+    * Plone >= 4.1.x (http://plone.org/products/plone)
 
-    * Dexterity >=1.1 (http://plone.org/products/dexterity)
-    
+    * Dexterity >= 1.1 (http://plone.org/products/dexterity)
+
+
 Installation
 ------------
-    
+
 To enable this product,on a buildout based installation:
 
     1. Edit your buildout.cfg and add ``collective.polls``
@@ -28,7 +31,7 @@ To enable this product,on a buildout based installation:
 
         [buildout]
         ...
-        eggs = 
+        eggs =
             collective.polls
 
 
@@ -43,8 +46,34 @@ Choose the product (check its checkbox) and click the 'Install' button.
 Uninstall -- This can be done from the same management screen, but only
 if you installed it from the quick installer.
 
-Note: You may have to empty your browser cache and save your resource registries
-in order to see the effects of the product installation.
+Note: You may have to empty your browser cache and save your resource
+registries in order to see the effects of the product installation.
+
+
+Workflow description
+--------------------
+
+The workflow associated with a poll has the following states: Private, Pending
+review, Open and Closed.
+
+    * Polls are created in Private state; only Owner, Manager, Editor or Site
+      Administrator roles can modify them
+    * When a poll is in Private state, it can be sent to Pending review or
+      directly to Open state, if the user has permission to do so
+    * When a poll is Pending review, it can be edited by Manager, Reviewer or
+      Site Administrator roles
+    * A poll in Pending review can be send to Open, with "Review portal
+      content" permission, or to Private, with "Request review" permission
+    * When the poll is Open, people can only vote; nobody can modify the poll
+      in any way
+    * An Open poll can be sent to Private or Closed state by Manager or Site
+      Administrator roles
+    * When a poll is Closed nobody can modify anything, neither to vote; there
+      is no way to reopen a closed poll
+
+
+You can modify the workflow associated with a poll through the Type Settings
+section in Plone Configuration.
 
 
 Credits
@@ -57,4 +86,3 @@ Credits
     * Érico Andrei (erico@simplesconsultoria.com.br)
 
     * WebDesignerDepot (www.webdesignerdepot.com) - icon
-    
