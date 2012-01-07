@@ -1,10 +1,10 @@
 collective.polls contributors
 =============================
 
-- Franco Pellegrini (frapell@gmail.com)
+    * Franco Pellegrini (frapell@gmail.com)
 
-- Héctor Velarde (hector.velarde@gmail.com)
+    * Héctor Velarde (hector.velarde@gmail.com)
 
-- Érico Andrei (erico@simplesconsultoria.com.br)
+    * Érico Andrei (erico@simplesconsultoria.com.br)
 
-- WebDesignerDepot (www.webdesignerdepot.com) - icon
+    * WebDesignerDepot (www.webdesignerdepot.com) - icon
