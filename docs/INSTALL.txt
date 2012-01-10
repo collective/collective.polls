@@ -1,17 +1,24 @@
-collective.polls Installation
------------------------------
+Installation
+------------
 
-To install collective.polls using zc.buildout and the plone.recipe.zope2instance
-recipe to manage your project, you can do this:
+To enable this product in a buildout-based installation:
 
-* Add ``collective.polls`` to the list of eggs to install, e.g.:
+    1. Edit your buildout.cfg and add ``collective.polls``
+       to the list of eggs to install ::
 
-    [buildout]
-    ...
-    eggs =
+        [buildout]
         ...
-        collective.polls
-       
-* Re-run buildout, e.g. with:
+        eggs =
+            collective.polls
 
-    $ ./bin/buildout
+
+After updating the configuration you need to run ''bin/buildout'',
+which will take care of updating your system.
+
+Go to the 'Site Setup' page in a Plone site and click on the
+'Add-ons' link.
+
+Check the box next to ''collective.polls'' and click the 'Activate' button.
+
+Note: You may have to empty your browser cache and save your resource
+registries in order to see the effects of the product installation.

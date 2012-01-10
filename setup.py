@@ -8,6 +8,7 @@ setup(name='collective.polls',
       description="A content type, workflow, and portlet for conducting "
                   "online polls, for anonymous and logged-in users",
       long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "INSTALL.txt")).read() + "\n" +
                        open(os.path.join("docs", "CREDITS.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
