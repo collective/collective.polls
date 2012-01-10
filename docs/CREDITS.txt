@@ -1,5 +1,5 @@
-collective.polls contributors
-=============================
+Contributors
+-------------------------------
 
     * Franco Pellegrini (frapell@gmail.com)
 
