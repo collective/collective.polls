@@ -47,15 +47,7 @@
   <ul id="results">
     <li tal:repeat="option_result results">
         <span class="option_description" tal:content="python: option_result[0]" />:
-        
-        <span class="option_result"
-              tal:content="python: option_result[1]"
-              tal:condition="python:context.results_format!='percentage'"/>
-
-        <span class="option_result"
-              tal:content="python: '%.2f%%'%(option_result[2]*100)"
-              tal:condition="python:context.results_format=='percentage'"/>
-
+        <span class="option_result" tal:content="python: option_result[1]" />
     </li>
   </ul>
       <tal:barchart condition="python:context.results_graph=='bar'">
