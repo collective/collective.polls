@@ -1,3 +1,7 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
 <dl class="portlet votePortlet"
     i18n:domain="collective.polls">
 
@@ -15,18 +19,19 @@
         tal:condition="nocall:poll">
 
         <h3 tal:content="poll/Title"/>
-        
+
         <tal:results condition="python:(not can_vote) and results">
             <tal:poll_results condition="nocall:results">
             <h4 i18n:translate="">Partial results</h4>
             <div id="portletresultholder"></div>
             <ul id="results">
               <li tal:repeat="option_result results">
-                  <span class="option_description" tal:content="python: option_result[0]" />: 
+                  <span class="option_description" tal:content="python: option_result[0]" />:
                   <span class="option_result" tal:content="python: option_result[1]" />
               </li>
             </ul>
-                <script tal:condition="python:poll.results_graph != 'numbers'">
+                <script type="text/javascript"
+                        tal:condition="python:poll.results_graph != 'numbers'">
                   jQuery(function(){
                           barChartPortlet();
                       });
@@ -83,3 +88,4 @@
     </dd>
 
 </dl>
+</html>

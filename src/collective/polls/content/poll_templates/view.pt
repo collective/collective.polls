@@ -51,14 +51,14 @@
     </li>
   </ul>
       <tal:barchart condition="python:context.results_graph=='bar'">
-      <script>
+      <script type="text/javascript">
         jQuery(function(){
                 barChart();
             });
       </script>
       </tal:barchart>
       <tal:piechart condition="python:context.results_graph=='pie'">
-      <script>
+      <script type="text/javascript">
         jQuery(function(){
                 pieChart();
             });
