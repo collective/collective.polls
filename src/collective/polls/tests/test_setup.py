@@ -10,6 +10,14 @@ from plone.app.testing import setRoles
 from collective.polls.config import PROJECTNAME
 from collective.polls.testing import INTEGRATION_TESTING
 
+JAVASCRIPTS = [
+    "++resource++collective.polls/js/raphael-min.js",
+    "++resource++collective.polls/js/g.raphael-min.js",
+    "++resource++collective.polls/js/g.pie-min.js",
+    "++resource++collective.polls/js/g.bar-min.js",
+    "++resource++collective.polls/js/collective.poll.js",
+    ]
+
 
 class InstallTest(unittest.TestCase):
 
@@ -22,11 +30,17 @@ class InstallTest(unittest.TestCase):
         qi = getattr(self.portal, 'portal_quickinstaller')
         self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
-    def test_add_permissions(self):
+    def test_add_permission(self):
         permission = 'collective.polls: Add poll'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
         self.assertEqual(roles, ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+
+    def test_jsregistry(self):
+        portal_javascripts = self.portal.portal_javascripts
+        for js in JAVASCRIPTS:
+            self.assertTrue(js in portal_javascripts.getResourceIds(),
+                            '%s not installed' % js)
 
 
 class UninstallTest(unittest.TestCase):
@@ -42,6 +56,12 @@ class UninstallTest(unittest.TestCase):
         qi = getattr(self.portal, 'portal_quickinstaller')
         qi.uninstallProducts(products=[PROJECTNAME])
         self.assertFalse(qi.isProductInstalled(PROJECTNAME))
+
+    def test_jsregistry_removed(self):
+        portal_javascripts = self.portal.portal_javascripts
+        for js in JAVASCRIPTS:
+            self.assertFalse(js in portal_javascripts.getResourceIds(),
+                             '%s not removed' % js)
 
 
 def test_suite():
