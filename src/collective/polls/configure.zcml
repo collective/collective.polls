@@ -7,6 +7,7 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.polls">
 
+  <five:registerPackage package="." />
   <includeDependencies package="." />
   <i18n:registerTranslations directory="locales" />
 
@@ -21,9 +22,6 @@
     />
 
   <grok:grok package="." />
-
-  <i18n:registerTranslations directory="locales" />
-
   <include package=".portlet" />
 
   <genericsetup:registerProfile
