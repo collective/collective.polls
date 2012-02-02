@@ -31,9 +31,15 @@
               </li>
             </ul>
                 <script type="text/javascript"
-                        tal:condition="python:poll.results_graph != 'numbers'">
+                        tal:condition="python:poll.results_graph == 'bar'">
                   jQuery(function(){
                           barChartPortlet();
+                      });
+                </script>
+                <script type="text/javascript"
+                        tal:condition="python:poll.results_graph == 'pie'">
+                  jQuery(function(){
+                          pieChartPortlet();
                       });
                 </script>
             </tal:poll_results>
