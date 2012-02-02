@@ -315,6 +315,10 @@ class View(grok.View):
         for msg in self.messages:
             messages.addStatusMessage(msg, type="info")
 
+        if 'voting.from' in form:
+            url = form['voting.from']
+            self.request.RESPONSE.redirect(url)
+
     @property
     def can_vote(self):
         if hasattr(self, '_has_voted') and self._has_voted:
