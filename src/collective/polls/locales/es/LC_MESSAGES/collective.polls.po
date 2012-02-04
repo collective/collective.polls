@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"PO-Revision-Date: 2012-02-04 18:06-0300\n"
+"PO-Revision-Date: 2012-02-04 18:16-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "La encuesta abierta más reciente"
 
 #: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
-msgstr ""
+msgstr "No hay nada aquí que pueda ver"
 
 #: collective/polls/content/poll.py:40
 msgid "Numbers Only"
@@ -84,7 +84,7 @@ msgstr "Opción"
 
 #: collective/polls/portlet/voteportlet.pt:25
 msgid "Partial results"
-msgstr ""
+msgstr "Resultados parciales"
 
 #: collective/polls/content/poll.py:39
 msgid "Pie Chart"
@@ -110,7 +110,7 @@ msgstr "Mostrar resultados parciales luego de que el votante ya haya votado."
 #: collective/polls/content/poll_templates/view.pt:40
 #: collective/polls/portlet/voteportlet.pt:87
 msgid "Submit"
-msgstr ""
+msgstr "Votar"
 
 #: collective/polls/content/poll.py:306
 msgid "Thanks for your vote"
@@ -133,4 +133,5 @@ msgstr "Qué encuesta mostrar en el portlet."
 #: collective/polls/content/poll.py:311
 msgid "You are not authorized to vote"
 msgstr "Usted no está autorizado para votar"
+
 
