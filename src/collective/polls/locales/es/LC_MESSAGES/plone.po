@@ -1,16 +1,25 @@
-# Héctor Velarde <hector.velarde@gmail.com>, 2011.
+# Héctor Velarde <hector.velarde@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2011-12-13 04:49+0000\n"
-"PO-Revision-Date: 2011-12-13 02:03-0300\n"
-"Last-Translator: Franco Pellegrini <frapell@gmail.com>\n"
-"Language-Team: Spanish <https://github.com/collective>\n"
+"POT-Creation-Date: 2012-02-04 18:47+0000\n"
+"PO-Revision-Date: 2012-02-04 18:07-0300\n"
+"Last-Translator: Franco Pellegrini\n"
+"Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 "X-Generator: Lokalize 1.2\n"
+"Language: es\n"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Admin retracts poll"
+msgstr "Administrador retrae la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
@@ -26,6 +35,10 @@ msgstr "El miembro propone la encuesta para ser publicada"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Open"
+msgstr "Abrir"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
 msgstr "Abierta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
@@ -45,8 +58,8 @@ msgid "Private"
 msgstr "Privado"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Reviewer publishes content"
-msgstr "El revisor publica el contenido"
+msgid "Reviewer opens the poll"
+msgstr "El revisor abre la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Site admin closes the poll"

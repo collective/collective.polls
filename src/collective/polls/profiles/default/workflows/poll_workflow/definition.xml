@@ -27,7 +27,7 @@
   </permission-map>
  </state>
 
- <state state_id="open" title="Open"  i18n:attributes="title">
+ <state state_id="open" title="Opened"  i18n:attributes="title">
   <exit-transition transition_id="close"/>
   <exit-transition transition_id="send_back"/>
   <permission-map name="Access contents information" acquired="False">
@@ -50,7 +50,7 @@
  </state>
 
  <state state_id="pending" title="Pending review"  i18n:attributes="title">
-  <exit-transition transition_id="publish"/>
+  <exit-transition transition_id="open"/>
   <exit-transition transition_id="retract"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
@@ -80,7 +80,7 @@
  </state>
 
  <state state_id="private" title="Private"  i18n:attributes="title">
-  <exit-transition transition_id="publish"/>
+  <exit-transition transition_id="open"/>
   <exit-transition transition_id="submit"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
@@ -120,13 +120,13 @@
   </guard>
  </transition>
 
- <transition transition_id="publish" title="Reviewer publishes content"
+ <transition transition_id="open" title="Reviewer opens the poll"
              new_state="open"
              trigger="USER"
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=open" category="workflow" icon="">Open</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
   </guard>

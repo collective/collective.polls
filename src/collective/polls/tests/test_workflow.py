@@ -46,7 +46,7 @@ class WorkflowTest(unittest.TestCase):
         self.workflow_tool.doActionFor(self.obj, 'submit')
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'pending')
-        self.workflow_tool.doActionFor(self.obj, 'publish')
+        self.workflow_tool.doActionFor(self.obj, 'open')
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'open')
         self.workflow_tool.doActionFor(self.obj, 'close')
@@ -55,7 +55,7 @@ class WorkflowTest(unittest.TestCase):
 
     def test_workflow_direct(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.workflow_tool.doActionFor(self.obj, 'publish')
+        self.workflow_tool.doActionFor(self.obj, 'open')
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'open')
         self.workflow_tool.doActionFor(self.obj, 'close')
@@ -84,7 +84,7 @@ class WorkflowTest(unittest.TestCase):
         self.assertEqual(review_state, 'private')
 
         # Let's open it, and try to get it back
-        self.workflow_tool.doActionFor(self.obj, 'publish')
+        self.workflow_tool.doActionFor(self.obj, 'open')
 
         #Now the poll is opened, we cannot retract, nor submit
 
@@ -102,7 +102,7 @@ class WorkflowTest(unittest.TestCase):
         self.assertEqual(review_state, 'private')
 
         # Finally, let's open it again, so we can close it
-        self.workflow_tool.doActionFor(self.obj, 'publish')
+        self.workflow_tool.doActionFor(self.obj, 'open')
         self.workflow_tool.doActionFor(self.obj, 'close')
         review_state = self.workflow_tool.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'closed')
@@ -118,23 +118,23 @@ class WorkflowTest(unittest.TestCase):
 
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
-                          self.obj, 'publish')
+                          self.obj, 'open')
 
     def test_workflow_permissions(self):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         # guard-permission: Review portal content
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
-                          self.obj, 'publish')
+                          self.obj, 'open')
         self.workflow_tool.doActionFor(self.obj, 'submit')
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
-                          self.obj, 'publish')
+                          self.obj, 'open')
 
-        # Reviewer can retract and publish
+        # Reviewer can retract and open
         setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
         self.workflow_tool.doActionFor(self.obj, 'retract')
-        self.workflow_tool.doActionFor(self.obj, 'publish')
+        self.workflow_tool.doActionFor(self.obj, 'open')
 
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         # Now, nobody, except manager, can close
@@ -160,9 +160,9 @@ class WorkflowTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Site Administrator'])
         self.workflow_tool.doActionFor(self.obj, 'send_back')
                           
-        # Finally, let's get Manager role, and publish and close
+        # Finally, let's get Manager role, and open and close
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.workflow_tool.doActionFor(self.obj, 'publish')
+        self.workflow_tool.doActionFor(self.obj, 'open')
         self.workflow_tool.doActionFor(self.obj, 'close')
 
 

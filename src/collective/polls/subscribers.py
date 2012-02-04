@@ -16,7 +16,7 @@ def fix_permissions(poll, event):
     ''' This subscriber will fix permission on poll object if
         allow_anonymous is enabled
     '''
-    if event.action in ['publish', ]:
+    if event.action in ['open', ]:
         # Poll has been opened
         allow_anonymous = poll.allow_anonymous
         if allow_anonymous:

@@ -104,8 +104,8 @@ class VotingTest(unittest.TestCase):
         p3 = self.folder['p3']
         p3.options = options
         # Open p2 and p3
-        wt.doActionFor(self.folder['p2'], 'publish')
-        wt.doActionFor(self.folder['p3'], 'publish')
+        wt.doActionFor(self.folder['p2'], 'open')
+        wt.doActionFor(self.folder['p3'], 'open')
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3

@@ -30,7 +30,7 @@ def PossiblePolls(context):
     catalog = getToolByName(context, 'portal_catalog')
     polls = catalog(portal_type="collective.polls.poll", review_state="open")
 
-    values = [SimpleTerm(value="latest", title=_(u"Latest open poll"))]
+    values = [SimpleTerm(value="latest", title=_(u"Latest opened poll"))]
     if polls:
         for i in polls:
             values.append(SimpleTerm(value=i.UID, title=i.Title))

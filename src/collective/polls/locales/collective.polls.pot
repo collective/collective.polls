@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-01-07 03:55+0000\n"
+"POT-Creation-Date: 2012-02-04 21:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,10 +67,10 @@ msgid "Invalid option"
 msgstr ""
 
 #: collective/polls/portlet/voteportlet.py:33
-msgid "Latest open poll"
+msgid "Latest opened poll"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.pt:39
+#: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Option"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.pt:21
+#: collective/polls/portlet/voteportlet.pt:25
 msgid "Partial results"
 msgstr ""
 
@@ -105,6 +105,11 @@ msgstr ""
 
 #: collective/polls/content/poll.py:73
 msgid "Show partial results after a voter has already voted."
+msgstr ""
+
+#: collective/polls/content/poll_templates/view.pt:40
+#: collective/polls/portlet/voteportlet.pt:87
+msgid "Submit"
 msgstr ""
 
 #: collective/polls/content/poll.py:306

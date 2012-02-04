@@ -2,15 +2,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2011-12-13 04:49+0000\n"
+"POT-Creation-Date: 2012-02-04 18:47+0000\n"
 "PO-Revision-Date: 2011-12-24 10:32-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 "X-Generator: Lokalize 1.2\n"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Admin retracts poll"
+msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
@@ -29,6 +37,10 @@ msgid "Open"
 msgstr "Aberta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Pending review"
 msgstr "Pendente"
 
@@ -45,8 +57,8 @@ msgid "Private"
 msgstr "Privado"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Reviewer publishes content"
-msgstr "O revisor publica conteúdo"
+msgid "Reviewer opens the poll"
+msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Site admin closes the poll"
