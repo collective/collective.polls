@@ -116,7 +116,7 @@
               i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=close" category="workflow" icon="">Close</action>
   <guard>
-   <guard-permission>Manage portal</guard-permission>
+   <guard-permission>collective.polls: Close poll</guard-permission>
   </guard>
  </transition>
 
