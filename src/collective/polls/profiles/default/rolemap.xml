@@ -7,6 +7,11 @@
    <role name="Owner"/>
    <role name="Contributor"/>
   </permission>
+  <permission name="collective.polls: Close poll" acquire="True">
+   <role name="Manager"/>
+   <role name="Site Administrator"/>
+   <role name="Editor"/>
+  </permission>
   <permission name="collective.polls: Vote" acquire="False" />
  </permissions>
 </rolemap>
