@@ -141,6 +141,9 @@ class PortletRegistrationTest(BasePortlet):
                                     IPortletRenderer)
         self.assertTrue(isinstance(renderer, voteportlet.Renderer))
 
+    def test_renderer_anonymous(self):
+        NotImplemented
+
 
 class PortletRendererTest(BasePortlet):
 
