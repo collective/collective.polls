@@ -17,6 +17,11 @@
     />
 
   <permission
+    id="collective.polls.ClosePoll"
+    title="collective.polls: Close poll"
+    />
+
+  <permission
     id="collective.polls.Vote"
     title="collective.polls: Vote"
     />

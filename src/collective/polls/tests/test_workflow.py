@@ -137,31 +137,35 @@ class WorkflowTest(unittest.TestCase):
         self.workflow_tool.doActionFor(self.obj, 'open')
 
         setRoles(self.portal, TEST_USER_ID, ['Member'])
-        # Now, nobody, except manager, can close
+        # Now, only Manager, Site Administrator and Reviewer can
+        # close the poll
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
                           self.obj, 'close')
 
-        setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
+        setRoles(self.portal, TEST_USER_ID, ['Owner',
+                                             'Member',
+                                             'Contributor',
+                                             'Editor'])
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
                           self.obj, 'close')
 
-        # Now, only Site Administrator or Manager can send it back
+        # Now, only Site Administrator, Manager, Reviewer can send it back
         setRoles(self.portal, TEST_USER_ID, ['Owner',
                                              'Member',
                                              'Editor',
-                                             'Reviewer'])
+                                             'Contributor'])
         self.assertRaises(WorkflowException,
                           self.workflow_tool.doActionFor,
                           self.obj, 'send_back')
 
-        # Manager is already tested in previous test
-        setRoles(self.portal, TEST_USER_ID, ['Site Administrator'])
+        # Reviewer can send the poll back
+        setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
         self.workflow_tool.doActionFor(self.obj, 'send_back')
-                          
-        # Finally, let's get Manager role, and open and close
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
+        # Finally, let's get Reviewer role, and open and close
+        setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
         self.workflow_tool.doActionFor(self.obj, 'open')
         self.workflow_tool.doActionFor(self.obj, 'close')
 

@@ -116,7 +116,7 @@
               i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=close" category="workflow" icon="">Close</action>
   <guard>
-   <guard-permission>Manage portal</guard-permission>
+   <guard-permission>collective.polls: Close poll</guard-permission>
   </guard>
  </transition>
 
@@ -140,7 +140,6 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-permission>Request review</guard-permission>
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
@@ -153,8 +152,7 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=send_back" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-role>Manager</guard-role>
-   <guard-role>Site Administrator</guard-role>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
 
