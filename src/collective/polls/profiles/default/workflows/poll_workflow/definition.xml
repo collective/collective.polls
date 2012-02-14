@@ -153,8 +153,7 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=send_back" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-role>Manager</guard-role>
-   <guard-role>Site Administrator</guard-role>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
 
