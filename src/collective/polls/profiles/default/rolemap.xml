@@ -10,7 +10,7 @@
   <permission name="collective.polls: Close poll" acquire="True">
    <role name="Manager"/>
    <role name="Site Administrator"/>
-   <role name="Editor"/>
+   <role name="Reviewer"/>
   </permission>
   <permission name="collective.polls: Vote" acquire="False" />
  </permissions>

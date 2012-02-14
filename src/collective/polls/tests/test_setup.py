@@ -45,7 +45,7 @@ class InstallTest(unittest.TestCase):
         permission = 'collective.polls: Close poll'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
-        self.assertEqual(roles, ['Editor', 'Manager', 'Site Administrator'])
+        self.assertEqual(roles, ['Manager', 'Reviewer', 'Site Administrator'])
 
     def test_jsregistry(self):
         portal_javascripts = self.portal.portal_javascripts
