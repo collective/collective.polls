@@ -140,7 +140,6 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-permission>Request review</guard-permission>
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
