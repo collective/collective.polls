@@ -31,6 +31,8 @@ from collective.polls.config import PERMISSION_VOTE
 
 from collective.polls.polls import IPolls
 
+from collective.polls.utils import anonymous_view_parent
+
 from collective.polls import MessageFactory as _
 
 
@@ -229,6 +231,8 @@ class PollAddForm(dexterity.AddForm):
     def updateWidgets(self):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollAddForm, self).updateWidgets()
+        if not anonymous_view_parent(self.context):
+            self.widgets['allow_anonymous'].mode = HIDDEN_MODE
         self.widgets['options'].allow_reorder = True
         self.widgets['options'].columns[0]['mode'] = HIDDEN_MODE
 
@@ -257,6 +261,8 @@ class PollEditForm(dexterity.EditForm):
     def updateWidgets(self):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollEditForm, self).updateWidgets()
+        if not anonymous_view_parent(self.context):
+            self.widgets['allow_anonymous'].mode = HIDDEN_MODE
         self.widgets['options'].allow_reorder = True
         self.widgets['options'].columns[0]['mode'] = HIDDEN_MODE
 
