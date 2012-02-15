@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-15 18:35+0000\n"
+"POT-Creation-Date: 2012-02-15 18:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,8 +121,7 @@ msgid "Thanks for your vote"
 msgstr ""
 
 #: collective/polls/portlet/voteportlet.py:54
-msgid "The header for the portlet.
-                                               Leave empty for none."
+msgid "The header for the portlet. Leave empty for none."
 msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:25

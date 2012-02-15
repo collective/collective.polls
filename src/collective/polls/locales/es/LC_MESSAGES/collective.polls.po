@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2012-02-15 18:50+0000\n"
 "PO-Revision-Date: 2012-02-04 18:16-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -119,6 +119,10 @@ msgstr "Votar"
 #: collective/polls/content/poll.py:327
 msgid "Thanks for your vote"
 msgstr "Gracias por su voto"
+
+#: collective/polls/portlet/voteportlet.py:54
+msgid "The header for the portlet. Leave empty for none."
+msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:25
 msgid "Vote!"

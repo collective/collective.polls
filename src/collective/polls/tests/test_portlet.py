@@ -189,6 +189,29 @@ class PortletRendererTest(BasePortlet):
                                                             poll='latest'))
         self.assertEqual(3, len(r.poll().options))
 
+    def test_all_polls_closed_dont_show_closed(self):
+        wt = self.wt
+        setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
+        wt.doActionFor(self.p2, 'close')
+        wt.doActionFor(self.p3, 'close')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
+                                                            poll='latest',
+                                                            show_closed=False))
+        self.assertEqual(False, r.available)
+
+    def test_all_polls_closed_do_show_closed(self):
+        wt = self.wt
+        setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
+        wt.doActionFor(self.p2, 'close')
+        wt.doActionFor(self.p3, 'close')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
+                                                            poll='latest',
+                                                            show_closed=True))
+        self.assertEqual(True, r.available)
+        self.assertEqual(3, len(r.poll().options))
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
