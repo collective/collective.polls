@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-15 18:50+0000\n"
-"PO-Revision-Date: 2012-02-04 18:16-0300\n"
-"Last-Translator: Franco Pellegrini\n"
+"POT-Creation-Date: 2012-02-15 20:27+0000\n"
+"PO-Revision-Date: 2012-02-15 18:30-0300\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,6 +62,10 @@ msgstr "Gráfico"
 msgid "Header"
 msgstr "Cabecera"
 
+#: collective/polls/portlet/voteportlet.py:64
+msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
+msgstr "¿Desea que portlet  muestre el resultado de la encuesta si no existe una encuesta abierta o la encuesta seleccionada ya fue cerrada?"
+
 #: collective/polls/content/poll.py:313
 msgid "Invalid option"
 msgstr "Opción inválida"
@@ -72,7 +76,7 @@ msgstr "La encuesta abierta más reciente"
 
 #: collective/polls/content/poll.py:48
 msgid "Not enought options provided"
-msgstr ""
+msgstr "No se proporcionaron suficientes opciones"
 
 #: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
@@ -103,6 +107,10 @@ msgstr "Encuesta"
 msgid "Results:"
 msgstr "Resultados:"
 
+#: collective/polls/portlet/voteportlet.py:63
+msgid "Show closed polls"
+msgstr "¿Mostrar encuestas cerradas?"
+
 #: collective/polls/content/poll.py:80
 msgid "Show partial results"
 msgstr "Mostrar resultados parciales"
@@ -122,13 +130,13 @@ msgstr "Gracias por su voto"
 
 #: collective/polls/portlet/voteportlet.py:54
 msgid "The header for the portlet. Leave empty for none."
-msgstr ""
+msgstr "El encabezado del portlet. Déjelo en blanco si no desea uno."
 
 #: collective/polls/content/poll_templates/view.pt:25
 msgid "Vote!"
 msgstr "¡Votar!"
 
-#: collective/polls/portlet/voteportlet.py:85
+#: collective/polls/portlet/voteportlet.py:93
 #: collective/polls/profiles/default/portlets.xml
 #: collective/polls/profiles/uninstall/portlets.xml
 msgid "Voting portlet"
@@ -144,5 +152,5 @@ msgstr "Usted no está autorizado para votar"
 
 #: collective/polls/content/poll.py:107
 msgid "You need to provide at least two options for a poll."
-msgstr ""
+msgstr "Necesita colocar al menos 2 opciones para responder la encuesta."
 

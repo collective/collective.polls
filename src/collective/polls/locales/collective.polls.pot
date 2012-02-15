@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-15 18:50+0000\n"
+"POT-Creation-Date: 2012-02-15 20:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,6 +62,10 @@ msgstr ""
 msgid "Header"
 msgstr ""
 
+#: collective/polls/portlet/voteportlet.py:64
+msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
+msgstr ""
+
 #: collective/polls/content/poll.py:313
 msgid "Invalid option"
 msgstr ""
@@ -103,6 +107,10 @@ msgstr ""
 msgid "Results:"
 msgstr ""
 
+#: collective/polls/portlet/voteportlet.py:63
+msgid "Show closed polls"
+msgstr ""
+
 #: collective/polls/content/poll.py:80
 msgid "Show partial results"
 msgstr ""
@@ -128,7 +136,7 @@ msgstr ""
 msgid "Vote!"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:85
+#: collective/polls/portlet/voteportlet.py:93
 #: collective/polls/profiles/default/portlets.xml
 #: collective/polls/profiles/uninstall/portlets.xml
 msgid "Voting portlet"
