@@ -3,7 +3,7 @@
    i18n:domain="plone"
    workflow_id="poll_workflow"
    title="Poll Workflow"
-   description="Poll Workflow is intended to be used with polls"
+   description="Workflow to be used with polls"
    state_variable="review_state"
    initial_state="private"
    manager_bypass="False"
@@ -27,7 +27,7 @@
 
  <state state_id="open" title="Opened"  i18n:attributes="title">
   <exit-transition transition_id="close"/>
-  <exit-transition transition_id="send_back"/>
+  <exit-transition transition_id="reject"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
@@ -48,6 +48,7 @@
  <state state_id="pending" title="Pending review"  i18n:attributes="title">
   <exit-transition transition_id="open"/>
   <exit-transition transition_id="retract"/>
+  <exit-transition transition_id="reject"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
@@ -104,7 +105,7 @@
   </permission-map>
  </state>
 
- <transition transition_id="close" title="Site admin closes the poll"
+ <transition transition_id="close" title="Reviewer closes the poll"
              new_state="closed"
              trigger="USER"
              before_script=""
@@ -136,29 +137,29 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-permission>Review portal content</guard-permission>
+   <guard-permission>Request review</guard-permission>
   </guard>
  </transition>
 
- <transition transition_id="send_back" title="Admin retracts poll"
+ <transition transition_id="reject" title="Reviewer rejects the poll"
              new_state="private"
              trigger="USER"
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=send_back" category="workflow" icon="">Retract</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=reject" category="workflow" icon="">Reject</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
 
- <transition transition_id="submit" title="Member submits content for publication"
+ <transition transition_id="submit" title="Member submits poll for opening"
              new_state="pending"
              trigger="USER"
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit for publication</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit for opening</action>
   <guard>
    <guard-permission>Request review</guard-permission>
   </guard>

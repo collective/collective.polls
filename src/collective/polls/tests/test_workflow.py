@@ -225,7 +225,7 @@ class WorkflowTest(unittest.TestCase):
                           self.obj, 'submit')
 
         # We can however send it back only as a site administrator or manager
-        self.wt.doActionFor(self.obj, 'send_back')
+        self.wt.doActionFor(self.obj, 'reject')
         review_state = self.wt.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'private')
 
@@ -286,11 +286,11 @@ class WorkflowTest(unittest.TestCase):
                                              'Contributor'])
         self.assertRaises(WorkflowException,
                           self.wt.doActionFor,
-                          self.obj, 'send_back')
+                          self.obj, 'reject')
 
         # Reviewer can send the poll back
         setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
-        self.wt.doActionFor(self.obj, 'send_back')
+        self.wt.doActionFor(self.obj, 'reject')
 
         # Finally, let's get Reviewer role, and open and close
         setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
