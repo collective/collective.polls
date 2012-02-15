@@ -3,7 +3,8 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       tal:omit-tag="">
 <dl class="portlet votePortlet"
-    i18n:domain="collective.polls">
+    i18n:domain="collective.polls"
+    tal:define="poll view/poll">
 
     <dt class="portletHeader" tal:condition="view/getHeader">
         <span class="portletTopLeft"></span>
@@ -12,8 +13,7 @@
     </dt>
 
     <dd class="portletItem odd"
-        tal:define="poll view/poll;
-                    can_vote view/can_vote;
+        tal:define="can_vote view/can_vote;
                     results view/getVotingResults;
                     toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
         tal:condition="nocall:poll">
@@ -87,7 +87,13 @@
                 <input type="submit" name="poll.submit" value="Submit" i18n:attributes="value" />
             </form>
         </tal:voting>
-
+        
+    </dd>
+    <dd class="portletFooter"
+         tal:condition="nocall:poll">
+        <span class="portletBottomLeft"></span>
+        <span i18n:translate="">Total Votes:</span><span tal:content="poll/total_votes">23</span>
+        <span class="portletBottomRight"></span>
     </dd>
 
     <dd class="portletFooter">

@@ -10,9 +10,11 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core"
          tal:define="results view/getResults;
-                     has_voted view/has_voted;">
+                     has_voted view/has_voted;
+                     can_vote view/can_vote;
+                     can_edit view/can_edit;">
 
-  <tal:editing tal:condition="view/can_edit">
+  <tal:editing tal:condition="can_edit">
   <h2 i18n:translate="">Available options:</h2>
   <ul>
     <li tal:repeat="option view/getOptions">
@@ -21,7 +23,7 @@
   </ul>
   </tal:editing>
 
-  <tal:vote tal:condition="view/can_vote">
+  <tal:vote tal:condition="can_vote">
   <h2 i18n:translate="">Vote!</h2>
       <form action="#" method="post"
               tal:attributes="action context/absolute_url">
@@ -41,7 +43,7 @@
       </form>
   </tal:vote>
 
-  <tal:results tal:condition="python:has_voted and results">
+  <tal:results tal:condition="python:results and not can_vote">
   <h2 i18n:translate="">Results:</h2>
   <div id="pollresultholder"></div>
   <ul id="results">
@@ -65,6 +67,9 @@
       </script>
       </tal:piechart>
   </tal:results>
+  <tal:total_votes condition="not:can_edit">
+    <span i18n:translate="">Total Votes:</span><span tal:content="context/total_votes">23</span>
+  </tal:total_votes>
   </metal:content-core>
 </metal:main>
 

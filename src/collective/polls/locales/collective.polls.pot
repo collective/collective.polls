@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-15 20:27+0000\n"
+"POT-Creation-Date: 2012-02-15 21:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Available options"
 msgstr ""
 
-#: collective/polls/content/poll_templates/view.pt:16
+#: collective/polls/content/poll_templates/view.pt:18
 msgid "Available options:"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Poll"
 msgstr ""
 
-#: collective/polls/content/poll_templates/view.pt:45
+#: collective/polls/content/poll_templates/view.pt:47
 msgid "Results:"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Show partial results after a voter has already voted."
 msgstr ""
 
-#: collective/polls/content/poll_templates/view.pt:40
+#: collective/polls/content/poll_templates/view.pt:42
 #: collective/polls/portlet/voteportlet.pt:87
 msgid "Submit"
 msgstr ""
@@ -132,7 +132,12 @@ msgstr ""
 msgid "The header for the portlet. Leave empty for none."
 msgstr ""
 
-#: collective/polls/content/poll_templates/view.pt:25
+#: collective/polls/content/poll_templates/view.pt:71
+#: collective/polls/portlet/voteportlet.pt:95
+msgid "Total Votes:"
+msgstr ""
+
+#: collective/polls/content/poll_templates/view.pt:27
 msgid "Vote!"
 msgstr ""
 
