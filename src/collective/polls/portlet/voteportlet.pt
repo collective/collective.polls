@@ -31,9 +31,15 @@
               </li>
             </ul>
                 <script type="text/javascript"
-                        tal:condition="python:poll.results_graph != 'numbers'">
+                        tal:condition="python:poll.results_graph == 'bar'">
                   jQuery(function(){
                           barChartPortlet();
+                      });
+                </script>
+                <script type="text/javascript"
+                        tal:condition="python:poll.results_graph == 'pie'">
+                  jQuery(function(){
+                          pieChartPortlet();
                       });
                 </script>
             </tal:poll_results>
@@ -74,9 +80,11 @@
                             <br/>
                 </tal:multi_choice>-->
 
+                <input type="hidden" name="voting.from" value=""
+                       tal:attributes="value context/absolute_url" />
                 <input type="hidden" name="poll.uuid" value=""
                        tal:attributes="value view/poll_uid" />
-                <input type="submit" name="poll.submit" value="Submit" i18n:translate="" />
+                <input type="submit" name="poll.submit" value="Submit" i18n:attributes="value" />
             </form>
         </tal:voting>
 

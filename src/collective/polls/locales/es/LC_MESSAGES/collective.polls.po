@@ -1,11 +1,11 @@
-# Franco Pellegrini <frapell@gmail.com>, 2011.
+# Franco Pellegrini <frapell@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"PO-Revision-Date: 2012-01-06 21:56-0600\n"
-"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
-"Language-Team: Spanish <https://github.com/collective>\n"
+"PO-Revision-Date: 2012-02-04 18:16-0300\n"
+"Last-Translator: Franco Pellegrini\n"
+"Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.polls\n"
 "X-Generator: Lokalize 1.2\n"
+"Language: es\n"
 
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
@@ -66,10 +67,10 @@ msgid "Invalid option"
 msgstr "Opción inválida"
 
 #: collective/polls/portlet/voteportlet.py:33
-msgid "Latest open poll"
+msgid "Latest opened poll"
 msgstr "La encuesta abierta más reciente"
 
-#: collective/polls/portlet/voteportlet.pt:39
+#: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
 msgstr "No hay nada aquí que pueda ver"
 
@@ -81,7 +82,7 @@ msgstr "Sólo números"
 msgid "Option"
 msgstr "Opción"
 
-#: collective/polls/portlet/voteportlet.pt:21
+#: collective/polls/portlet/voteportlet.pt:25
 msgid "Partial results"
 msgstr "Resultados parciales"
 
@@ -106,6 +107,11 @@ msgstr "Mostrar resultados parciales"
 msgid "Show partial results after a voter has already voted."
 msgstr "Mostrar resultados parciales luego de que el votante ya haya votado."
 
+#: collective/polls/content/poll_templates/view.pt:40
+#: collective/polls/portlet/voteportlet.pt:87
+msgid "Submit"
+msgstr "Votar"
+
 #: collective/polls/content/poll.py:306
 msgid "Thanks for your vote"
 msgstr "Gracias por su voto"
@@ -127,4 +133,5 @@ msgstr "Qué encuesta mostrar en el portlet."
 #: collective/polls/content/poll.py:311
 msgid "You are not authorized to vote"
 msgstr "Usted no está autorizado para votar"
+
 

@@ -15,27 +15,24 @@
  <permission>collective.polls: Vote</permission>
 
  <state state_id="closed" title="Closed"  i18n:attributes="title">
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
   </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="View" acquired="True">
   </permission-map>
   <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
  </state>
- <state state_id="open" title="Open"  i18n:attributes="title">
+
+ <state state_id="open" title="Opened"  i18n:attributes="title">
   <exit-transition transition_id="close"/>
   <exit-transition transition_id="send_back"/>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
   </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="View" acquired="True">
   </permission-map>
   <permission-map name="collective.polls: Vote" acquired="False">
    <permission-role>Contributor</permission-role>
@@ -45,14 +42,18 @@
    <permission-role>Reader</permission-role>
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
-
   </permission-map>
  </state>
+
  <state state_id="pending" title="Pending review"  i18n:attributes="title">
-  <exit-transition transition_id="publish"/>
+  <exit-transition transition_id="open"/>
   <exit-transition transition_id="retract"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
@@ -63,19 +64,26 @@
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
  </state>
+
  <state state_id="private" title="Private"  i18n:attributes="title">
-  <exit-transition transition_id="publish"/>
+  <exit-transition transition_id="open"/>
   <exit-transition transition_id="submit"/>
   <permission-map name="Access contents information" acquired="False">
-   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
@@ -85,14 +93,17 @@
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
-   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
  </state>
+
  <transition transition_id="close" title="Site admin closes the poll"
              new_state="closed"
              trigger="USER"
@@ -101,20 +112,22 @@
               i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=close" category="workflow" icon="">Close</action>
   <guard>
-   <guard-permission>Manage portal</guard-permission>
+   <guard-permission>collective.polls: Close poll</guard-permission>
   </guard>
  </transition>
- <transition transition_id="publish" title="Reviewer publishes content"
+
+ <transition transition_id="open" title="Reviewer opens the poll"
              new_state="open"
              trigger="USER"
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=open" category="workflow" icon="">Open</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+
  <transition transition_id="retract" title="Member retracts submission"
              new_state="private"
              trigger="USER"
@@ -123,10 +136,10 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-permission>Request review</guard-permission>
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+
  <transition transition_id="send_back" title="Admin retracts poll"
              new_state="private"
              trigger="USER"
@@ -135,10 +148,10 @@
              i18n:attributes="title">
   <action url="%(content_url)s/content_status_modify?workflow_action=send_back" category="workflow" icon="">Retract</action>
   <guard>
-   <guard-role>Manager</guard-role>
-   <guard-role>Site Administrator</guard-role>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+
  <transition transition_id="submit" title="Member submits content for publication"
              new_state="pending"
              trigger="USER"
@@ -150,6 +163,7 @@
    <guard-permission>Request review</guard-permission>
   </guard>
  </transition>
+
  <worklist worklist_id="reviewer_queue" title="">
   <description>Reviewer tasks</description>
   <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
@@ -158,37 +172,37 @@
   </guard>
   <match name="review_state" values="pending"/>
  </worklist>
+
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
   <description>Previous transition</description>
   <default>
-
    <expression>transition/getId|nothing</expression>
   </default>
   <guard>
   </guard>
  </variable>
+
  <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
   <description>The ID of the user who performed the previous transition</description>
   <default>
-
    <expression>user/getId</expression>
   </default>
   <guard>
   </guard>
  </variable>
+
  <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
   <description>Comment about the last transition</description>
   <default>
-
    <expression>python:state_change.kwargs.get('comment', '')</expression>
   </default>
   <guard>
   </guard>
  </variable>
+
  <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
   <description>Provides access to workflow history</description>
   <default>
-
    <expression>state_change/getHistory</expression>
   </default>
   <guard>
@@ -196,10 +210,10 @@
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </variable>
+
  <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
   <description>When the previous transition was performed</description>
   <default>
-
    <expression>state_change/getDateTime</expression>
   </default>
   <guard>

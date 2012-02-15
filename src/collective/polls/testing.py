@@ -18,6 +18,9 @@ class Fixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
         self.applyProfile(portal, 'collective.polls:default')
+        wf = getattr(portal, 'portal_workflow')
+        types = ('Folder', )
+        wf.setChainForPortalTypes(types, 'simple_publication_workflow')
 
 
 FIXTURE = Fixture()

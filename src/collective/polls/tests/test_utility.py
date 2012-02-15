@@ -25,19 +25,22 @@ class IntegrationTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.wt = self.portal.portal_workflow
         setSite(self.portal)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         # Create base folders
         self.portal.invokeFactory('Folder', 'folder')
         self.folder = self.portal['folder']
         self.folder.invokeFactory('Folder', 'folder')
+        self.wt.doActionFor(self.folder, 'publish')
         self.subfolder = self.folder['folder']
+        self.wt.doActionFor(self.subfolder, 'publish')
         # Set up polls
         self.setUpPolls()
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def setUpPolls(self):
-        wt = self.portal.portal_workflow
+        wt = self.wt
         # Create 6 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         self.folder.invokeFactory('collective.polls.poll', 'p2')
@@ -46,8 +49,8 @@ class IntegrationTest(unittest.TestCase):
         self.subfolder.invokeFactory('collective.polls.poll', 'p5')
         self.subfolder.invokeFactory('collective.polls.poll', 'p6')
         # Open 2 polls
-        wt.doActionFor(self.folder['p2'], 'publish')
-        wt.doActionFor(self.subfolder['p5'], 'publish')
+        wt.doActionFor(self.folder['p2'], 'open')
+        wt.doActionFor(self.subfolder['p5'], 'open')
 
     def test_utility_registered(self):
         ''' Test if our utility was properly registered '''
@@ -126,7 +129,7 @@ class IntegrationTest(unittest.TestCase):
         ''' test if a user voted in a poll '''
         logout()
         utility = queryUtility(IPolls, name='collective.polls')
-        # Published Poll, allowed to vote
+        # Opened Poll, allowed to vote
         poll = self.subfolder['p5']
         # Anonymous user and we do not pass a request
         self.assertTrue(utility.voted_in_a_poll(poll))
@@ -134,7 +137,7 @@ class IntegrationTest(unittest.TestCase):
     def test_allowed_to_vote(self):
         ''' test if a user voted in a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
-        # Published Poll, allowed to vote
+        # Opened Poll, allowed to vote
         poll = self.subfolder['p5']
         self.assertTrue(utility.allowed_to_vote(poll))
         # Unpuclished poll, not allowed to vote
@@ -142,9 +145,9 @@ class IntegrationTest(unittest.TestCase):
         self.assertRaises(Unauthorized, utility.allowed_to_vote, poll)
 
     def test_allowed_to_view(self):
-        ''' Member can view a published poll '''
+        ''' Member can view a opened poll '''
         utility = queryUtility(IPolls, name='collective.polls')
-        # Published Poll, member can view
+        # Opened Poll, member can view
         poll = self.subfolder['p5']
         self.assertTrue(utility.allowed_to_view(poll))
 
@@ -158,15 +161,15 @@ class IntegrationTest(unittest.TestCase):
     def test_not_allowed_to_edit(self):
         ''' test if member can edit a poll '''
         utility = queryUtility(IPolls, name='collective.polls')
-        # Published Poll, member cannot edit
+        # Opened Poll, member cannot edit
         poll = self.subfolder['p5']
         self.assertFalse(utility.allowed_to_edit(poll))
 
     def test_anonymous_allowed_to_view(self):
-        ''' Anonymous can view a published poll '''
+        ''' Anonymous can view a opened poll '''
         logout()
         utility = queryUtility(IPolls, name='collective.polls')
-        # Published Poll, member can view
+        # Opened Poll, member can view
         poll = self.subfolder['p5']
         self.assertTrue(utility.allowed_to_view(poll))
 
@@ -174,7 +177,7 @@ class IntegrationTest(unittest.TestCase):
         ''' Anonymous cannot view a private poll '''
         logout()
         utility = queryUtility(IPolls, name='collective.polls')
-        # Published Poll, member can view
+        # Opened Poll, member can view
         poll = self.subfolder['p6']
         self.assertFalse(utility.allowed_to_view(poll))
 

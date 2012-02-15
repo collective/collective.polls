@@ -39,14 +39,16 @@ class BasePortlet(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.wt = self.portal.portal_workflow
         self.request = self.layer['request']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         self.folder = self.portal['test-folder']
+        self.wt.doActionFor(self.folder, 'publish')
         self.setUpPolls()
 
     def setUpPolls(self):
-        wt = self.portal.portal_workflow
+        wt = self.wt
         # Create 3 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         self.folder.invokeFactory('collective.polls.poll', 'p2')
@@ -64,8 +66,8 @@ class BasePortlet(unittest.TestCase):
         p3.options = options
         p3.allow_anonymous = True
         # Open p2 and p3
-        wt.doActionFor(self.folder['p2'], 'publish')
-        wt.doActionFor(self.folder['p3'], 'publish')
+        wt.doActionFor(self.folder['p2'], 'open')
+        wt.doActionFor(self.folder['p3'], 'open')
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
@@ -141,6 +143,9 @@ class PortletRegistrationTest(BasePortlet):
                                     IPortletRenderer)
         self.assertTrue(isinstance(renderer, voteportlet.Renderer))
 
+    def test_renderer_anonymous(self):
+        NotImplemented
+
 
 class PortletRendererTest(BasePortlet):
 
@@ -157,14 +162,14 @@ class PortletRendererTest(BasePortlet):
                                 IPortletRenderer)
 
     def test_available(self):
-        # Use a published poll
+        # Use a opened poll
         poll_uid = IUUID(self.p3)
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
                                                             poll=poll_uid))
         self.assertEqual(True, r.available)
 
     def test_available_anonymous(self):
-        # Use a published poll
+        # Use a opened poll
         poll_uid = IUUID(self.p3)
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',
                                                             poll=poll_uid))
@@ -172,7 +177,7 @@ class PortletRendererTest(BasePortlet):
         self.assertEqual(True, r.available)
 
     def test_not_available(self):
-        # Use a non-published poll
+        # Use a non-opened poll
         poll_uid = IUUID(self.p1)
         logout()
         r = self.renderer(assignment=voteportlet.Assignment(header='Polls',

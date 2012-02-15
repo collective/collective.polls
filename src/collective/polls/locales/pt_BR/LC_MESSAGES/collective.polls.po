@@ -66,12 +66,12 @@ msgid "Invalid option"
 msgstr "Opção inválida"
 
 #: collective/polls/portlet/voteportlet.py:33
-msgid "Latest open poll"
-msgstr "Última enquete aberta"
+msgid "Latest opened poll"
+msgstr ""
 
-#: collective/polls/portlet/voteportlet.pt:39
+#: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
-msgstr "Nada para ver aqui"
+msgstr ""
 
 #: collective/polls/content/poll.py:40
 msgid "Numbers Only"
@@ -81,9 +81,9 @@ msgstr "Só nûmeros"
 msgid "Option"
 msgstr "Escolha"
 
-#: collective/polls/portlet/voteportlet.pt:21
+#: collective/polls/portlet/voteportlet.pt:25
 msgid "Partial results"
-msgstr "Resultados parciais"
+msgstr ""
 
 #: collective/polls/content/poll.py:39
 msgid "Pie Chart"
@@ -105,6 +105,11 @@ msgstr "Mostrar resultados parciais"
 #: collective/polls/content/poll.py:73
 msgid "Show partial results after a voter has already voted."
 msgstr "Mostrar resultados parciais, após o usuário já votou."
+
+#: collective/polls/content/poll_templates/view.pt:40
+#: collective/polls/portlet/voteportlet.pt:87
+msgid "Submit"
+msgstr ""
 
 #: collective/polls/content/poll.py:306
 msgid "Thanks for your vote"

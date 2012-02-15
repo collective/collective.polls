@@ -7,17 +7,28 @@ function pieChart() {
     var r = Raphael("pollresultholder");
     var labels = [];
     var data = [];
+    var total = 0;
     jQuery('ul#results span.option_description').each(function(){
         labels.push(jQuery(this).text());
-     });
-     jQuery('ul#results span.option_result').each(function(){
-         data.push(parseInt(jQuery(this).text()));
-      });
-     pie = r.piechart(110, 110, 100, 
-                      data, 
-                      { legend: labels,
-                        legendpos: "east",
-                      });
+    });
+    jQuery('ul#results span.option_result').each(function(){
+        var value = parseInt(jQuery(this).text());
+        data.push(value);
+        total = total + value;
+    });
+
+    
+    for (var i=0; i < labels.length; i++){
+        var percent = (data[i] / total) * 100;
+        var n_round = Math.round(percent*Math.pow(10,2))/Math.pow(10,2);
+        labels[i] = String(n_round) + "% - " + labels[i];
+    }
+
+    pie = r.piechart(110, 110, 100,
+                    data,
+                    { legend: labels,
+                    legendpos: "east",
+                    });
 
     pie.hover(function () {
         this.sector.stop();
@@ -71,17 +82,27 @@ function pieChartPortlet() {
     var r = Raphael("portletresultholder");
     var labels = [];
     var data = [];
+    var total = 0;
     jQuery('ul#results span.option_description').each(function(){
         labels.push(jQuery(this).text());
-     });
-     jQuery('ul#results span.option_result').each(function(){
-         data.push(parseInt(jQuery(this).text()));
-      });
-     pie = r.piechart(30, 30, 20, 
-                      data, 
-                      { legend: labels,
-                        legendpos: "east",
-                      });
+    });
+    jQuery('ul#results span.option_result').each(function(){
+        var value = parseInt(jQuery(this).text());
+        data.push(value);
+        total = total + value;
+    });
+
+    for (var i=0; i < labels.length; i++){
+        var percent = (data[i] / total) * 100;
+        var n_round = Math.round(percent*Math.pow(10,2))/Math.pow(10,2);
+        labels[i] = String(n_round) + "% - " + labels[i];
+    }
+    
+    pie = r.piechart(30, 30, 20,
+                    data,
+                    { legend: labels,
+                    legendpos: "east",
+                    });
 
     pie.hover(function () {
         this.sector.stop();
@@ -109,10 +130,10 @@ function barChartPortlet() {
     var data = [];
     jQuery('ul#results span.option_description').each(function(){
         labels.push(jQuery(this).text());
-     });
-     jQuery('ul#results span.option_result').each(function(){
-         data.push(parseInt(jQuery(this).text()));
-      });
+    });
+    jQuery('ul#results span.option_result').each(function(){
+        data.push(parseInt(jQuery(this).text()));
+    });
     fin = function () {
                   this.flag = r.popup(this.bar.x, this.bar.y, this.bar.value || "0").insertBefore(this);
               };

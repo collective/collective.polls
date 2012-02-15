@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-13 04:49+0000\n"
+"POT-Creation-Date: 2012-02-04 18:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Admin retracts poll"
+msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
@@ -31,6 +35,10 @@ msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Open"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
@@ -50,11 +58,10 @@ msgid "Private"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Reviewer publishes content"
+msgid "Reviewer opens the poll"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Site admin closes the poll"
 msgstr ""
-
 
