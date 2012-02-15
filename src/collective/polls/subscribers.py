@@ -36,9 +36,9 @@ def fix_permissions(poll, event):
 @grok.subscribe(IPoll, IActionSucceededEvent)
 def remove_votes(poll, event):
     ''' This subscriber will remove existing votes on poll object
-        if send_back transaction happens
+        if reject transaction happens
     '''
-    if event.action in ['send_back', ]:
+    if event.action in ['reject', ]:
         options = [o.get('option_id') for o in poll.getOptions()]
         annotations = poll.annotations
         # Erase Voters
