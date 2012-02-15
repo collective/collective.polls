@@ -73,7 +73,7 @@ class Assignment(base.Assignment):
     header = u""
     poll = None
 
-    def __init__(self, poll, header = u""):
+    def __init__(self, poll, header=u""):
         self.header = header
         self.poll = poll
 
