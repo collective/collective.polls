@@ -15,13 +15,11 @@
  <permission>collective.polls: Vote</permission>
 
  <state state_id="closed" title="Closed"  i18n:attributes="title">
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
   </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="View" acquired="True">
   </permission-map>
   <permission-map name="collective.polls: Vote" acquired="False">
   </permission-map>
@@ -30,13 +28,11 @@
  <state state_id="open" title="Opened"  i18n:attributes="title">
   <exit-transition transition_id="close"/>
   <exit-transition transition_id="send_back"/>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
   </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Anonymous</permission-role>
+  <permission-map name="View" acquired="True">
   </permission-map>
   <permission-map name="collective.polls: Vote" acquired="False">
    <permission-role>Contributor</permission-role>

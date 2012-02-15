@@ -36,14 +36,14 @@ review, Open and Closed.
 * Polls are created in Private state; only Owner, Manager, Editor or Site
   Administrator roles can modify them
 * When a poll is Private it can be sent to Pending review or directly to Open,
-  if the user has the proper role
-* When a poll is Pending review it can be edited by Manager, Reviewer or Site
-  Administrator roles
+  if the user has the proper role (Reviewer, Manager, Site Administrator)
+* When a poll is Pending review it can be edited by Manager, Editor, Reviewer 
+  or Site Administrator roles
 * A poll in Pending review can be sent to Open, with "Review portal content"
   permission, or to Private, with "Request review" permission
 * When the poll is Open, people can only vote; nobody can modify the poll in
   any way
-* An Open poll can be sent to Private or Closed state by Manager or Site
-  Administrator roles
+* An Open poll can be sent to Private or Closed state by Reviewer, Manager or
+  Site Administrator roles
 * When a poll is Closed nobody can modify it, nor can anyone vote on it; there
   is no way to reopen a closed poll
