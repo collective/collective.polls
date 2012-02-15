@@ -16,9 +16,15 @@ from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 
 from collective.polls.content.poll import IPoll
+from collective.polls.content.poll import InsuficientOptions
+
 from collective.polls.testing import INTEGRATION_TESTING
 
 from collective.polls.config import PERMISSION_VOTE
+
+
+class MockPoll(object):
+    options = []
 
 
 class IntegrationTest(unittest.TestCase):
@@ -63,6 +69,25 @@ class IntegrationTest(unittest.TestCase):
         p1 = self.folder['p1']
         self.assertTrue(IReferenceable.providedBy(p1))
         self.assertTrue(IAttributeUUID.providedBy(p1))
+
+    def test_validate_no_options(self):
+        data = MockPoll()
+        self.assertRaises(InsuficientOptions, IPoll.validateInvariants, data)
+
+    def test_validate_one_option(self):
+        data = MockPoll()
+        data.options = [{'option_id': 0, 'description': 'Foo'}]
+        self.assertRaises(InsuficientOptions, IPoll.validateInvariants, data)
+
+    def test_validate_two_options(self):
+        data = MockPoll()
+        data.options = [{'option_id': 0, 'description': 'Foo'},
+                        {'option_id': 1, 'description': 'Bar'},
+                       ]
+        try:
+            IPoll.validateInvariants(data)
+        except InsuficientOptions:
+            self.fail()
 
 
 class VotingTest(unittest.TestCase):
