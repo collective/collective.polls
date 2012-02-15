@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-15 18:35+0000\n"
+"POT-Creation-Date: 2012-02-15 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 msgid "Pie Chart"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:58
+#: collective/polls/portlet/voteportlet.py:57
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "Poll"
 msgstr ""
@@ -121,21 +121,20 @@ msgid "Thanks for your vote"
 msgstr ""
 
 #: collective/polls/portlet/voteportlet.py:54
-msgid "The header for the portlet.
-                                               Leave empty for none."
+msgid "The header for the portlet. Leave empty for none."
 msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:25
 msgid "Vote!"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:85
+#: collective/polls/portlet/voteportlet.py:84
 #: collective/polls/profiles/default/portlets.xml
 #: collective/polls/profiles/uninstall/portlets.xml
 msgid "Voting portlet"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:59
+#: collective/polls/portlet/voteportlet.py:58
 msgid "Which poll to show in the portlet."
 msgstr ""
 

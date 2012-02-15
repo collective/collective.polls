@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2012-02-15 18:40+0000\n"
 "PO-Revision-Date: 2012-01-06 21:56-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Pie Chart"
 msgstr "Gráfico de pizza"
 
-#: collective/polls/portlet/voteportlet.py:58
+#: collective/polls/portlet/voteportlet.py:57
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "Poll"
 msgstr "Enquete"
@@ -119,17 +119,21 @@ msgstr ""
 msgid "Thanks for your vote"
 msgstr "Obrigado pelo seu voto"
 
+#: collective/polls/portlet/voteportlet.py:54
+msgid "The header for the portlet. Leave empty for none."
+msgstr ""
+
 #: collective/polls/content/poll_templates/view.pt:25
 msgid "Vote!"
 msgstr "Vote!"
 
-#: collective/polls/portlet/voteportlet.py:85
+#: collective/polls/portlet/voteportlet.py:84
 #: collective/polls/profiles/default/portlets.xml
 #: collective/polls/profiles/uninstall/portlets.xml
 msgid "Voting portlet"
 msgstr "Portlet de voto"
 
-#: collective/polls/portlet/voteportlet.py:59
+#: collective/polls/portlet/voteportlet.py:58
 msgid "Which poll to show in the portlet."
 msgstr "Que enquete para mostrar no portlet."
 
