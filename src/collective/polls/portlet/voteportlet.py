@@ -51,7 +51,8 @@ class IVotePortlet(IPortletDataProvider):
     """
 
     header = schema.TextLine(title=_(u'Header'),
-                             description=_(u'''The header for the portlet. Leave empty for none.'''),
+                             description=_(u'The header for the portlet. '
+                                           u'Leave empty for none.'),
                              required=False)
 
     poll = schema.Choice(title=_(u'Poll'),
