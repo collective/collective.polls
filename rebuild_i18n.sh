@@ -5,6 +5,7 @@ BASE_DIRECTORY="src/collective/polls"
 
 # Synchronise the templates and scripts with the .pot.
 ./bin/i18ndude rebuild-pot --pot ${BASE_DIRECTORY}/locales/${I18NDOMAIN}.pot \
+    --merge ${BASE_DIRECTORY}/locales/manual.pot \
     --create ${I18NDOMAIN} \
     ${BASE_DIRECTORY}
 
