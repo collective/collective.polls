@@ -20,4 +20,4 @@ Changelog
 1.0rc1 (2012-01-10)
 ^^^^^^^^^^^^^^^^^^^
 
-- Initial release.
+* Initial release.
