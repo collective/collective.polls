@@ -65,4 +65,3 @@ msgstr "El revisor abre la encuesta"
 msgid "Site admin closes the poll"
 msgstr "El administrador del sitio cierra la encuesta"
 
-

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2012-02-15 18:50+0000\n"
 "PO-Revision-Date: 2012-02-04 18:16-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -26,15 +26,15 @@ msgstr "Una encuesta"
 msgid "A portlet to allow voting on a specific poll"
 msgstr "Un portlet que permite votar en una encuesta específica"
 
-#: collective/polls/content/poll.py:60
+#: collective/polls/content/poll.py:68
 msgid "Allow anonymous"
 msgstr "Permitir anónimos"
 
-#: collective/polls/content/poll.py:61
+#: collective/polls/content/poll.py:69
 msgid "Allow not logged in users to vote."
 msgstr "Permitir a usuarios que no han iniciado sesión, votar."
 
-#: collective/polls/content/poll.py:86
+#: collective/polls/content/poll.py:94
 msgid "Available options"
 msgstr "Opciones disponibles"
 
@@ -42,19 +42,19 @@ msgstr "Opciones disponibles"
 msgid "Available options:"
 msgstr "Opciones disponibles:"
 
-#: collective/polls/content/poll.py:38
+#: collective/polls/content/poll.py:42
 msgid "Bar Chart"
 msgstr "Gráfico de barras"
 
-#: collective/polls/content/poll.py:51
+#: collective/polls/content/poll.py:59
 msgid "Description"
 msgstr "Descripción"
 
-#: collective/polls/content/poll.py:80
+#: collective/polls/content/poll.py:88
 msgid "Format to show the results."
 msgstr "Formato en el que se mostrarán los resultados."
 
-#: collective/polls/content/poll.py:79
+#: collective/polls/content/poll.py:87
 msgid "Graph"
 msgstr "Gráfico"
 
@@ -62,7 +62,7 @@ msgstr "Gráfico"
 msgid "Header"
 msgstr "Cabecera"
 
-#: collective/polls/content/poll.py:292
+#: collective/polls/content/poll.py:313
 msgid "Invalid option"
 msgstr "Opción inválida"
 
@@ -70,15 +70,19 @@ msgstr "Opción inválida"
 msgid "Latest opened poll"
 msgstr "La encuesta abierta más reciente"
 
+#: collective/polls/content/poll.py:48
+msgid "Not enought options provided"
+msgstr ""
+
 #: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
 msgstr "No hay nada aquí que pueda ver"
 
-#: collective/polls/content/poll.py:40
+#: collective/polls/content/poll.py:44
 msgid "Numbers Only"
 msgstr "Sólo números"
 
-#: collective/polls/content/poll.py:87
+#: collective/polls/content/poll.py:95
 msgid "Option"
 msgstr "Opción"
 
@@ -86,7 +90,7 @@ msgstr "Opción"
 msgid "Partial results"
 msgstr "Resultados parciales"
 
-#: collective/polls/content/poll.py:39
+#: collective/polls/content/poll.py:43
 msgid "Pie Chart"
 msgstr "Gráfico de tarta"
 
@@ -99,11 +103,11 @@ msgstr "Encuesta"
 msgid "Results:"
 msgstr "Resultados:"
 
-#: collective/polls/content/poll.py:72
+#: collective/polls/content/poll.py:80
 msgid "Show partial results"
 msgstr "Mostrar resultados parciales"
 
-#: collective/polls/content/poll.py:73
+#: collective/polls/content/poll.py:81
 msgid "Show partial results after a voter has already voted."
 msgstr "Mostrar resultados parciales luego de que el votante ya haya votado."
 
@@ -112,9 +116,13 @@ msgstr "Mostrar resultados parciales luego de que el votante ya haya votado."
 msgid "Submit"
 msgstr "Votar"
 
-#: collective/polls/content/poll.py:306
+#: collective/polls/content/poll.py:327
 msgid "Thanks for your vote"
 msgstr "Gracias por su voto"
+
+#: collective/polls/portlet/voteportlet.py:54
+msgid "The header for the portlet. Leave empty for none."
+msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:25
 msgid "Vote!"
@@ -130,8 +138,11 @@ msgstr "Portlet de votación"
 msgid "Which poll to show in the portlet."
 msgstr "Qué encuesta mostrar en el portlet."
 
-#: collective/polls/content/poll.py:311
+#: collective/polls/content/poll.py:332
 msgid "You are not authorized to vote"
 msgstr "Usted no está autorizado para votar"
 
+#: collective/polls/content/poll.py:107
+msgid "You need to provide at least two options for a poll."
+msgstr ""
 
