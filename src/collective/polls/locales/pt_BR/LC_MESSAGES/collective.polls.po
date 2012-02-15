@@ -25,15 +25,15 @@ msgstr "Uma enquete"
 msgid "A portlet to allow voting on a specific poll"
 msgstr "Um portlet para permitir voto numa enquete específica"
 
-#: collective/polls/content/poll.py:60
+#: collective/polls/content/poll.py:68
 msgid "Allow anonymous"
 msgstr "Permitir voto anônimo"
 
-#: collective/polls/content/poll.py:61
+#: collective/polls/content/poll.py:69
 msgid "Allow not logged in users to vote."
 msgstr "Permitir aos usuários não logados votar."
 
-#: collective/polls/content/poll.py:86
+#: collective/polls/content/poll.py:94
 msgid "Available options"
 msgstr "Opções disponíveis"
 
@@ -41,19 +41,19 @@ msgstr "Opções disponíveis"
 msgid "Available options:"
 msgstr "Opções disponíveis:"
 
-#: collective/polls/content/poll.py:38
+#: collective/polls/content/poll.py:42
 msgid "Bar Chart"
 msgstr "Gráfico de barras"
 
-#: collective/polls/content/poll.py:51
+#: collective/polls/content/poll.py:59
 msgid "Description"
 msgstr "Descrição"
 
-#: collective/polls/content/poll.py:80
+#: collective/polls/content/poll.py:88
 msgid "Format to show the results."
 msgstr "Formato para mostrar os resultados"
 
-#: collective/polls/content/poll.py:79
+#: collective/polls/content/poll.py:87
 msgid "Graph"
 msgstr "Gráfico"
 
@@ -61,7 +61,7 @@ msgstr "Gráfico"
 msgid "Header"
 msgstr "Título"
 
-#: collective/polls/content/poll.py:292
+#: collective/polls/content/poll.py:313
 msgid "Invalid option"
 msgstr "Opção inválida"
 
@@ -69,15 +69,19 @@ msgstr "Opção inválida"
 msgid "Latest opened poll"
 msgstr ""
 
+#: collective/polls/content/poll.py:48
+msgid "Not enought options provided"
+msgstr ""
+
 #: collective/polls/portlet/voteportlet.pt:50
 msgid "Nothing to see here"
 msgstr ""
 
-#: collective/polls/content/poll.py:40
+#: collective/polls/content/poll.py:44
 msgid "Numbers Only"
 msgstr "Só nûmeros"
 
-#: collective/polls/content/poll.py:87
+#: collective/polls/content/poll.py:95
 msgid "Option"
 msgstr "Escolha"
 
@@ -85,7 +89,7 @@ msgstr "Escolha"
 msgid "Partial results"
 msgstr ""
 
-#: collective/polls/content/poll.py:39
+#: collective/polls/content/poll.py:43
 msgid "Pie Chart"
 msgstr "Gráfico de pizza"
 
@@ -98,11 +102,11 @@ msgstr "Enquete"
 msgid "Results:"
 msgstr "Resultados:"
 
-#: collective/polls/content/poll.py:72
+#: collective/polls/content/poll.py:80
 msgid "Show partial results"
 msgstr "Mostrar resultados parciais"
 
-#: collective/polls/content/poll.py:73
+#: collective/polls/content/poll.py:81
 msgid "Show partial results after a voter has already voted."
 msgstr "Mostrar resultados parciais, após o usuário já votou."
 
@@ -111,7 +115,7 @@ msgstr "Mostrar resultados parciais, após o usuário já votou."
 msgid "Submit"
 msgstr ""
 
-#: collective/polls/content/poll.py:306
+#: collective/polls/content/poll.py:327
 msgid "Thanks for your vote"
 msgstr "Obrigado pelo seu voto"
 
@@ -129,7 +133,11 @@ msgstr "Portlet de voto"
 msgid "Which poll to show in the portlet."
 msgstr "Que enquete para mostrar no portlet."
 
-#: collective/polls/content/poll.py:311
+#: collective/polls/content/poll.py:332
 msgid "You are not authorized to vote"
 msgstr "Você não está autorizado a votar"
+
+#: collective/polls/content/poll.py:107
+msgid "You need to provide at least two options for a poll."
+msgstr ""
 
