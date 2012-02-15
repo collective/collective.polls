@@ -4,6 +4,7 @@ Changelog
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+* Updated Brazilian Portuguese translation.
 * Added option to control if portlet shows closed polls when no open ones are
   available (issue #32).
 * Added validation for Poll options (issue #31).
@@ -20,6 +21,7 @@ Changelog
 * Added the pieChart to the portlet (issue #23).
 * Made the poll redirect to the place where the vote was casted (issue #22).
   [frapell]
+* Updated Spanish translation.
 * Fixed permissions on private and pending states (issue #20).
 * Fixed javascript registry uninstall and tests.
   [hvelarde]
