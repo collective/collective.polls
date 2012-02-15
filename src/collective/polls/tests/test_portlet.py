@@ -39,14 +39,16 @@ class BasePortlet(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.wt = self.portal.portal_workflow
         self.request = self.layer['request']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         self.folder = self.portal['test-folder']
+        self.wt.doActionFor(self.folder, 'publish')
         self.setUpPolls()
 
     def setUpPolls(self):
-        wt = self.portal.portal_workflow
+        wt = self.wt
         # Create 3 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         self.folder.invokeFactory('collective.polls.poll', 'p2')

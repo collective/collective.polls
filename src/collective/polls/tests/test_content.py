@@ -81,11 +81,12 @@ class VotingTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         self.folder = self.portal['test-folder']
+        self.wt = self.portal.portal_workflow
+        self.wt.doActionFor(self.folder, 'publish')
         self.setUpPolls()
         setRoles(self.portal, TEST_USER_ID, ['Member'])
 
     def setUpPolls(self):
-        self.wt = self.portal.portal_workflow
         wt = self.wt
         # Create 3 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
