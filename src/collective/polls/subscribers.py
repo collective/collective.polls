@@ -7,6 +7,8 @@ from Products.CMFCore.interfaces import IActionSucceededEvent
 
 from collective.polls.content.poll import IPoll
 
+from collective.polls.config import MEMBERS_ANNO_KEY
+from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 
 ALL_ROLES = ['Anonymous', 'Contributor', 'Editor', 'Manager', 'Member',
@@ -29,3 +31,18 @@ def fix_permissions(poll, event):
             poll.manage_permission(PERMISSION_VOTE,
                                    ALL_ROLES,
                                    acquire=0)
+
+
+@grok.subscribe(IPoll, IActionSucceededEvent)
+def remove_votes(poll, event):
+    ''' This subscriber will remove existing votes on poll object
+        if send_back transaction happens
+    '''
+    if event.action in ['send_back', ]:
+        options = [o.get('option_id') for o in poll.getOptions()]
+        annotations = poll.annotations
+        # Erase Voters
+        annotations[MEMBERS_ANNO_KEY] = []
+        # Erase Votes
+        for option in options:
+            annotations[VOTE_ANNO_KEY % option] = 0
