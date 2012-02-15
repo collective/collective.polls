@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-04 18:47+0000\n"
+"POT-Creation-Date: 2012-02-15 21:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,10 +31,6 @@ msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits content for publication"
-msgstr ""
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Open"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-04 18:47+0000\n"
+"POT-Creation-Date: 2012-02-15 21:20+0000\n"
 "PO-Revision-Date: 2011-12-24 10:32-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -31,10 +31,6 @@ msgstr "Membro retrai submissão"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits content for publication"
 msgstr "O membro envia conteúdo para publicação"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Open"
-msgstr "Aberta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Opened"
