@@ -31,17 +31,17 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="collective.polls"
+      title="Polls"
       directory="profiles/default"
-      description="Extension profile for A product for creating polls."
+      description="A Plone extension providing a Poll content type, portlet and workflow."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="collective.polls uninstall"
+      title="Polls: Uninstall"
       directory="profiles/uninstall"
-      description="Uninstall profile for the collective.polls package."
+      description="Uninstall the collective.polls package."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
         
