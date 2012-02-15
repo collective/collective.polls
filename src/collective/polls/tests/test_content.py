@@ -205,7 +205,6 @@ class VotingTest(unittest.TestCase):
 
         total = self.p2.total_votes
         self.assertEqual(total, 0)
-        
 
     def test_anonymous_closed_poll(self):
         logout()
