@@ -25,19 +25,22 @@ class IntegrationTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.wt = self.portal.portal_workflow
         setSite(self.portal)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         # Create base folders
         self.portal.invokeFactory('Folder', 'folder')
         self.folder = self.portal['folder']
         self.folder.invokeFactory('Folder', 'folder')
+        self.wt.doActionFor(self.folder, 'publish')
         self.subfolder = self.folder['folder']
+        self.wt.doActionFor(self.subfolder, 'publish')
         # Set up polls
         self.setUpPolls()
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def setUpPolls(self):
-        wt = self.portal.portal_workflow
+        wt = self.wt
         # Create 6 polls
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         self.folder.invokeFactory('collective.polls.poll', 'p2')
