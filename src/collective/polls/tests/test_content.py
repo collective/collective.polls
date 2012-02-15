@@ -171,6 +171,21 @@ class VotingTest(unittest.TestCase):
         total = self.p2.total_votes
         self.assertEqual(total, 1)
 
+    def test_vote_open_poll_send_back_vote_again(self):
+        options = 2
+        wt = self.wt
+        setRoles(self.portal, TEST_USER_ID, ['Member', 'Reviewer'])
+        self.p2.setVote(options)
+        self.assertEqual(self.p2.total_votes, 1)
+        # Send poll back, must erase votes
+        wt.doActionFor(self.p2, 'send_back')
+        self.assertEqual(self.p2.total_votes, 0)
+        # Open again
+        wt.doActionFor(self.p2, 'open')
+        # User must be allowed to vote again
+        self.p2.setVote(options)
+        self.assertEqual(self.p2.total_votes, 1)
+
     def test_vote_same_user_twice(self):
         options = 2
         voted = self.p2.setVote(options)
