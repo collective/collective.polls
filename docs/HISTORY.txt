@@ -3,6 +3,9 @@ Changelog
 
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
+
+* Added option to control if portlet shows closed polls when no open ones are
+  available [ericof]
 * Added validation for Poll options [ericof]
 * Fix Anonymous permissions to View and Vote on polls.
 * Modify workflows and permissions to be consistent with the ones used in
