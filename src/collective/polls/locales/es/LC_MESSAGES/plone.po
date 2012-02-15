@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-15 21:20+0000\n"
+"POT-Creation-Date: 2012-02-15 21:35+0000\n"
 "PO-Revision-Date: 2012-02-04 18:07-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -16,10 +16,6 @@ msgstr ""
 "Domain: plone\n"
 "X-Generator: Lokalize 1.2\n"
 "Language: es\n"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Admin retracts poll"
-msgstr "Administrador retrae la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
@@ -46,18 +42,22 @@ msgid "Poll Workflow"
 msgstr "Flujo de trabajo de encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Poll Workflow is intended to be used with polls"
-msgstr "Un flujo de trabajo para utilizarse en encuestas."
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
 msgstr "Privado"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer closes the poll"
+msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer opens the poll"
 msgstr "El revisor abre la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Site admin closes the poll"
-msgstr "El administrador del sitio cierra la encuesta"
+msgid "Reviewer rejects the poll"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr ""
 
