@@ -60,6 +60,13 @@ class IVotePortlet(IPortletDataProvider):
                          required=True,
                          source=PossiblePolls)
 
+    show_closed = schema.Bool(title=_(u'Show closed polls'),
+                        description=_(u'If there is no available open poll or '
+                                      u'the chosen poll is already closed, '
+                                      u'should the porlet show the results '
+                                      u'instead.'),
+                              default=False)
+
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -73,9 +80,10 @@ class Assignment(base.Assignment):
     header = u""
     poll = None
 
-    def __init__(self, poll, header=u""):
+    def __init__(self, poll, header=u"", show_closed=False):
         self.header = header
         self.poll = poll
+        self.show_closed = show_closed
 
     @property
     def title(self):
@@ -112,6 +120,12 @@ class Renderer(base.Renderer):
         utility = self.utility
         uid = self.data.poll
         poll = utility.poll_by_uid(uid)
+        if not poll and self.data.show_closed:
+            # if we have no open poll, try closed ones
+            results = utility.recent_polls(show_all=True,
+                                        limit=1,
+                                        review_state='closed')
+            poll = results and results[0].getObject() or None
         return poll
 
     def poll_uid(self):
