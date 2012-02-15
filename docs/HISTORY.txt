@@ -3,21 +3,21 @@ Changelog
 
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
-
-- Fix Anonymous permissions to View and Vote on polls.
-- Modify workflows and permissions to be consistent with the ones used in
+* Added validation for Poll options [ericof]
+* Fix Anonymous permissions to View and Vote on polls.
+* Modify workflows and permissions to be consistent with the ones used in
   Plone.
   [ericof]
-- Renamed the workflow state to 'Opened' instead of 'Published'.
-- Updated tests and translations.
-- Added the pieChart to the portlet.
+* Renamed the workflow state to 'Opened' instead of 'Published'.
+* Updated tests and translations.
+* Added the pieChart to the portlet.
   [frapell]
-- Fixed permissions on private and pending states.
-- Fixed javascript registry uninstall and tests.
+* Fixed permissions on private and pending states.
+* Fixed javascript registry uninstall and tests.
   [hvelarde]
 
 
 1.0rc1 (2012-01-10)
 ^^^^^^^^^^^^^^^^^^^
 
-- Initial release.
+* Initial release.

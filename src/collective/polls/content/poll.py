@@ -11,6 +11,8 @@ from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
 
+from zope.interface import invariant, Invalid
+
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from z3c.form.interfaces import HIDDEN_MODE
@@ -40,6 +42,10 @@ graph_options = SimpleVocabulary(
     [SimpleTerm(value=u'bar', title=_(u'Bar Chart')),
      SimpleTerm(value=u'pie', title=_(u'Pie Chart')),
      SimpleTerm(value=u'numbers', title=_(u'Numbers Only'))])
+
+
+class InsuficientOptions(Invalid):
+    __doc__ = _(u"Not enought options provided")
 
 
 class IOption(interface.Interface):
@@ -90,6 +96,15 @@ class IPoll(form.Schema):
                            schema=IOption),
         default=[],
         required=True)
+
+    @invariant
+    def validate_options(data):
+        ''' Validate options '''
+        options = data.options
+        descriptions = options and [o['description'].strip() for o in options]
+        if len(descriptions) < 2:
+            raise InsuficientOptions(
+                    _(u"You need to provide at least two options for a poll."))
 
 
 class Poll(dexterity.Item):
