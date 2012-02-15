@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-15 21:45+0000\n"
+"POT-Creation-Date: 2012-02-15 21:58+0000\n"
 "PO-Revision-Date: 2012-01-06 21:56-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -15,6 +15,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.polls\n"
 "X-Generator: Lokalize 1.2\n"
+
+#: collective/polls/configure.zcml
+msgid "A Plone extension providing a Poll content type, portlet and workflow."
+msgstr "Uma extensão do Plone que provê um tipo de conteúdo, um portlet e um workflow para gerenciar Enquetes."
 
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
@@ -102,6 +106,14 @@ msgstr "Gráfico de pizza"
 msgid "Poll"
 msgstr "Enquete"
 
+#: collective/polls/configure.zcml
+msgid "Polls"
+msgstr "Enquetes"
+
+#: collective/polls/configure.zcml
+msgid "Polls: Uninstall"
+msgstr "Enquetes: Desinstalação"
+
 #: collective/polls/content/poll_templates/view.pt:47
 msgid "Results:"
 msgstr "Resultados:"
@@ -135,6 +147,10 @@ msgstr "Cabeçalho do portlet. Deixe em branco para não exibir um cabeçalho."
 #: collective/polls/portlet/voteportlet.pt:95
 msgid "Total Votes:"
 msgstr "Total de votos:"
+
+#: collective/polls/configure.zcml
+msgid "Uninstall the collective.polls package."
+msgstr "Desinstalar o pacote collective.polls(Enquetes)"
 
 #: collective/polls/content/poll_templates/view.pt:27
 msgid "Vote!"

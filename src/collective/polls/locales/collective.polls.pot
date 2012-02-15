@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-15 21:45+0000\n"
+"POT-Creation-Date: 2012-02-15 21:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.polls\n"
+
+#: collective/polls/configure.zcml
+msgid "A Plone extension providing a Poll content type, portlet and workflow."
+msgstr ""
 
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
@@ -103,6 +107,14 @@ msgstr ""
 msgid "Poll"
 msgstr ""
 
+#: collective/polls/configure.zcml
+msgid "Polls"
+msgstr ""
+
+#: collective/polls/configure.zcml
+msgid "Polls: Uninstall"
+msgstr ""
+
 #: collective/polls/content/poll_templates/view.pt:47
 msgid "Results:"
 msgstr ""
@@ -135,6 +147,10 @@ msgstr ""
 #: collective/polls/content/poll_templates/view.pt:71
 #: collective/polls/portlet/voteportlet.pt:95
 msgid "Total Votes:"
+msgstr ""
+
+#: collective/polls/configure.zcml
+msgid "Uninstall the collective.polls package."
 msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:27

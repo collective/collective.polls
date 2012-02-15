@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-15 21:45+0000\n"
+"POT-Creation-Date: 2012-02-15 21:58+0000\n"
 "PO-Revision-Date: 2012-02-15 18:30-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Domain: collective.polls\n"
 "X-Generator: Lokalize 1.2\n"
 "Language: es\n"
+
+#: collective/polls/configure.zcml
+msgid "A Plone extension providing a Poll content type, portlet and workflow."
+msgstr ""
 
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
@@ -103,6 +107,14 @@ msgstr "Gráfico de tarta"
 msgid "Poll"
 msgstr "Encuesta"
 
+#: collective/polls/configure.zcml
+msgid "Polls"
+msgstr ""
+
+#: collective/polls/configure.zcml
+msgid "Polls: Uninstall"
+msgstr ""
+
 #: collective/polls/content/poll_templates/view.pt:47
 msgid "Results:"
 msgstr "Resultados:"
@@ -135,6 +147,10 @@ msgstr "El encabezado del portlet. Déjelo en blanco si no desea uno."
 #: collective/polls/content/poll_templates/view.pt:71
 #: collective/polls/portlet/voteportlet.pt:95
 msgid "Total Votes:"
+msgstr ""
+
+#: collective/polls/configure.zcml
+msgid "Uninstall the collective.polls package."
 msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:27
