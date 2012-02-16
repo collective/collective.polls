@@ -338,7 +338,7 @@ class View(grok.View):
 
         if 'voting.from' in form:
             url = form['voting.from']
-            self.request.RESPONSE.redirect(url)
+            #self.request.RESPONSE.redirect(url)
 
     @property
     def can_vote(self):
