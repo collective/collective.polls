@@ -5,3 +5,13 @@
 #portletresultholder {
     margin-top: 25px;
 }
+.votePortlet {
+    position:relative;
+}
+.poll-spinner {
+    display:none;
+    position:absolute;
+    top:40%;
+    text-align:center;
+    left:50%;
+}

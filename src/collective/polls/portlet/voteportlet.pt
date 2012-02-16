@@ -4,7 +4,8 @@
       tal:omit-tag="">
 <dl class="portlet votePortlet"
     i18n:domain="collective.polls"
-    tal:define="poll view/poll">
+    tal:define="poll view/poll"
+    tal:attributes="data python:view.manager.__name__">
 
     <dt class="portletHeader" tal:condition="view/getHeader">
         <span class="portletTopLeft"></span>
@@ -85,9 +86,18 @@
                 <input type="hidden" name="poll.uuid" value=""
                        tal:attributes="value view/poll_uid" />
                 <input type="submit" name="poll.submit" value="Submit" i18n:attributes="value" />
+                <script type="text/javascript">
+                  jQuery(function(){
+                    ajaxSubmitForm();
+                  });
+                </script>
             </form>
         </tal:voting>
-        
+        <tal:spinner>
+        <div class="poll-spinner">
+            <img alt="" src="/spinner.gif" tal:attributes="src python:context.absolute_url()+'/spinner.gif'"/>
+        </div>
+        </tal:spinner>
     </dd>
     <dd class="portletFooter"
          tal:condition="nocall:poll">

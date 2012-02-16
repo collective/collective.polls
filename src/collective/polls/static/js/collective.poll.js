@@ -146,3 +146,40 @@ function barChartPortlet() {
         var text = r.text(10, bar.bars[j].y, labels[j]).attr(txtattr);
     }
 };
+
+/*ajax submit form*/
+function ajaxSubmitForm() {
+    $('.votePortlet form').submit(function(event) {
+      var $this = $(this);
+      var $parent = $this.parents('.votePortlet');
+      var url = $(this).attr('action');
+      var data = $(this).serialize()+'&ajax_load=True&poll.submit=True';
+        //show the ajax load spinner
+        $('.poll-spinner', $parent).show();
+        $this.css({'visibility': 'hidden'});
+      $.ajax({
+        url: url,
+        data: data,
+        type: 'POST',
+        contents: '#content-core',
+        success: function(html){
+            var portlet_dom = $this.parents('.votePortlet');
+            //gets the portlet assigment column
+            var manager = ''
+            if (portlet_dom[0] !== undefined){
+                manager = portlet_dom.attr('data');
+            }
+            $.ajax({
+                url: './@@poll_portlet_render',
+                data: {'column':manager},
+                success:function(data){
+                    $('.votePortlet').replaceWith(data);
+                    $('.spinner', portlet_dom).hide();
+                }
+            });
+            
+        }        
+      });
+      return false;
+    });
+}
