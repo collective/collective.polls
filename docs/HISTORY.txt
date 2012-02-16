@@ -4,6 +4,8 @@ Changelog
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+* Ajax load of partial results on portlet (issue #37).
+  [Quimera]
 * Updated Brazilian Portuguese translation.
 * Added option to control if portlet shows closed polls when no open ones are
   available (issue #32).

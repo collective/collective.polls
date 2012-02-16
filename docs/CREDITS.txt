@@ -9,6 +9,8 @@ Contributors
 
 * Rafahela Bazzanella (rafahela.bazzanella@camara.gov.br)
 
+* Silvestre Huens (s.huens@gmail.com)
+
 * WebDesignerDepot (www.webdesignerdepot.com) - icon
 
 Development sponsored by Open Multimedia and Simples Consultoria.
