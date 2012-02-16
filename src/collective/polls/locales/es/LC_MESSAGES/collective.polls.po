@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
 "POT-Creation-Date: 2012-02-15 21:58+0000\n"
-"PO-Revision-Date: 2012-02-15 18:30-0300\n"
+"PO-Revision-Date: 2012-02-16 11:04-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: collective/polls/configure.zcml
 msgid "A Plone extension providing a Poll content type, portlet and workflow."
-msgstr ""
+msgstr "Un complemento que brinda la posibilidad de crear encuestas en Plone."
 
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
@@ -109,11 +109,11 @@ msgstr "Encuesta"
 
 #: collective/polls/configure.zcml
 msgid "Polls"
-msgstr ""
+msgstr "Encuestas"
 
 #: collective/polls/configure.zcml
 msgid "Polls: Uninstall"
-msgstr ""
+msgstr "Desintalar Encuestas"
 
 #: collective/polls/content/poll_templates/view.pt:47
 msgid "Results:"
@@ -147,15 +147,15 @@ msgstr "El encabezado del portlet. Déjelo en blanco si no desea uno."
 #: collective/polls/content/poll_templates/view.pt:71
 #: collective/polls/portlet/voteportlet.pt:95
 msgid "Total Votes:"
-msgstr ""
+msgstr "Votos totales:"
 
 #: collective/polls/configure.zcml
 msgid "Uninstall the collective.polls package."
-msgstr ""
+msgstr "Desinstala el complemento collective.polls."
 
 #: collective/polls/content/poll_templates/view.pt:27
 msgid "Vote!"
-msgstr "¡Votar!"
+msgstr "Votar"
 
 #: collective/polls/portlet/voteportlet.py:93
 #: collective/polls/profiles/default/portlets.xml
