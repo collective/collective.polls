@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-04 18:47+0000\n"
+"POT-Creation-Date: 2012-02-15 21:58+0000\n"
 "PO-Revision-Date: 2012-02-04 18:07-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -18,10 +18,6 @@ msgstr ""
 "Language: es\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Admin retracts poll"
-msgstr "Administrador retrae la encuesta"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
 msgstr "Cerrada"
 
@@ -30,12 +26,8 @@ msgid "Member retracts submission"
 msgstr "El miembro retrae la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Member submits content for publication"
-msgstr "El miembro propone la encuesta para ser publicada"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Open"
-msgstr "Abrir"
+msgid "Member submits poll for opening"
+msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Opened"
@@ -50,18 +42,22 @@ msgid "Poll Workflow"
 msgstr "Flujo de trabajo de encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Poll Workflow is intended to be used with polls"
-msgstr "Un flujo de trabajo para utilizarse en encuestas."
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
 msgstr "Privado"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer closes the poll"
+msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer opens the poll"
 msgstr "El revisor abre la encuesta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Site admin closes the poll"
-msgstr "El administrador del sitio cierra la encuesta"
+msgid "Reviewer rejects the poll"
+msgstr ""
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr ""
 

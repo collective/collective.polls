@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-04 18:47+0000\n"
+"POT-Creation-Date: 2012-02-15 21:58+0000\n"
 "PO-Revision-Date: 2011-12-24 10:32-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -17,28 +17,20 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Admin retracts poll"
-msgstr ""
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
-msgstr "Fechada"
+msgstr "Encerrada"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member retracts submission"
 msgstr "Membro retrai submissão"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Member submits content for publication"
-msgstr "O membro envia conteúdo para publicação"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Open"
-msgstr "Aberta"
+msgid "Member submits poll for opening"
+msgstr "Membro submete enquete para abertura"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Opened"
-msgstr ""
+msgstr "Aberta"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Pending review"
@@ -46,21 +38,25 @@ msgstr "Pendente"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow"
-msgstr "Workflow de enquete"
-
-#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Poll Workflow is intended to be used with polls"
-msgstr "Workflow a ser utilizado com enquetes"
+msgstr "Workflow para enquete"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
 msgstr "Privado"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Reviewer opens the poll"
-msgstr ""
+msgid "Reviewer closes the poll"
+msgstr "Revisor encerra uma enquete"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
-msgid "Site admin closes the poll"
-msgstr "O administrador do site fecha a enquete"
+msgid "Reviewer opens the poll"
+msgstr "Revisor abre uma enquete"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer rejects the poll"
+msgstr "Revisor rejeita uma enquete"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr "Workflow a ser utilizado com enquetes"
 
