@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0rc2dev'
+version = '1.0rc2'
 
 setup(name='collective.polls',
       version=version,

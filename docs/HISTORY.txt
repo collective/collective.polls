@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.0rc2 (unreleased)
+1.0rc2 (2012-02-20)
 ^^^^^^^^^^^^^^^^^^^
 
 * Ajax load of partial results on portlet (issue #37).
