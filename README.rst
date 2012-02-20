@@ -13,7 +13,7 @@ anonymous and logged-in users.
 Requirements
 ------------
 
-* Plone >= 4.1.x (http://plone.org/products/plone)
+* Plone >= 4.1 (http://plone.org/products/plone)
 * Dexterity >= 1.1 (http://pypi.python.org/pypi/plone.app.dexterity)
 
 Features
@@ -26,6 +26,7 @@ Features
 * Users can see partial results of the poll
 * Results can be shown using a bar chart, a pie chart, or just by number of
   votes
+* Polls can have relations with other content in the site
 
 Workflow description
 --------------------
@@ -37,7 +38,7 @@ review, Open and Closed.
   Administrator roles can modify them
 * When a poll is Private it can be sent to Pending review or directly to Open,
   if the user has the proper role (Reviewer, Manager, Site Administrator)
-* When a poll is Pending review it can be edited by Manager, Editor, Reviewer 
+* When a poll is Pending review it can be edited by Manager, Editor, Reviewer
   or Site Administrator roles
 * A poll in Pending review can be sent to Open, with "Review portal content"
   permission, or to Private, with "Request review" permission
@@ -45,5 +46,7 @@ review, Open and Closed.
   any way
 * An Open poll can be sent to Private or Closed state by Reviewer, Manager or
   Site Administrator roles
+* When an Open poll is sent to Private, all votes are removed to avoid data
+  manipulation.
 * When a poll is Closed nobody can modify it, nor can anyone vote on it; there
   is no way to reopen a closed poll

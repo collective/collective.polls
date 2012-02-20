@@ -10,29 +10,26 @@ Changelog
 1.0rc2 (2012-02-20)
 ^^^^^^^^^^^^^^^^^^^
 
-* Ajax load of partial results on portlet (issue #37).
-  [Quimera]
-* Updated Brazilian Portuguese translation.
+* Ajax load of partial results on portlet (issue #37). [Quimera]
+* Updated Brazilian Portuguese translation. [ericof]
 * Added option to control if portlet shows closed polls when no open ones are
-  available (issue #32).
-* Added validation for Poll options (issue #31).
+  available (issue #32). [ericof]
+* Added validation for Poll options (issue #31). [ericof]
 * Add a subscriber to erase votes when poll is sent back to revision (issue
-  #33).
-* Fix Anonymous permissions to View and Vote on polls.
+  #33). [ericof]
+* Fix Anonymous permissions to View and Vote on polls. [ericof]
 * Modify workflows and permissions to be consistent with the ones used in
-  Plone.
-  [ericof]
-* Fixed MANIFEST.in file.
-  [nueces]
+  Plone. [ericof]
+* Fixed MANIFEST.in file. [nueces]
 * Renamed the workflow state to 'Opened' instead of 'Published' (issue #26).
-* Updated tests and translations.
-* Added the pieChart to the portlet (issue #23).
+  [frapell]
+* Updated tests and translations. [frapell]
+* Added the pieChart to the portlet (issue #23). [frapell]
 * Made the poll redirect to the place where the vote was casted (issue #22).
   [frapell]
-* Updated Spanish translation.
-* Fixed permissions on private and pending states (issue #20).
-* Fixed javascript registry uninstall and tests.
-  [hvelarde]
+* Updated Spanish translation. [hvelarde]
+* Fixed permissions on private and pending states (issue #20). [hvelarde]
+* Fixed javascript registry uninstall and tests. [hvelarde]
 
 
 1.0rc1 (2012-01-10)
