@@ -4,7 +4,7 @@ Changelog
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Fixed problem when one all votes goes to one option.
 
 
 1.0rc2 (2012-02-20)
