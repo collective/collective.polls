@@ -4,6 +4,8 @@ Changelog
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+- Tested for Plone 4.2 compatibility. [hvelarde]
+
 - Added a nice hack to include both README.txt and README.rst in the package
   declaration. [hvelarde]
 
