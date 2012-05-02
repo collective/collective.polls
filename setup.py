@@ -15,7 +15,7 @@ setup(name='collective.polls',
                   "online polls, for anonymous and logged-in users.",
       long_description=long_description,
       classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: 4.1",
