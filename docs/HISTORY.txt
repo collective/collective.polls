@@ -6,6 +6,9 @@ Changelog
 
 - Tested for Plone 4.2 compatibility. [hvelarde]
 
+- Updated Dexterity version requirement (we want to use latest version to
+  avoid any issues). [hvelarde]
+
 - Added a nice hack to include both README.txt and README.rst in the package
   declaration. [hvelarde]
 

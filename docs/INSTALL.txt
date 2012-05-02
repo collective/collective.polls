@@ -17,7 +17,7 @@ To enable this product in a buildout-based installation:
     [buildout]
     ...
     extends =
-        http://good-py.appspot.com/release/dexterity/1.1?plone=4.1
+        http://good-py.appspot.com/release/dexterity/1.2.1
 
 After updating the configuration you need to run ''bin/buildout'', which will
 take care of updating your system.
@@ -28,3 +28,4 @@ Check the box next to ''collective.polls'' and click the 'Activate' button.
 
 Note: You may have to empty your browser cache and save your resource
 registries in order to see the effects of the product installation.
+
