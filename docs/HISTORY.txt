@@ -7,6 +7,8 @@ Changelog
 - Added a nice hack to include both README.txt and README.rst in the package
   declaration. [hvelarde]
 
+- Fixed problem when one all votes goes to one option (issue #27). [flecox]
+
 
 1.0rc2 (2012-02-20)
 ^^^^^^^^^^^^^^^^^^^
@@ -37,3 +39,4 @@ Changelog
 ^^^^^^^^^^^^^^^^^^^
 
 - Initial release.
+
