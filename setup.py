@@ -12,7 +12,7 @@ long_description = open("README.txt").read() + "\n" + \
 setup(name='collective.polls',
       version=version,
       description="A content type, workflow, and portlet for conducting "
-                  "online polls, for anonymous and logged-in users",
+                  "online polls, for anonymous and logged-in users.",
       long_description=long_description,
       classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -20,7 +20,7 @@ setup(name='collective.polls',
         "Framework :: Plone",
         "Framework :: Plone :: 4.1",
         "Framework :: Plone :: 4.2",
-        "Intended Audience :: System Administrators",
+        "Intended Audience :: End Users/Desktop",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
         "Programming Language :: JavaScript",
