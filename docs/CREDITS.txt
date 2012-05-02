@@ -1,16 +1,14 @@
 Contributors
 ------------
 
-* Franco Pellegrini (frapell@gmail.com)
-
-* Héctor Velarde (hector.velarde@gmail.com)
-
-* Érico Andrei (erico@simplesconsultoria.com.br)
-
-* Rafahela Bazzanella (rafahela.bazzanella@camara.gov.br)
-
-* Silvestre Huens (s.huens@gmail.com)
-
-* WebDesignerDepot (www.webdesignerdepot.com) - icon
+- Franco Pellegrini
+- Héctor Velarde
+- Érico Andrei
+- Rafahela Bazzanella
+- Silvestre Huens
+- `WebDesignerDepot`_ (icon)
 
 Development sponsored by Open Multimedia and Simples Consultoria.
+
+.. _`WebDesignerDepot`: http://www.webdesignerdepot.com/
+
