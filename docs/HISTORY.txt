@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Fix UnicodeDecodeError in PossiblePolls vocabulary when we have a
+  poll with umlauts in the title. [elioschmutz]
+
 - Add German translation. [elioschmutz]
 
 
