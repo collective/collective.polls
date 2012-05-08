@@ -33,7 +33,8 @@ def PossiblePolls(context):
     values = [SimpleTerm(value="latest", title=_(u"Latest opened poll"))]
     if polls:
         for i in polls:
-            values.append(SimpleTerm(value=i.UID, title=i.Title))
+            values.append(
+                SimpleTerm(value=i.UID, title=i.Title.decode('utf-8')))
 
     vocab = SimpleVocabulary(values)
 

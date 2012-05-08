@@ -6,6 +6,8 @@ from zope.component import getUtility
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
 
+from zope.i18n import translate
+
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from plone.app.testing import logout
@@ -62,6 +64,7 @@ class BasePortlet(unittest.TestCase):
         p1.options = options
         p2 = self.folder['p2']
         p2.options = options
+        p2.title = 'Umlaut Ü'
         p3 = self.folder['p3']
         p3.options = options
         p3.allow_anonymous = True
@@ -128,6 +131,17 @@ class PortletRegistrationTest(BasePortlet):
         vocab = voteportlet.PossiblePolls(portal)
         # We should list here 2 open polls + latest as options
         self.assertEqual(len(vocab), 3)
+
+    def test_vocab_possible_polls_encoding(self):
+        ''' test encoding of vocabulary '''
+
+        portal = self.portal
+        vocab = voteportlet.PossiblePolls(portal)
+
+        # The title should be stored in unicode
+        for term in vocab:
+            title = translate(term.title)
+            self.assertTrue(type(title) == unicode)
 
     def test_renderer(self):
         context = self.folder
