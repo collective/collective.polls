@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.1 (unreleased)
+1.0.1 (2012-05-08)
 ^^^^^^^^^^^^^^^^
 
 - Fix UnicodeDecodeError in PossiblePolls vocabulary when we have a
