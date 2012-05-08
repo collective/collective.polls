@@ -6,6 +6,7 @@ Contributors
 - Érico Andrei
 - Rafahela Bazzanella
 - Silvestre Huens
+- Elio Schmutz
 - `WebDesignerDepot`_ (icon)
 
 Development sponsored by Open Multimedia and Simples Consultoria.
