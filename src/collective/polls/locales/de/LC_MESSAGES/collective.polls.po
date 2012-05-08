@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-02-15 21:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/polls/configure.zcml
+msgid "A Plone extension providing a Poll content type, portlet and workflow."
+msgstr "Eine Plone-Erweiterung welche ein Umfrage-Inhaltstyp, Portlets und Workflow zur verfügung stellt."
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "A poll"
+msgstr "Eine Umfrage"
+
+#: collective/polls/profiles/default/portlets.xml
+#: collective/polls/profiles/uninstall/portlets.xml
+msgid "A portlet to allow voting on a specific poll"
+msgstr "Ein Portlet zum Abstimmen über eine bestimmte Umfrage"
+
+#: collective/polls/content/poll.py:68
+msgid "Allow anonymous"
+msgstr "Anonym erlauben"
+
+#: collective/polls/content/poll.py:69
+msgid "Allow not logged in users to vote."
+msgstr "Erlaubt nicht eingeloggten Benutzern die Teilnahme an der Umfrage."
+
+#: collective/polls/content/poll.py:94
+msgid "Available options"
+msgstr "Verfügbare Optionen"
+
+#: collective/polls/content/poll_templates/view.pt:18
+msgid "Available options:"
+msgstr "Verfügbare Optionen:"
+
+#: collective/polls/content/poll.py:42
+msgid "Bar Chart"
+msgstr "Balkendiagramm"
+
+#: collective/polls/content/poll.py:59
+msgid "Description"
+msgstr "Beschreibung"
+
+#: collective/polls/content/poll.py:88
+msgid "Format to show the results."
+msgstr "Format zum Anzeigen des Resultates."
+
+#: collective/polls/content/poll.py:87
+msgid "Graph"
+msgstr "Diagramm"
+
+#: collective/polls/portlet/voteportlet.py:53
+msgid "Header"
+msgstr "Titel"
+
+#: collective/polls/portlet/voteportlet.py:64
+msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
+msgstr "Das Portlet zeigt das Resultat an wenn keine offene Umfrage verfügbar ist oder die gewählte Umfrage bereits geschlossen wurde."
+
+#: collective/polls/content/poll.py:313
+msgid "Invalid option"
+msgstr "Ungültige Option"
+
+#: collective/polls/portlet/voteportlet.py:33
+msgid "Latest opened poll"
+msgstr "Letzte geöffnete Umfrage"
+
+#: collective/polls/content/poll.py:48
+msgid "Not enought options provided"
+msgstr "Stellt nicht genügen Optionen zur verfügung"
+
+#: collective/polls/portlet/voteportlet.pt:50
+msgid "Nothing to see here"
+msgstr "Hier ist nichts zu sehen"
+
+#: collective/polls/content/poll.py:44
+msgid "Numbers Only"
+msgstr "Nur Zahlen"
+
+#: collective/polls/content/poll.py:95
+msgid "Option"
+msgstr "Option"
+
+#: collective/polls/portlet/voteportlet.pt:25
+msgid "Partial results"
+msgstr "Teilergebnisse"
+
+#: collective/polls/content/poll.py:43
+msgid "Pie Chart"
+msgstr "Kuchendiagramm"
+
+#: collective/polls/portlet/voteportlet.py:58
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Poll"
+msgstr "Umfrage"
+
+#: collective/polls/configure.zcml
+msgid "Polls"
+msgstr "Umfragen"
+
+#: collective/polls/configure.zcml
+msgid "Polls: Uninstall"
+msgstr "Umfragen: Deinstallieren"
+
+#: collective/polls/content/poll_templates/view.pt:47
+msgid "Results:"
+msgstr "Ergebnis:"
+
+#: collective/polls/portlet/voteportlet.py:63
+msgid "Show closed polls"
+msgstr "Geschlossene Umfragen anzeigen"
+
+#: collective/polls/content/poll.py:80
+msgid "Show partial results"
+msgstr "Teilergebnisse anzeigen"
+
+#: collective/polls/content/poll.py:81
+msgid "Show partial results after a voter has already voted."
+msgstr "Zeigt Teilergebnisse nachdem ein Benutzer abgestimmt hat."
+
+#: collective/polls/content/poll_templates/view.pt:42
+#: collective/polls/portlet/voteportlet.pt:87
+msgid "Submit"
+msgstr "Absenden"
+
+#: collective/polls/content/poll.py:327
+msgid "Thanks for your vote"
+msgstr "Danke für die Teilnahme"
+
+#: collective/polls/portlet/voteportlet.py:54
+msgid "The header for the portlet. Leave empty for none."
+msgstr "Portlettitel. Leer lassen um keinen Titel darzustellen."
+
+#: collective/polls/content/poll_templates/view.pt:71
+#: collective/polls/portlet/voteportlet.pt:95
+msgid "Total Votes:"
+msgstr "Anzahl Teilnahmen:"
+
+#: collective/polls/configure.zcml
+msgid "Uninstall the collective.polls package."
+msgstr "Deinstalliert das collective.polls Packet."
+
+#: collective/polls/content/poll_templates/view.pt:27
+msgid "Vote!"
+msgstr "Abstimmen!"
+
+#: collective/polls/portlet/voteportlet.py:93
+#: collective/polls/profiles/default/portlets.xml
+#: collective/polls/profiles/uninstall/portlets.xml
+msgid "Voting portlet"
+msgstr "Umfrageportlet"
+
+#: collective/polls/portlet/voteportlet.py:59
+msgid "Which poll to show in the portlet."
+msgstr "Welche Umfrage soll im Portlet angezeigt werden."
+
+#: collective/polls/content/poll.py:332
+msgid "You are not authorized to vote"
+msgstr "Sie sind nicht zum Abstimmen berechtigt"
+
+#: collective/polls/content/poll.py:107
+msgid "You need to provide at least two options for a poll."
+msgstr "Sie müssen mindestens zwei Optionen für eine Umfrage angeben."
