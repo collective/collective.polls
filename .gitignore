@@ -4,17 +4,14 @@
 *.pyc
 .installed.cfg
 .mr.developer.cfg
+library-settings.txt
+log.html
+output.xml
+report.html
+selenium*
 bin/
 develop-eggs/
 downloads/
 eggs/
 parts/
 var/
-
-# SeleniumLibrary #
-###################
-acceptance-tests/library-settings.txt
-log.html
-output.xml
-report.html
-selenium*
