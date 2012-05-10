@@ -8,7 +8,7 @@ Changelog
 
 
 1.0.1 (2012-05-08)
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 - Fix UnicodeDecodeError in PossiblePolls vocabulary when we have a
   poll with umlauts in the title. [elioschmutz]
@@ -17,7 +17,7 @@ Changelog
 
 
 1.0 (2012-05-02)
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 - Tested for Plone 4.2 compatibility. [hvelarde]
 
