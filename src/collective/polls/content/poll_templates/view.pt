@@ -68,7 +68,9 @@
       </tal:piechart>
   </tal:results>
   <tal:total_votes condition="not:can_edit">
+  <div class="total-votes">
     <span i18n:translate="">Total Votes:</span><span tal:content="context/total_votes">23</span>
+    </div>
   </tal:total_votes>
   </metal:content-core>
 </metal:main>

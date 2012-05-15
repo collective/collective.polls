@@ -20,8 +20,7 @@ from z3c.form.interfaces import HIDDEN_MODE
 from plone.directives import dexterity
 from plone.directives import form
 
-from collective.z3cform.datagridfield import DataGridFieldFactory
-from collective.z3cform.datagridfield import DictRow
+from collective.z3cform.widgets.tasks_widget import TasksFieldWidget
 
 from Products.statusmessages.interfaces import IStatusMessage
 
@@ -46,18 +45,6 @@ graph_options = SimpleVocabulary(
 
 class InsuficientOptions(Invalid):
     __doc__ = _(u"Not enought options provided")
-
-
-class IOption(interface.Interface):
-    ''' An option in a poll '''
-
-    option_id = schema.Int(
-        title=u"Option Id",
-        required=False)
-
-    description = schema.TextLine(
-        title=_(u"Description"),
-        required=True)
 
 
 class IPoll(form.Schema):
@@ -90,10 +77,10 @@ class IPoll(form.Schema):
         required=True,
         source=graph_options)
 
+    form.widget(options=TasksFieldWidget)
     options = schema.List(
         title=_(u"Available options"),
-        value_type=DictRow(title=_(u'Option'),
-                           schema=IOption),
+        value_type= schema.TextLine(),
         default=[],
         required=True)
 
@@ -101,7 +88,7 @@ class IPoll(form.Schema):
     def validate_options(data):
         ''' Validate options '''
         options = data.options
-        descriptions = options and [o['description'].strip() for o in options]
+        descriptions = options and [o for o in options]
         if len(descriptions) < 2:
             raise InsuficientOptions(
                     _(u"You need to provide at least two options for a poll."))
@@ -234,27 +221,24 @@ class PollAddForm(dexterity.AddForm):
 
     grok.name('collective.polls.poll')
 
-    def updateFields(self):
-        ''' Update form fields to set options to use DataGridFieldFactory '''
-        super(PollAddForm, self).updateFields()
-        self.fields['options'].widgetFactory = DataGridFieldFactory
-
-    def datagridUpdateWidgets(self, subform, widgets, widget):
-        ''' Hides the widgets in the datagrid subform '''
-        widgets['option_id'].mode = HIDDEN_MODE
-
-    def updateWidgets(self):
-        ''' Update form widgets to hide column option_id from end user '''
-        super(PollAddForm, self).updateWidgets()
-        if not anonymous_view_parent(self.context):
-            self.widgets['allow_anonymous'].mode = HIDDEN_MODE
-        self.widgets['options'].allow_reorder = True
-        self.widgets['options'].columns[0]['mode'] = HIDDEN_MODE
+    # def updateFields(self):
+    #     ''' Update form fields to set options to use DataGridFieldFactory '''
+    #     super(PollAddForm, self).updateFields()
+    #     self.fields['options'].widgetFactory = DataGridFieldFactory
+    # 
+    # def datagridUpdateWidgets(self, subform, widgets, widget):
+    #     ''' Hides the widgets in the datagrid subform '''
+    #     widgets['option_id'].mode = HIDDEN_MODE
 
     def create(self, data):
         options = data['options']
+        new_data = []
         for (index, option) in enumerate(options):
-            option['option_id'] = index
+            option_new = {}
+            option_new['option_id'] = index
+            option_new['description'] = option
+            new_data.append(option_new)
+        data['options'] = new_data
         return super(PollAddForm, self).create(data)
 
 
@@ -264,29 +248,43 @@ class PollEditForm(dexterity.EditForm):
 
     grok.context(IPoll)
 
-    def updateFields(self):
-        ''' Update form fields to set options to use DataGridFieldFactory '''
-        super(PollEditForm, self).updateFields()
-        self.fields['options'].widgetFactory = DataGridFieldFactory
-
-    def datagridUpdateWidgets(self, subform, widgets, widget):
-        ''' Hides the widgets in the datagrid subform '''
-        widgets['option_id'].mode = HIDDEN_MODE
+    # def updateFields(self):
+    #     ''' Update form fields to set options to use DataGridFieldFactory '''
+    #     super(PollEditForm, self).updateFields()
+    #     self.fields['options'].widgetFactory = DataGridFieldFactory
+    # 
+    # def datagridUpdateWidgets(self, subform, widgets, widget):
+    #     ''' Hides the widgets in the datagrid subform '''
+    #     widgets['option_id'].mode = HIDDEN_MODE
 
     def updateWidgets(self):
         ''' Update form widgets to hide column option_id from end user '''
         super(PollEditForm, self).updateWidgets()
         if not anonymous_view_parent(self.context):
             self.widgets['allow_anonymous'].mode = HIDDEN_MODE
+
         self.widgets['options'].allow_reorder = True
-        self.widgets['options'].columns[0]['mode'] = HIDDEN_MODE
+        data = ""
+        for option in self.widgets['options'].value.split("\n"):
+            if data:
+                data += "\n"
+            if option.strip().startswith("{"):
+                new_val = eval(option)
+                data += new_val["description"]
+            else:
+                data = option
+        self.widgets['options'].value = data
 
     def applyChanges(self, data):
         options = data['options']
+        new_data = []
         for (index, option) in enumerate(options):
-            option['option_id'] = index
+            option_new = {}
+            option_new['option_id'] = index
+            option_new['description'] = option
+            new_data.append(option_new)
+        data['options'] = new_data
         super(PollEditForm, self).applyChanges(data)
-
 
 class View(grok.View):
 
