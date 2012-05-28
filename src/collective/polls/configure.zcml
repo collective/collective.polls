@@ -27,6 +27,12 @@
     />
 
   <grok:grok package="." />
+
+   <browser:resourceDirectory
+           name="collective.polls"
+           directory="static"
+           />
+  
   <include package=".portlet" />
 
   <genericsetup:registerProfile
