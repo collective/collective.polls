@@ -1,0 +1,93 @@
+*** Settings ***
+
+Resource  plone.txt
+
+Suite Setup  Setup
+
+*** Variables ***
+
+${poll-link-placeholder}  a#collective-polls-poll
+${title-field-placeholder}  input#form-widgets-IBasic-title
+${description-field-placeholder}  textarea#form-widgets-IBasic-description
+${option-placeholder}  textarea.task-description
+
+*** Test cases ***
+
+Test CRUD
+    Goto Homepage
+    Create, Update, Delete Poll  Test poll
+
+Test Issue X
+    Goto Homepage
+    Add Poll  Issue X
+    Issue X  Issue X
+    Delete Poll  Issue X
+
+*** Keywords ***
+
+Setup
+    Log In  admin  admin
+
+Add Option
+    [Arguments]  ${option}
+
+    Input Text  css=${option-placeholder}  ${option}
+    Click Button  Add  Don't Wait
+    Wait Until Page Contains  ${option}
+
+Remove Option
+    [Documentation]  Should remove the named option; this is not possible with
+    ...              current implementation of the JavaScript library, so now
+    ...              we are removing the first option only
+    [Arguments]  ${option}
+
+    Click Link  Delete task  Don't Wait
+    Wait Until Keyword Succeeds  1  5  Page Should Not Contain  ${option}
+
+Add Poll
+    [Arguments]  ${title}
+
+    Open Add New Menu
+    Click Link  css=${poll-link-placeholder}
+    Page Should Contain  Add Poll
+    Input Text  css=${title-field-placeholder}  ${title}
+    Add Option  Maybe
+    Add Option  Yes
+    Add Option  No
+    Click Button  Save
+    Page Should Contain  Item created
+
+Edit Poll
+    [Arguments]  ${title}
+
+    Click Link  ${title}
+    Click Link  Edit
+    Page Should Contain  Edit Poll
+    Remove Option  Maybe
+    Click Button  Save
+    Page Should Contain  Changes saved
+
+Delete Poll
+    [Arguments]  ${title}
+
+    Click Link  ${title}
+    Click Delete Action
+    Wait Until Page Contains  Do you really want to delete this item?
+    Click Button  Delete
+
+Create, Update, Delete Poll
+    [Arguments]  ${title}
+
+    Add Poll  ${title}
+    Edit Poll  ${title}
+    Delete Poll  ${title}
+
+Issue X
+    [Documentation]  This tests demonstrates issue X
+    [Arguments]  ${title}
+
+    Click Link  ${title}
+    Click Link  Edit
+    Page Should Contain  Allow anonymous
+    Click Button  Cancel
+
