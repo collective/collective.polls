@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-02-15 21:58+0000\n"
+"POT-Creation-Date: 2012-05-15 02:18+0000\n"
 "PO-Revision-Date: 2012-01-06 21:56-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -29,15 +29,15 @@ msgstr "Uma enquete"
 msgid "A portlet to allow voting on a specific poll"
 msgstr "Um portlet para permitir voto numa enquete específica"
 
-#: collective/polls/content/poll.py:68
+#: collective/polls/content/poll.py:55
 msgid "Allow anonymous"
 msgstr "Permitir voto anônimo"
 
-#: collective/polls/content/poll.py:69
+#: collective/polls/content/poll.py:56
 msgid "Allow not logged in users to vote."
 msgstr "Permitir aos usuários não logados votar."
 
-#: collective/polls/content/poll.py:94
+#: collective/polls/content/poll.py:82
 msgid "Available options"
 msgstr "Opções disponíveis"
 
@@ -45,31 +45,27 @@ msgstr "Opções disponíveis"
 msgid "Available options:"
 msgstr "Opções disponíveis:"
 
-#: collective/polls/content/poll.py:42
+#: collective/polls/content/poll.py:41
 msgid "Bar Chart"
 msgstr "Gráfico de barras"
 
-#: collective/polls/content/poll.py:59
-msgid "Description"
-msgstr "Descrição"
-
-#: collective/polls/content/poll.py:88
+#: collective/polls/content/poll.py:75
 msgid "Format to show the results."
 msgstr "Formato para mostrar os resultados"
 
-#: collective/polls/content/poll.py:87
+#: collective/polls/content/poll.py:74
 msgid "Graph"
 msgstr "Gráfico"
 
-#: collective/polls/portlet/voteportlet.py:53
+#: collective/polls/portlet/voteportlet.py:54
 msgid "Header"
 msgstr "Título"
 
-#: collective/polls/portlet/voteportlet.py:64
+#: collective/polls/portlet/voteportlet.py:65
 msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
 msgstr "Caso não exista nenhuma enquete aberta o portlet exibirá o resultado de enquete encerrada recentemente. Se o portlet tiver uma enquete escolhida e esta estiver encerrada, também será exibido o seu resultado."
 
-#: collective/polls/content/poll.py:313
+#: collective/polls/content/poll.py:311
 msgid "Invalid option"
 msgstr "Opção inválida"
 
@@ -77,31 +73,27 @@ msgstr "Opção inválida"
 msgid "Latest opened poll"
 msgstr "Última enquete aberta"
 
-#: collective/polls/content/poll.py:48
+#: collective/polls/content/poll.py:47
 msgid "Not enought options provided"
 msgstr "Número de opções informado não é o suficiente para uma enquete"
 
-#: collective/polls/portlet/voteportlet.pt:50
+#: collective/polls/portlet/voteportlet.pt:53
 msgid "Nothing to see here"
 msgstr "Nada para ser visto aqui"
 
-#: collective/polls/content/poll.py:44
+#: collective/polls/content/poll.py:43
 msgid "Numbers Only"
 msgstr "Apenas números"
 
-#: collective/polls/content/poll.py:95
-msgid "Option"
-msgstr "Opções"
-
-#: collective/polls/portlet/voteportlet.pt:25
+#: collective/polls/portlet/voteportlet.pt:27
 msgid "Partial results"
 msgstr "Resultados parciais"
 
-#: collective/polls/content/poll.py:43
+#: collective/polls/content/poll.py:42
 msgid "Pie Chart"
 msgstr "Gráfico de pizza"
 
-#: collective/polls/portlet/voteportlet.py:58
+#: collective/polls/portlet/voteportlet.py:59
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "Poll"
 msgstr "Enquete"
@@ -114,37 +106,41 @@ msgstr "Enquetes"
 msgid "Polls: Uninstall"
 msgstr "Enquetes: Desinstalação"
 
+#: collective/polls/portlet/voteportlet.pt:28
+msgid "Results"
+msgstr ""
+
 #: collective/polls/content/poll_templates/view.pt:47
 msgid "Results:"
 msgstr "Resultados:"
 
-#: collective/polls/portlet/voteportlet.py:63
+#: collective/polls/portlet/voteportlet.py:64
 msgid "Show closed polls"
 msgstr "Exibir enquetes encerradas"
 
-#: collective/polls/content/poll.py:80
+#: collective/polls/content/poll.py:67
 msgid "Show partial results"
 msgstr "Mostrar resultados parciais"
 
-#: collective/polls/content/poll.py:81
+#: collective/polls/content/poll.py:68
 msgid "Show partial results after a voter has already voted."
 msgstr "Mostrar resultados parciais, após o usuário já ter votado."
 
 #: collective/polls/content/poll_templates/view.pt:42
-#: collective/polls/portlet/voteportlet.pt:87
+#: collective/polls/portlet/voteportlet.pt:90
 msgid "Submit"
 msgstr "Votar"
 
-#: collective/polls/content/poll.py:327
+#: collective/polls/content/poll.py:325
 msgid "Thanks for your vote"
 msgstr "Obrigado pelo seu voto"
 
-#: collective/polls/portlet/voteportlet.py:54
+#: collective/polls/portlet/voteportlet.py:55
 msgid "The header for the portlet. Leave empty for none."
 msgstr "Cabeçalho do portlet. Deixe em branco para não exibir um cabeçalho."
 
-#: collective/polls/content/poll_templates/view.pt:71
-#: collective/polls/portlet/voteportlet.pt:95
+#: collective/polls/content/poll_templates/view.pt:72
+#: collective/polls/portlet/voteportlet.pt:107
 msgid "Total Votes:"
 msgstr "Total de votos:"
 
@@ -156,21 +152,21 @@ msgstr "Desinstalar o pacote collective.polls(Enquetes)"
 msgid "Vote!"
 msgstr "Vote"
 
-#: collective/polls/portlet/voteportlet.py:93
+#: collective/polls/portlet/voteportlet.py:94
 #: collective/polls/profiles/default/portlets.xml
 #: collective/polls/profiles/uninstall/portlets.xml
 msgid "Voting portlet"
 msgstr "Portlet de votação"
 
-#: collective/polls/portlet/voteportlet.py:59
+#: collective/polls/portlet/voteportlet.py:60
 msgid "Which poll to show in the portlet."
 msgstr "Qual enquete mostrar no portlet."
 
-#: collective/polls/content/poll.py:332
+#: collective/polls/content/poll.py:330
 msgid "You are not authorized to vote"
 msgstr "Você não está autorizado a votar"
 
-#: collective/polls/content/poll.py:107
+#: collective/polls/content/poll.py:94
 msgid "You need to provide at least two options for a poll."
 msgstr "Você deve informar ao menos duas opções em uma enquete."
 

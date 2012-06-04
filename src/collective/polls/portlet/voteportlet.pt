@@ -15,6 +15,7 @@
 
     <dd class="portletItem odd"
         tal:define="can_vote view/can_vote;
+                    closed view/is_closed;
                     results view/getVotingResults;
                     toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
         tal:condition="nocall:poll">
@@ -23,7 +24,8 @@
 
         <tal:results condition="python:(not can_vote) and results">
             <tal:poll_results condition="nocall:results">
-            <h4 i18n:translate="">Partial results</h4>
+            <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
+            <h4 tal:condition="closed" i18n:translate="">Results</h4>
             <div id="portletresultholder"></div>
             <ul id="results">
               <li tal:repeat="option_result results">
