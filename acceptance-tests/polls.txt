@@ -17,12 +17,6 @@ Test CRUD
     Goto Homepage
     Create, Update, Delete Poll  Test poll
 
-Test Issue X
-    Goto Homepage
-    Add Poll  Issue X
-    Issue X  Issue X
-    Delete Poll  Issue X
-
 *** Keywords ***
 
 Setup

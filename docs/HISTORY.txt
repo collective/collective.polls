@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- allow_anonymous field is always shown (fixes `#51`_). [hvelarde]
+
 - Some refactoring on tests was done; we now test for CSS installation and
   removal. [hvelarde]
 
@@ -62,4 +64,6 @@ Because you have to know where your towel is.
 ^^^^^^^^^^^^^^^^^^^
 
 - Initial release.
+
+.. _`#51`: https://github.com/collective/collective.polls/issues/51
 
