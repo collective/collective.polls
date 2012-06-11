@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-15 02:18+0000\n"
+"POT-Creation-Date: 2012-06-11 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,3 +58,22 @@ msgstr "Reviewer lehnt die Umfrage ab"
 msgid "Workflow to be used with polls"
 msgstr "Aktiver Workflow für Umfragen"
 
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Veröffentlichen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Für Veröffentlichung einrechen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Ablehnen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Zurückziehen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Umfrage Schliessen"
