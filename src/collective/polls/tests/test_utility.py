@@ -180,7 +180,3 @@ class IntegrationTest(unittest.TestCase):
         # Opened Poll, member can view
         poll = self.subfolder['p6']
         self.assertFalse(utility.allowed_to_view(poll))
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

@@ -306,7 +306,3 @@ class VotingTest(unittest.TestCase):
         self.assertEqual(results[options][1], 1)
         # 50%
         self.assertEqual(results[options][2], 0.5)
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

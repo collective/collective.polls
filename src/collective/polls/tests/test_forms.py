@@ -36,7 +36,3 @@ class IntegrationTest(unittest.TestCase):
         request = self.request
         edit_form = PollEditForm(context, request)
         self.assertTrue(interfaces.IEditForm.providedBy(edit_form))
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

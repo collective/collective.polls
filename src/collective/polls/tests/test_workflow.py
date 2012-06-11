@@ -296,7 +296,3 @@ class WorkflowTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
         self.wt.doActionFor(self.obj, 'open')
         self.wt.doActionFor(self.obj, 'close')
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

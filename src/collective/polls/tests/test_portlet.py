@@ -225,7 +225,3 @@ class PortletRendererTest(BasePortlet):
                                                             show_closed=True))
         self.assertEqual(True, r.available)
         self.assertEqual(3, len(r.poll().options))
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
