@@ -16,8 +16,12 @@ JAVASCRIPTS = [
     "++resource++collective.polls/js/collective.poll.js",
     ]
 
+CSS = [
+    "++resource++collective.polls/css/collective.polls.css",
+    ]
 
-class InstallTest(unittest.TestCase):
+
+class InstallTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
@@ -48,13 +52,17 @@ class InstallTest(unittest.TestCase):
         self.assertEqual(roles, ['Manager', 'Reviewer', 'Site Administrator'])
 
     def test_jsregistry(self):
-        portal_javascripts = self.portal.portal_javascripts
-        for js in JAVASCRIPTS:
-            self.assertTrue(js in portal_javascripts.getResourceIds(),
-                            '%s not installed' % js)
+        resource_ids = self.portal.portal_javascripts.getResourceIds()
+        for id in JAVASCRIPTS:
+            self.assertTrue(id in resource_ids, '%s not installed' % id)
+
+    def test_cssregistry(self):
+        resource_ids = self.portal.portal_css.getResourceIds()
+        for id in CSS:
+            self.assertTrue(id in resource_ids, '%s not installed' % id)
 
 
-class UninstallTest(unittest.TestCase):
+class UninstallTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
@@ -68,11 +76,11 @@ class UninstallTest(unittest.TestCase):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_jsregistry_removed(self):
-        portal_javascripts = self.portal.portal_javascripts
-        for js in JAVASCRIPTS:
-            self.assertFalse(js in portal_javascripts.getResourceIds(),
-                             '%s not removed' % js)
+        resource_ids = self.portal.portal_javascripts.getResourceIds()
+        for id in JAVASCRIPTS:
+            self.assertTrue(id not in resource_ids, '%s not installed' % id)
 
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
+    def test_cssregistry_removed(self):
+        resource_ids = self.portal.portal_css.getResourceIds()
+        for id in CSS:
+            self.assertTrue(id not in resource_ids, '%s not removed' % id)
