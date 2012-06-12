@@ -1,6 +1,5 @@
 #! /bin/sh
 
-PATH=bin:$PATH
 I18NDOMAIN="collective.polls"
 BASE_DIRECTORY="src/collective/polls"
 

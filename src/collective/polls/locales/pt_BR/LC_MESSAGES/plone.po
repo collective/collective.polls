@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-05-15 02:18+0000\n"
-"PO-Revision-Date: 2011-12-24 10:32-0600\n"
+"POT-Creation-Date: 2012-06-11 23:09+0000\n"
+"PO-Revision-Date: 2012-06-11 20:18-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,10 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Fechar"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
 msgstr "Encerrada"
 
@@ -27,6 +31,10 @@ msgstr "Membro retrai submissão"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits poll for opening"
 msgstr "Membro submete enquete para abertura"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Abrir"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Opened"
@@ -45,6 +53,14 @@ msgid "Private"
 msgstr "Privado"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Rejeitar"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Retraer"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer closes the poll"
 msgstr "Revisor encerra uma enquete"
 
@@ -55,6 +71,10 @@ msgstr "Revisor abre uma enquete"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer rejects the poll"
 msgstr "Revisor rejeita uma enquete"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Submeter para abertura"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"

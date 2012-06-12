@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-05-15 02:18+0000\n"
-"PO-Revision-Date: 2012-02-16 11:07-0300\n"
+"POT-Creation-Date: 2012-06-11 23:09+0000\n"
+"PO-Revision-Date: 2012-06-11 20:16-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Language: es\n"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Cerrar"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
 msgstr "Cerrada"
 
@@ -28,6 +32,10 @@ msgstr "El miembro retira la encuesta"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits poll for opening"
 msgstr "El miembro solicita abrir la encuesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Abrir"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Opened"
@@ -46,6 +54,14 @@ msgid "Private"
 msgstr "Privado"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Rechazar"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Retirar"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer closes the poll"
 msgstr "El revisor cierra la encuesta"
 
@@ -56,6 +72,10 @@ msgstr "El revisor abre la encuesta"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer rejects the poll"
 msgstr "El revisor rechaza la encuesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Enviar para publicación"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"

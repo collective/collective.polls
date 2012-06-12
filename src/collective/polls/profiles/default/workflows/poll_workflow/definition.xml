@@ -111,7 +111,9 @@
              before_script=""
              after_script=""
               i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=close" category="workflow" icon="">Close</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=close"
+          category="workflow"
+          i18n:translate="">Close</action>
   <guard>
    <guard-permission>collective.polls: Close poll</guard-permission>
   </guard>
@@ -123,7 +125,9 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=open" category="workflow" icon="">Open</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=open"
+          category="workflow"
+          i18n:translate="">Open</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
   </guard>
@@ -135,7 +139,9 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=retract"
+          category="workflow"
+          i18n:translate="">Retract</action>
   <guard>
    <guard-permission>Request review</guard-permission>
   </guard>
@@ -147,7 +153,9 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=reject" category="workflow" icon="">Reject</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=reject"
+          category="workflow"
+          i18n:translate="">Reject</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
   </guard>
@@ -159,7 +167,9 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit for opening</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit"
+          category="workflow"
+          i18n:translate="">Submit for opening</action>
   <guard>
    <guard-permission>Request review</guard-permission>
   </guard>

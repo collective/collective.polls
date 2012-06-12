@@ -6,9 +6,10 @@ Because you have to know where your towel is.
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Update german translations. [tschanzt]
+- Fixed translation strings for actions on poll workflow; updated Spanish and
+  Brazilian Portuguese translations. [hvelarde]
 
-- Add action titles to localization file. [tschanzt]
+- Update german translations. [tschanzt]
 
 - allow_anonymous field is always shown (fixes `#51`_). [hvelarde]
 
