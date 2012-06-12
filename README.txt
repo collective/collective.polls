@@ -4,14 +4,19 @@ collective.polls
 
 .. contents:: Table of Contents
 
-Overview
---------
+Life, the Universe, and Everything
+----------------------------------
 
 A content type, workflow, and portlet for conducting online polls, for
 anonymous and logged-in users.
 
+Don't Panic
+-----------
+
+TBA.
+
 Features
---------
+^^^^^^^^
 
 - Polls can be open for anonymous users to vote
 - Voting can take place in the object or in a voting portlet
@@ -23,7 +28,7 @@ Features
 - Polls can have relations with other content in the site
 
 Workflow description
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 The workflow associated with polls has the following states: Private, Pending
 review, Open and Closed.
@@ -44,4 +49,11 @@ review, Open and Closed.
   manipulation.
 - When a poll is Closed nobody can modify it, nor can anyone vote on it; there
   is no way to reopen a closed poll
+
+Mostly Harmless
+---------------
+
+Have an idea? Found a bug? Let us know by `opening a support ticket`_.
+
+.. _`opening a support ticket`: https://github.com/collective/collective.polls/issues
 
