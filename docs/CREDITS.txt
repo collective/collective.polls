@@ -10,6 +10,7 @@ following people:
 - Rafahela Bazzanella
 - Silvestre Huens
 - Elio Schmutz
+- Timon Tschanz
 - `WebDesignerDepot`_ (icon)
 
 Development sponsored by Open Multimedia and Simples Consultoria.

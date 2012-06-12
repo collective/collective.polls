@@ -6,11 +6,14 @@ Because you have to know where your towel is.
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Update german translations. [tschanzt]
+
+- Add action titles to localization file. [tschanzt]
+
 - allow_anonymous field is always shown (fixes `#51`_). [hvelarde]
 
 - Some refactoring on tests was done; we now test for CSS installation and
   removal. [hvelarde]
-
 
 1.0.1 (2012-05-08)
 ^^^^^^^^^^^^^^^^^^
