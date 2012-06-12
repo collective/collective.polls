@@ -1,5 +1,8 @@
-Contributors
-------------
+Share and Enjoy
+---------------
+
+collective.polls would not have been possible without the contribution of the
+following people:
 
 - Franco Pellegrini
 - Héctor Velarde
