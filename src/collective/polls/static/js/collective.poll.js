@@ -17,7 +17,6 @@ function pieChart() {
         total = total + value;
     });
 
-    
     for (var i=0; i < labels.length; i++){
         var percent = (data[i] / total) * 100;
         var n_round = Math.round(percent*Math.pow(10,2))/Math.pow(10,2);
@@ -28,6 +27,7 @@ function pieChart() {
                     data,
                     { legend: labels,
                     legendpos: "east",
+                    legendothers: legendothers_translation,
                     });
 
     pie.hover(function () {

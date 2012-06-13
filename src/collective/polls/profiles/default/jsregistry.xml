@@ -5,4 +5,7 @@
  <javascript id="++resource++collective.polls/js/g.pie-min.js" compression="none" expression="" />
  <javascript id="++resource++collective.polls/js/g.bar-min.js" compression="none" expression="" />
  <javascript id="++resource++collective.polls/js/collective.poll.js" compression="full" expression="" />
+ <javascript id="@@legendothers_translation.js" cacheable="False" compression="safe" cookable="False" expression=""
+     enabled="True" inline="True" insert-before="++resource++collective.polls/js/collective.poll.js"
+     />
 </object>

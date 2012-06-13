@@ -6,6 +6,10 @@ Because you have to know where your towel is.
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add translation functionality for the 'Others' string
+  and translate it to german
+  [eschmutz
+
 - Fixed translation strings for actions on poll workflow; updated Spanish and
   Brazilian Portuguese translations. [hvelarde]
 
