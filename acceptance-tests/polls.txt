@@ -16,6 +16,8 @@ ${option-placeholder}  textarea.task-description
 Test CRUD
     Goto Homepage
     Create, Update, Delete Poll  Test poll
+    Add Poll in Private Folder  Test Folder  Test Poll
+    Add Poll in Public Folder  Test Folder  Test Poll
 
 *** Keywords ***
 
@@ -85,3 +87,50 @@ Issue X
     Page Should Contain  Allow anonymous
     Click Button  Cancel
 
+Create Folder
+    [arguments]  ${title}
+
+    Open Add New Menu
+    Click Link  Folder
+    Input Text  title  ${title}
+    Click Button  Save
+    Page Should Contain  Changes saved.
+
+Open Change Workflow Menu
+    Open Menu  plone-contentmenu-workflow
+
+Add Poll Check Warning
+    [Arguments]  ${title}
+
+    Open Add New Menu
+    Click Link  css=${poll-link-placeholder}
+    Page Should Contain  Add Poll
+    Input Text  css=${title-field-placeholder}  ${title}
+    Add Option  Maybe
+    Add Option  Yes
+    Add Option  No
+    Page Should Contain  Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect
+    Click Button  Save
+    Page Should Contain  Item created
+    
+
+
+Add Poll in Private Folder
+    [arguments]  ${title}  ${titlepoll}
+    Create Folder  ${title}
+    Add Poll Check Warning  ${titlepoll}
+    Open Change Workflow Menu
+    Click Link  Open
+    Page Should Contain  Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again
+    Goto Homepage
+
+Add Poll in Public Folder
+    [arguments]  ${title}  ${titlepoll}
+    Create Folder  ${title}
+    Click Link  Publish
+    Open Change Workflow Menu
+    Add Poll Check Warning  ${titlepoll}
+    Open Change Workflow Menu
+    Click Link  Open
+    Page Should Not Contain  Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again
+    Goto Homepage

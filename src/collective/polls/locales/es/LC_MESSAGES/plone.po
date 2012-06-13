@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2012-06-11 23:09+0000\n"
+"POT-Creation-Date: 2012-06-12 16:35+0000\n"
 "PO-Revision-Date: 2012-06-11 20:16-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"

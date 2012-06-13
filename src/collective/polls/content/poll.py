@@ -49,7 +49,9 @@ class IPoll(form.Schema):
 
     allow_anonymous = schema.Bool(
         title=_(u"Allow anonymous"),
-        description=_(u"Allow not logged in users to vote."),
+        description=_(u"Allow not logged in users to vote. The parent folder \
+            of this poll should be published before opeining the poll for \
+            this field to take effect"),
         default=True,
         )
 
@@ -217,15 +219,6 @@ class PollAddForm(dexterity.AddForm):
 
     grok.name('collective.polls.poll')
 
-    # def updateFields(self):
-    #     ''' Update form fields to set options to use DataGridFieldFactory '''
-    #     super(PollAddForm, self).updateFields()
-    #     self.fields['options'].widgetFactory = DataGridFieldFactory
-    # 
-    # def datagridUpdateWidgets(self, subform, widgets, widget):
-    #     ''' Hides the widgets in the datagrid subform '''
-    #     widgets['option_id'].mode = HIDDEN_MODE
-
     def create(self, data):
         options = data['options']
         new_data = []
@@ -296,11 +289,22 @@ class View(grok.View):
                                       name=u'plone_context_state')
         self.wf_state = self.state.workflow_state()
         self.utility = context.utility
-
         # Handle vote
         form = self.request.form
         self.errors = []
         self.messages = []
+        
+        #if the poll is open and anonymous should vote but the parent folder
+        #is private.. inform the user.
+        if 'open' == self.wf_state:
+            roles = [r['name'] for r in 
+                self.context.rolesOfPermission('collective.polls: Vote') 
+                    if r['selected']]
+            if 'Anonymous' not in roles and self.context.allow_anonymous:
+                messages.addStatusMessage(_(u"Anonymous user won't be able to\
+                    vote, you forgot to publish the parent folder, you must \
+                    sent back the poll to private state, publish the parent \
+                    folder and open the poll again"), type="info")
 
         INVALID_OPTION = _(u'Invalid option')
         if 'poll.submit' in form:
