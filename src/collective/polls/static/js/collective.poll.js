@@ -102,6 +102,7 @@ function pieChartPortlet() {
                     data,
                     { legend: labels,
                     legendpos: "east",
+                    legendothers: legendothers_translation,
                     });
 
     pie.hover(function () {

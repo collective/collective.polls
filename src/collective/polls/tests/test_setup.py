@@ -14,6 +14,7 @@ JAVASCRIPTS = [
     "++resource++collective.polls/js/g.pie-min.js",
     "++resource++collective.polls/js/g.bar-min.js",
     "++resource++collective.polls/js/collective.poll.js",
+    '@@legendothers_translation.js',
     ]
 
 CSS = [

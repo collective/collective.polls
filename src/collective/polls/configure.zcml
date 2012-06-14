@@ -33,9 +33,8 @@
            name="collective.polls"
            directory="static"
            />
-  
+
   <include package=".portlet" />
-  <include package=".browser" />
 
   <genericsetup:registerProfile
       name="default"
