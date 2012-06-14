@@ -175,3 +175,6 @@ msgstr ""
 msgid "You need to provide at least two options for a poll."
 msgstr ""
 
+#: collective/polls/browser/legendothers_translation.js:2
+msgid "label_legendothers"
+msgstr ""
