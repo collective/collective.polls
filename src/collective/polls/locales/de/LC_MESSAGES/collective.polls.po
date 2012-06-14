@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-06-12 16:35+0000\n"
+"POT-Creation-Date: 2012-06-14 16:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,6 +172,8 @@ msgstr "Sie sind nicht zum Abstimmen berechtigt"
 msgid "You need to provide at least two options for a poll."
 msgstr "Sie müssen mindestens zwei Optionen für eine Umfrage angeben."
 
-#: collective/polls/browser/legendothers_translation.js:2
+#. Default: "Others"
+#: collective/polls/legendothers_translation.py:19
 msgid "label_legendothers"
 msgstr "Andere"
+
