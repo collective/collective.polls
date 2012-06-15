@@ -18,7 +18,7 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from plone.directives import dexterity
 from plone.directives import form
 
-from collective.z3cform.widgets.tasks_widget import TasksFieldWidget
+from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 
 from Products.statusmessages.interfaces import IStatusMessage
 
@@ -75,7 +75,7 @@ class IPoll(form.Schema):
         required=True,
         source=graph_options)
 
-    form.widget(options=TasksFieldWidget)
+    form.widget(options=EnhancedTextLinesFieldWidget)
     options = schema.List(
         title=_(u"Available options"),
         value_type= schema.TextLine(),
