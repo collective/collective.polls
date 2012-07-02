@@ -18,10 +18,13 @@ TBA.
 Features
 ^^^^^^^^
 
-- Polls can be open for anonymous users to vote
+- Polls can be opened for anonymous users to vote
+- If a open poll, allowed for anonymous is in a private folder nobody can vote.
+  The parent folder of this poll should be published before opening the poll for
+  this field to take effect
 - Voting can take place in the object or in a voting portlet
 - The voting portlet shows automatically the latest open poll or a specific
-  open poll
+  open poll and closed polls
 - Users can see partial results of the poll
 - Results can be shown using a bar chart, a pie chart, or just by number of
   votes
