@@ -79,7 +79,7 @@ class UninstallTestCase(unittest.TestCase):
     def test_jsregistry_removed(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         for id in JAVASCRIPTS:
-            self.assertTrue(id not in resource_ids, '%s not installed' % id)
+            self.assertTrue(id not in resource_ids, '%s not removed' % id)
 
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
