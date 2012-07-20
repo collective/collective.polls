@@ -5,7 +5,6 @@ from Acquisition import aq_inner
 from five import grok
 
 from zope import schema
-from zope import interface
 
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
@@ -78,7 +77,7 @@ class IPoll(form.Schema):
     form.widget(options=EnhancedTextLinesFieldWidget)
     options = schema.List(
         title=_(u"Available options"),
-        value_type= schema.TextLine(),
+        value_type=schema.TextLine(),
         default=[],
         required=True)
 
@@ -164,7 +163,7 @@ class Poll(dexterity.Item):
         if not member_id and request:
             poll_uid = utility.uid_for_poll(self)
             cookie = COOKIE_KEY % str(poll_uid)
-            expires = 'Wed, 19 Feb 2020 14:28:00 GMT'
+            expires = 'Wed, 19 Feb 2020 14:28:00 GMT'  # XXX: why hardcoded?
             vote_id = str(utility.anonymous_vote_id())
             request.response[cookie] = vote_id
             request.response.setCookie(cookie,
@@ -241,7 +240,7 @@ class PollEditForm(dexterity.EditForm):
     #     ''' Update form fields to set options to use DataGridFieldFactory '''
     #     super(PollEditForm, self).updateFields()
     #     self.fields['options'].widgetFactory = DataGridFieldFactory
-    # 
+    #
     # def datagridUpdateWidgets(self, subform, widgets, widget):
     #     ''' Hides the widgets in the datagrid subform '''
     #     widgets['option_id'].mode = HIDDEN_MODE
@@ -273,6 +272,7 @@ class PollEditForm(dexterity.EditForm):
         data['options'] = new_data
         super(PollEditForm, self).applyChanges(data)
 
+
 class View(grok.View):
 
     grok.context(IPoll)
@@ -293,12 +293,12 @@ class View(grok.View):
         form = self.request.form
         self.errors = []
         self.messages = []
-        
+
         #if the poll is open and anonymous should vote but the parent folder
         #is private.. inform the user.
         if 'open' == self.wf_state:
-            roles = [r['name'] for r in 
-                self.context.rolesOfPermission('collective.polls: Vote') 
+            roles = [r['name'] for r in
+                self.context.rolesOfPermission('collective.polls: Vote')
                     if r['selected']]
             if 'Anonymous' not in roles and self.context.allow_anonymous:
                 messages.addStatusMessage(_(u"Anonymous user won't be able to\
