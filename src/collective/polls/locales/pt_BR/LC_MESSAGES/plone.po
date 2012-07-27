@@ -80,3 +80,8 @@ msgstr "Submeter para abertura"
 msgid "Workflow to be used with polls"
 msgstr "Workflow a ser utilizado com enquetes"
 
+msgid "Voting portlet" 
+msgstr "Enquete" 
+
+msgid "A portlet to allow voting on a specific poll" 
+msgstr "Portlet que permite votar em enquetes específicas." 
