@@ -25,10 +25,12 @@ function pieChart() {
 
     pie = r.piechart(110, 110, 100,
                     data,
-                    { legend: labels,
-                    legendpos: "east",
-                    legendothers: legendothers_translation,
-                    });
+                        { 
+                        legend: labels,
+                        legendpos: "east",
+                        legendothers: legendothers_translation
+                        }
+                    );
 
     pie.hover(function () {
         this.sector.stop();
@@ -102,7 +104,7 @@ function pieChartPortlet() {
                     data,
                     { legend: labels,
                     legendpos: "east",
-                    legendothers: legendothers_translation,
+                    legendothers: legendothers_translation
                     });
 
     pie.hover(function () {
