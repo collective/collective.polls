@@ -80,3 +80,10 @@ msgstr "Submeter para abertura"
 msgid "Workflow to be used with polls"
 msgstr "Workflow a ser utilizado com enquetes"
 
+#: collective/polls/profiles/default/portlets.xml
+msgid "Voting portlet" 
+msgstr "Enquete" 
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "A portlet to allow voting on a specific poll" 
+msgstr "Portlet que permite votar em enquetes específicas." 
