@@ -1,5 +1,5 @@
 language: python
 python: "2.7"
 install: python bootstrap.py -c travis.cfg
-before_script: bin/buildout -c travis.cfg
+before_script: bin/buildout -c travis.cfg -q
 script: bin/test
