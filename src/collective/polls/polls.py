@@ -117,7 +117,17 @@ class Polls(grok.GlobalUtility):
 
     def voted_in_a_poll(self, poll, request=None):
         ''' check if current user already voted '''
-        anonymous_allowed = poll.allow_anonymous
+
+        # XXX: Figure out how to include this import where it belongs
+        #      without generating a circular dependency between
+        #      polls.py, content/poll.py and anon_behavior.py
+        from collective.polls.anon_behavior import IAnonymous
+        try:
+            anonymous = IAnonymous(poll)
+            anonymous_allowed = anonymous.allow_anonymous
+        except TypeError:
+            anonymous_allowed = False
+
         poll_uid = self.uid_for_poll(poll)
         member = self.member
         member_id = member.getId()

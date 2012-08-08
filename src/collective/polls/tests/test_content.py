@@ -15,6 +15,8 @@ from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 
+from collective.polls.anon_behavior import IAnonymous
+
 from collective.polls.content.poll import IPoll
 from collective.polls.content.poll import InsuficientOptions
 
@@ -43,11 +45,12 @@ class IntegrationTest(unittest.TestCase):
         p1 = self.folder['p1']
         self.assertTrue(IPoll.providedBy(p1))
 
-    def test_default_values_for_checkboxes(self):
+    def test_default_values_for_schema(self):
         self.folder.invokeFactory('collective.polls.poll', 'p1')
         p1 = self.folder['p1']
-        self.assertTrue(p1.allow_anonymous)
         self.assertTrue(p1.show_results)
+        self.assertEquals(p1.results_graph, 'bar')
+        self.assertEquals(p1.options, [])
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
@@ -124,10 +127,12 @@ class VotingTest(unittest.TestCase):
                   ]
         p1 = self.folder['p1']
         p1.options = options
+        IAnonymous(p1).allow_anonymous = False
         p2 = self.folder['p2']
         p2.options = options
-        p2.allow_anonymous = False
+        IAnonymous(p2).allow_anonymous = False
         p3 = self.folder['p3']
+        IAnonymous(p3).allow_anonymous = True
         p3.options = options
         # Open p2 and p3
         wt.doActionFor(self.folder['p2'], 'open')

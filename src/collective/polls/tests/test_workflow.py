@@ -8,8 +8,9 @@ from plone.app.testing import setRoles
 from plone.app.testing import login
 from plone.app.testing import logout
 
-
 from Products.CMFCore.WorkflowCore import WorkflowException
+
+from collective.polls.anon_behavior import IAnonymous
 
 from collective.polls.config import PERMISSION_VOTE
 
@@ -45,6 +46,7 @@ class WorkflowTest(unittest.TestCase):
 
         self.folder.invokeFactory(ctype, 'obj')
         self.obj = self.folder['obj']
+        IAnonymous(self.obj).allow_anonymous = True
 
     def test_workflow_installed(self):
         ids = self.wt.getWorkflowIds()

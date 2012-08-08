@@ -24,6 +24,7 @@
      <element value="plone.app.content.interfaces.INameFromTitle" />
      <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
      <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+     <element value="collective.polls.anon_behavior.IAnonymous" />
    </property>
 
   <!-- View information -->
