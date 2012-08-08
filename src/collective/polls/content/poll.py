@@ -46,14 +46,6 @@ class IPoll(form.Schema):
     """ A Poll in a Plone site
     """
 
-    allow_anonymous = schema.Bool(
-        title=_(u"Allow anonymous"),
-        description=_(u"Allow not logged in users to vote. The parent folder \
-            of this poll should be published before opeining the poll for \
-            this field to take effect"),
-        default=True,
-        )
-
     #multivalue = schema.Bool(
         #title = _(u"Multivalue"),
         #description = _(u"Voters can choose several answers at the same "

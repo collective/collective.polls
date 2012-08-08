@@ -35,6 +35,8 @@
            />
 
   <include package=".portlet" />
+  
+  <include file="behaviors.zcml" />
 
   <genericsetup:registerProfile
       name="default"
