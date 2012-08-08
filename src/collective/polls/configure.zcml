@@ -37,7 +37,8 @@
   <include package=".portlet" />
   
   <include file="behaviors.zcml" />
-
+  <include file="upgrades.zcml" />
+  
   <genericsetup:registerProfile
       name="default"
       title="Polls"
