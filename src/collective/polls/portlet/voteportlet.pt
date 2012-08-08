@@ -23,77 +23,62 @@
         <h3 tal:content="poll/Title"/>
 
         <tal:results condition="python:(not can_vote) and results">
-            <tal:poll_results condition="nocall:results">
-            <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
-            <h4 tal:condition="closed" i18n:translate="">Results</h4>
-            <div id="portletresultholder"></div>
-            <ul id="results">
+        <tal:poll_results condition="nocall:results">
+        <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
+        <h4 tal:condition="closed" i18n:translate="">Results</h4>
+        <div class="poll-data" 
+             tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
+            <div class="portletpollresultholder"></div>
+            <ul class="poll-results">
               <li tal:repeat="option_result results">
                   <span class="option_description" tal:content="python: option_result[0]" />:
                   <span class="option_result" tal:content="python: option_result[1]" />
               </li>
             </ul>
-                <script type="text/javascript"
-                        tal:condition="python:poll.results_graph == 'bar'">
-                  jQuery(function(){
-                          barChartPortlet();
-                      });
-                </script>
-                <script type="text/javascript"
-                        tal:condition="python:poll.results_graph == 'pie'">
-                  jQuery(function(){
-                          pieChartPortlet();
-                      });
-                </script>
-            </tal:poll_results>
+        </div>
+        </tal:poll_results>
         </tal:results>
 
         <!-- XXX: Why is this necessary ? -->
         <tal:no_results condition="python:not (can_vote or results)">
-            <h4 i18n:translate="">Nothing to see here</h4>
+        <h4 i18n:translate="">Nothing to see here</h4>
         </tal:no_results>
 
         <tal:voting condition="view/can_vote">
+        <form action="#" method="post"
+                tal:attributes="action poll/absolute_url">
 
-            <form action="#" method="post"
-                    tal:attributes="action poll/absolute_url">
+            <!--<tal:one_choice repeat="answer current_poll/answers"
+                            condition="not:current_poll/multivalue">-->
+                <tal:one_choice repeat="option poll/options">
+                <input type="radio"
+                        name="#"
+                        value="#"
+                        tal:attributes="name string:options;
+                                        value option/option_id;"
+                        />
+                        <span tal:content="option/description" />
+                        <br/>
+            </tal:one_choice>
 
-                <!--<tal:one_choice repeat="answer current_poll/answers"
-                                condition="not:current_poll/multivalue">-->
-                    <tal:one_choice repeat="option poll/options">
-                    <input type="radio"
-                            name="#"
-                            value="#"
-                            tal:attributes="name string:options;
-                                            value option/option_id;"
-                            />
-                            <span tal:content="option/description" />
-                            <br/>
-                </tal:one_choice>
+            <!-- Comment out for now
+            <tal:multi_choice repeat="answer current_poll/answers"
+                            condition="current_poll/multivalue">
+                <input type="checkbox"
+                        name="answers:list"
+                        value="#"
+                        tal:attributes="value answer;"
+                        />
+                        <span tal:content="answer" />
+                        <br/>
+            </tal:multi_choice>-->
 
-                <!-- Comment out for now
-                <tal:multi_choice repeat="answer current_poll/answers"
-                                condition="current_poll/multivalue">
-                    <input type="checkbox"
-                            name="answers:list"
-                            value="#"
-                            tal:attributes="value answer;"
-                            />
-                            <span tal:content="answer" />
-                            <br/>
-                </tal:multi_choice>-->
-
-                <input type="hidden" name="voting.from" value=""
-                       tal:attributes="value context/absolute_url" />
-                <input type="hidden" name="poll.uuid" value=""
-                       tal:attributes="value view/poll_uid" />
-                <input type="submit" name="poll.submit" value="Submit" i18n:attributes="value" />
-                <script type="text/javascript">
-                  jQuery(function(){
-                    ajaxSubmitForm();
-                  });
-                </script>
-            </form>
+            <input type="hidden" name="voting.from" value=""
+                   tal:attributes="value context/absolute_url" />
+            <input type="hidden" name="poll.uuid" value=""
+                   tal:attributes="value view/poll_uid" />
+            <input type="submit" name="poll.submit" value="Submit" i18n:attributes="value" />
+        </form>
         </tal:voting>
         <tal:spinner>
         <div class="poll-spinner">
