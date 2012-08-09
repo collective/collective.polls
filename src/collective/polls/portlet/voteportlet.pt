@@ -77,7 +77,7 @@
                    tal:attributes="value context/absolute_url" />
             <input type="hidden" name="poll.uuid" value=""
                    tal:attributes="value view/poll_uid" />
-            <input type="submit" name="poll.submit" value="Submit" i18n:attributes="value" />
+            <input type="submit" name="poll.submit" value="Submit" class="context" i18n:attributes="value" />
         </form>
         </tal:voting>
         <tal:spinner>
