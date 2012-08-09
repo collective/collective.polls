@@ -57,6 +57,7 @@ Mostly Harmless
 ---------------
 
 .. image:: https://secure.travis-ci.org/collective/collective.polls.png
+    :target: http://travis-ci.org/collective/collective.polls
 
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
