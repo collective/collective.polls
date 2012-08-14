@@ -6,6 +6,12 @@ Because you have to know where your towel is.
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Multiple poll charts can be rendered in one page. [Quimera]
+
+- Multiple poll portlets can be rendered in one page. [Quimera]
+
+- Updated Brazilian Portuguese translation. [rafahela]
+
 - Add translation functionality for the 'Others' string and translate it to
   German. [eschmutz]
 
