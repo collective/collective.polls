@@ -4,15 +4,16 @@ Installation
 To enable this product in a buildout-based installation:
 
 1. Edit your buildout.cfg and add ``collective.polls`` to the list of eggs to
-   install ::
+   install::
 
     [buildout]
     ...
     eggs =
         collective.polls
 
-2. You may need to extend a Dexterity known good set (KGS) to make sure that
-   you get the right versions of the packages that make up Dexterity ::
+2. If you are using Plone 4.1 you may need to extend a Dexterity known good
+   set (KGS) to make sure that you get the right versions of the packages that
+   make up Dexterity::
 
     [buildout]
     ...
