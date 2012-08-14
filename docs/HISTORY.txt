@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0.2 (unreleased)
+1.1 (2012-08-14)
 ^^^^^^^^^^^^^^^^^^
 
 - Multiple poll charts can be rendered in one page. [Quimera]
