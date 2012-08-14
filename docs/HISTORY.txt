@@ -6,9 +6,6 @@ Because you have to know where your towel is.
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- TasksFieldWidget was renamed to EnhancedTextLinesFieldWidget in dependency
-  collective.z3cform.widgets 1.0a3. [hvelarde]
-
 - Add translation functionality for the 'Others' string and translate it to
   German. [eschmutz]
 
@@ -21,6 +18,9 @@ Because you have to know where your towel is.
 
 - Some refactoring on tests was done; we now test for CSS installation and
   removal. [hvelarde]
+
+- DataGridField widget was replaced with EnhancedTextLinesFieldWidget.
+  [flecox, hvelarde]
 
 1.0.1 (2012-05-08)
 ^^^^^^^^^^^^^^^^^^
