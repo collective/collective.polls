@@ -10,9 +10,9 @@ from collective.polls.testing import INTEGRATION_TESTING
 
 JAVASCRIPTS = [
     "++resource++collective.polls/js/raphael-min.js",
-    "++resource++collective.polls/js/g.raphael-min.js",
-    "++resource++collective.polls/js/g.pie-min.js",
-    "++resource++collective.polls/js/g.bar-min.js",
+    "++resource++collective.polls/js/jquery.flot.js",
+    "++resource++collective.polls/js/jquery.flot.pie.js",
+    "++resource++collective.polls/js/polls.js",
     "++resource++collective.polls/js/collective.poll.js",
     '@@legendothers_translation.js',
     ]
