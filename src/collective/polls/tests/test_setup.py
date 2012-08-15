@@ -9,7 +9,6 @@ from collective.polls.config import PROJECTNAME
 from collective.polls.testing import INTEGRATION_TESTING
 
 JAVASCRIPTS = [
-    "++resource++collective.polls/js/raphael-min.js",
     "++resource++collective.polls/js/jquery.flot.js",
     "++resource++collective.polls/js/jquery.flot.pie.js",
     "++resource++collective.polls/js/polls.js",
