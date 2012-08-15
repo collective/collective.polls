@@ -2,7 +2,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       tal:omit-tag="">
-<dl class="portlet votePortlet"
+<dl class="portlet votePortlet vote-container"
     i18n:domain="collective.polls"
     tal:define="poll view/poll"
     tal:attributes="data python:view.manager.__name__">
