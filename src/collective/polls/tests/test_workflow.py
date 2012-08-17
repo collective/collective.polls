@@ -190,6 +190,21 @@ class WorkflowTest(unittest.TestCase):
         review_state = self.wt.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'closed')
 
+    def test_polls_can_be_reopened(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.wt.doActionFor(self.obj, 'open')
+        review_state = self.wt.getInfoFor(self.obj, 'review_state')
+        self.assertEqual(review_state, 'open')
+        self.wt.doActionFor(self.obj, 'close')
+        review_state = self.wt.getInfoFor(self.obj, 'review_state')
+        self.assertEqual(review_state, 'closed')
+        self.wt.doActionFor(self.obj, 'open')
+        review_state = self.wt.getInfoFor(self.obj, 'review_state')
+        self.assertEqual(review_state, 'open')
+        self.wt.doActionFor(self.obj, 'close')
+        review_state = self.wt.getInfoFor(self.obj, 'review_state')
+        self.assertEqual(review_state, 'closed')
+
     def test_workflow_transitions_not_allowed(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         # We cannot close a private poll
@@ -235,7 +250,7 @@ class WorkflowTest(unittest.TestCase):
         review_state = self.wt.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'closed')
 
-        #Finally, we cannot do anything else from a closed poll
+        #Finally, we cannot do anything else from a closed poll, except reopen it
         self.assertRaises(WorkflowException,
                           self.wt.doActionFor,
                           self.obj, 'retract')
@@ -243,10 +258,6 @@ class WorkflowTest(unittest.TestCase):
         self.assertRaises(WorkflowException,
                           self.wt.doActionFor,
                           self.obj, 'submit')
-
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'open')
 
     def test_workflow_permissions(self):
         setRoles(self.portal, TEST_USER_ID, ['Member'])

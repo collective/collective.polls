@@ -15,6 +15,7 @@
  <permission>collective.polls: Vote</permission>
 
  <state state_id="closed" title="Closed"  i18n:attributes="title">
+  <exit-transition transition_id="open"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">

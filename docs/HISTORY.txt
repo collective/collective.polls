@@ -6,7 +6,9 @@ Because you have to know where your towel is.
 1.2 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Added the 'open' transition to the 'closed' state, that way,
+  polls can be re-opened after they were closed
+  [frapell]
 
 
 1.1 (2012-08-14)
