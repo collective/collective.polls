@@ -10,8 +10,11 @@ output.xml
 report.html
 selenium*
 bin/
+coverage/
 develop-eggs/
 downloads/
 eggs/
+include/
+lib/
 parts/
 var/
