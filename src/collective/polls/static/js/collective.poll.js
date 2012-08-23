@@ -4,7 +4,7 @@
 
     var DrawPoll = function (element, options) {
         this.init(element);
-    }
+    };
     
     DrawPoll.prototype = {
 
@@ -17,7 +17,7 @@
             if (this.content_handler[0] !== undefined ) {
                 this.type = this.get_type();
                 this.data = this.get_data();
-                this.extra_conf = {'width':undefined}
+                this.extra_conf = {'width':undefined};
                 
                 switch (this.type) {
                     //XXX at some poing we are going to have more cases :P
@@ -147,7 +147,7 @@
                 return false;
             });        
         }
-    }
+    };
 
     /*we define a jquery plugin, in that way we can go out of the js scope
      and yes i know, cluttering the global namespace*/
@@ -161,7 +161,7 @@
             if (!data) $this.data('drawpoll', (data = new DrawPoll(this, options)));
             if (typeof option == 'string') data[option]();
         })
-    }
+    };
 
     $.fn.drawpoll.Constructor = DrawPoll;
 

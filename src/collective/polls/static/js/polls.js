@@ -7,7 +7,7 @@
 
     var Poll = function ( element, options ) {
         this.init('polls', element, options);
-    }
+    };
 
     Poll.prototype = {
 
@@ -129,7 +129,7 @@
             );
         }
 
-    }
+    };
 
 
     /*
@@ -145,7 +145,7 @@
             if (!data) $this.data('polls', (data = new Poll(this, options)));
             if (typeof option == 'string') data[option]();
         })
-    }
+    };
 
     $.fn.polls.Constructor = Poll;
 
@@ -161,6 +161,6 @@
                  '#F8002A', '#599B10', '#008B88', '#009ADD', '#F1AD00', 
                  '#FA5600', '#F8002A'],
         data: []
-    }
+    };
 
 }(window.jQuery);
