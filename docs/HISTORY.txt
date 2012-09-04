@@ -6,9 +6,11 @@ Because you have to know where your towel is.
 1.2 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Added the 'open' transition to the 'closed' state, that way,
-  polls can be re-opened after they were closed
-  [frapell]
+- EnhancedTextLinesFieldWidget widget was updated; new features (like inline
+  editing and reordering) are now available. [hvelarde]
+
+- Added the 'open' transition to the 'closed' state, that way, polls can be
+  re-opened after they were closed. [frapell]
 
 
 1.1 (2012-08-14)
@@ -104,4 +106,3 @@ Because you have to know where your towel is.
 - Initial release.
 
 .. _`#51`: https://github.com/collective/collective.polls/issues/51
-
