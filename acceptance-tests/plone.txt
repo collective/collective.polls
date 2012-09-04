@@ -1,5 +1,6 @@
 *** Settings ***
-Resource  library-settings.txt
+
+Library  Selenium2Library  timeout=3 seconds  implicit_wait=5 seconds
 
 *** Variables ***
 
@@ -10,11 +11,9 @@ ${BROWSER} =  Firefox
 
 *** Keywords ***
 
-Start browser and wake plone up
+Start Browser and Wake Plone Up
 
-    Start selenium server
-
-    Set Selenium timeout  3s
+    Set Selenium Timeout  3s
 
     ${previous}  Register keyword to run on failure  Close Browser
     Wait until keyword succeeds  2min  3s  Open Browser  ${ZOPE_URL}  browser=${BROWSER}
@@ -22,16 +21,12 @@ Start browser and wake plone up
 
     Maximize browser window
 
-    Set Selenium timeout  30s
+    Set Selenium Timeout  30s
     Wait until keyword succeeds  30s  1s  Log in  admin  admin
     Log out
-    Set Selenium timeout  7s
+    Set Selenium Timeout  3s
 
-Close browser and selenium server
-    Close browser
-    Stop selenium server
-
-Goto homepage
+Goto Homepage
     Go to   ${PLONE_URL}
     Page should contain  Plone site
 
@@ -50,7 +45,7 @@ Log in
 
 Click Overlay Link
     [Arguments]  ${element}
-    Click Link  ${element}  don't wait
+    Click Link  ${element}
     Wait Until Page Contains Element  css=div.pb-ajax div#content-core
 
 Should be above
@@ -64,7 +59,7 @@ Open Menu
     [Arguments]  ${elementId}
 
     Element Should Not Be Visible  css=dl#${elementId} dd.actionMenuContent
-    Click link  css=dl#${elementId} dt.actionMenuHeader a  don't wait
+    Click link  css=dl#${elementId} dt.actionMenuHeader a
     Wait until keyword succeeds  1  5  Element Should Be Visible  css=dl#${elementId} dd.actionMenuContent
 
 Open User Menu
@@ -86,7 +81,7 @@ Click ${name} In Edit Bar
 Click Actions ${name}
     Open Action Menu
     Element Should Contain  css=dl#plone-contentmenu-actions dd.actionMenuContent  ${name}
-    Click Link  ${name}  don't wait
+    Click Link  ${name}
 
 Click Cut Action
     Click Actions Cut

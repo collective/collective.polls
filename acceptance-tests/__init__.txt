@@ -1,5 +1,5 @@
 *** Settings ***
-Resource  plone.txt
 
-Suite Setup  Start browser and wake Plone up
-Suite Teardown  Close browser and selenium server
+Resource  plone.txt
+Suite Setup  Start Browser and Wake Plone Up
+Suite Teardown  Close Browser

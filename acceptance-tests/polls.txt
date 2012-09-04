@@ -28,16 +28,15 @@ Add Option
     [Arguments]  ${option}
 
     Input Text  css=${option-placeholder}  ${option}
-    Click Button  Add  Don't Wait
+    Click Button  Add
     Wait Until Page Contains  ${option}
 
 Remove Option
-    [Documentation]  Should remove the named option; this is not possible with
-    ...              current implementation of the JavaScript library, so now
-    ...              we are removing the first option only
+    [Documentation]  Should remove the named option; but I don't know how to
+    ...              do it so we are removing the first option only for now
     [Arguments]  ${option}
 
-    Click Link  Delete task  Don't Wait
+    Click Link  Delete Option
     Wait Until Keyword Succeeds  1  5  Page Should Not Contain  ${option}
 
 Add Poll
@@ -112,8 +111,6 @@ Add Poll Check Warning
     Page Should Contain  Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect
     Click Button  Save
     Page Should Contain  Item created
-    
-
 
 Add Poll in Private Folder
     [arguments]  ${title}  ${titlepoll}
