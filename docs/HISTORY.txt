@@ -10,7 +10,7 @@ Because you have to know where your towel is.
   editing and reordering) are now available. [hvelarde]
 
 - Added the 'open' transition to the 'closed' state, that way, polls can be
-  re-opened after they were closed. [frapell]
+  re-opened after they were closed (closes `#53`_). [frapell]
 
 
 1.1 (2012-08-14)
@@ -37,6 +37,7 @@ Because you have to know where your towel is.
 
 - DataGridField widget was replaced with EnhancedTextLinesFieldWidget.
   [flecox, hvelarde]
+
 
 1.0.1 (2012-05-08)
 ^^^^^^^^^^^^^^^^^^
@@ -106,3 +107,4 @@ Because you have to know where your towel is.
 - Initial release.
 
 .. _`#51`: https://github.com/collective/collective.polls/issues/51
+.. _`#53`: https://github.com/collective/collective.polls/issues/53
