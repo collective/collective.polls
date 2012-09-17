@@ -20,7 +20,7 @@ i18ndude rebuild-pot --pot ${BASE_DIRECTORY}/locales/plone.pot \
     ${BASE_DIRECTORY}/configure.zcml \
     ${BASE_DIRECTORY}/profiles/default/workflows
 
-# Synchronise the plone's pot file (Used for the workflows)
+# Synchronise the Plone's pot file (Used for the workflows)
 for po in ${BASE_DIRECTORY}/locales/*/LC_MESSAGES/plone.po; do
     i18ndude sync --pot ${BASE_DIRECTORY}/locales/plone.pot $po
 done
