@@ -46,7 +46,7 @@ setup(name='collective.polls',
         'Products.CMFPlone>=4.1',
         'plone.app.dexterity>=1.2.1',
         'plone.app.referenceablebehavior',
-        'collective.z3cform.widgets>=1.0a4',
+        'collective.z3cform.widgets>=1.0b1',
         ],
       extras_require={
         'test': ['plone.app.testing'],
