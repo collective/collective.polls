@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.2 (unreleased)
+1.2 (2012-09-16)
 ^^^^^^^^^^^^^^^^
 
 - EnhancedTextLinesFieldWidget widget was updated; new features (like inline
