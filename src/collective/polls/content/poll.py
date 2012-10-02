@@ -292,11 +292,23 @@ class View(grok.View):
             roles = [r['name'] for r in
                 self.context.rolesOfPermission('collective.polls: Vote')
                     if r['selected']]
-            if 'Anonymous' not in roles and self.context.allow_anonymous:
-                messages.addStatusMessage(_(u"Anonymous user won't be able to\
-                    vote, you forgot to publish the parent folder, you must \
-                    sent back the poll to private state, publish the parent \
-                    folder and open the poll again"), type="info")
+            if 'Anonymous' not in roles:
+                # XXX: Figure out how to include this import where it belongs
+                #      without generating a circular dependency between
+                #      polls.py, content/poll.py and anon_behavior.py
+                from collective.polls.anon_behavior import IAnonymous
+
+                try:
+                    anonymous = IAnonymous(self)
+                    anonymous_allowed = anonymous.allow_anonymous
+                except TypeError:
+                    anonymous_allowed = False
+
+                if anonymous_allowed:
+                    messages.addStatusMessage(_(u"Anonymous user won't be able to\
+                        vote, you forgot to publish the parent folder, you must \
+                        sent back the poll to private state, publish the parent \
+                        folder and open the poll again"), type="info")
 
         INVALID_OPTION = _(u'Invalid option')
         if 'poll.submit' in form:
