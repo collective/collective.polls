@@ -159,7 +159,7 @@ class Renderer(base.Renderer):
             # Do not show this portlet in the poll context
             return can_view and not (poll == self.context)
         return False
-    
+
     def is_closed(self):
         state = self.context.portal_workflow.getInfoFor(self.poll(),
             'review_state')

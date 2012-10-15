@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+
 import time
 import random
 
@@ -15,7 +16,6 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.polls.config import COOKIE_KEY
 
-import Acquisition
 from zope.component import getUtility, getMultiAdapter, queryMultiAdapter
 from plone.portlets.interfaces import IPortletRetriever, IPortletManager, IPortletRenderer
 
@@ -180,7 +180,6 @@ class PollPortletRender(grok.View):
             if not manager:
                 manager = getUtility(IPortletManager, name='plone.leftcolumn')
         return manager
-           
 
     def render_portlet(self, context, request, view, manager, interface):
         """ Render a portlet defined in external location.

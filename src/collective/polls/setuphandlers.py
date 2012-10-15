@@ -5,6 +5,7 @@ from Products.CMFPlone.interfaces import INonInstallable
 
 from Products.CMFCore.utils import getToolByName
 
+
 class HiddenProfiles(grok.GlobalUtility):
 
     grok.implements(INonInstallable)
