@@ -4,6 +4,7 @@ from five import grok
 from Acquisition import aq_parent
 
 from Products.CMFCore.interfaces import IActionSucceededEvent
+from Products.CMFCore.interfaces import ISiteRoot
 
 from collective.polls.content.poll import IPoll
 
@@ -27,7 +28,8 @@ def fix_permissions(poll, event):
                                        if r['selected']]
         # Poll has been opened
         allow_anonymous = poll.allow_anonymous
-        if ('Anonymous' in parent_view_roles) and allow_anonymous:
+        if ('Anonymous' in parent_view_roles or ISiteRoot.providedBy(parent)) \
+               and allow_anonymous:
             poll.manage_permission(PERMISSION_VOTE,
                                    ALL_ROLES,
                                    acquire=0)

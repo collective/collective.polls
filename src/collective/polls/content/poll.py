@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from AccessControl import Unauthorized
-from Acquisition import aq_inner
+from Acquisition import aq_inner, aq_parent
 from five import grok
 
 from zope import schema
@@ -20,6 +20,7 @@ from plone.directives import form
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 
 from Products.statusmessages.interfaces import IStatusMessage
+from Products.CMFCore.interfaces import ISiteRoot
 
 from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
@@ -296,10 +297,14 @@ class View(grok.View):
 
         #if the poll is open and anonymous should vote but the parent folder
         #is private.. inform the user.
-        if 'open' == self.wf_state:
+        # When the poll's container is the site's root, we do not need to
+        # check the permissions.
+        container = aq_parent(aq_inner(self.context))
+        if 'open' == self.wf_state and not ISiteRoot.providedBy(container):
             roles = [r['name'] for r in
                 self.context.rolesOfPermission('collective.polls: Vote')
                     if r['selected']]
+
             if 'Anonymous' not in roles and self.context.allow_anonymous:
                 messages.addStatusMessage(_(u"Anonymous user won't be able to\
                     vote, you forgot to publish the parent folder, you must \
