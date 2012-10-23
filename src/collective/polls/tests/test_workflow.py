@@ -125,6 +125,36 @@ class WorkflowTest(unittest.TestCase):
         # Anonymous cannot view a closed poll
         self.assertNotEqual(checkPermission('View', self.obj), 1)
 
+    def test_workflow_anonymous_vote_permissions_root(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory(ctype, 'obj-root')
+        root_poll = self.portal['obj-root']
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+
+        checkPermission = self.checkPermission
+        logout()
+
+        # Anonymous cannot vote on a private poll
+        self.assertNotEqual(checkPermission(PERMISSION_VOTE, root_poll), 1)
+
+        self._transition_poll(self.obj, 'submit')
+        logout()
+        # Anonymous cannot vote on a pending poll
+        self.assertNotEqual(checkPermission(PERMISSION_VOTE, root_poll), 1)
+
+        self._transition_poll(self.obj, 'open')
+        logout()
+
+        # Anonymous can vote on an open poll
+        self.assertEqual(checkPermission(PERMISSION_VOTE, root_poll), 1)
+
+        self._transition_poll(self.obj, 'close')
+        logout()
+
+        # Anonymous cannot vote a closed poll
+        self.assertNotEqual(checkPermission(PERMISSION_VOTE, root_poll), 1)
+
+
     def test_workflow_anonymous_vote_permissions(self):
         checkPermission = self.checkPermission
         logout()
