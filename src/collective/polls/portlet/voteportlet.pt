@@ -42,7 +42,9 @@
         </tal:poll_results>
         </tal:results>
 
+        <tal:comments replace="nothing">
         <!-- XXX: Why is this necessary ? -->
+        </tal:comments>
         <tal:no_results condition="python:not(can_vote or results)">
         <h4 i18n:translate="">Nothing to see here</h4>
         </tal:no_results>
