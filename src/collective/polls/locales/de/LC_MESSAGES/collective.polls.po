@@ -32,11 +32,11 @@ msgid "Allow anonymous"
 msgstr "Anonym erlauben"
 
 #: collective/polls/content/poll.py:52
-msgid "Allow not logged in users to vote. The parent folder             of this poll should be published before opeining the poll for             this field to take effect"
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
 msgstr ""
 
 #: collective/polls/content/poll.py:304
-msgid "Anonymous user won't be able to                    vote, you forgot to publish the parent folder, you must                     sent back the poll to private state, publish the parent                     folder and open the poll again"
+msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr ""
 
 #: collective/polls/content/poll.py:80

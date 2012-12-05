@@ -1,12 +1,12 @@
 *** Settings ***
 
-Library  Selenium2Library  timeout=3 seconds  implicit_wait=5 seconds
+Library  Selenium2Library  timeout=5 seconds  implicit_wait=0.5 seconds
 
 *** Variables ***
 
-${PORT} =  8080
+${PORT} =  55001
 ${ZOPE_URL} =  http://localhost:${PORT}
-${PLONE_URL} =  ${ZOPE_URL}/Plone
+${PLONE_URL} =  ${ZOPE_URL}/plone
 ${BROWSER} =  Firefox
 
 *** Keywords ***

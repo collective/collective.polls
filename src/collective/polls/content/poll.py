@@ -48,9 +48,10 @@ class IPoll(form.Schema):
 
     allow_anonymous = schema.Bool(
         title=_(u"Allow anonymous"),
-        description=_(u"Allow not logged in users to vote. The parent folder \
-            of this poll should be published before opeining the poll for \
-            this field to take effect"),
+        description=_(
+            u"Allow not logged in users to vote. The parent folder of this "
+            u"poll should be published before opeining the poll for this "
+            u"field to take effect"),
         default=True,
         )
 
@@ -301,10 +302,11 @@ class View(grok.View):
                 self.context.rolesOfPermission('collective.polls: Vote')
                     if r['selected']]
             if 'Anonymous' not in roles and self.context.allow_anonymous:
-                messages.addStatusMessage(_(u"Anonymous user won't be able to\
-                    vote, you forgot to publish the parent folder, you must \
-                    sent back the poll to private state, publish the parent \
-                    folder and open the poll again"), type="info")
+                messages.addStatusMessage(_(
+                    u"Anonymous user won't be able to vote, you forgot to "
+                    u"publish the parent folder, you must sent back the poll "
+                    u"to private state, publish the parent folder and open "
+                    u"the poll again"), type="info")
 
         INVALID_OPTION = _(u'Invalid option')
         if 'poll.submit' in form:
