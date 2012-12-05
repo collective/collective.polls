@@ -23,8 +23,8 @@ def fix_permissions(poll, event):
     if event.action in ['open', ]:
         parent = aq_parent(poll)
         parent_view_roles = parent.rolesOfPermission('View')
-        parent_view_roles = [r['name'] for r in parent_view_roles
-                                       if r['selected']]
+        parent_view_roles = [
+            r['name'] for r in parent_view_roles if r['selected']]
         # Poll has been opened
         allow_anonymous = poll.allow_anonymous
         if ('Anonymous' in parent_view_roles) and allow_anonymous:

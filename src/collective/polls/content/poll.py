@@ -53,34 +53,35 @@ class IPoll(form.Schema):
             u"poll should be published before opeining the poll for this "
             u"field to take effect"),
         default=True,
-        )
+    )
 
     #multivalue = schema.Bool(
         #title = _(u"Multivalue"),
         #description = _(u"Voters can choose several answers at the same "
                          #"time."),
-        #)
+    #)
 
     show_results = schema.Bool(
         title=_(u"Show partial results"),
-        description=_(u"Show partial results after a voter has already "
-                       "voted."),
+        description=_(u"Show partial results after a voter has already voted."),
         default=True,
-        )
+    )
 
     results_graph = schema.Choice(
         title=_(u'Graph'),
         description=_(u"Format to show the results."),
         default='bar',
         required=True,
-        source=graph_options)
+        source=graph_options,
+    )
 
     form.widget(options=EnhancedTextLinesFieldWidget)
     options = schema.List(
         title=_(u"Available options"),
         value_type=schema.TextLine(),
         default=[],
-        required=True)
+        required=True,
+    )
 
     @invariant
     def validate_options(data):
@@ -89,7 +90,7 @@ class IPoll(form.Schema):
         descriptions = options and [o for o in options]
         if len(descriptions) < 2:
             raise InsuficientOptions(
-                    _(u"You need to provide at least two options for a poll."))
+                _(u"You need to provide at least two options for a poll."))
 
 
 class Poll(dexterity.Item):
@@ -99,9 +100,8 @@ class Poll(dexterity.Item):
     grok.implements(IPoll)
 
     __ac_permissions__ = (
-        (PERMISSION_VOTE,
-         ('setVote', '_setVoter', )),
-        )
+        (PERMISSION_VOTE, ('setVote', '_setVoter', )),
+    )
 
     @property
     def annotations(self):
@@ -286,8 +286,8 @@ class View(grok.View):
         messages = IStatusMessage(self.request)
         context = aq_inner(self.context)
         self.context = context
-        self.state = getMultiAdapter((context, self.request),
-                                      name=u'plone_context_state')
+        self.state = getMultiAdapter(
+            (context, self.request), name=u'plone_context_state')
         self.wf_state = self.state.workflow_state()
         self.utility = context.utility
         # Handle vote
@@ -298,9 +298,11 @@ class View(grok.View):
         #if the poll is open and anonymous should vote but the parent folder
         #is private.. inform the user.
         if 'open' == self.wf_state:
-            roles = [r['name'] for r in
+            roles = [
+                r['name'] for r in
                 self.context.rolesOfPermission('collective.polls: Vote')
-                    if r['selected']]
+                if r['selected']]
+
             if 'Anonymous' not in roles and self.context.allow_anonymous:
                 messages.addStatusMessage(_(
                     u"Anonymous user won't be able to vote, you forgot to "

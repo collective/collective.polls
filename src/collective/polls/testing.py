@@ -23,13 +23,12 @@ class Fixture(PloneSandboxLayer):
         types = ('Folder', )
         wf.setChainForPortalTypes(types, 'simple_publication_workflow')
 
-
 FIXTURE = Fixture()
 INTEGRATION_TESTING = IntegrationTesting(
     bases=(FIXTURE,),
     name='collective.polls:Integration',
-    )
+)
 FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE, ZSERVER_FIXTURE),
     name='collective.polls:Functional',
-    )
+)
