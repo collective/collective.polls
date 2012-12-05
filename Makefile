@@ -7,8 +7,8 @@ options = -N -q -t 3
 src = src/collective/polls/
 minimum_coverage = 73
 pep8_ignores = E501
-css_ignores = ! -name bootstrap\* ! -name jquery\*
-js_ignores = ! -name bootstrap\* ! -name jquery\*
+css_ignores = ! -name jquery\*
+js_ignores = ! -name excanvas\* ! -name jquery\*
 
 ack-install:
 	sudo apt-get install ack-grep
