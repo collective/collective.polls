@@ -1,0 +1,42 @@
+*** Settings ***
+
+*** Variables ***
+
+${WORKFLOW_MENU_LOCATOR} =  dl#plone-contentmenu-workflow.actionMenu
+${WORKFLOW_TRANSITION_SUBMIT} =  a#workflow-transition-submit
+${WORKFLOW_TRANSITION_RETRACT} =  a#workflow-transition-retract
+${WORKFLOW_TRANSITION_REJECT} =  a#workflow-transition-reject
+${WORKFLOW_TRANSITION_PUBLISH} =  a#workflow-transition-publish
+${STATUS_MESSAGE} =  Item state changed.
+
+*** Keywords ***
+
+Check Status Message
+    [Arguments]  ${message}
+    Page Should Contain Element  css=dl.portalMessage dt  Info
+    Page Should Contain Element  css=dl.portalMessage dd  ${message}
+
+Open Workflow Menu
+    Element Should Not Be Visible  css=${WORKFLOW_MENU_LOCATOR} dd.actionMenuContent
+    Click Link  css=${WORKFLOW_MENU_LOCATOR} dt.actionMenuHeader a
+    Wait until keyword succeeds  1  5  Element Should Be Visible  css=${WORKFLOW_MENU_LOCATOR} dd.actionMenuContent
+
+Submit
+    Open Workflow Menu
+    Click Link  css=${WORKFLOW_TRANSITION_SUBMIT}
+    Check Status Message  ${STATUS_MESSAGE}
+
+Retract
+    Open Workflow Menu
+    Click Link  css=${WORKFLOW_TRANSITION_RETRACT}
+    Check Status Message  ${STATUS_MESSAGE}
+
+Reject
+    Open Workflow Menu
+    Click Link  css=${WORKFLOW_TRANSITION_REJECT}
+    Check Status Message  ${STATUS_MESSAGE}
+
+Publish
+    Open Workflow Menu
+    Click Link  css=${WORKFLOW_TRANSITION_PUBLISH}
+    Check Status Message  ${STATUS_MESSAGE}

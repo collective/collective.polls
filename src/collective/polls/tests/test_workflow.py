@@ -157,7 +157,6 @@ class WorkflowTest(unittest.TestCase):
         # Anonymous cannot vote a closed poll
         self.assertNotEqual(checkPermission(PERMISSION_VOTE, root_poll), 1)
 
-
     def test_workflow_anonymous_vote_permissions(self):
         checkPermission = self.checkPermission
         logout()

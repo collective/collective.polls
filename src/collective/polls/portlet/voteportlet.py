@@ -51,22 +51,26 @@ class IVotePortlet(IPortletDataProvider):
     same.
     """
 
-    header = schema.TextLine(title=_(u'Header'),
-                             description=_(u'The header for the portlet. '
-                                           u'Leave empty for none.'),
-                             required=False)
+    header = schema.TextLine(
+        title=_(u'Header'),
+        description=_(u"The header for the portlet. Leave empty for none."),
+        required=False,
+    )
 
-    poll = schema.Choice(title=_(u'Poll'),
-                         description=_(u"Which poll to show in the portlet."),
-                         required=True,
-                         source=PossiblePolls)
+    poll = schema.Choice(
+        title=_(u'Poll'),
+        description=_(u"Which poll to show in the portlet."),
+        required=True,
+        source=PossiblePolls,
+    )
 
-    show_closed = schema.Bool(title=_(u'Show closed polls'),
-                        description=_(u'If there is no available open poll or '
-                                      u'the chosen poll is already closed, '
-                                      u'should the porlet show the results '
-                                      u'instead.'),
-                              default=False)
+    show_closed = schema.Bool(
+        title=_(u'Show closed polls'),
+        description=_(
+            u"If there is no available open poll or the chosen poll is "
+            u"already closed, should the porlet show the results instead."),
+        default=False,
+    )
 
 
 class Assignment(base.Assignment):
@@ -106,13 +110,13 @@ class Renderer(base.Renderer):
 
     @property
     def utility(self):
-        ''' Access to IPolls utility '''
+        """ Access to IPolls utility
+        """
         utility = queryUtility(IPolls, name='collective.polls')
         return utility
 
     def getHeader(self):
-        """
-        Returns the header for the portlet
+        """ Returns the header for the portlet
         """
         return self.data.header
 
@@ -123,14 +127,14 @@ class Renderer(base.Renderer):
         poll = utility.poll_by_uid(uid)
         if not poll and self.data.show_closed:
             # if we have no open poll, try closed ones
-            results = utility.recent_polls(show_all=True,
-                                        limit=1,
-                                        review_state='closed')
+            results = utility.recent_polls(
+                show_all=True, limit=1, review_state='closed')
             poll = results and results[0].getObject() or None
         return poll
 
     def poll_uid(self):
-        ''' Return uid for current poll '''
+        """ Return uid for current poll
+        """
         utility = self.utility
         return utility.uid_for_poll(self.poll())
 
@@ -161,8 +165,8 @@ class Renderer(base.Renderer):
         return False
 
     def is_closed(self):
-        state = self.context.portal_workflow.getInfoFor(self.poll(),
-            'review_state')
+        state = self.context.portal_workflow.getInfoFor(
+            self.poll(), 'review_state')
         return state == 'closed'
 
 

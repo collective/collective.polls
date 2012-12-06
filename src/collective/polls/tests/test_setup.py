@@ -14,11 +14,11 @@ JAVASCRIPTS = [
     "++resource++collective.polls/js/polls.js",
     "++resource++collective.polls/js/collective.poll.js",
     '@@legendothers_translation.js',
-    ]
+]
 
 CSS = [
     "++resource++collective.polls/css/collective.polls.css",
-    ]
+]
 
 
 class InstallTestCase(unittest.TestCase):

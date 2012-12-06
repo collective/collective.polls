@@ -1,14 +1,9 @@
-*~
 *.egg-info
 *.mo
 *.pyc
+*~
 .installed.cfg
 .mr.developer.cfg
-library-settings.txt
-log.html
-output.xml
-report.html
-selenium*
 bin/
 coverage/
 develop-eggs/

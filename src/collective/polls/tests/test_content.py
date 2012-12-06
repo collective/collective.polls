@@ -15,12 +15,10 @@ from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 
-from collective.polls.content.poll import IPoll
-from collective.polls.content.poll import InsuficientOptions
-
-from collective.polls.testing import INTEGRATION_TESTING
-
 from collective.polls.config import PERMISSION_VOTE
+from collective.polls.content.poll import InsuficientOptions
+from collective.polls.content.poll import IPoll
+from collective.polls.testing import INTEGRATION_TESTING
 
 
 class MockPoll(object):
@@ -81,9 +79,10 @@ class IntegrationTest(unittest.TestCase):
 
     def test_validate_two_options(self):
         data = MockPoll()
-        data.options = [{'option_id': 0, 'description': 'Foo'},
-                        {'option_id': 1, 'description': 'Bar'},
-                       ]
+        data.options = [
+            {'option_id': 0, 'description': 'Foo'},
+            {'option_id': 1, 'description': 'Bar'},
+        ]
         try:
             IPoll.validateInvariants(data)
         except InsuficientOptions:
@@ -118,10 +117,11 @@ class VotingTest(unittest.TestCase):
         self.folder.invokeFactory('collective.polls.poll', 'p2')
         self.folder.invokeFactory('collective.polls.poll', 'p3')
         # Set options
-        options = [{'option_id':0, 'description':'Option 1'},
-                   {'option_id':1, 'description':'Option 2'},
-                   {'option_id':2, 'description':'Option 3'},
-                  ]
+        options = [
+            {'option_id':0, 'description':'Option 1'},
+            {'option_id':1, 'description':'Option 2'},
+            {'option_id':2, 'description':'Option 3'},
+        ]
         p1 = self.folder['p1']
         p1.options = options
         p2 = self.folder['p2']
@@ -155,19 +155,30 @@ class VotingTest(unittest.TestCase):
         # Poll without allow_anonymous set
         poll = self.p2
         roles = poll.rolesOfPermission(PERMISSION_VOTE)
-        self.assertEqual(self._active_roles(roles),
-                         ['Contributor', 'Editor', 'Manager', 'Member',
-                          'Reader', 'Reviewer', 'Site Administrator']
-                        )
+        self.assertEqual(self._active_roles(roles), [
+            'Contributor',
+            'Editor',
+            'Manager',
+            'Member',
+            'Reader',
+            'Reviewer',
+            'Site Administrator',
+        ])
 
     def test_permission_to_vote_open_poll_anon(self):
         # Poll with allow_anonymous set
         poll = self.p3
         roles = poll.rolesOfPermission(PERMISSION_VOTE)
-        self.assertEqual(self._active_roles(roles),
-                         ['Anonymous', 'Contributor', 'Editor', 'Manager',
-                          'Member', 'Reader', 'Reviewer', 'Site Administrator']
-                        )
+        self.assertEqual(self._active_roles(roles), [
+            'Anonymous',
+            'Contributor',
+            'Editor',
+            'Manager',
+            'Member',
+            'Reader',
+            'Reviewer',
+            'Site Administrator',
+        ])
 
     def test_permission_to_vote_closed_poll(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])

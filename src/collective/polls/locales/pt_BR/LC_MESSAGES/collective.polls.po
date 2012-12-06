@@ -34,11 +34,11 @@ msgid "Allow anonymous"
 msgstr "Permitir voto anônimo"
 
 #: collective/polls/content/poll.py:52
-msgid "Allow not logged in users to vote. The parent folder             of this poll should be published before opeining the poll for             this field to take effect"
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
 msgstr "Permite que usuários não autenticados votem. A pasta de nível acima desta enquete deve ser publicada antes da enquete ser aberta."
 
 #: collective/polls/content/poll.py:304
-msgid "Anonymous user won't be able to                    vote, you forgot to publish the parent folder, you must                     sent back the poll to private state, publish the parent                     folder and open the poll again"
+msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr "Usuários anônimos não podem votar, você esqueceu de publicar a pasta acima desta enquete. Você deve colocar a enquete no estado privado, publicar a pasta acima e abrir a enquete novamente."
 
 #: collective/polls/content/poll.py:80

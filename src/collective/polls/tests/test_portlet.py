@@ -56,10 +56,11 @@ class BasePortlet(unittest.TestCase):
         self.folder.invokeFactory('collective.polls.poll', 'p2')
         self.folder.invokeFactory('collective.polls.poll', 'p3')
         # Set options
-        options = [{'option_id':0, 'description':'Option 1'},
-                   {'option_id':1, 'description':'Option 2'},
-                   {'option_id':2, 'description':'Option 3'},
-                  ]
+        options = [
+            {'option_id':0, 'description':'Option 1'},
+            {'option_id':1, 'description':'Option 2'},
+            {'option_id':2, 'description':'Option 3'},
+        ]
         p1 = self.folder['p1']
         p1.options = options
         p2 = self.folder['p2']
@@ -88,13 +89,13 @@ class PortletRegistrationTest(BasePortlet):
                                name='collective.polls.VotePortlet')
         registered_interfaces = [_getDottedName(i) for i in portlet.for_]
         registered_interfaces.sort()
-        self.assertEqual(['plone.app.portlets.interfaces.IColumn',
-                           'plone.app.portlets.interfaces.IDashboard'],
-                          registered_interfaces)
+        self.assertEqual(registered_interfaces, [
+            'plone.app.portlets.interfaces.IColumn',
+            'plone.app.portlets.interfaces.IDashboard',
+        ])
 
     def test_interfaces(self):
-        portlet = voteportlet.Assignment(header='Polls',
-                                         poll='latest')
+        portlet = voteportlet.Assignment(header='Polls', poll='latest')
         self.assertTrue(IPortletAssignment.providedBy(portlet))
         self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
@@ -112,17 +113,15 @@ class PortletRegistrationTest(BasePortlet):
         addview.createAndAdd(data={'header': 'Polls', 'poll': 'latest'})
 
         self.assertEqual(len(mapping), 1)
-        self.assertTrue(isinstance(mapping.values()[0],
-                                   voteportlet.Assignment))
+        self.assertTrue(isinstance(mapping.values()[0], voteportlet.Assignment))
 
     def test_invoke_editview(self):
         mapping = PortletAssignmentMapping()
         request = self.folder.REQUEST
 
-        mapping['foo'] = voteportlet.Assignment(header='Polls',
-                                         poll='latest')
-        editview = getMultiAdapter((mapping['foo'], request),
-                                    name='edit')
+        mapping['foo'] = voteportlet.Assignment(header='Polls', poll='latest')
+        editview = getMultiAdapter(
+            (mapping['foo'], request), name='edit')
         self.assertTrue(isinstance(editview, voteportlet.EditForm))
 
     def test_vocab_possible_polls(self):
@@ -150,11 +149,10 @@ class PortletRegistrationTest(BasePortlet):
         manager = getUtility(IPortletManager,
                              name='plone.leftcolumn',
                              context=self.portal)
-        assignment = voteportlet.Assignment(header='Polls',
-                                             poll='latest')
+        assignment = voteportlet.Assignment(header='Polls', poll='latest')
 
-        renderer = getMultiAdapter((context, request, view, manager, assignment),
-                                    IPortletRenderer)
+        renderer = getMultiAdapter(
+            (context, request, view, manager, assignment), IPortletRenderer)
         self.assertTrue(isinstance(renderer, voteportlet.Renderer))
 
     def test_renderer_anonymous(self):
@@ -172,8 +170,8 @@ class PortletRendererTest(BasePortlet):
                                         name='plone.leftcolumn',
                                         context=self.portal)
 
-        return getMultiAdapter((context, request, view, manager, assignment),
-                                IPortletRenderer)
+        return getMultiAdapter(
+            (context, request, view, manager, assignment), IPortletRenderer)
 
     def test_available(self):
         # Use a opened poll

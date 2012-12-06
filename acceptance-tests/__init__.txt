@@ -1,5 +1,0 @@
-*** Settings ***
-
-Resource  plone.txt
-Suite Setup  Start Browser and Wake Plone Up
-Suite Teardown  Close Browser

@@ -4,6 +4,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
+from plone.testing.z2 import ZSERVER_FIXTURE
 
 
 class Fixture(PloneSandboxLayer):
@@ -22,13 +23,12 @@ class Fixture(PloneSandboxLayer):
         types = ('Folder', )
         wf.setChainForPortalTypes(types, 'simple_publication_workflow')
 
-
 FIXTURE = Fixture()
 INTEGRATION_TESTING = IntegrationTesting(
     bases=(FIXTURE,),
     name='collective.polls:Integration',
-    )
+)
 FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(FIXTURE,),
+    bases=(FIXTURE, ZSERVER_FIXTURE),
     name='collective.polls:Functional',
-    )
+)
