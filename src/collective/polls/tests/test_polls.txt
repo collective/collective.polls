@@ -16,7 +16,6 @@ ${description_selector}  textarea#form-widgets-IBasic-description
 ${option_placeholder}  textarea.task-description
 ${folder_link_placeholder}  a#folder
 ${folder_title_selector}  input#title
-${WORKFLOW_TRANSITION_OPEN} =  a#workflow-transition-open
 
 *** Test cases ***
 
@@ -102,22 +101,20 @@ Create Folder
     Click Button  Save
     Page Should Contain  Changes saved.
 
-Open
-    Open Workflow Menu
-    Click Link  css=${WORKFLOW_TRANSITION_OPEN}
-    Check Status Message  ${STATUS_MESSAGE}
+Workflow Open
+    Trigger Workflow Transition  open
 
 Add Poll in Private Folder
     [arguments]  ${folder_title}  ${poll_title}
     Create Folder  ${folder_title}
     Create Poll  ${poll_title}  This is a test
-    Open
+    Workflow Open
     Page Should Contain  Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again
 
 Add Poll in Public Folder
     [arguments]  ${folder_title}  ${poll_title}
     Create Folder  ${folder_title}
-    Publish
+    Workflow Publish
     Create Poll  ${poll_title}  This is a test
-    Open
+    Workflow Open
     Page Should Not Contain  Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again
