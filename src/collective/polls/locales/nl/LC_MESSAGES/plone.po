@@ -1,6 +1,3 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -15,7 +12,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: plone\n"
+"Domain: DOMAIN\n"
 
 #: collective/polls/profiles/default/portlets.xml
 msgid "A portlet to allow voting on a specific poll"
@@ -23,63 +20,63 @@ msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Close"
-msgstr ""
+msgstr "Enquête sluiten"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
-msgstr ""
+msgstr "Gesloten"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member retracts submission"
-msgstr ""
+msgstr "Gebruik trekt publicatie terug."
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits poll for opening"
-msgstr ""
+msgstr "Gebruiker dient enquête in voor publicatie"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Open"
-msgstr ""
+msgstr "Publiceren"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Opened"
-msgstr ""
+msgstr "Geopend"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Pending review"
-msgstr ""
+msgstr "In behandeling"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow"
-msgstr ""
+msgstr "Enquête Workflow"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Private"
-msgstr ""
+msgstr "Privé"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reject"
-msgstr ""
+msgstr "Weigeren"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Retract"
-msgstr ""
+msgstr "Terugtrekken"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer closes the poll"
-msgstr ""
+msgstr "Redacteur sluit de enquête"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer opens the poll"
-msgstr ""
+msgstr "Redacteur opent de enquête"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer rejects the poll"
-msgstr ""
+msgstr "Redacteur weigert de enquête"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
-msgstr ""
+msgstr "Indienen voor openen"
 
 #: collective/polls/profiles/default/portlets.xml
 msgid "Voting portlet"
@@ -87,5 +84,5 @@ msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"
-msgstr ""
+msgstr "Workflow voor gebruik met enquêtes"
 
