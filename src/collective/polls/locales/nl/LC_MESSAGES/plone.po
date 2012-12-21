@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-06-14 16:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Enquête sluiten"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Closed"
+msgstr "Gesloten"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member retracts submission"
+msgstr "Gebruik trekt publicatie terug."
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member submits poll for opening"
+msgstr "Gebruiker dient enquête in voor publicatie"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Publiceren"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
+msgstr "Geopend"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Pending review"
+msgstr "In behandeling"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Poll Workflow"
+msgstr "Enquête Workflow"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Private"
+msgstr "Privé"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Weigeren"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Intrekken"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer closes the poll"
+msgstr "Redacteur sluit de enquête"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer opens the poll"
+msgstr "Redacteur opent de enquête"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer rejects the poll"
+msgstr "Redacteur weigert de enquête"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Indienen voor openen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr "Workflow voor gebruik met enquêtes"
+
