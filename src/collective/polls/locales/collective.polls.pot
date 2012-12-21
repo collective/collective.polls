@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-06-14 16:40+0000\n"
+"POT-Creation-Date: 2012-12-21 12:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,6 @@ msgstr ""
 msgid "A poll"
 msgstr ""
 
-#: collective/polls/profiles/default/portlets.xml
-#: collective/polls/profiles/uninstall/portlets.xml
-msgid "A portlet to allow voting on a specific poll"
-msgstr ""
-
 #: collective/polls/content/poll.py:51
 msgid "Allow anonymous"
 msgstr ""
@@ -38,11 +33,11 @@ msgstr ""
 msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
 msgstr ""
 
-#: collective/polls/content/poll.py:304
+#: collective/polls/content/poll.py:313
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr ""
 
-#: collective/polls/content/poll.py:80
+#: collective/polls/content/poll.py:81
 msgid "Available options"
 msgstr ""
 
@@ -62,15 +57,15 @@ msgstr ""
 msgid "Graph"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:54
+#: collective/polls/portlet/voteportlet.py:55
 msgid "Header"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:65
+#: collective/polls/portlet/voteportlet.py:69
 msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
 msgstr ""
 
-#: collective/polls/content/poll.py:309
+#: collective/polls/content/poll.py:319
 msgid "Invalid option"
 msgstr ""
 
@@ -82,7 +77,7 @@ msgstr ""
 msgid "Not enought options provided"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.pt:53
+#: collective/polls/portlet/voteportlet.pt:49
 msgid "Nothing to see here"
 msgstr ""
 
@@ -90,7 +85,7 @@ msgstr ""
 msgid "Numbers Only"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.pt:27
+#: collective/polls/portlet/voteportlet.pt:28
 msgid "Partial results"
 msgstr ""
 
@@ -98,7 +93,7 @@ msgstr ""
 msgid "Pie Chart"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:59
+#: collective/polls/portlet/voteportlet.py:61
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "Poll"
 msgstr ""
@@ -111,41 +106,38 @@ msgstr ""
 msgid "Polls: Uninstall"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.pt:28
+#: collective/polls/content/poll_templates/view.pt:47
+#: collective/polls/portlet/voteportlet.pt:29
 msgid "Results"
 msgstr ""
 
-#: collective/polls/content/poll_templates/view.pt:47
-msgid "Results:"
-msgstr ""
-
-#: collective/polls/portlet/voteportlet.py:64
+#: collective/polls/portlet/voteportlet.py:68
 msgid "Show closed polls"
 msgstr ""
 
-#: collective/polls/content/poll.py:65
+#: collective/polls/content/poll.py:66
 msgid "Show partial results"
 msgstr ""
 
-#: collective/polls/content/poll.py:66
+#: collective/polls/content/poll.py:67
 msgid "Show partial results after a voter has already voted."
 msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:42
-#: collective/polls/portlet/voteportlet.pt:90
+#: collective/polls/portlet/voteportlet.pt:80
 msgid "Submit"
 msgstr ""
 
-#: collective/polls/content/poll.py:323
+#: collective/polls/content/poll.py:333
 msgid "Thanks for your vote"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:55
+#: collective/polls/portlet/voteportlet.py:56
 msgid "The header for the portlet. Leave empty for none."
 msgstr ""
 
-#: collective/polls/content/poll_templates/view.pt:72
-#: collective/polls/portlet/voteportlet.pt:107
+#: collective/polls/content/poll_templates/view.pt:61
+#: collective/polls/portlet/voteportlet.pt:96
 msgid "Total Votes:"
 msgstr ""
 
@@ -157,26 +149,28 @@ msgstr ""
 msgid "Vote!"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:94
-#: collective/polls/profiles/default/portlets.xml
-#: collective/polls/profiles/uninstall/portlets.xml
+#: collective/polls/portlet/voteportlet.py:98
 msgid "Voting portlet"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:60
+#: collective/polls/portlet/voteportlet.py:62
 msgid "Which poll to show in the portlet."
 msgstr ""
 
-#: collective/polls/content/poll.py:328
+#: collective/polls/content/poll.py:338
 msgid "You are not authorized to vote"
 msgstr ""
 
-#: collective/polls/content/poll.py:92
+#: collective/polls/content/poll.py:94
 msgid "You need to provide at least two options for a poll."
 msgstr ""
 
 #. Default: "Others"
-#: collective/polls/legendothers_translation.py:19
+#: collective/polls/js_i18n_helper.py:19
 msgid "label_legendothers"
+msgstr ""
+
+#: collective/polls/portlet/voteportlet.pt:87
+msgid "spinner"
 msgstr ""
 

@@ -84,7 +84,7 @@
 
         <tal:spinner>
         <div class="poll-spinner">
-            <img alt="spinner"
+            <img alt="spinner" i18n:attributes="alt"
                 tal:attributes="src string:${context/absolute_url}/spinner.gif" />
         </div>
         </tal:spinner>
