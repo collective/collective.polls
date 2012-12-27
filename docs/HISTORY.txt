@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.3 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Declare Pillow as a package dependency. [hvelarde]
+
 - Fixed permissions checks for anonymous users when a poll is at the
   root level of the site. [vincentpsarga]
 

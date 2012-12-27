@@ -43,6 +43,7 @@ setup(name='collective.polls',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'Pillow',
         'Products.CMFPlone>=4.1',
         'plone.app.dexterity>=1.2.1',
         'plone.app.referenceablebehavior',
