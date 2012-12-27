@@ -57,9 +57,9 @@ class BasePortlet(unittest.TestCase):
         self.folder.invokeFactory('collective.polls.poll', 'p3')
         # Set options
         options = [
-            {'option_id':0, 'description':'Option 1'},
-            {'option_id':1, 'description':'Option 2'},
-            {'option_id':2, 'description':'Option 3'},
+            {'option_id': 0, 'description': 'Option 1'},
+            {'option_id': 1, 'description': 'Option 2'},
+            {'option_id': 2, 'description': 'Option 3'},
         ]
         p1 = self.folder['p1']
         p1.options = options
