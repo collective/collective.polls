@@ -87,7 +87,7 @@ Update
 
 Delete
     Open Action Menu
-    Click Link  css=a#delete
+    Click Link  css=a#plone-contentmenu-actions-delete
     Click Button  Delete
     Page Should Contain  Plone site
 
