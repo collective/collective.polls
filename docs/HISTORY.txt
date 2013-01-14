@@ -13,8 +13,10 @@ Because you have to know where your towel is.
 
 - Declare Pillow as a package dependency. [hvelarde]
 
+- Add Dutch translation. [fredvd]
+
 - Fixed permissions checks for anonymous users when a poll is at the
-  root level of the site. [vincentpsarga]
+  root level of the site (fixes `#61`_). [vincentpsarga]
 
 
 1.2 (2012-09-16)
@@ -122,3 +124,4 @@ Because you have to know where your towel is.
 
 .. _`#51`: https://github.com/collective/collective.polls/issues/51
 .. _`#53`: https://github.com/collective/collective.polls/issues/53
+.. _`#61`: https://github.com/collective/collective.polls/issues/61

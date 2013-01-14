@@ -13,8 +13,6 @@ anonymous and logged-in users.
 Don't Panic
 -----------
 
-TBA.
-
 Features
 ^^^^^^^^
 
@@ -60,7 +58,7 @@ Mostly Harmless
 .. image:: https://secure.travis-ci.org/collective/collective.polls.png
     :target: http://travis-ci.org/collective/collective.polls
 
-Have an idea? Found a bug? Let us know by `opening a support ticket`_.
+Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
 .. _`opening a support ticket`: https://github.com/collective/collective.polls/issues
 

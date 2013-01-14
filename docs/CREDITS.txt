@@ -1,8 +1,8 @@
 Share and Enjoy
 ---------------
 
-collective.polls would not have been possible without the contribution of the
-following people:
+``collective.polls`` would not have been possible without the contribution of
+the following people:
 
 - Franco Pellegrini
 - Héctor Velarde
@@ -13,7 +13,6 @@ following people:
 - Timon Tschanz
 - `WebDesignerDepot`_ (icon)
 
-Development sponsored by Open Multimedia and Simples Consultoria.
+Development sponsored by OpenMultimedia and Simples Consultoria.
 
 .. _`WebDesignerDepot`: http://www.webdesignerdepot.com/
-
