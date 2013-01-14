@@ -6,6 +6,9 @@ Because you have to know where your towel is.
 1.3 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Bump up version of collective.z3cform.widgets dependency to 1.0b3.
+  [hvelarde]
+
 - Declare Pillow as a package dependency. [hvelarde]
 
 - Fixed permissions checks for anonymous users when a poll is at the
