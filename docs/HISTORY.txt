@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.3 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Test compatibility with Plone 4.3. [hvelarde]
+
 - Bump up version of collective.z3cform.widgets dependency to 1.0b3.
   [hvelarde]
 
