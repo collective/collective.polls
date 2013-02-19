@@ -5,7 +5,7 @@
     var DrawPoll = function (element, options) {
         this.init(element);
     };
-    
+
     DrawPoll.prototype = {
 
         constructor: DrawPoll,
@@ -18,7 +18,7 @@
                 this.type = this.get_type();
                 this.data = this.get_data();
                 this.extra_conf = {'width':undefined};
-                
+
                 switch (this.type) {
                     //XXX at some poing we are going to have more cases :P
                     case 'portlet':
@@ -31,7 +31,7 @@
                 this.draw(this.data, this.content_handler, this.extra_conf);
             }
         },
-        
+
         draw : function(data, content_handler, extra_conf) {
             content_handler.polls({
                 width: extra_conf.width,
@@ -39,7 +39,7 @@
                 data : data.result_data
             });
         },
-        
+
         get_data : function(poll) {
             var poll = poll !== undefined ? poll : this.poll,
                 raw_results = poll.find('.poll-results'),
@@ -70,7 +70,7 @@
         },
 
         get_type : function(handler) {
-            var handler = handler !== undefined ? handler : this.content_handler, 
+            var handler = handler !== undefined ? handler : this.content_handler,
                 re = /\w+(?=pollresultholder)/,
                 match = handler.attr('class').match(re),
                 type  = match ? match[0] : match;
@@ -78,10 +78,10 @@
             if (type === undefined) {
                 type = 'default';
             }
-            
+
             return type
         },
-        
+
         get_graph_type : function(poll) {
             var poll = poll !== undefined ? poll : this.poll,
                 re = /\w+(?=-poll)/,
@@ -90,7 +90,7 @@
 
             return type
         },
-        
+
         setup_portlet : function(type) {
             if (type == 'pie') {
                 this.content_handler.height(150);
@@ -110,7 +110,7 @@
             }
             this.extra_conf['width'] = width;
         },
-        
+
         ajax_submit : function() {
             this.poll.submit(function(event) {
                 var $this = $(this);
@@ -125,7 +125,6 @@
                     url: url,
                     data: data,
                     type: 'POST',
-                    contents: '#content-core',
                     success: function(html){
                         //gets the portlet assigment column
                         var manager = ''
@@ -145,7 +144,7 @@
                     }
                 });
                 return false;
-            });        
+            });
         }
     };
 
