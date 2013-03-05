@@ -76,7 +76,7 @@ msgstr "Onvoldoende opties ingevoerd"
 
 #: collective/polls/portlet/voteportlet.pt:49
 msgid "Nothing to see here"
-msgstr ""
+msgstr "Niets te zien"
 
 #: collective/polls/content/poll.py:39
 msgid "Numbers Only"
@@ -84,7 +84,7 @@ msgstr "Alleen getallen"
 
 #: collective/polls/portlet/voteportlet.pt:28
 msgid "Partial results"
-msgstr ""
+msgstr "Voorlopige resultaten"
 
 #: collective/polls/content/poll.py:38
 msgid "Pie Chart"
@@ -169,5 +169,5 @@ msgstr "Andere"
 
 #: collective/polls/portlet/voteportlet.pt:87
 msgid "spinner"
-msgstr ""
+msgstr "spinner"
 
