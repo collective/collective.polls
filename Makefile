@@ -45,7 +45,7 @@ js-validation: ack-install jshint-install
 
 quality-assurance: python-validation css-validation js-validation
 	@echo Quality assurance
-	./coverage.sh $(minimum_coverage)
+	bin/coverage.sh $(minimum_coverage)
 
 install:
 	mkdir -p buildout-cache/downloads
