@@ -16,7 +16,7 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.polls.config import COOKIE_KEY
 
-from zope.component import getUtility, getMultiAdapter, queryMultiAdapter
+from zope.component import getUtility, getMultiAdapter, queryMultiAdapter, ComponentLookupError
 from plone.portlets.interfaces import IPortletRetriever, IPortletManager, IPortletRenderer
 
 
@@ -174,7 +174,11 @@ class PollPortletRender(grok.View):
         @return: plone.portlets.interfaces.IPortletManagerRenderer instance
         """
         if column:
-            manager = getUtility(IPortletManager, name=column)
+            try:
+                manager = getUtility(IPortletManager, name=column)
+            except ComponentLookupError:
+                # Happens when using polls in a panel from collective.panels
+                manager = None
         else:
             manager = getUtility(IPortletManager, name='plone.rightcolumn')
             if not manager:
@@ -200,6 +204,9 @@ class PollPortletRender(grok.View):
 
         @return: Rendered portlet HTML as a string, or empty string if portlet not found
         """
+
+        if manager is None:
+            return ""
 
         retriever = getMultiAdapter((context, manager), IPortletRetriever)
 
