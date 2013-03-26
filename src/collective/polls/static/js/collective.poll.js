@@ -129,15 +129,21 @@
                         //gets the portlet assigment column
                         var manager = ''
                         if ($parent[0] !== undefined){
-                            manager = $parent.attr('data');
+                            manager = $parent.attr('data-manager');
                         }
                         if (! manager){
                             // Portlet reload will not work, so we refresh the page.
                             window.location = window.location;
                         }
                         else {
+                            // Get the base for the url, which could
+                            // be the url of the front-page.
+                            var base = $parent.attr('data-url');
+                            if (! base) {
+                                base = '.';
+                            }
                             $.ajax({
-                                url: './@@poll_portlet_render',
+                                url: base + '/@@poll_portlet_render',
                                 data: {'column':manager},
                                 success:function(data){
                                     $parent.replaceWith(data);
