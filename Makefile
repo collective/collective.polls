@@ -11,7 +11,7 @@ SHELL = /bin/sh
 
 options = -N -q -t 3
 src = src/collective/polls/
-minimum_coverage = 73
+minimum_coverage = 72
 pep8_ignores = E501
 max_complexity = 12
 css_ignores = ! -name jquery\*
