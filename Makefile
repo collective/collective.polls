@@ -21,7 +21,7 @@ qa:
 # QA runs only if an environment variable named QA is present
 ifneq "$(QA)" ""
 	@echo Validating Python files
-	# FIXME: skip for now as we don't have time to deal with this now
+	# FIXME: skip complexity validation for now as we don't have time to deal with it
 	#bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 	bin/flake8 --ignore=$(pep8_ignores) $(src)
 
@@ -29,9 +29,11 @@ ifneq "$(QA)" ""
 	bin/coverage.sh $(minimum_coverage)
 
 	@echo Validating CSS files
+	npm install csslint -g 2>/dev/null
 	find $(src) -type f -name *.css $(css_ignores) | xargs csslint
 
 	@echo Validating JavaScript files
+	npm install jshint -g 2>/dev/null
 	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';'
 else
 	@echo 'No QA environment variable present; skipping'

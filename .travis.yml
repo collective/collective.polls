@@ -10,9 +10,6 @@ install:
   - sed -ie "s#travis-4.x.cfg#travis-$PLONE_VERSION.x.cfg#" travis.cfg
   - make install
 script: make tests
-after_success:
-  - npm install csslint -g 1>/dev/null
-  - npm install jshint -g 1>/dev/null
-  - make qa
+after_success: make qa
 notifications:
   irc: irc.freenode.org#simplesconsultoria
