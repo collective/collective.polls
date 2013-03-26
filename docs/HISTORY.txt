@@ -6,6 +6,12 @@ Because you have to know where your towel is.
 1.4 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Fix refreshing the portlet.  Previously no html would be returned
+  when the portlet was defined on a default page.  The refresh would
+  fail with a ComponentLookupError when used inside a panel of
+  collective.panels.
+  [maurits]
+
 - Fixing Jquery bug when doing ajax call in portlet. [flecox]
 
 
