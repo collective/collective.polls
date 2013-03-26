@@ -131,15 +131,21 @@
                         if ($parent[0] !== undefined){
                             manager = $parent.attr('data');
                         }
-                        $.ajax({
-                            url: './@@poll_portlet_render',
-                            data: {'column':manager},
-                            success:function(data){
-                                $parent.replaceWith(data);
-                                $('.poll-data').drawpoll();
-                                $('.spinner', $parent).hide();
-                            }
-                        });
+                        if (! manager){
+                            // Portlet reload will not work, so we refresh the page.
+                            window.location = window.location;
+                        }
+                        else {
+                            $.ajax({
+                                url: './@@poll_portlet_render',
+                                data: {'column':manager},
+                                success:function(data){
+                                    $parent.replaceWith(data);
+                                    $('.poll-data').drawpoll();
+                                    $('.spinner', $parent).hide();
+                                }
+                            })
+                        };
 
                     }
                 });

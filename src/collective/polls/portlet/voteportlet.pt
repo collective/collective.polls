@@ -5,7 +5,7 @@
 
 <dl class="portlet votePortlet vote-container"
     tal:define="poll view/poll"
-    tal:attributes="data python:view.manager.__name__"
+    tal:attributes="data view/portlet_manager_name"
     i18n:domain="collective.polls">
 
     <dt class="portletHeader" tal:condition="view/getHeader">

@@ -4,7 +4,7 @@ from AccessControl import Unauthorized
 from zope import schema
 from zope.formlib import form
 
-from zope.component import queryUtility
+from zope.component import queryUtility, getUtility, ComponentLookupError
 
 from zope.interface import implements
 from zope.interface import alsoProvides
@@ -15,6 +15,7 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from plone.memoize.instance import memoize
 
 from plone.portlets.interfaces import IPortletDataProvider
+from plone.portlets.interfaces import IPortletManager
 from plone.app.portlets.portlets import base
 
 from Products.CMFCore.utils import getToolByName
@@ -119,6 +120,19 @@ class Renderer(base.Renderer):
         """ Returns the header for the portlet
         """
         return self.data.header
+
+    def portlet_manager_name(self):
+        column = self.manager.__name__
+        # Check that we can reach this manager.  If this does not
+        # work, we cannot refresh the portlet.  This happens when
+        # using polls in a panel from collective.panels and possibly
+        # in other situations.  We will not activate the ajax portlet
+        # refresh then.
+        try:
+            getUtility(IPortletManager, name=column)
+        except ComponentLookupError:
+            return ''
+        return column
 
     @memoize
     def poll(self):
