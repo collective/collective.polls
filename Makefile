@@ -17,28 +17,25 @@ max_complexity = 12
 css_ignores = ! -name jquery\*
 js_ignores = ! -name excanvas\* ! -name jquery\*
 
-ack-install:
-	sudo apt-get install ack-grep
-
-python-validation:
+qa:
+# QA runs only if an environment variable named QA is present
+ifneq "$(QA)" ""
 	@echo Validating Python files
 	# FIXME: skip for now as we don't have time to deal with this now
 	#bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 	bin/flake8 --ignore=$(pep8_ignores) $(src)
 
-css-validation: ack-install
-	@echo Validating CSS files
-	npm install csslint -g
-	find $(src) -type f -name *.css $(css_ignores) | xargs csslint | ack-grep --passthru error
-
-js-validation: ack-install
-	@echo Validating JavaScript files
-	npm install jshint -g
-	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';' | ack-grep --passthru error
-
-quality-assurance: python-validation css-validation js-validation
-	@echo Quality assurance
+	@echo Validating minimun test coverage
 	bin/coverage.sh $(minimum_coverage)
+
+	@echo Validating CSS files
+	find $(src) -type f -name *.css $(css_ignores) | xargs csslint
+
+	@echo Validating JavaScript files
+	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';'
+else
+	@echo 'No QA environment variable present; skipping'
+endif
 
 install:
 	mkdir -p buildout-cache/downloads
