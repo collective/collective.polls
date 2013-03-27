@@ -13,3 +13,4 @@ include/
 lib/
 parts/
 var/
+Makefile
