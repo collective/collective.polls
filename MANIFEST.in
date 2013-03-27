@@ -1,4 +1,4 @@
-include *.txt
+include *.txt *.py *.cfg *.yml Makefile
 
 recursive-include src *
 recursive-include docs *
