@@ -13,11 +13,11 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 script: bin/test
 after_success:
-  - bin/flake8 --ignore=E501 --max-complexity=12 src/collective/polls
-  - bin/coverage.sh 72
-  - npm install csslint -g 2>/dev/null
-  - find src/collective/polls -type f -name *.css ! -name jquery\* | xargs csslint
-  - npm install jshint -g 2>/dev/null
-  - find src/collective/polls -type f -name *.js ! -name excanvas\* ! -name jquery\* -exec jshint {} ';'
+  - test -n "$QA" && bin/flake8 --ignore=E501 --max-complexity=12 src/collective/polls
+  - test -n "$QA" && bin/coverage.sh 72
+  - test -n "$QA" && npm install csslint -g 2>/dev/null
+  - test -n "$QA" && find src/collective/polls -type f -name *.css ! -name jquery\* | xargs csslint
+  - test -n "$QA" && npm install jshint -g 2>/dev/null
+  - test -n "$QA" && find src/collective/polls -type f -name *.js ! -name excanvas\* ! -name jquery\* -exec jshint {} ';'
 notifications:
   irc: irc.freenode.org#simplesconsultoria
