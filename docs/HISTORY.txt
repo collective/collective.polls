@@ -3,8 +3,8 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.4 (unreleased)
-^^^^^^^^^^^^^^^^
+1.3.1 (2013-03-27)
+^^^^^^^^^^^^^^^^^^
 
 - Fix refreshing the portlet.  Previously no html would be returned
   when the portlet was defined on a default page.  The refresh would
