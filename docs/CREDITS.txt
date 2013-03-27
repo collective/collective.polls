@@ -11,8 +11,13 @@ the following people:
 - Silvestre Huens
 - Elio Schmutz
 - Timon Tschanz
+- Maurits van Rees
 - `WebDesignerDepot`_ (icon)
 
-Development sponsored by OpenMultimedia and Simples Consultoria.
+You can find an updated list of package contributors on `GitHub`_.
+
+Development sponsored by Open Multimedia and `Simples Consultoria`_.
 
 .. _`WebDesignerDepot`: http://www.webdesignerdepot.com/
+.. _`GitHub`: https://github.com/collective/collective.polls/contributors
+.. _`Simples Consultoria`: http://www.simplesconsultoria.com.br/
