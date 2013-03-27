@@ -12,6 +12,12 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 script: bin/test
-after_success: ./validation.sh
+after_success:
+  - bin/flake8 --ignore=E501 --max-complexity=12 src/collective/polls
+  - bin/coverage.sh 72
+  - npm install csslint -g 2>/dev/null
+  - find src/collective/polls -type f -name *.css ! -name jquery\* | xargs csslint
+  - npm install jshint -g 2>/dev/null
+  - find src/collective/polls -type f -name *.js ! -name excanvas\* ! -name jquery\* -exec jshint {} ';'
 notifications:
   irc: irc.freenode.org#simplesconsultoria
