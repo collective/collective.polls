@@ -12,7 +12,6 @@
          interface=".voteportlet.IVotePortlet"
          assignment=".voteportlet.Assignment"
          view_permission="zope2.View"
-         edit_permission="plone.app.portlets.ManagePortlets"
          renderer=".voteportlet.Renderer"
          addview=".voteportlet.AddForm"
          editview=".voteportlet.EditForm"
