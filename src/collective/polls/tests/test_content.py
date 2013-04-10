@@ -8,7 +8,9 @@ from zope.component import createObject
 from zope.component import queryUtility
 
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import setRoles
+from plone.app.testing import login
 from plone.app.testing import logout
 
 from plone.app.referenceablebehavior.referenceable import IReferenceable
@@ -98,6 +100,20 @@ class VotingTest(unittest.TestCase):
         response_cookies = request.response.cookies
         for key, cookie in response_cookies.items():
             request.cookies[key] = cookie['value']
+
+    def reject_poll(self, poll):
+        login(self.portal, TEST_USER_NAME)
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.wt.doActionFor(poll, 'reject')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        logout()
+
+    def open_poll(self, poll):
+        login(self.portal, TEST_USER_NAME)
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.wt.doActionFor(poll, 'open')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        logout()
 
     def setUp(self):
         self.portal = self.layer['portal']
@@ -280,13 +296,29 @@ class VotingTest(unittest.TestCase):
         voted = self.p3.setVote(options, self.request)
         self.assertTrue(voted)
         self._set_request_cookies(self.request)
-
-        self.assertRaises(Unauthorized, self.p1.setVote, options)
+        self.assertRaises(Unauthorized,
+                          self.p3.setVote,
+                          *(options, self.request))
 
         results = self.p3.getResults()
         self.assertEqual(results[options][1], 1)
         total = self.p3.total_votes
         self.assertEqual(total, 1)
+
+    def test_anonymous_vote_after_reopen_poll(self):
+        logout()
+        options = 1
+        # Anonymous user can vote
+        voted = self.p3.setVote(options, self.request)
+        self.assertTrue(voted)
+        self._set_request_cookies(self.request)
+        # Reject the poll
+        self.reject_poll(self.p3)
+        # Reopen the poll
+        self.open_poll(self.p3)
+        # Anonymous user can vote again
+        voted = self.p3.setVote(options, self.request)
+        self.assertTrue(voted)
 
     def test_percentage_vote_report(self):
         poll = self.p3

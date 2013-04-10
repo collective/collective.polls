@@ -127,7 +127,9 @@ class Polls(grok.GlobalUtility):
         elif anonymous_allowed and request:
             cookie = COOKIE_KEY % poll_uid
             value = request.cookies.get(cookie, '')
-            return value and True or False
+            if value:
+                value = 'Anonymous-%s' % value in voters
+            return value
         else:
             # If we cannot be sure, we will block this user from voting again
             return True
