@@ -86,7 +86,8 @@ Update
     Page Should Not Contain  Maybe
 
 Delete
-    Click Delete Action
+    Open Action Menu
+    Click Link  css=a#plone-contentmenu-actions-delete
     Click Button  Delete
     Page Should Contain  Plone site
 
