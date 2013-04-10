@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.3.2 (unreleased)
+1.4 (2013-04-10)
 ^^^^^^^^^^^^^^^^^^
 
 - Tested for Plone 4.3 compatibility. [ericof, hvelarde]
