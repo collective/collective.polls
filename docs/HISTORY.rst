@@ -6,7 +6,12 @@ Because you have to know where your towel is.
 1.3.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- - Remove cmf.ManagePortal permission when editing the portlets. [flecox]
+- Tested for Plone 4.3 compatibility. [ericof, hvelarde]
+
+- Anonymous voters can now vote again on a reopened poll (fixes `#35`_).
+  [ericof]
+
+- Remove cmf.ManagePortal permission when editing the portlets. [flecox]
 
 
 1.3.1 (2013-03-27)
@@ -140,6 +145,7 @@ Because you have to know where your towel is.
 
 - Initial release.
 
+.. _`#35`: https://github.com/collective/collective.polls/issues/35
 .. _`#51`: https://github.com/collective/collective.polls/issues/51
 .. _`#53`: https://github.com/collective/collective.polls/issues/53
 .. _`#61`: https://github.com/collective/collective.polls/issues/61
