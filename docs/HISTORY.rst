@@ -6,7 +6,7 @@ Because you have to know where your towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Add french translation. [toutpt]
 
 
 1.4 (2013-04-10)

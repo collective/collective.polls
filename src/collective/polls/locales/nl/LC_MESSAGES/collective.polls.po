@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-12-21 12:56+0000\n"
+"POT-Creation-Date: 2013-10-28 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,80 +18,80 @@ msgstr ""
 msgid "A Plone extension providing a Poll content type, portlet and workflow."
 msgstr "Een Plone add-on met enquête content-type, portlets en bijbhorende workflow."
 
-#: collective/polls/profiles/default/types/collective.polls.poll.xml
+#: ./profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
 msgstr "Een enquête"
 
-#: collective/polls/content/poll.py:51
+#: ./content/poll.py:51
 msgid "Allow anonymous"
 msgstr "Anoniem stemmen toestaan"
 
-#: collective/polls/content/poll.py:52
+#: ./content/poll.py:52
 msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
 msgstr "Niet ingelogd gebruikers toestaan om te stemmen. De map waar deze enquête in staat moet gepubliceerd zijn, anders heeft dit veld geen functie."
 
-#: collective/polls/content/poll.py:313
+#: ./content/poll.py:313
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr "Anonieme bezoekers kunnen niet stemmen, de map waar de enquête in staat moet eerst gepubliceed worden. Trek de enquête in, publiceer de map en open de enquête opnieuw."
 
-#: collective/polls/content/poll.py:81
+#: ./content/poll.py:81
 msgid "Available options"
 msgstr "Beschikbare opties"
 
-#: collective/polls/content/poll_templates/view.pt:18
+#: ./content/poll_templates/view.pt:18
 msgid "Available options:"
 msgstr "Beschikbare opties:"
 
-#: collective/polls/content/poll.py:37
+#: ./content/poll.py:37
 msgid "Bar Chart"
 msgstr "Staafdiagram"
 
-#: collective/polls/content/poll.py:73
+#: ./content/poll.py:73
 msgid "Format to show the results."
 msgstr "Formaat voor het tonen van de uitslag."
 
-#: collective/polls/content/poll.py:72
+#: ./content/poll.py:72
 msgid "Graph"
 msgstr "Diagram"
 
-#: collective/polls/portlet/voteportlet.py:55
+#: ./portlet/voteportlet.py:56
 msgid "Header"
 msgstr "Titel"
 
-#: collective/polls/portlet/voteportlet.py:69
+#: ./portlet/voteportlet.py:70
 msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
 msgstr "Het portlet toont de uitslag als geen openstaande enquête beschikbaar is, of de gekozen enquête al gesloten is."
 
-#: collective/polls/content/poll.py:319
+#: ./content/poll.py:319
 msgid "Invalid option"
 msgstr "Ongeldige optie"
 
-#: collective/polls/portlet/voteportlet.py:33
+#: ./portlet/voteportlet.py:34
 msgid "Latest opened poll"
 msgstr "Meest recente enquête"
 
-#: collective/polls/content/poll.py:43
+#: ./content/poll.py:43
 msgid "Not enought options provided"
 msgstr "Onvoldoende opties ingevoerd"
 
-#: collective/polls/portlet/voteportlet.pt:49
+#: ./portlet/voteportlet.pt:50
 msgid "Nothing to see here"
 msgstr "Niets te zien"
 
-#: collective/polls/content/poll.py:39
+#: ./content/poll.py:39
 msgid "Numbers Only"
 msgstr "Alleen getallen"
 
-#: collective/polls/portlet/voteportlet.pt:28
+#: ./portlet/voteportlet.pt:29
 msgid "Partial results"
 msgstr "Voorlopige resultaten"
 
-#: collective/polls/content/poll.py:38
+#: ./content/poll.py:38
 msgid "Pie Chart"
 msgstr "Taartdiagram"
 
-#: collective/polls/portlet/voteportlet.py:61
-#: collective/polls/profiles/default/types/collective.polls.poll.xml
+#: ./portlet/voteportlet.py:62
+#: ./profiles/default/types/collective.polls.poll.xml
 msgid "Poll"
 msgstr "Enquête"
 
@@ -103,38 +103,38 @@ msgstr "Enquêtes"
 msgid "Polls: Uninstall"
 msgstr "Enquêtes: Deinstalleren"
 
-#: collective/polls/content/poll_templates/view.pt:47
-#: collective/polls/portlet/voteportlet.pt:29
+#: ./content/poll_templates/view.pt:47
+#: ./portlet/voteportlet.pt:30
 msgid "Results"
 msgstr "Resultaten"
 
-#: collective/polls/portlet/voteportlet.py:68
+#: ./portlet/voteportlet.py:69
 msgid "Show closed polls"
 msgstr "Toon gesloten enquêtes"
 
-#: collective/polls/content/poll.py:66
+#: ./content/poll.py:66
 msgid "Show partial results"
 msgstr "Voorlopige resultaten weergeven"
 
-#: collective/polls/content/poll.py:67
+#: ./content/poll.py:67
 msgid "Show partial results after a voter has already voted."
 msgstr "Toon voorlopig resultaten nadat een gebruiker gestemd heeft."
 
-#: collective/polls/content/poll_templates/view.pt:42
-#: collective/polls/portlet/voteportlet.pt:80
+#: ./content/poll_templates/view.pt:42
+#: ./portlet/voteportlet.pt:81
 msgid "Submit"
 msgstr "Versturen"
 
-#: collective/polls/content/poll.py:333
+#: ./content/poll.py:333
 msgid "Thanks for your vote"
 msgstr "Hartelijk dank voor uw stem"
 
-#: collective/polls/portlet/voteportlet.py:56
+#: ./portlet/voteportlet.py:57
 msgid "The header for the portlet. Leave empty for none."
 msgstr "Portlettitel. Laat leeg voor geen titel."
 
-#: collective/polls/content/poll_templates/view.pt:61
-#: collective/polls/portlet/voteportlet.pt:96
+#: ./content/poll_templates/view.pt:61
+#: ./portlet/voteportlet.pt:97
 msgid "Total Votes:"
 msgstr "Aantal stemmen:"
 
@@ -142,32 +142,32 @@ msgstr "Aantal stemmen:"
 msgid "Uninstall the collective.polls package."
 msgstr "Verwijdert dd collective.polls add-on."
 
-#: collective/polls/content/poll_templates/view.pt:27
+#: ./content/poll_templates/view.pt:27
 msgid "Vote!"
 msgstr "Stem!"
 
-#: collective/polls/portlet/voteportlet.py:98
+#: ./portlet/voteportlet.py:99
 msgid "Voting portlet"
 msgstr "Enquête-portlet"
 
-#: collective/polls/portlet/voteportlet.py:62
+#: ./portlet/voteportlet.py:63
 msgid "Which poll to show in the portlet."
 msgstr "Welke enquête in het portlet staat."
 
-#: collective/polls/content/poll.py:338
+#: ./content/poll.py:338
 msgid "You are not authorized to vote"
 msgstr "Het is niet toegestaan voor u om te stemmen."
 
-#: collective/polls/content/poll.py:94
+#: ./content/poll.py:94
 msgid "You need to provide at least two options for a poll."
 msgstr "U moet minimaal twee opties voor een enquête opgeven."
 
 #. Default: "Others"
-#: collective/polls/js_i18n_helper.py:19
+#: ./js_i18n_helper.py:19
 msgid "label_legendothers"
 msgstr "Andere"
 
-#: collective/polls/portlet/voteportlet.pt:87
+#: ./portlet/voteportlet.pt:88
 msgid "spinner"
 msgstr "spinner"
 

@@ -12,6 +12,7 @@ the following people:
 - Elio Schmutz
 - Timon Tschanz
 - Maurits van Rees
+- Jean-Michel FRANCOIS
 - `WebDesignerDepot`_ (icon)
 
 You can find an updated list of package contributors on `GitHub`_.
