@@ -1,0 +1,3 @@
+src/collective/polls/static/js/excanvas.min.js
+src/collective/polls/static/js/jquery.flot.js
+src/collective/polls/static/js/jquery.flot.pie.js
