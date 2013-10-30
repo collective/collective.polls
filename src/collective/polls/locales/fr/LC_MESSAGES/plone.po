@@ -31,11 +31,11 @@ msgstr "Fermé"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member retracts submission"
-msgstr ""
+msgstr "Le membre retire la demande d'ouverture"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits poll for opening"
-msgstr ""
+msgstr "Le membre demande l'ouverture le sondage"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Open"
@@ -67,15 +67,15 @@ msgstr "Retirer"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer closes the poll"
-msgstr ""
+msgstr "Le modérateur ferme le sondage"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer opens the poll"
-msgstr ""
+msgstr "Le modérateur ouvre le sondage"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Reviewer rejects the poll"
-msgstr ""
+msgstr "Le modérateur refuse la demande d'ouverture"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
