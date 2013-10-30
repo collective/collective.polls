@@ -29,11 +29,11 @@ msgstr "Un sondage"
 
 #: ./content/poll.py:51
 msgid "Allow anonymous"
-msgstr "Autoriser les anonymes"
+msgstr "Autoriser aux anonymes"
 
 #: ./content/poll.py:52
 msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
-msgstr "Autoriser les utilisateurs non connectés à voter. Le dossier parent du sondage doit être publié avant que le sondage ne soit ouvert pour que ce champ fassent effet."
+msgstr "Autoriser les utilisateurs non connectés à voter. Le dossier parent du sondage doit être publié avant que le sondage ne soit ouvert pour que ce champ fasse effet."
 
 #: ./content/poll.py:313
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
@@ -65,7 +65,7 @@ msgstr "Titre"
 
 #: ./portlet/voteportlet.py:70
 msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
-msgstr "S'il n'y a pas de sondage ouvert disponible ou que le sondage choisis est clos, est ce que cette portlet doit afficher le résultat du sondage à la place ?"
+msgstr "S'il n'y a pas de sondage ouvert disponible ou que le sondage choisi est clos, est-ce que cette portlet doit afficher le résultat du sondage à la place ?"
 
 #: ./content/poll.py:319
 msgid "Invalid option"
@@ -89,7 +89,7 @@ msgstr "Uniquement des nombres"
 
 #: ./portlet/voteportlet.pt:29
 msgid "Partial results"
-msgstr "Résultat partiel"
+msgstr "Résultats partiels"
 
 #: ./content/poll.py:38
 msgid "Pie Chart"
@@ -119,11 +119,11 @@ msgstr "Afficher les sondages clos"
 
 #: ./content/poll.py:66
 msgid "Show partial results"
-msgstr "Afficher le résultat partiel"
+msgstr "Afficher les résultats partiels"
 
 #: ./content/poll.py:67
 msgid "Show partial results after a voter has already voted."
-msgstr "Afficher les résultats après qu'un voteur est déjà voté."
+msgstr "Afficher les résultats dès qu'il y a eu un premier voteur."
 
 #: ./content/poll_templates/view.pt:42
 #: ./portlet/voteportlet.pt:81
