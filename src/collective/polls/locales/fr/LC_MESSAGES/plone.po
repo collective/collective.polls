@@ -83,7 +83,7 @@ msgstr "Cliquer pour ouvrir"
 
 #: collective/polls/profiles/default/portlets.xml
 msgid "Voting portlet"
-msgstr "Portlet sondage"
+msgstr "Sondage"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"
