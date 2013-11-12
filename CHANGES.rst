@@ -6,6 +6,10 @@ Because you have to know where your towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Remove dependency on unittest2; package is not going to be tested under
+  Python 2.6 anymore.
+  [hvelarde]
+
 - Drop support for Plone 4.1. [hvelarde]
 
 - Add french translation. [toutpt]
