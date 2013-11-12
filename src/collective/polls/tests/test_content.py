@@ -56,7 +56,7 @@ class IntegrationTest(unittest.TestCase):
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
         schema = fti.lookupSchema()
-        self.assertEquals(IPoll, schema)
+        self.assertEqual(IPoll, schema)
 
     def test_factory(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
