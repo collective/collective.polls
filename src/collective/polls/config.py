@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
 PROJECTNAME = 'collective.polls'
 COOKIE_KEY = 'collective.poll.%s'

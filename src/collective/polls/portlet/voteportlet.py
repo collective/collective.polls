@@ -1,4 +1,5 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from AccessControl import Unauthorized
 
 from zope import schema

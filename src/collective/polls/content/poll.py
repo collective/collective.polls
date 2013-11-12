@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from AccessControl import Unauthorized
 from Acquisition import aq_inner, aq_parent
