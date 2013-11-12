@@ -2,6 +2,7 @@
 
 from collective.polls.portlet import voteportlet
 from collective.polls.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import logout
 from plone.app.testing import setRoles
@@ -35,11 +36,11 @@ class BasePortlet(unittest.TestCase):
         self.portal = self.layer['portal']
         self.wt = self.portal.portal_workflow
         self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        self.folder = self.portal['test-folder']
-        self.wt.doActionFor(self.folder, 'publish')
-        self.setUpPolls()
+
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
+            api.content.transition(obj=self.folder, transition='publish')
+            self.setUpPolls()
 
     def setUpPolls(self):
         wt = self.wt
@@ -92,6 +93,7 @@ class PortletRegistrationTest(BasePortlet):
         self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
     def test_invoke_addview(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         portal = self.portal
         traversal = '++contextportlets++plone.leftcolumn'
         portlet = queryUtility(IPortletType,

@@ -2,6 +2,7 @@
 
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
@@ -32,12 +33,10 @@ class WorkflowTest(unittest.TestCase):
         self.wt = getattr(self.portal, 'portal_workflow')
         self.portal_membership = getattr(self.portal, 'portal_membership')
         self.checkPermission = self.portal_membership.checkPermission
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        self.folder = self.portal['test-folder']
-        self.wt.doActionFor(self.folder, 'publish')
 
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
+            api.content.transition(obj=self.folder, transition='publish')
 
         self.folder.invokeFactory(ctype, 'obj')
         self.obj = self.folder['obj']
@@ -235,18 +234,18 @@ class WorkflowTest(unittest.TestCase):
 
     def test_workflow_transitions_not_allowed(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
         # We cannot close a private poll
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'close')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'close')
 
         self.wt.doActionFor(self.obj, 'submit')
         review_state = self.wt.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'pending')
+
         # We cannot close a pending poll
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'close')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'close')
 
         # We can however, retract it
         self.wt.doActionFor(self.obj, 'retract')
@@ -258,14 +257,11 @@ class WorkflowTest(unittest.TestCase):
         self.wt.doActionFor(self.obj, 'open')
 
         #Now the poll is opened, we cannot retract, nor submit
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'retract')
 
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'retract')
-
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'submit')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'submit')
 
         # We can however send it back only as a site administrator or manager
         self.wt.doActionFor(self.obj, 'reject')
@@ -278,25 +274,24 @@ class WorkflowTest(unittest.TestCase):
         review_state = self.wt.getInfoFor(self.obj, 'review_state')
         self.assertEqual(review_state, 'closed')
 
-        #Finally, we cannot do anything else from a closed poll, except reopen it
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'retract')
+        # Finally, we cannot do anything else from a closed poll
+        # except reopen it
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'retract')
 
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'submit')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'submit')
 
     def test_workflow_permissions(self):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
+
         # guard-permission: Review portal content
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'open')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'open')
+
         self.wt.doActionFor(self.obj, 'submit')
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'open')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'open')
 
         # Reviewer can retract and open
         setRoles(self.portal, TEST_USER_ID, ['Reviewer'])
@@ -304,28 +299,26 @@ class WorkflowTest(unittest.TestCase):
         self.wt.doActionFor(self.obj, 'open')
 
         setRoles(self.portal, TEST_USER_ID, ['Member'])
+
         # Now, only Manager, Site Administrator and Reviewer can
         # close the poll
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'close')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'close')
 
         setRoles(self.portal, TEST_USER_ID, ['Owner',
                                              'Member',
                                              'Contributor',
                                              'Editor'])
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'close')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'close')
 
         # Now, only Site Administrator, Manager, Reviewer can send it back
         setRoles(self.portal, TEST_USER_ID, ['Owner',
                                              'Member',
                                              'Editor',
                                              'Contributor'])
-        self.assertRaises(WorkflowException,
-                          self.wt.doActionFor,
-                          self.obj, 'reject')
+        with self.assertRaises(WorkflowException):
+            self.wt.doActionFor(self.obj, 'reject')
 
         # Reviewer can send the poll back
         setRoles(self.portal, TEST_USER_ID, ['Reviewer'])

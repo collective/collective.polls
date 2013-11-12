@@ -5,6 +5,7 @@ from collective.polls.config import PERMISSION_VOTE
 from collective.polls.content.poll import InsuficientOptions
 from collective.polls.content.poll import IPoll
 from collective.polls.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import login
 from plone.app.testing import logout
@@ -29,25 +30,23 @@ class IntegrationTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
+
+        self.poll = api.content.create(
+            self.folder, 'collective.polls.poll', 'poll')
 
     def test_adding(self):
-        self.folder.invokeFactory('collective.polls.poll', 'p1')
-        p1 = self.folder['p1']
-        self.assertTrue(IPoll.providedBy(p1))
+        self.assertTrue(IPoll.providedBy(self.poll))
 
     def test_default_values_for_checkboxes(self):
-        self.folder.invokeFactory('collective.polls.poll', 'p1')
-        p1 = self.folder['p1']
-        self.assertTrue(p1.allow_anonymous)
-        self.assertTrue(p1.show_results)
+        self.assertTrue(self.poll.allow_anonymous)
+        self.assertTrue(self.poll.show_results)
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
-        self.assertNotEquals(None, fti)
+        self.assertIsNotNone(fti)
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='collective.polls.poll')
@@ -61,19 +60,21 @@ class IntegrationTest(unittest.TestCase):
         self.assertTrue(IPoll.providedBy(new_object))
 
     def test_is_referenceable(self):
-        self.folder.invokeFactory('collective.polls.poll', 'p1')
-        p1 = self.folder['p1']
-        self.assertTrue(IReferenceable.providedBy(p1))
-        self.assertTrue(IAttributeUUID.providedBy(p1))
+        self.assertTrue(IReferenceable.providedBy(self.poll))
+        self.assertTrue(IAttributeUUID.providedBy(self.poll))
 
     def test_validate_no_options(self):
         data = MockPoll()
-        self.assertRaises(InsuficientOptions, IPoll.validateInvariants, data)
+
+        with self.assertRaises(InsuficientOptions):
+            IPoll.validateInvariants(data)
 
     def test_validate_one_option(self):
         data = MockPoll()
         data.options = [{'option_id': 0, 'description': 'Foo'}]
-        self.assertRaises(InsuficientOptions, IPoll.validateInvariants, data)
+
+        with self.assertRaises(InsuficientOptions):
+            IPoll.validateInvariants(data)
 
     def test_validate_two_options(self):
         data = MockPoll()
@@ -114,13 +115,12 @@ class VotingTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        self.folder = self.portal['test-folder']
-        self.wt = self.portal.portal_workflow
-        self.wt.doActionFor(self.folder, 'publish')
-        self.setUpPolls()
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
+
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
+            self.wt = self.portal.portal_workflow
+            self.wt.doActionFor(self.folder, 'publish')
+            self.setUpPolls()
 
     def setUpPolls(self):
         wt = self.wt
@@ -202,7 +202,9 @@ class VotingTest(unittest.TestCase):
 
     def test_vote_closed_poll(self):
         options = 2
-        self.assertRaises(Unauthorized, self.p1.setVote, options)
+
+        with self.assertRaises(Unauthorized):
+            self.p1.setVote(options)
 
         results = self.p1.getResults()
         self.assertEqual(results[options][1], 0)
@@ -239,7 +241,8 @@ class VotingTest(unittest.TestCase):
         voted = self.p2.setVote(options)
         self.assertTrue(voted)
 
-        self.assertRaises(Unauthorized, self.p1.setVote, options)
+        with self.assertRaises(Unauthorized):
+            self.p1.setVote(options)
 
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 1)
@@ -258,7 +261,8 @@ class VotingTest(unittest.TestCase):
         logout()
         options = 1
 
-        self.assertRaises(Unauthorized, self.p1.setVote, options)
+        with self.assertRaises(Unauthorized):
+            self.p1.setVote(options)
 
         results = self.p1.getResults()
         self.assertEqual(results[options][1], 0)
@@ -269,7 +273,8 @@ class VotingTest(unittest.TestCase):
         logout()
         options = 1
 
-        self.assertRaises(Unauthorized, self.p1.setVote, options)
+        with self.assertRaises(Unauthorized):
+            self.p1.setVote(options)
 
         results = self.p2.getResults()
         self.assertEqual(results[options][1], 0)
@@ -292,9 +297,9 @@ class VotingTest(unittest.TestCase):
         voted = self.p3.setVote(options, self.request)
         self.assertTrue(voted)
         self._set_request_cookies(self.request)
-        self.assertRaises(Unauthorized,
-                          self.p3.setVote,
-                          *(options, self.request))
+
+        with self.assertRaises(Unauthorized):
+            self.p3.setVote(*(options, self.request))
 
         results = self.p3.getResults()
         self.assertEqual(results[options][1], 1)

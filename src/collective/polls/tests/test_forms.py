@@ -3,8 +3,7 @@
 from collective.polls.content.poll import PollAddForm
 from collective.polls.content.poll import PollEditForm
 from collective.polls.testing import INTEGRATION_TESTING
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone import api
 from z3c.form import interfaces
 
 import unittest
@@ -17,10 +16,9 @@ class IntegrationTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
 
     def test_add_form_interface(self):
         context = self.portal

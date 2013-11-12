@@ -3,12 +3,10 @@
 from AccessControl import Unauthorized
 from collective.polls.polls import IPolls
 from collective.polls.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.uuid.interfaces import IUUID
 from zope.component import queryUtility
-from zope.site.hooks import setSite
 
 import unittest
 
@@ -20,18 +18,13 @@ class IntegrationTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.wt = self.portal.portal_workflow
-        setSite(self.portal)
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        # Create base folders
-        self.portal.invokeFactory('Folder', 'folder')
-        self.folder = self.portal['folder']
-        self.folder.invokeFactory('Folder', 'folder')
-        self.wt.doActionFor(self.folder, 'publish')
-        self.subfolder = self.folder['folder']
-        self.wt.doActionFor(self.subfolder, 'publish')
-        # Set up polls
-        self.setUpPolls()
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
+            api.content.transition(obj=self.folder, transition='publish')
+            self.subfolder = api.content.create(self.folder, 'Folder', 'folder')
+            api.content.transition(obj=self.subfolder, transition='publish')
+            self.setUpPolls()
 
     def setUpPolls(self):
         wt = self.wt
@@ -136,7 +129,9 @@ class IntegrationTest(unittest.TestCase):
         self.assertTrue(utility.allowed_to_vote(poll))
         # Unpuclished poll, not allowed to vote
         poll = self.subfolder['p6']
-        self.assertRaises(Unauthorized, utility.allowed_to_vote, poll)
+
+        with self.assertRaises(Unauthorized):
+            utility.allowed_to_vote(poll)
 
     def test_allowed_to_view(self):
         ''' Member can view a opened poll '''
