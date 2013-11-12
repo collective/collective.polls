@@ -3,17 +3,16 @@
 from AccessControl import Unauthorized
 from collective.polls.config import COOKIE_KEY
 from five import grok
+from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletRetriever
 from plone.uuid.interfaces import IUUID
-from Products.CMFCore.utils import getToolByName
 from zope.component import ComponentLookupError
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
-from zope.site.hooks import getSite
 
 import random
 import time
@@ -62,15 +61,15 @@ class Polls(grok.GlobalUtility):
 
     @property
     def ct(self):
-        return getToolByName(getSite(), 'portal_catalog')
+        return api.portal.get_tool(name='portal_catalog')
 
     @property
     def mt(self):
-        return getToolByName(getSite(), 'portal_membership')
+        return api.portal.get_tool(name='portal_membership')
 
     @property
     def wt(self):
-        return getToolByName(getSite(), 'portal_workflow')
+        return api.portal.get_tool(name='portal_workflow')
 
     @property
     def member(self):

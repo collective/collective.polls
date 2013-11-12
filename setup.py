@@ -43,6 +43,7 @@ setup(name='collective.polls',
       install_requires=[
           'collective.z3cform.widgets >=1.0b3',
           'five.grok',
+          'plone.api',
           'plone.app.dexterity [grok, relations]',
           'plone.app.portlets',
           'plone.app.referenceablebehavior',

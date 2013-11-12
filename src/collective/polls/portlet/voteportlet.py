@@ -3,11 +3,11 @@
 from AccessControl import Unauthorized
 from collective.polls import MessageFactory as _
 from collective.polls.polls import IPolls
+from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.component import ComponentLookupError
@@ -22,7 +22,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 def PossiblePolls(context):
-    catalog = getToolByName(context, 'portal_catalog')
+    catalog = api.portal.get_tool(name='portal_catalog')
     polls = catalog(portal_type="collective.polls.poll", review_state="open")
 
     values = [SimpleTerm(value="latest", title=_(u"Latest opened poll"))]

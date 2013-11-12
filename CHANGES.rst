@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Depend on plone.api.
+  [hvelarde]
+
 - Remove dependency on unittest2; package is not going to be tested under
   Python 2.6 anymore.
   [hvelarde]

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 
 
@@ -17,7 +17,7 @@ class HiddenProfiles(grok.GlobalUtility):
 
 
 def updateWorkflowDefinitions(portal):
-    wf_tool = getToolByName(portal, 'portal_workflow')
+    wf_tool = api.portal.get_tool(name='portal_workflow')
     wf_tool.updateRoleMappings()
     print "Workflow definitions updated"
 
