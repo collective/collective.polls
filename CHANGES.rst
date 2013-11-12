@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Drop support for Plone 4.1. [hvelarde]
+
 - Add french translation. [toutpt]
 
 
