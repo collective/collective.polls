@@ -1,32 +1,24 @@
 # -*- coding: utf-8 -*-
 
-import unittest
-
-from zope.component import getUtility
-from zope.component import getMultiAdapter
-from zope.component import queryUtility
-
-from zope.i18n import translate
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
+from collective.polls.portlet import voteportlet
+from collective.polls.testing import INTEGRATION_TESTING
+from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import logout
-
-from plone.portlets.interfaces import IPortletType
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletAssignment
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
-
-from plone.app.portlets.storage import PortletAssignmentMapping
-
+from plone.portlets.interfaces import IPortletType
 from plone.uuid.interfaces import IUUID
-
 from Products.GenericSetup.utils import _getDottedName
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.i18n import translate
 
-from collective.polls.portlet import voteportlet
-
-from collective.polls.testing import INTEGRATION_TESTING
+import unittest
 
 
 class BasePortlet(unittest.TestCase):

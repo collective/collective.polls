@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import unittest
-
-import robotsuite
-
+from collective.polls.testing import FUNCTIONAL_TESTING
 from plone.testing import layered
 
-from collective.polls.testing import FUNCTIONAL_TESTING
+import robotsuite
+import unittest
 
 
 def test_suite():

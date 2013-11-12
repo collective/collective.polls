@@ -1,26 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import unittest
-
 from AccessControl import Unauthorized
-
-from zope.component import createObject
-from zope.component import queryUtility
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import setRoles
-from plone.app.testing import login
-from plone.app.testing import logout
-
-from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IAttributeUUID
-
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.content.poll import InsuficientOptions
 from collective.polls.content.poll import IPoll
 from collective.polls.testing import INTEGRATION_TESTING
+from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.testing import login
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.uuid.interfaces import IAttributeUUID
+from zope.component import createObject
+from zope.component import queryUtility
+
+import unittest
 
 
 class MockPoll(object):

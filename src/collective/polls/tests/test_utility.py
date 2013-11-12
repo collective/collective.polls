@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import unittest
-
 from AccessControl import Unauthorized
-
+from collective.polls.polls import IPolls
+from collective.polls.testing import INTEGRATION_TESTING
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.uuid.interfaces import IUUID
+from zope.component import queryUtility
 from zope.site.hooks import setSite
 
-from zope.component import queryUtility
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-from plone.app.testing import logout
-
-from plone.uuid.interfaces import IUUID
-
-from collective.polls.polls import IPolls
-
-from collective.polls.testing import INTEGRATION_TESTING
+import unittest
 
 
 class IntegrationTest(unittest.TestCase):

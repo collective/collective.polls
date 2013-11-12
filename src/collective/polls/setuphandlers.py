@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-
-from Products.CMFPlone.interfaces import INonInstallable
-
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import INonInstallable
 
 
 class HiddenProfiles(grok.GlobalUtility):

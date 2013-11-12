@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from collective.polls import MessageFactory as _
 from five import grok
 from zope.interface import Interface
-
-from collective.polls import MessageFactory as _
 
 
 class LegendOthersTranslation(grok.View):

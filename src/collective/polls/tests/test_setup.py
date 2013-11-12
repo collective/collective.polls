@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import unittest
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-
 from collective.polls.config import PROJECTNAME
 from collective.polls.testing import INTEGRATION_TESTING
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
+import unittest
 
 JAVASCRIPTS = [
     "++resource++collective.polls/js/jquery.flot.js",

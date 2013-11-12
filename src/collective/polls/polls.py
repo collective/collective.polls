@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import time
-import random
-
 from AccessControl import Unauthorized
-
+from collective.polls.config import COOKIE_KEY
 from five import grok
-
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletRetriever
+from plone.uuid.interfaces import IUUID
+from Products.CMFCore.utils import getToolByName
+from zope.component import ComponentLookupError
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.interface import Interface
 from zope.site.hooks import getSite
 
-from plone.uuid.interfaces import IUUID
-
-from Products.CMFCore.utils import getToolByName
-
-from collective.polls.config import COOKIE_KEY
-
-from zope.component import getUtility, getMultiAdapter, queryMultiAdapter, ComponentLookupError
-from plone.portlets.interfaces import IPortletRetriever, IPortletManager, IPortletRenderer
+import random
+import time
 
 
 class IPolls(Interface):

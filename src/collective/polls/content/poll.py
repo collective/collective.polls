@@ -1,36 +1,28 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import Unauthorized
-from Acquisition import aq_inner, aq_parent
+from Acquisition import aq_inner
+from Acquisition import aq_parent
+from collective.polls import MessageFactory as _
+from collective.polls.config import COOKIE_KEY
+from collective.polls.config import MEMBERS_ANNO_KEY
+from collective.polls.config import PERMISSION_VOTE
+from collective.polls.config import VOTE_ANNO_KEY
+from collective.polls.polls import IPolls
+from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from five import grok
-
+from plone.directives import dexterity
+from plone.directives import form
+from Products.CMFCore.interfaces import ISiteRoot
+from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
-
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
-
-from zope.interface import invariant, Invalid
-
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-
-from plone.directives import dexterity
-from plone.directives import form
-
-from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
-
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.CMFCore.interfaces import ISiteRoot
-
-from collective.polls.config import COOKIE_KEY
-from collective.polls.config import MEMBERS_ANNO_KEY
-from collective.polls.config import VOTE_ANNO_KEY
-
-from collective.polls.config import PERMISSION_VOTE
-
-from collective.polls.polls import IPolls
-
-from collective.polls import MessageFactory as _
+from zope.interface import Invalid
+from zope.interface import invariant
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 graph_options = SimpleVocabulary(

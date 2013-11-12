@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import Unauthorized
-
-from zope import schema
-from zope.formlib import form
-
-from zope.component import queryUtility, getUtility, ComponentLookupError
-
-from zope.interface import implements
-from zope.interface import alsoProvides
-
-from zope.schema.interfaces import IContextSourceBinder
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-
+from collective.polls import MessageFactory as _
+from collective.polls.polls import IPolls
+from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
-
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
-from plone.app.portlets.portlets import base
-
 from Products.CMFCore.utils import getToolByName
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from collective.polls.polls import IPolls
-
-from collective.polls import MessageFactory as _
+from zope import schema
+from zope.component import ComponentLookupError
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.formlib import form
+from zope.interface import alsoProvides
+from zope.interface import implements
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 def PossiblePolls(context):

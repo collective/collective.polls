@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from five import grok
-
 from Acquisition import aq_parent
-
+from collective.polls.config import MEMBERS_ANNO_KEY
+from collective.polls.config import PERMISSION_VOTE
+from collective.polls.config import VOTE_ANNO_KEY
+from collective.polls.content.poll import IPoll
+from five import grok
 from Products.CMFCore.interfaces import IActionSucceededEvent
 from Products.CMFCore.interfaces import ISiteRoot
-
-from collective.polls.content.poll import IPoll
-
-from collective.polls.config import MEMBERS_ANNO_KEY
-from collective.polls.config import VOTE_ANNO_KEY
-from collective.polls.config import PERMISSION_VOTE
 
 ALL_ROLES = ['Anonymous', 'Contributor', 'Editor', 'Manager', 'Member',
              'Reader', 'Reviewer', 'Site Administrator']
