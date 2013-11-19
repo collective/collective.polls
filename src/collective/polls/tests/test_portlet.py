@@ -107,7 +107,8 @@ class PortletRegistrationTest(BasePortlet):
         addview.createAndAdd(data={'header': 'Polls', 'poll': 'latest'})
 
         self.assertEqual(len(mapping), 1)
-        self.assertTrue(isinstance(mapping.values()[0], voteportlet.Assignment))
+        self.assertTrue(isinstance(mapping.values()[0],
+                                   voteportlet.Assignment))
 
     def test_invoke_editview(self):
         mapping = PortletAssignmentMapping()

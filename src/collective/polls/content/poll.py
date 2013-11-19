@@ -9,7 +9,8 @@ from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
-from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
+from collective.z3cform.widgets.enhancedtextlines import \
+    EnhancedTextLinesFieldWidget
 from five import grok
 from plone.directives import dexterity
 from plone.directives import form
@@ -56,7 +57,8 @@ class IPoll(form.Schema):
 
     show_results = schema.Bool(
         title=_(u"Show partial results"),
-        description=_(u"Show partial results after a voter has already voted."),
+        description=_(u"Show partial results after a "
+                      u"voter has already voted."),
         default=True,
     )
 
@@ -308,26 +310,8 @@ class View(grok.View):
                     u"to private state, publish the parent folder and open "
                     u"the poll again"), type="info")
 
-        INVALID_OPTION = _(u'Invalid option')
         if 'poll.submit' in form:
-            options = form.get('options', '')
-            if isinstance(options, list):
-                self.errors.append(INVALID_OPTION)
-            elif isinstance(options, str):
-                if not options.isdigit():
-                    self.errors.append(INVALID_OPTION)
-                else:
-                    options = int(options)
-            if not self.errors:
-                # Let's vote
-                try:
-                    self.context.setVote(options, self.request)
-                    self.messages.append(_(u'Thanks for your vote'))
-                    # We do this to avoid redirecting anonymous user as
-                    # we just sent them the cookie
-                    self._has_voted = True
-                except Unauthorized:
-                    self.errors.append(_(u'You are not authorized to vote'))
+            self._updateForm(form)
         # Update status messages
         for error in self.errors:
             messages.addStatusMessage(error, type="warn")
@@ -338,6 +322,27 @@ class View(grok.View):
         #if 'voting.from' in form:
             #url = form['voting.from']
             #self.request.RESPONSE.redirect(url)
+
+    def _updateForm(self, form):
+        INVALID_OPTION = _(u'Invalid option')
+        options = form.get('options', '')
+        if isinstance(options, list):
+            self.errors.append(INVALID_OPTION)
+        elif isinstance(options, str):
+            if not options.isdigit():
+                self.errors.append(INVALID_OPTION)
+            else:
+                options = int(options)
+        if not self.errors:
+            # Let's vote
+            try:
+                self.context.setVote(options, self.request)
+                self.messages.append(_(u'Thanks for your vote'))
+                # We do this to avoid redirecting anonymous user as
+                # we just sent them the cookie
+                self._has_voted = True
+            except Unauthorized:
+                self.errors.append(_(u'You are not authorized to vote'))
 
     @property
     def can_vote(self):

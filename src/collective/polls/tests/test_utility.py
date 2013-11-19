@@ -22,7 +22,8 @@ class IntegrationTest(unittest.TestCase):
         with api.env.adopt_roles(['Manager']):
             self.folder = api.content.create(self.portal, 'Folder', 'folder')
             api.content.transition(obj=self.folder, transition='publish')
-            self.subfolder = api.content.create(self.folder, 'Folder', 'folder')
+            self.subfolder = api.content.create(self.folder, 'Folder',
+                                                'folder')
             api.content.transition(obj=self.subfolder, transition='publish')
             self.setUpPolls()
 
