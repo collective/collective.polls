@@ -240,7 +240,7 @@ class PollPortletRender(grok.View):
         renderer = queryMultiAdapter(
             (context, request, view, manager, assignment),
             IPortletRenderer
-            )
+        )
 
         # Make sure we have working acquisition chain
         renderer = renderer.__of__(context)
