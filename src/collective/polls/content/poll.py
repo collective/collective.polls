@@ -9,8 +9,7 @@ from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
-from collective.z3cform.widgets.enhancedtextlines import \
-    EnhancedTextLinesFieldWidget
+from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from five import grok
 from plone.directives import dexterity
 from plone.directives import form
