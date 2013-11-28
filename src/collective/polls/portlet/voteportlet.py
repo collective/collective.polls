@@ -59,6 +59,12 @@ class IVotePortlet(IPortletDataProvider):
         source=PossiblePolls,
     )
 
+    show_total = schema.Bool(
+        title=_(u'Show total votes'),
+        description=_(u"Show the number of collected votes so far."),
+        default=True,
+    )
+
     show_closed = schema.Bool(
         title=_(u'Show closed polls'),
         description=_(
@@ -80,9 +86,10 @@ class Assignment(base.Assignment):
     header = u""
     poll = None
 
-    def __init__(self, poll, header=u"", show_closed=False):
+    def __init__(self, poll, header=u"", show_total=True, show_closed=False):
         self.header = header
         self.poll = poll
+        self.show_total = show_total
         self.show_closed = show_closed
 
     @property
