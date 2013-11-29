@@ -61,7 +61,7 @@ class IVotePortlet(IPortletDataProvider):
 
     show_total = schema.Bool(
         title=_(u'Show total votes'),
-        description=_(u"Show the number of collected votes so far."),
+        description=_(u'Show the number of collected votes so far.'),
         default=True,
     )
 
@@ -185,11 +185,7 @@ class Renderer(base.Renderer):
         return state == 'closed'
 
     def show_total(self):
-        try:
-            show_total = self.data.show_total
-        except AttributeError:
-            show_total = True
-        return show_total
+        return getattr(self.data, 'show_total', True)
 
 
 class AddForm(base.AddForm):
