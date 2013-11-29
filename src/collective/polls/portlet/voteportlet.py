@@ -184,6 +184,13 @@ class Renderer(base.Renderer):
             self.poll(), 'review_state')
         return state == 'closed'
 
+    def show_total(self):
+        try:
+            show_total = self.data.show_total
+        except AttributeError:
+            show_total = True
+        return show_total
+
 
 class AddForm(base.AddForm):
     """Portlet add form.
@@ -203,5 +210,19 @@ class EditForm(base.EditForm):
 
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
+
+    For field added to the interface in version 1.5.dev0, instead of creating
+    an upgrade step that should iterate over all objects of the site, we add
+    a check in the __call__ method
+
+    These new field has an explicit default_value.
     """
     form_fields = form.Fields(IVotePortlet)
+
+    def __call__(self):
+        new_fields = ('show_total', )
+        for new_field in new_fields:
+            if not hasattr(self.context, new_field):
+                field = self.form_fields.get(new_field)
+                setattr(self.context, new_field, field.field.default)
+        return super(EditForm, self).__call__()

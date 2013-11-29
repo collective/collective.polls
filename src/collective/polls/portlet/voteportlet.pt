@@ -94,7 +94,7 @@
     </dd>
 
     <dd class="portletFooter" 
-        tal:condition="python:has_poll and view.data.show_total">
+        tal:condition="python:has_poll and view.show_total()">
         <span class="portletBottomLeft" />
         <span i18n:translate="">Total Votes:</span>
         <span tal:content="poll/total_votes">23</span>
@@ -102,7 +102,7 @@
     </dd>
 
     <dd class="portletFooter" 
-        tal:condition="python:not has_poll or not view.data.show_total">
+        tal:condition="python:not has_poll or not view.show_total()">
         <span class="portletBottomLeft" />
         <span class="portletBottomRight" />
     </dd>
