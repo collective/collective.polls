@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Implement show_total for the portlet (closes `#64`_). [marcosfromero]
+
 - Depend on plone.api.
   [hvelarde]
 
@@ -164,3 +166,4 @@ There's a frood who really knows where his towel is.
 .. _`#51`: https://github.com/collective/collective.polls/issues/51
 .. _`#53`: https://github.com/collective/collective.polls/issues/53
 .. _`#61`: https://github.com/collective/collective.polls/issues/61
+.. _`#64`: https://github.com/collective/collective.polls/issues/64

@@ -59,6 +59,12 @@ class IVotePortlet(IPortletDataProvider):
         source=PossiblePolls,
     )
 
+    show_total = schema.Bool(
+        title=_(u'Show total votes'),
+        description=_(u'Show the number of collected votes so far.'),
+        default=True,
+    )
+
     show_closed = schema.Bool(
         title=_(u'Show closed polls'),
         description=_(
@@ -80,9 +86,10 @@ class Assignment(base.Assignment):
     header = u""
     poll = None
 
-    def __init__(self, poll, header=u"", show_closed=False):
+    def __init__(self, poll, header=u"", show_total=True, show_closed=False):
         self.header = header
         self.poll = poll
+        self.show_total = show_total
         self.show_closed = show_closed
 
     @property
@@ -177,6 +184,9 @@ class Renderer(base.Renderer):
             self.poll(), 'review_state')
         return state == 'closed'
 
+    def show_total(self):
+        return getattr(self.data, 'show_total', True)
+
 
 class AddForm(base.AddForm):
     """Portlet add form.
@@ -196,5 +206,19 @@ class EditForm(base.EditForm):
 
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
+
+    For field added to the interface in version 1.5.dev0, instead of creating
+    an upgrade step that should iterate over all objects of the site, we add
+    a check in the __call__ method
+
+    These new field has an explicit default_value.
     """
     form_fields = form.Fields(IVotePortlet)
+
+    def __call__(self):
+        new_fields = ('show_total', )
+        for new_field in new_fields:
+            if not hasattr(self.context, new_field):
+                field = self.form_fields.get(new_field)
+                setattr(self.context, new_field, field.field.default)
+        return super(EditForm, self).__call__()
