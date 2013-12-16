@@ -87,6 +87,15 @@ class Polls(grok.GlobalUtility):
 
     def recent_polls(self, show_all=False, limit=5, **kw):
         ''' Return recent polls in a given context '''
+        if 'path' not in kw:
+            portal = api.portal.get()
+            portal_state = api.content.get_view(
+                name='plone_portal_state',
+                context=portal,
+                request=portal.REQUEST
+            )
+            kw['path'] = portal_state.navigation_root_path()
+
         kw['sort_on'] = 'created'
         kw['sort_order'] = 'reverse'
         kw['sort_limit'] = limit
