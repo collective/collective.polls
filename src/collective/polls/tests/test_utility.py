@@ -67,16 +67,14 @@ class IntegrationTest(unittest.TestCase):
         ''' List for polls in subfolder context '''
         utility = queryUtility(IPolls, name='collective.polls')
         context = self.subfolder
-        polls = utility.recent_polls_in_context(context=context,
-                                                show_all=True)
+        polls = utility.recent_polls(context=context, show_all=True)
         self.assertEqual(len(polls), 3)
 
     def test_open_polls_context(self):
         ''' List for open polls in subfolder context '''
         utility = queryUtility(IPolls, name='collective.polls')
         context = self.subfolder
-        polls = utility.recent_polls_in_context(context=context,
-                                                show_all=False)
+        polls = utility.recent_polls(context=context, show_all=False)
         self.assertEqual(len(polls), 1)
 
     def test_poll_by_uid(self):

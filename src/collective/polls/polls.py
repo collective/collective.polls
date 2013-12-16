@@ -24,9 +24,6 @@ class IPolls(Interface):
     def recent_polls(show_all=False, limit=5, kw={}):
         ''' Return recent polls'''
 
-    def recent_polls_in_context(context, show_all=False, limit=5, kw={}):
-        ''' Return recent polls in a given context '''
-
     def uid_for_poll(poll):
         ''' Return a uid for a poll '''
 
@@ -85,16 +82,10 @@ class Polls(grok.GlobalUtility):
         ''' Return a uid for a poll '''
         return IUUID(poll)
 
-    def recent_polls(self, show_all=False, limit=5, **kw):
-        ''' Return recent polls in a given context '''
-        if 'path' not in kw:
-            portal = api.portal.get()
-            portal_state = api.content.get_view(
-                name='plone_portal_state',
-                context=portal,
-                request=portal.REQUEST
-            )
-            kw['path'] = portal_state.navigation_root_path()
+    def recent_polls(self, context=None, show_all=False, limit=5, **kw):
+        ''' Return recent polls '''
+        if context is not None:
+            kw['path'] = '/'.join(context.getPhysicalPath())
 
         kw['sort_on'] = 'created'
         kw['sort_order'] = 'reverse'
@@ -104,17 +95,10 @@ class Polls(grok.GlobalUtility):
         results = self._query_for_polls(**kw)
         return results[:limit]
 
-    def recent_polls_in_context(self, context, show_all=False, limit=5, **kw):
-        ''' Return recent polls in a given context '''
-        context_path = '/'.join(context.getPhysicalPath())
-        kw['path'] = context_path
-        results = self.recent_polls(show_all, limit, **kw)
-        return results
-
-    def poll_by_uid(self, uid):
+    def poll_by_uid(self, uid, context=None):
         ''' Return the poll for the given uid '''
         if uid == 'latest':
-            results = self.recent_polls(show_all=False, limit=1)
+            results = self.recent_polls(context=context, show_all=False, limit=1)
         else:
             kw = {'UID': uid}
             results = self._query_for_polls(**kw)

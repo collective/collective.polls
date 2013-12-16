@@ -22,18 +22,22 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 def PossiblePolls(context):
-    catalog = api.portal.get_tool(name='portal_catalog')
-    polls = catalog(portal_type="collective.polls.poll", review_state="open")
+    portal_state = api.content.get_view(
+        name='plone_portal_state',
+        context=context,
+        request=context.REQUEST
+    )
+    utility = queryUtility(IPolls, name='collective.polls')
+    navigation_root = portal_state.navigation_root()
+    polls = utility.recent_polls(context=navigation_root, show_all=False, limit=999999)
 
     values = [SimpleTerm(value="latest", title=_(u"Latest opened poll"))]
-    if polls:
-        for i in polls:
-            values.append(
-                SimpleTerm(value=i.UID, title=i.Title.decode('utf-8')))
+    values.extend(
+        SimpleTerm(value=i.UID, title=i.Title.decode('utf-8'))
+        for i in polls
+    )
 
-    vocab = SimpleVocabulary(values)
-
-    return vocab
+    return SimpleVocabulary(values)
 
 
 alsoProvides(PossiblePolls, IContextSourceBinder)
@@ -137,13 +141,23 @@ class Renderer(base.Renderer):
 
     @memoize
     def poll(self):
+        portal_state = api.content.get_view(
+            name='plone_portal_state',
+            context=self.context,
+            request=self.context.REQUEST
+        )
+        navigation_root = portal_state.navigation_root()
         utility = self.utility
         uid = self.data.poll
-        poll = utility.poll_by_uid(uid)
+        poll = utility.poll_by_uid(uid, context=navigation_root)
         if not poll and self.data.show_closed:
             # if we have no open poll, try closed ones
             results = utility.recent_polls(
-                show_all=True, limit=1, review_state='closed')
+                context=navigation_root,
+                show_all=True,
+                limit=1,
+                review_state='closed'
+            )
             poll = results and results[0].getObject() or None
         return poll
 
