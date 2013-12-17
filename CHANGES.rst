@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Remove unnecesary code in portlet (clonse `#73`_).
+  [nueces]
+
 - Implement show_total for the portlet (closes `#64`_). [marcosfromero]
 
 - Depend on plone.api.
@@ -167,3 +170,4 @@ There's a frood who really knows where his towel is.
 .. _`#53`: https://github.com/collective/collective.polls/issues/53
 .. _`#61`: https://github.com/collective/collective.polls/issues/61
 .. _`#64`: https://github.com/collective/collective.polls/issues/64
+.. _`#73`: https://github.com/collective/collective.polls/issues/73
