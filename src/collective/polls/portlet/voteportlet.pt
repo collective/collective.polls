@@ -10,9 +10,9 @@
                     data-url context/absolute_url;"
     i18n:domain="collective.polls">
 
-    <dt class="portletHeader" tal:condition="view/getHeader">
+    <dt class="portletHeader" tal:condition="view/data/header">
         <span class="portletTopLeft" />
-        <span tal:content="view/getHeader" />
+        <span tal:content="view/data/header" />
         <span class="portletTopRight" />
     </dt>
 
@@ -93,16 +93,16 @@
 
     </dd>
 
-    <dd class="portletFooter" 
-        tal:condition="python:has_poll and view.show_total()">
+    <dd class="portletFooter"
+        tal:condition="python:has_poll and view.data.show_total">
         <span class="portletBottomLeft" />
         <span i18n:translate="">Total Votes:</span>
         <span tal:content="poll/total_votes">23</span>
         <span class="portletBottomRight" />
     </dd>
 
-    <dd class="portletFooter" 
-        tal:condition="python:not has_poll or not view.show_total()">
+    <dd class="portletFooter"
+        tal:condition="python:not has_poll or not view.data.show_total">
         <span class="portletBottomLeft" />
         <span class="portletBottomRight" />
     </dd>
