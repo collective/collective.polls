@@ -4,7 +4,9 @@
       tal:omit-tag="">
 
 <dl class="portlet votePortlet vote-container"
-    tal:define="poll view/poll;
+    tal:define="portal_state context/@@plone_portal_state;
+                portal_url portal_state/portal_url;
+                poll view/poll;
                 has_poll nocall:poll"
     tal:attributes="data-manager view/portlet_manager_name;
                     data-url context/absolute_url;"
@@ -87,7 +89,7 @@
         <tal:spinner>
         <div class="poll-spinner">
             <img alt="spinner" i18n:attributes="alt"
-                tal:attributes="src string:${context/absolute_url}/spinner.gif" />
+                tal:attributes="src string:${portal_url}/spinner.gif" />
         </div>
         </tal:spinner>
 
