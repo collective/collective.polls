@@ -247,12 +247,12 @@ class PortletRendererTest(BasePortlet):
 
         # Create a poll inside the subsite and check if it will be retrieved
         # by the portlet
-        poll = api.content.create(container=subsite,
-                                  type='collective.polls.poll',
-                                  id='poll-in-subsite-folder',
-                                  title='Poll in Subsite Folder')
-        api.content.transition(poll, 'open')
-        poll.options = [
+        new_poll = api.content.create(container=subsite,
+                                      type='collective.polls.poll',
+                                      id='poll-in-subsite-folder',
+                                      title='Poll in Subsite Folder')
+        api.content.transition(new_poll, 'open')
+        new_poll.options = [
             {'option_id': 0, 'description': 'Option 1'},
             {'option_id': 1, 'description': 'Option 2'},
         ]
@@ -260,3 +260,4 @@ class PortletRendererTest(BasePortlet):
                           assignment=voteportlet.Assignment(poll='latest'))
         poll = r.poll()
         self.assertIsNotNone(poll)
+        self.assertEqual(poll.getId(), new_poll.getId())
