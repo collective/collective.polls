@@ -1,6 +1,3 @@
-include *.rst
-
-graft src
 graft docs
-
-global-exclude *.pyc
+graft src
+include *.rst
