@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.5 (unreleased)
+1.5 (2013-12-17)
 ^^^^^^^^^^^^^^^^
 
 - Make the add-on aware of subsites (INavigationRoot) [rafaelbco]
