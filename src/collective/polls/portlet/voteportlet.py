@@ -132,11 +132,6 @@ class Renderer(base.Renderer):
         utility = queryUtility(IPolls, name='collective.polls')
         return utility
 
-    def getHeader(self):
-        """ Returns the header for the portlet
-        """
-        return self.data.header
-
     def portlet_manager_name(self):
         column = self.manager.__name__
         # Check that we can reach this manager.  If this does not
@@ -208,12 +203,6 @@ class Renderer(base.Renderer):
         state = self.context.portal_workflow.getInfoFor(
             self.poll(), 'review_state')
         return state == 'closed'
-
-    def show_total(self):
-        return self.data.show_total
-
-    def link_poll(self):
-        return self.data.link_poll
 
 
 class AddForm(base.AddForm):
