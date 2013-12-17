@@ -3,6 +3,7 @@
 from collective.polls.portlet import voteportlet
 from collective.polls.testing import INTEGRATION_TESTING
 from plone import api
+from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import logout
 from plone.app.testing import setRoles
@@ -18,6 +19,8 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryUtility
 from zope.i18n import translate
+from zope.interface import alsoProvides
+
 
 import unittest
 
@@ -218,3 +221,43 @@ class PortletRendererTest(BasePortlet):
                                                             show_closed=True))
         self.assertEqual(True, r.available)
         self.assertEqual(3, len(r.poll().options))
+
+    def test_respect_navigation_root(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
+        # Rendering the portlet on the site root will give us an existing
+        # poll, created during the test setup
+        r = self.renderer(context=self.portal,
+                          assignment=voteportlet.Assignment(poll='latest'))
+        poll = r.poll()
+        self.assertIsNotNone(poll)
+
+        # Create a subsite (i.e a folder marked with INavigationRoot)
+        subsite = api.content.create(self.portal,
+                                     'Folder',
+                                     'subsite-folder')
+        alsoProvides(subsite, INavigationRoot)
+
+        # If we render the portlet on this folder then we should not see
+        # any polls, since it's a subsite without any polls.
+        r = self.renderer(context=subsite,
+                          assignment=voteportlet.Assignment(poll='latest'))
+        poll = r.poll()
+        self.assertIsNone(poll)
+
+        # Create a poll inside the subsite and check if it will be retrieved
+        # by the portlet
+        new_poll = api.content.create(container=subsite,
+                                      type='collective.polls.poll',
+                                      id='poll-in-subsite-folder',
+                                      title='Poll in Subsite Folder')
+        api.content.transition(new_poll, 'open')
+        new_poll.options = [
+            {'option_id': 0, 'description': 'Option 1'},
+            {'option_id': 1, 'description': 'Option 2'},
+        ]
+        r = self.renderer(context=subsite,
+                          assignment=voteportlet.Assignment(poll='latest'))
+        poll = r.poll()
+        self.assertIsNotNone(poll)
+        self.assertEqual(poll.getId(), new_poll.getId())

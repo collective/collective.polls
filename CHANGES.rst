@@ -19,6 +19,7 @@ There's a frood who really knows where his towel is.
 
 - Add french translation. [toutpt]
 
+- Make the add-on aware of subsites (INavigationRoot) [rafaelbco]
 
 1.4 (2013-04-10)
 ^^^^^^^^^^^^^^^^^^
