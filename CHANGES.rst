@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.5 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Make the add-on aware of subsites (INavigationRoot) [rafaelbco]
+
 - Implement show_total for the portlet (closes `#64`_). [marcosfromero]
 
 - Depend on plone.api.
@@ -17,9 +19,8 @@ There's a frood who really knows where his towel is.
 
 - Drop support for Plone 4.1. [hvelarde]
 
-- Add french translation. [toutpt]
+- Add French translation. [toutpt]
 
-- Make the add-on aware of subsites (INavigationRoot) [rafaelbco]
 
 1.4 (2013-04-10)
 ^^^^^^^^^^^^^^^^^^
