@@ -43,6 +43,11 @@ def PossiblePolls(context):
 alsoProvides(PossiblePolls, IContextSourceBinder)
 
 
+resultsAsVocabulary = SimpleVocabulary.fromItems((
+    (_(u'Votes count'), 'votes'),
+    (_(u'Percentage'), 'percentage')))
+
+
 class IVotePortlet(IPortletDataProvider):
     """A portlet
     It inherits from IPortletDataProvider because for this portlet, the
@@ -61,6 +66,13 @@ class IVotePortlet(IPortletDataProvider):
         description=_(u"Which poll to show in the portlet."),
         required=True,
         source=PossiblePolls,
+    )
+
+    show_results_as = schema.Choice(
+        title=_(u'Show results as'),
+        required=True,
+        vocabulary=resultsAsVocabulary,
+        default='votes',
     )
 
     show_total = schema.Bool(
@@ -90,9 +102,10 @@ class Assignment(base.Assignment):
     header = u""
     poll = None
 
-    def __init__(self, poll, header=u"", show_total=True, show_closed=False):
+    def __init__(self, poll, header=u"", show_results_as='votes', show_total=True, show_closed=False):
         self.header = header
         self.poll = poll
+        self.show_results_as = show_results_as
         self.show_total = show_total
         self.show_closed = show_closed
 
@@ -169,10 +182,14 @@ class Renderer(base.Renderer):
 
     def getVotingResults(self):
         poll = self.poll()
-        if poll.show_results:
-            return poll.getResults()
-        else:
+        if not poll.show_results:
             return None
+
+        results = poll.getResults()
+        if self.data.show_results_as == 'votes':
+            return results
+        else:
+            return [(x[0], "{0:.2f}".format(x[2] * 100)) for x in results]
 
     @property
     def can_vote(self):
@@ -230,7 +247,7 @@ class EditForm(base.EditForm):
     form_fields = form.Fields(IVotePortlet)
 
     def __call__(self):
-        new_fields = ('show_total', )
+        new_fields = ('show_total', 'show_results_as',)
         for new_field in new_fields:
             if not hasattr(self.context, new_field):
                 field = self.form_fields.get(new_field)
