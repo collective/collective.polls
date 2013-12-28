@@ -3,6 +3,7 @@
 from AccessControl import Unauthorized
 from collective.polls import MessageFactory as _
 from collective.polls.polls import IPolls
+from collective.polls.vocabularies import resultsAsVocabulary
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
@@ -41,11 +42,6 @@ def PossiblePolls(context):
 
 
 alsoProvides(PossiblePolls, IContextSourceBinder)
-
-
-resultsAsVocabulary = SimpleVocabulary.fromItems((
-    (_(u'Votes count'), 'votes'),
-    (_(u'Percentage'), 'percentage')))
 
 
 class IVotePortlet(IPortletDataProvider):
@@ -119,7 +115,6 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
     """Portlet renderer.
-
     This is registered in configure.zcml. The referenced page template is
     rendered, and the implicit variable 'view' will refer to an instance
     of this class. Other methods can be added and referenced in the template.
@@ -217,6 +212,16 @@ class Renderer(base.Renderer):
 
     def show_total(self):
         return getattr(self.data, 'show_total', True)
+
+    def class_name(self):
+        poll = self.poll()
+        if poll:
+            classes = ['poll-data']
+            classes.append('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')
+            classes.append('poll-{0}'.format(self.data.show_results_as))
+            return ' '.join(classes)
+        else:
+            return ''
 
 
 class AddForm(base.AddForm):
