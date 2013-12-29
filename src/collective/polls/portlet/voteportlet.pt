@@ -23,7 +23,13 @@
                     toLocalizedTime nocall:context/@@plone/toLocalizedTime"
         tal:condition="has_poll">
 
-        <h3 tal:content="poll/Title"/>
+        <h3>
+            <a tal:omit-tag="not:view/link_poll"
+               tal:attributes="href poll/absolute_url">
+                <tal:title content="poll/Title"/>
+            </a>
+        </h3>
+   
 
         <tal:results condition="python:(not can_vote) and results">
         <tal:poll_results condition="nocall:results">
