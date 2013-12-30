@@ -85,6 +85,12 @@ class IVotePortlet(IPortletDataProvider):
         default=False,
     )
 
+    link_poll = schema.Bool(
+        title=_(u'Add a link to the poll'),
+        description=u'',
+        default=True,
+    )
+
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -98,12 +104,13 @@ class Assignment(base.Assignment):
     header = u""
     poll = None
 
-    def __init__(self, poll, header=u"", show_results_as='votes', show_total=True, show_closed=False):
+    def __init__(self, poll, header=u"", show_results_as='votes', show_total=True, show_closed=False, link_poll=''):
         self.header = header
         self.poll = poll
         self.show_results_as = show_results_as
         self.show_total = show_total
         self.show_closed = show_closed
+        self.link_poll = link_poll
 
     @property
     def title(self):
@@ -223,6 +230,9 @@ class Renderer(base.Renderer):
         else:
             return ''
 
+    def link_poll(self):
+        return getattr(self.data, 'link_poll', True)
+
 
 class AddForm(base.AddForm):
     """Portlet add form.
@@ -252,7 +262,7 @@ class EditForm(base.EditForm):
     form_fields = form.Fields(IVotePortlet)
 
     def __call__(self):
-        new_fields = ('show_total', 'show_results_as',)
+        new_fields = ('show_total', 'show_results_as', 'link_poll', )
         for new_field in new_fields:
             if not hasattr(self.context, new_field):
                 field = self.form_fields.get(new_field)
