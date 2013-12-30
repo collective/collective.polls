@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 1.6 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- In portlet link back to poll page (closes `#47`_).
+  [marcosfromero]
 
 
 1.5 (2013-12-17)
@@ -171,6 +172,7 @@ There's a frood who really knows where his towel is.
 - Initial release.
 
 .. _`#35`: https://github.com/collective/collective.polls/issues/35
+.. _`#47`: https://github.com/collective/collective.polls/issues/47
 .. _`#51`: https://github.com/collective/collective.polls/issues/51
 .. _`#53`: https://github.com/collective/collective.polls/issues/53
 .. _`#61`: https://github.com/collective/collective.polls/issues/61

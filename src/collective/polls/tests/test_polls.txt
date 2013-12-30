@@ -30,6 +30,26 @@ Test Poll in Private Folder
 Test Poll in Public Folder
     Add Poll in Public Folder  Test Folder  Test Poll
 
+Test portlet poll
+    Add Poll in Public Folder  Test Folder  Test Poll
+    Go to  ${PLONE_URL}/@@manage-portlets
+    Select From List By Label  css=#portletmanager-plone-rightcolumn select[name=":action"]  Voting portlet
+    Input text  id=form.header  Latest poll!
+    Select From List By Label  id=form.poll  Latest opened poll
+    Click Button  Save
+    Goto Homepage
+    Page Should Contain  Total Votes
+    Page Should Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
+    Go to  ${PLONE_URL}/@@manage-portlets
+    Click Element  link=Voting portlet
+    Unselect Checkbox  name=form.show_total
+    Unselect Checkbox  name=form.link_poll
+    Click Button  Save
+    Goto Homepage
+    Page Should Not Contain  Total Votes
+    Page Should Contain Element  css=#portal-column-two dl.votePortlet h3
+    Page Should Not Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
+
 *** Keywords ***
 
 Start Browser and Log In
