@@ -99,7 +99,7 @@ class Assignment(base.Assignment):
     show_closed = True
     link_poll = True
 
-    def __init__(self, poll, header=u"", show_total=True, show_closed=False,
+    def __init__(self, poll=u"latest", header=u"", show_total=True, show_closed=False,
                  link_poll=True):
         self.header = header
         self.poll = poll
