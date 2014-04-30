@@ -225,7 +225,7 @@ class PollPortletRender(grok.View):
             # Did not find a portlet
             return ""
 
-        #- A special type of content provider, IPortletRenderer, knows how to
+        # - A special type of content provider, IPortletRenderer, knows how to
         # render each type of portlet. The IPortletRenderer should be a
         # multi-adapter from (context, request, view, portlet manager,
         #                     data provider).

@@ -48,11 +48,11 @@ class IPoll(form.Schema):
         default=True,
     )
 
-    #multivalue = schema.Bool(
-        #title = _(u"Multivalue"),
-        #description = _(u"Voters can choose several answers at the same "
-                         #"time."),
-    #)
+    # multivalue = schema.Bool(
+    #    title = _(u"Multivalue"),
+    #    description = _(u"Voters can choose several answers at the same "
+    #                     "time."),
+    # )
 
     show_results = schema.Bool(
         title=_(u"Show partial results"),
@@ -289,8 +289,8 @@ class View(grok.View):
         self.errors = []
         self.messages = []
 
-        #if the poll is open and anonymous should vote but the parent folder
-        #is private.. inform the user.
+        # if the poll is open and anonymous should vote but the parent folder
+        # is private.. inform the user.
 
         # When the poll's container is the site's root, we do not need to
         # check the permissions.
@@ -318,9 +318,9 @@ class View(grok.View):
             messages.addStatusMessage(msg, type="info")
 
         # XXX
-        #if 'voting.from' in form:
-            #url = form['voting.from']
-            #self.request.RESPONSE.redirect(url)
+        # if 'voting.from' in form:
+        #     url = form['voting.from']
+        #     self.request.RESPONSE.redirect(url)
 
     def _updateForm(self, form):
         INVALID_OPTION = _(u'Invalid option')
