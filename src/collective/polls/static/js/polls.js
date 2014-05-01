@@ -38,7 +38,12 @@
         _create_bar: function(bar_data) {
             var label = $('<span/>').addClass('bar-label');
             var bar = $('<div/>').addClass('bar');
-            var vote_counter = $('<span/>').append(' ('+bar_data['value']+')');
+            var value = bar_data['value'];
+            if (this.options['show_results_as']=='percentage') {
+                value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+                value+='%';
+            }
+            var vote_counter = $('<span/>').append(' ('+value+')');
             var bar_row = $('<div/>').addClass('bar-row');
             bar_row.data('bar_row_value', bar_data['value']);
 
@@ -93,6 +98,7 @@
             var bar = {};
             var label = 'label';
             var total_votes = 0;
+            this.options.show_results_as = this.$element.parent().hasClass('poll-votes') ? 'votes' : 'percentage';
             for(var i=0, len=data.length; i < len; i++){
                 var $d = data[i];
                 if (typeof $d == "number") {

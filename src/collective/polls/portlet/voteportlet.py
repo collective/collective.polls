@@ -3,6 +3,7 @@
 from AccessControl import Unauthorized
 from collective.polls import MessageFactory as _
 from collective.polls.polls import IPolls
+from collective.polls.vocabularies import resultsAsVocabulary
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
@@ -65,6 +66,13 @@ class IVotePortlet(IPortletDataProvider):
         source=PossiblePolls,
     )
 
+    show_results_as = schema.Choice(
+        title=_(u'Show results as'),
+        required=True,
+        vocabulary=resultsAsVocabulary,
+        default='votes',
+    )
+
     show_total = schema.Bool(
         title=_(u'Show total votes'),
         description=_(u'Show the number of collected votes so far.'),
@@ -98,14 +106,16 @@ class Assignment(base.Assignment):
 
     poll = None
     header = u''
+    show_results_as = 'votes'
     show_total = True
     show_closed = True
     link_poll = True
 
-    def __init__(self, poll=u'latest', header=u'', show_total=True, show_closed=False,
+    def __init__(self, poll=u'latest', header=u'', show_results_as='votes', show_total=True, show_closed=False,
                  link_poll=True):
-        self.header = header
         self.poll = poll
+        self.header = header
+        self.show_results_as = show_results_as
         self.show_total = show_total
         self.show_closed = show_closed
         self.link_poll = link_poll
@@ -175,10 +185,14 @@ class Renderer(base.Renderer):
 
     def getVotingResults(self):
         poll = self.poll()
-        if poll.show_results:
-            return poll.getResults()
-        else:
+        if not poll.show_results:
             return None
+
+        results = poll.getResults()
+        if self.data.show_results_as == 'votes':
+            return results
+        else:
+            return [(x[0], '{0:.2f}'.format(x[2] * 100)) for x in results]
 
     @property
     def can_vote(self):
@@ -203,6 +217,16 @@ class Renderer(base.Renderer):
         state = self.context.portal_workflow.getInfoFor(
             self.poll(), 'review_state')
         return state == 'closed'
+
+    def class_name(self):
+        poll = self.poll()
+        if poll:
+            classes = ['poll-data']
+            classes.append('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')
+            classes.append('poll-{0}'.format(self.data.show_results_as))
+            return ' '.join(classes)
+        else:
+            return ''
 
 
 class AddForm(base.AddForm):

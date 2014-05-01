@@ -38,7 +38,7 @@
         <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
         <h4 tal:condition="closed" i18n:translate="">Results</h4>
         <div class="poll-data"
-             tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
+             tal:attributes="class view/class_name">
             <div class="portletpollresultholder"></div>
             <ul class="poll-results">
                 <li tal:repeat="option_result results">

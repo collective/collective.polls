@@ -30,6 +30,21 @@ Test Poll in Private Folder
 Test Poll in Public Folder
     Add Poll in Public Folder  Test Folder  Test Poll
 
+Test Show Results as
+    Create Poll  My poll  This is a test
+    Workflow Open
+    Select Radio Button  options  0
+    Click Button  Submit
+    Page Should Contain  Maybe (1)
+    Workflow Reject
+    Click Link  link=Edit
+    Select From List By Label  id=form-widgets-show_results_as  Percentage
+    Click Button  Save
+    Workflow Open
+    Select Radio Button  options  0
+    Click Button  Submit
+    Page Should Contain  Maybe (100.00%)
+
 Test portlet poll
     Add Poll in Public Folder  Test Folder  Test Poll
     Go to  ${PLONE_URL}/@@manage-portlets
@@ -49,6 +64,16 @@ Test portlet poll
     Page Should Not Contain  Total Votes
     Page Should Contain Element  css=#portal-column-two dl.votePortlet h3
     Page Should Not Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
+    Select Radio Button  options  0
+    Click Button  name=poll.submit
+    Wait Until Page Contains  Partial results
+    Page Should Contain  Maybe (1)
+    Go to  ${PLONE_URL}/@@manage-portlets
+    Click Element  link=Voting portlet
+    Select From List By Label  id=form.show_results_as  Percentage
+    Click Button  Save
+    Goto Homepage
+    Page Should Contain  Maybe (100.00%)
 
 *** Keywords ***
 

@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.6 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Display results as votes or percentage (closes `#4`_).
+  [marcosfromero]
+
 - Add a default value to the voting portlet ``poll`` parameter. This fixes an
   issue happening when importing ``portlets.xml`` assignments.
   [ericof]
@@ -178,6 +181,7 @@ There's a frood who really knows where his towel is.
 
 - Initial release.
 
+.. _`#4`: https://github.com/collective/collective.polls/issues/4
 .. _`#35`: https://github.com/collective/collective.polls/issues/35
 .. _`#47`: https://github.com/collective/collective.polls/issues/47
 .. _`#51`: https://github.com/collective/collective.polls/issues/51

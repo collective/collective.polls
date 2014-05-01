@@ -9,6 +9,7 @@ from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
+from collective.polls.vocabularies import resultsAsVocabulary
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from five import grok
 from plone.directives import dexterity
@@ -58,6 +59,13 @@ class IPoll(form.Schema):
         description=_(
             u'Show partial results after a voter has already voted.'),
         default=True,
+    )
+
+    show_results_as = schema.Choice(
+        title=_(u'Show results as'),
+        required=True,
+        vocabulary=resultsAsVocabulary,
+        default='votes',
     )
 
     results_graph = schema.Choice(
@@ -367,6 +375,12 @@ class View(grok.View):
         """Return available options."""
         return self.context.getOptions()
 
+    def class_name(self):
+        classes = ['poll-data']
+        classes.append('bar-poll' if self.context.results_graph == 'bar' else 'pie-poll')
+        classes.append('poll-{0}'.format(self.context.show_results_as))
+        return ' '.join(classes)
+
     def getResults(self):
         """Return results so far if allowed."""
         show_results = False
@@ -374,4 +388,12 @@ class View(grok.View):
             show_results = show_results or self.context.show_results
         elif self.wf_state == 'closed':
             show_results = True
-        return (show_results and self.context.getResults()) or None
+
+        if not show_results:
+            return None
+        else:
+            results = self.context.getResults()
+            if self.context.show_results_as == 'votes':
+                return results
+            else:
+                return [(x[0], '{0:.2f}'.format(x[2] * 100)) for x in results]

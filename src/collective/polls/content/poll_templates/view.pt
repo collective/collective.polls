@@ -45,8 +45,8 @@
 
     <tal:results tal:condition="python:results and not can_vote">
     <h2><span i18n:translate="">Results</span>:</h2>
-    <div class="poll-data" 
-       tal:attributes="class python:'poll-data ' + ('bar-poll' if context.results_graph == 'bar' else 'pie-poll')">
+    <div class="poll-data"
+         tal:attributes="class view/class_name">
       <div class="pollresultholder"></div>
       <ul class="poll-results">
         <li tal:repeat="option_result results">
