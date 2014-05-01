@@ -230,6 +230,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
+
     """Portlet add form.
 
     This is registered in configure.zcml. The form_fields variable tells
