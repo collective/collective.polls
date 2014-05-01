@@ -8,4 +8,4 @@ def uninstall(portal):
     profile = 'profile-%s:uninstall' % PROJECTNAME
     setup_tool = api.portal.get_tool(name='portal_setup')
     setup_tool.runAllImportStepsFromProfile(profile)
-    return "Ran all uninstall steps."
+    return 'Ran all uninstall steps.'

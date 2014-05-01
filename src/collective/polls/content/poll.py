@@ -32,7 +32,7 @@ graph_options = SimpleVocabulary(
 
 
 class InsuficientOptions(Invalid):
-    __doc__ = _(u"Not enought options provided")
+    __doc__ = _(u'Not enought options provided')
 
 
 class IPoll(form.Schema):
@@ -40,11 +40,10 @@ class IPoll(form.Schema):
     """
 
     allow_anonymous = schema.Bool(
-        title=_(u"Allow anonymous"),
+        title=_(u'Allow anonymous'),
         description=_(
-            u"Allow not logged in users to vote. The parent folder of this "
-            u"poll should be published before opeining the poll for this "
-            u"field to take effect"),
+            u'Allow not logged in users to vote. '
+            u'The parent folder of this poll should be published before opeining the poll for this field to take effect'),
         default=True,
     )
 
@@ -55,15 +54,15 @@ class IPoll(form.Schema):
     # )
 
     show_results = schema.Bool(
-        title=_(u"Show partial results"),
-        description=_(u"Show partial results after a "
-                      u"voter has already voted."),
+        title=_(u'Show partial results'),
+        description=_(
+            u'Show partial results after a voter has already voted.'),
         default=True,
     )
 
     results_graph = schema.Choice(
         title=_(u'Graph'),
-        description=_(u"Format to show the results."),
+        description=_(u'Format to show the results.'),
         default='bar',
         required=True,
         source=graph_options,
@@ -71,7 +70,7 @@ class IPoll(form.Schema):
 
     form.widget(options=EnhancedTextLinesFieldWidget)
     options = schema.List(
-        title=_(u"Available options"),
+        title=_(u'Available options'),
         value_type=schema.TextLine(),
         default=[],
         required=True,
@@ -84,7 +83,7 @@ class IPoll(form.Schema):
         descriptions = options and [o for o in options]
         if len(descriptions) < 2:
             raise InsuficientOptions(
-                _(u"You need to provide at least two options for a poll."))
+                _(u'You need to provide at least two options for a poll.'))
 
 
 class Poll(dexterity.Item):
@@ -245,13 +244,13 @@ class PollEditForm(dexterity.EditForm):
         super(PollEditForm, self).updateWidgets()
 
         self.widgets['options'].allow_reorder = True
-        data = ""
-        for option in self.widgets['options'].value.split("\n"):
+        data = ''
+        for option in self.widgets['options'].value.split('\n'):
             if data:
-                data += "\n"
-            if option.strip().startswith("{"):
+                data += '\n'
+            if option.strip().startswith('{'):
                 new_val = eval(option)
-                data += new_val["description"]
+                data += new_val['description']
             else:
                 data = option
         self.widgets['options'].value = data
@@ -305,17 +304,17 @@ class View(grok.View):
             if 'Anonymous' not in roles and self.context.allow_anonymous:
                 messages.addStatusMessage(_(
                     u"Anonymous user won't be able to vote, you forgot to "
-                    u"publish the parent folder, you must sent back the poll "
-                    u"to private state, publish the parent folder and open "
-                    u"the poll again"), type="info")
+                    u'publish the parent folder, you must sent back the poll '
+                    u'to private state, publish the parent folder and open '
+                    u'the poll again'), type='info')
 
         if 'poll.submit' in form:
             self._updateForm(form)
         # Update status messages
         for error in self.errors:
-            messages.addStatusMessage(error, type="warn")
+            messages.addStatusMessage(error, type='warn')
         for msg in self.messages:
-            messages.addStatusMessage(msg, type="info")
+            messages.addStatusMessage(msg, type='info')
 
         # XXX
         # if 'voting.from' in form:

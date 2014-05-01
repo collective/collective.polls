@@ -10,7 +10,7 @@ import unittest
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTests([
-        layered(robotsuite.RobotTestSuite("test_polls.txt"),
+        layered(robotsuite.RobotTestSuite('test_polls.txt'),
                 layer=FUNCTIONAL_TESTING),
     ])
     return suite

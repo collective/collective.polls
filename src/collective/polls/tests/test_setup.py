@@ -8,15 +8,15 @@ from plone.app.testing import TEST_USER_ID
 import unittest
 
 JAVASCRIPTS = [
-    "++resource++collective.polls/js/jquery.flot.js",
-    "++resource++collective.polls/js/jquery.flot.pie.js",
-    "++resource++collective.polls/js/polls.js",
-    "++resource++collective.polls/js/collective.poll.js",
+    '++resource++collective.polls/js/jquery.flot.js',
+    '++resource++collective.polls/js/jquery.flot.pie.js',
+    '++resource++collective.polls/js/polls.js',
+    '++resource++collective.polls/js/collective.poll.js',
     '@@legendothers_translation.js',
 ]
 
 CSS = [
-    "++resource++collective.polls/css/collective.polls.css",
+    '++resource++collective.polls/css/collective.polls.css',
 ]
 
 

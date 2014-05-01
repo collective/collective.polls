@@ -31,7 +31,7 @@ def PossiblePolls(context):
     navigation_root = portal_state.navigation_root()
     polls = utility.recent_polls(context=navigation_root, show_all=False, limit=999999)
 
-    values = [SimpleTerm(value="latest", title=_(u"Latest opened poll"))]
+    values = [SimpleTerm(value='latest', title=_(u'Latest opened poll'))]
     values.extend(
         SimpleTerm(value=i.UID, title=i.Title.decode('utf-8'))
         for i in polls
@@ -52,13 +52,13 @@ class IVotePortlet(IPortletDataProvider):
 
     header = schema.TextLine(
         title=_(u'Header'),
-        description=_(u"The header for the portlet. Leave empty for none."),
+        description=_(u'The header for the portlet. Leave empty for none.'),
         required=False,
     )
 
     poll = schema.Choice(
         title=_(u'Poll'),
-        description=_(u"Which poll to show in the portlet."),
+        description=_(u'Which poll to show in the portlet.'),
         required=True,
         source=PossiblePolls,
     )
@@ -72,8 +72,8 @@ class IVotePortlet(IPortletDataProvider):
     show_closed = schema.Bool(
         title=_(u'Show closed polls'),
         description=_(
-            u"If there is no available open poll or the chosen poll is "
-            u"already closed, should the porlet show the results instead."),
+            u'If there is no available open poll or the chosen poll is '
+            u'already closed, should the porlet show the results instead.'),
         default=False,
     )
 
@@ -94,12 +94,12 @@ class Assignment(base.Assignment):
     implements(IVotePortlet)
 
     poll = None
-    header = u""
+    header = u''
     show_total = True
     show_closed = True
     link_poll = True
 
-    def __init__(self, poll=u"latest", header=u"", show_total=True, show_closed=False,
+    def __init__(self, poll=u'latest', header=u'', show_total=True, show_closed=False,
                  link_poll=True):
         self.header = header
         self.poll = poll

@@ -157,7 +157,7 @@ class PollPortletRender(grok.View):
     """ this methods allow to use the portlet render in a view """
     grok.context(Interface)
     grok.name('poll_portlet_render')
-    grok.require("zope2.View")
+    grok.require('zope2.View')
 
     def get_portlet_manager(self, column=''):
         """ Return one of default Plone portlet managers.
@@ -200,9 +200,8 @@ class PollPortletRender(grok.View):
         @return: Rendered portlet HTML as a string, or empty string if
             portlet not found
         """
-
         if manager is None:
-            return ""
+            return ''
 
         retriever = getMultiAdapter((context, manager), IPortletRetriever)
 
@@ -217,13 +216,13 @@ class PollPortletRender(grok.View):
             # 'name': u'facebook-like-box',
             # 'key': '/isleofback/sisalto/huvit-ja-harrasteet
             # Identify portlet by interface provided by assignment
-            if interface.providedBy(portlet["assignment"]):
-                assignment = portlet["assignment"]
+            if interface.providedBy(portlet['assignment']):
+                assignment = portlet['assignment']
                 break
 
         if assignment is None:
             # Did not find a portlet
-            return ""
+            return ''
 
         # - A special type of content provider, IPortletRenderer, knows how to
         # render each type of portlet. The IPortletRenderer should be a
@@ -239,8 +238,8 @@ class PollPortletRender(grok.View):
         renderer = renderer.__of__(context)
 
         if renderer is None:
-            raise RuntimeError("No portlet renderer found for portlet "
-                               "assignment:" + str(assignment))
+            raise RuntimeError(
+                'No portlet renderer found for portlet assignment: ' + str(assignment))
 
         renderer.update()
         # Does not check visibility here... force render always

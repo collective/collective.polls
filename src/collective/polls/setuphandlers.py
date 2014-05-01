@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-
+from collective.polls.config import PROJECTNAME
 from five import grok
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
+
+import logging
+
+logger = logging.getLogger(PROJECTNAME)
 
 
 class HiddenProfiles(grok.GlobalUtility):
@@ -19,7 +23,7 @@ class HiddenProfiles(grok.GlobalUtility):
 def updateWorkflowDefinitions(portal):
     wf_tool = api.portal.get_tool(name='portal_workflow')
     wf_tool.updateRoleMappings()
-    print "Workflow definitions updated"
+    logger.info(u'Workflow definitions updated')
 
 
 def setupVarious(context):
