@@ -44,7 +44,9 @@ alsoProvides(PossiblePolls, IContextSourceBinder)
 
 
 class IVotePortlet(IPortletDataProvider):
-    """A portlet
+
+    """A portlet.
+
     It inherits from IPortletDataProvider because for this portlet, the
     data that is being rendered and the portlet assignment itself are the
     same.
@@ -85,6 +87,7 @@ class IVotePortlet(IPortletDataProvider):
 
 
 class Assignment(base.Assignment):
+
     """Portlet assignment.
 
     This is what is actually managed through the portlets UI and associated
@@ -109,13 +112,12 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        """This property is used to give the title of the portlet in the
-        "manage portlets" screen.
-        """
-        return _(u"Voting portlet")
+        """Return the title of the portlet in the 'manage portlets' screen."""
+        return _(u'Voting portlet')
 
 
 class Renderer(base.Renderer):
+
     """Portlet renderer.
 
     This is registered in configure.zcml. The referenced page template is
@@ -127,8 +129,7 @@ class Renderer(base.Renderer):
 
     @property
     def utility(self):
-        """ Access to IPolls utility
-        """
+        """Access to IPolls utility."""
         utility = queryUtility(IPolls, name='collective.polls')
         return utility
 
@@ -168,8 +169,7 @@ class Renderer(base.Renderer):
         return poll
 
     def poll_uid(self):
-        """ Return uid for current poll
-        """
+        """Return uid for current poll."""
         utility = self.utility
         return utility.uid_for_poll(self.poll())
 
@@ -206,12 +206,14 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
+
     """Portlet add form.
 
     This is registered in configure.zcml. The form_fields variable tells
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
+
     form_fields = form.Fields(IVotePortlet)
 
     def create(self, data):
@@ -219,9 +221,11 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
+
     """Portlet edit form.
 
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
+
     form_fields = form.Fields(IVotePortlet)
