@@ -15,9 +15,7 @@ ALL_ROLES = ['Anonymous', 'Contributor', 'Editor', 'Manager', 'Member',
 
 @grok.subscribe(IPoll, IActionSucceededEvent)
 def fix_permissions(poll, event):
-    ''' This subscriber will fix permission on poll object if
-        allow_anonymous is enabled
-    '''
+    """Fix permission on poll object if allow_anonymous is enabled."""
     if event.action in ['open', ]:
         parent = aq_parent(poll)
         parent_view_roles = parent.rolesOfPermission('View')
@@ -35,9 +33,7 @@ def fix_permissions(poll, event):
 
 @grok.subscribe(IPoll, IActionSucceededEvent)
 def remove_votes(poll, event):
-    ''' This subscriber will remove existing votes on poll object
-        if reject transaction happens
-    '''
+    """Remove existing votes on poll object if reject transaction happens."""
     if event.action in ['reject', ]:
         options = [o.get('option_id') for o in poll.getOptions()]
         annotations = poll.annotations

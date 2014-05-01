@@ -256,7 +256,7 @@ class WorkflowTest(unittest.TestCase):
         # Let's open it, and try to get it back
         self.wt.doActionFor(self.obj, 'open')
 
-        #Now the poll is opened, we cannot retract, nor submit
+        # Now the poll is opened, we cannot retract, nor submit
         with self.assertRaises(WorkflowException):
             self.wt.doActionFor(self.obj, 'retract')
 

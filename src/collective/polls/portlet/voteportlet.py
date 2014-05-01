@@ -32,7 +32,7 @@ def PossiblePolls(context):
     navigation_root = portal_state.navigation_root()
     polls = utility.recent_polls(context=navigation_root, show_all=False, limit=999999)
 
-    values = [SimpleTerm(value="latest", title=_(u"Latest opened poll"))]
+    values = [SimpleTerm(value='latest', title=_(u'Latest opened poll'))]
     values.extend(
         SimpleTerm(value=i.UID, title=i.Title.decode('utf-8'))
         for i in polls
@@ -45,7 +45,9 @@ alsoProvides(PossiblePolls, IContextSourceBinder)
 
 
 class IVotePortlet(IPortletDataProvider):
-    """A portlet
+
+    """A portlet.
+
     It inherits from IPortletDataProvider because for this portlet, the
     data that is being rendered and the portlet assignment itself are the
     same.
@@ -53,13 +55,13 @@ class IVotePortlet(IPortletDataProvider):
 
     header = schema.TextLine(
         title=_(u'Header'),
-        description=_(u"The header for the portlet. Leave empty for none."),
+        description=_(u'The header for the portlet. Leave empty for none.'),
         required=False,
     )
 
     poll = schema.Choice(
         title=_(u'Poll'),
-        description=_(u"Which poll to show in the portlet."),
+        description=_(u'Which poll to show in the portlet.'),
         required=True,
         source=PossiblePolls,
     )
@@ -80,8 +82,8 @@ class IVotePortlet(IPortletDataProvider):
     show_closed = schema.Bool(
         title=_(u'Show closed polls'),
         description=_(
-            u"If there is no available open poll or the chosen poll is "
-            u"already closed, should the porlet show the results instead."),
+            u'If there is no available open poll or the chosen poll is '
+            u'already closed, should the porlet show the results instead.'),
         default=False,
     )
 
@@ -93,6 +95,7 @@ class IVotePortlet(IPortletDataProvider):
 
 
 class Assignment(base.Assignment):
+
     """Portlet assignment.
 
     This is what is actually managed through the portlets UI and associated
@@ -101,12 +104,17 @@ class Assignment(base.Assignment):
 
     implements(IVotePortlet)
 
-    header = u""
     poll = None
+    header = u''
+    show_results_as = 'votes'
+    show_total = True
+    show_closed = True
+    link_poll = True
 
-    def __init__(self, poll, header=u"", show_results_as='votes', show_total=True, show_closed=False, link_poll=''):
-        self.header = header
+    def __init__(self, poll=u'latest', header=u'', show_results_as='votes', show_total=True, show_closed=False,
+                 link_poll=True):
         self.poll = poll
+        self.header = header
         self.show_results_as = show_results_as
         self.show_total = show_total
         self.show_closed = show_closed
@@ -114,14 +122,14 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        """This property is used to give the title of the portlet in the
-        "manage portlets" screen.
-        """
-        return _(u"Voting portlet")
+        """Return the title of the portlet in the 'manage portlets' screen."""
+        return _(u'Voting portlet')
 
 
 class Renderer(base.Renderer):
+
     """Portlet renderer.
+
     This is registered in configure.zcml. The referenced page template is
     rendered, and the implicit variable 'view' will refer to an instance
     of this class. Other methods can be added and referenced in the template.
@@ -131,15 +139,9 @@ class Renderer(base.Renderer):
 
     @property
     def utility(self):
-        """ Access to IPolls utility
-        """
+        """Access to IPolls utility."""
         utility = queryUtility(IPolls, name='collective.polls')
         return utility
-
-    def getHeader(self):
-        """ Returns the header for the portlet
-        """
-        return self.data.header
 
     def portlet_manager_name(self):
         column = self.manager.__name__
@@ -177,8 +179,7 @@ class Renderer(base.Renderer):
         return poll
 
     def poll_uid(self):
-        """ Return uid for current poll
-        """
+        """Return uid for current poll."""
         utility = self.utility
         return utility.uid_for_poll(self.poll())
 
@@ -191,7 +192,7 @@ class Renderer(base.Renderer):
         if self.data.show_results_as == 'votes':
             return results
         else:
-            return [(x[0], "{0:.2f}".format(x[2] * 100)) for x in results]
+            return [(x[0], '{0:.2f}'.format(x[2] * 100)) for x in results]
 
     @property
     def can_vote(self):
@@ -217,9 +218,6 @@ class Renderer(base.Renderer):
             self.poll(), 'review_state')
         return state == 'closed'
 
-    def show_total(self):
-        return getattr(self.data, 'show_total', True)
-
     def class_name(self):
         poll = self.poll()
         if poll:
@@ -230,9 +228,6 @@ class Renderer(base.Renderer):
         else:
             return ''
 
-    def link_poll(self):
-        return getattr(self.data, 'link_poll', True)
-
 
 class AddForm(base.AddForm):
     """Portlet add form.
@@ -241,6 +236,7 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
+
     form_fields = form.Fields(IVotePortlet)
 
     def create(self, data):
@@ -248,23 +244,11 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
+
     """Portlet edit form.
 
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
-
-    For field added to the interface in version 1.5.dev0, instead of creating
-    an upgrade step that should iterate over all objects of the site, we add
-    a check in the __call__ method
-
-    These new field has an explicit default_value.
     """
-    form_fields = form.Fields(IVotePortlet)
 
-    def __call__(self):
-        new_fields = ('show_total', 'show_results_as', 'link_poll', )
-        for new_field in new_fields:
-            if not hasattr(self.context, new_field):
-                field = self.form_fields.get(new_field)
-                setattr(self.context, new_field, field.field.default)
-        return super(EditForm, self).__call__()
+    form_fields = form.Fields(IVotePortlet)

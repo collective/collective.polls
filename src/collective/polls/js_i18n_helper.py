@@ -15,5 +15,5 @@ class LegendOthersTranslation(grok.View):
         response = self.request.response
         response.setHeader('content-type', 'text/javascript;;charset=utf-8')
 
-        label_legendothers = _(u"label_legendothers", default=u"Others")
+        label_legendothers = _(u'label_legendothers', default=u'Others')
         return "legendothers_translation = '%s';" % label_legendothers

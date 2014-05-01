@@ -19,38 +19,40 @@ import time
 
 
 class IPolls(Interface):
-    ''' '''
+
+    """A poll."""
 
     def recent_polls(show_all=False, limit=5, kw={}):
-        ''' Return recent polls'''
+        """Return recent polls."""
 
     def uid_for_poll(poll):
-        ''' Return a uid for a poll '''
+        """Return a uid for a poll."""
 
     def poll_by_uid(uid):
-        ''' Return the poll for the given uid '''
+        """Return the poll for the given uid."""
 
     def voters_in_a_poll(poll):
-        ''' list of voters in a poll '''
+        """Return the list of voters in a poll."""
 
     def voted_in_a_poll(poll):
-        ''' check if current user already voted '''
+        """Check if current user already voted."""
 
     def allowed_to_edit(poll):
-        ''' is member allowed to edit a poll '''
+        """Return True if member is allowed to edit a poll."""
 
     def allowed_to_view(poll):
-        ''' Is user allowed to view this poll '''
+        """Return True if user is allowed to view this poll."""
 
     def allowed_to_vote(poll):
-        ''' vote in a poll '''
+        """Return True is user is allowed to vote in a poll."""
 
     def anonymous_vote_id(poll_uid):
-        ''' return a identifier for vote_id '''
+        """Return a identifier for vote_id."""
 
 
 class Polls(grok.GlobalUtility):
-    ''' Utility methods for dealing with polls '''
+
+    """Utility methods for dealing with polls."""
 
     grok.implements(IPolls)
     grok.provides(IPolls)
@@ -73,17 +75,17 @@ class Polls(grok.GlobalUtility):
         return self.mt.getAuthenticatedMember()
 
     def _query_for_polls(self, **kw):
-        ''' Use Portal Catalog to return a list of polls '''
+        """Use Portal Catalog to return a list of polls."""
         kw['portal_type'] = 'collective.polls.poll'
         results = self.ct.searchResults(**kw)
         return results
 
     def uid_for_poll(self, poll):
-        ''' Return a uid for a poll '''
+        """Return a uid for a poll."""
         return IUUID(poll)
 
     def recent_polls(self, context=None, show_all=False, limit=5, **kw):
-        ''' Return recent polls '''
+        """Return recent polls."""
         if context is not None:
             kw['path'] = '/'.join(context.getPhysicalPath())
 
@@ -96,7 +98,7 @@ class Polls(grok.GlobalUtility):
         return results[:limit]
 
     def poll_by_uid(self, uid, context=None):
-        ''' Return the poll for the given uid '''
+        """Return the poll for the given uid."""
         if uid == 'latest':
             results = self.recent_polls(context=context, show_all=False, limit=1)
         else:
@@ -107,7 +109,7 @@ class Polls(grok.GlobalUtility):
             return poll
 
     def voted_in_a_poll(self, poll, request=None):
-        ''' check if current user already voted '''
+        """Check if current user already voted."""
         anonymous_allowed = poll.allow_anonymous
         poll_uid = self.uid_for_poll(poll)
         member = self.member
@@ -126,16 +128,16 @@ class Polls(grok.GlobalUtility):
             return True
 
     def allowed_to_edit(self, poll):
-        ''' Is user allowed to edit this poll '''
+        """Return True if member is allowed to edit a poll."""
         return (self.mt.checkPermission('Modify portal content', poll)
                 and True) or False
 
     def allowed_to_view(self, poll):
-        ''' Is user allowed to view this poll '''
+        """Return True if user is allowed to view this poll."""
         return (self.mt.checkPermission('View', poll) and True) or False
 
     def allowed_to_vote(self, poll, request=None):
-        ''' is current user allowed to vote in this poll ?'''
+        """Return True is user is allowed to vote in a poll."""
         canVote = (self.mt.checkPermission('collective.polls: Vote', poll)
                    and True) or False
         if canVote:
@@ -148,19 +150,21 @@ class Polls(grok.GlobalUtility):
         raise Unauthorized
 
     def anonymous_vote_id(self):
-        ''' return a identifier for vote_id '''
+        """Return a identifier for vote_id."""
         vote_id = int(time.time() * 10000000) + random.randint(0, 99)
         return vote_id
 
 
 class PollPortletRender(grok.View):
-    """ this methods allow to use the portlet render in a view """
+
+    """This methods allow to use the portlet render in a view."""
+
     grok.context(Interface)
     grok.name('poll_portlet_render')
-    grok.require("zope2.View")
+    grok.require('zope2.View')
 
     def get_portlet_manager(self, column=''):
-        """ Return one of default Plone portlet managers.
+        """Return one of default Plone portlet managers.
 
         @param column: "plone.leftcolumn" or "plone.rightcolumn"
 
@@ -179,7 +183,7 @@ class PollPortletRender(grok.View):
         return manager
 
     def render_portlet(self, context, request, view, manager, interface):
-        """ Render a portlet defined in external location.
+        """Render a portlet defined in external location.
 
         .. note ::
 
@@ -200,9 +204,8 @@ class PollPortletRender(grok.View):
         @return: Rendered portlet HTML as a string, or empty string if
             portlet not found
         """
-
         if manager is None:
-            return ""
+            return ''
 
         retriever = getMultiAdapter((context, manager), IPortletRetriever)
 
@@ -217,15 +220,15 @@ class PollPortletRender(grok.View):
             # 'name': u'facebook-like-box',
             # 'key': '/isleofback/sisalto/huvit-ja-harrasteet
             # Identify portlet by interface provided by assignment
-            if interface.providedBy(portlet["assignment"]):
-                assignment = portlet["assignment"]
+            if interface.providedBy(portlet['assignment']):
+                assignment = portlet['assignment']
                 break
 
         if assignment is None:
             # Did not find a portlet
-            return ""
+            return ''
 
-        #- A special type of content provider, IPortletRenderer, knows how to
+        # - A special type of content provider, IPortletRenderer, knows how to
         # render each type of portlet. The IPortletRenderer should be a
         # multi-adapter from (context, request, view, portlet manager,
         #                     data provider).
@@ -239,8 +242,8 @@ class PollPortletRender(grok.View):
         renderer = renderer.__of__(context)
 
         if renderer is None:
-            raise RuntimeError("No portlet renderer found for portlet "
-                               "assignment:" + str(assignment))
+            raise RuntimeError(
+                'No portlet renderer found for portlet assignment: ' + str(assignment))
 
         renderer.update()
         # Does not check visibility here... force render always
@@ -249,7 +252,7 @@ class PollPortletRender(grok.View):
         return html
 
     def render(self):
-        """ Render a portlet from another page in-line to this page
+        """Render a portlet from another page in-line to this page.
 
         Does not render other portlets in the same portlet manager.
         """

@@ -15,11 +15,19 @@ Mostly Harmless
 
 .. image:: https://secure.travis-ci.org/collective/collective.polls.png?branch=master
     :target: http://travis-ci.org/collective/collective.polls
+    :alt: Travis CI badge
 
 .. image:: https://coveralls.io/repos/collective/collective.polls/badge.png?branch=master
     :target: https://coveralls.io/r/collective/collective.polls
+    :alt: Coveralls badge
+
+.. image:: https://pypip.in/d/collective.polls/badge.png
+    :target: https://pypi.python.org/pypi/collective.polls/
+    :alt: Downloads
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
+
+.. _`opening a support ticket`: https://github.com/collective/collective.polls/issues
 
 Don't Panic
 -----------
@@ -110,5 +118,4 @@ Not entirely unlike
     provided. It can be configured to display the last poll, or the first poll
     of a folder. After the vote statistics screens are shown.
 
-.. _`opening a support ticket`: https://github.com/collective/collective.polls/issues
 .. _`Plone PoPoll`: http://plone.org/products/plonepopoll

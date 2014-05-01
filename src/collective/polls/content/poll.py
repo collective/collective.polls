@@ -33,32 +33,31 @@ graph_options = SimpleVocabulary(
 
 
 class InsuficientOptions(Invalid):
-    __doc__ = _(u"Not enought options provided")
+    __doc__ = _(u'Not enought options provided')
 
 
 class IPoll(form.Schema):
-    """ A Poll in a Plone site
-    """
+
+    """A Poll in a Plone site."""
 
     allow_anonymous = schema.Bool(
-        title=_(u"Allow anonymous"),
+        title=_(u'Allow anonymous'),
         description=_(
-            u"Allow not logged in users to vote. The parent folder of this "
-            u"poll should be published before opeining the poll for this "
-            u"field to take effect"),
+            u'Allow not logged in users to vote. '
+            u'The parent folder of this poll should be published before opeining the poll for this field to take effect'),
         default=True,
     )
 
-    #multivalue = schema.Bool(
-        #title = _(u"Multivalue"),
-        #description = _(u"Voters can choose several answers at the same "
-                         #"time."),
-    #)
+    # multivalue = schema.Bool(
+    #    title = _(u"Multivalue"),
+    #    description = _(u"Voters can choose several answers at the same "
+    #                     "time."),
+    # )
 
     show_results = schema.Bool(
-        title=_(u"Show partial results"),
-        description=_(u"Show partial results after a "
-                      u"voter has already voted."),
+        title=_(u'Show partial results'),
+        description=_(
+            u'Show partial results after a voter has already voted.'),
         default=True,
     )
 
@@ -71,7 +70,7 @@ class IPoll(form.Schema):
 
     results_graph = schema.Choice(
         title=_(u'Graph'),
-        description=_(u"Format to show the results."),
+        description=_(u'Format to show the results.'),
         default='bar',
         required=True,
         source=graph_options,
@@ -79,7 +78,7 @@ class IPoll(form.Schema):
 
     form.widget(options=EnhancedTextLinesFieldWidget)
     options = schema.List(
-        title=_(u"Available options"),
+        title=_(u'Available options'),
         value_type=schema.TextLine(),
         default=[],
         required=True,
@@ -87,17 +86,17 @@ class IPoll(form.Schema):
 
     @invariant
     def validate_options(data):
-        ''' Validate options '''
+        """Validate options."""
         options = data.options
         descriptions = options and [o for o in options]
         if len(descriptions) < 2:
             raise InsuficientOptions(
-                _(u"You need to provide at least two options for a poll."))
+                _(u'You need to provide at least two options for a poll.'))
 
 
 class Poll(dexterity.Item):
-    """ A Poll in a Plone site
-    """
+
+    """A Poll in a Plone site."""
 
     grok.implements(IPoll)
 
@@ -115,12 +114,12 @@ class Poll(dexterity.Item):
         return utility
 
     def getOptions(self):
-        ''' Returns available options '''
+        """Return available options."""
         options = self.options
         return options
 
     def _getVotes(self):
-        ''' Return votes in a dict format '''
+        """Return votes in a dict format."""
         votes = {'options': [],
                  'total': 0}
         for option in self.getOptions():
@@ -137,7 +136,7 @@ class Poll(dexterity.Item):
         return votes
 
     def getResults(self):
-        ''' Returns results so far '''
+        """Return results so far."""
         votes = self._getVotes()
         all_results = []
         for item in votes['options']:
@@ -147,7 +146,7 @@ class Poll(dexterity.Item):
         return all_results
 
     def _validateVote(self, options=[]):
-        ''' Check if passed options are available here '''
+        """Check if passed options are available here."""
         available_options = [o['option_id'] for o in self.getOptions()]
         if isinstance(options, list):
             # TODO: Allow multiple options
@@ -157,7 +156,7 @@ class Poll(dexterity.Item):
             return options in available_options
 
     def _setVoter(self, request=None):
-        ''' Mark this user as a voter '''
+        """Mark this user as a voter."""
         utility = self.utility
         annotations = self.annotations
         voters = self.voters()
@@ -187,12 +186,12 @@ class Poll(dexterity.Item):
 
     @property
     def total_votes(self):
-        ''' Return the # of votes so far'''
+        """Return the number of votes so far."""
         votes = self._getVotes()
         return votes['total']
 
     def setVote(self, options=[], request=None):
-        ''' Set a vote on this poll '''
+        """Set a vote on this poll."""
         annotations = self.annotations
         utility = self.utility
         try:
@@ -216,8 +215,8 @@ class Poll(dexterity.Item):
 
 
 class PollAddForm(dexterity.AddForm):
-    """ Form to handle creation of new Polls
-    """
+
+    """Form to handle creation of new Polls."""
 
     grok.name('collective.polls.poll')
 
@@ -234,32 +233,23 @@ class PollAddForm(dexterity.AddForm):
 
 
 class PollEditForm(dexterity.EditForm):
-    """ Form to handle edition of existing Polls
-    """
+
+    """Form to handle edition of existing polls."""
 
     grok.context(IPoll)
 
-    # def updateFields(self):
-    #     ''' Update form fields to set options to use DataGridFieldFactory '''
-    #     super(PollEditForm, self).updateFields()
-    #     self.fields['options'].widgetFactory = DataGridFieldFactory
-    #
-    # def datagridUpdateWidgets(self, subform, widgets, widget):
-    #     ''' Hides the widgets in the datagrid subform '''
-    #     widgets['option_id'].mode = HIDDEN_MODE
-
     def updateWidgets(self):
-        ''' Update form widgets to hide column option_id from end user '''
+        """Update form widgets to hide column option_id from end user."""
         super(PollEditForm, self).updateWidgets()
 
         self.widgets['options'].allow_reorder = True
-        data = ""
-        for option in self.widgets['options'].value.split("\n"):
+        data = ''
+        for option in self.widgets['options'].value.split('\n'):
             if data:
-                data += "\n"
-            if option.strip().startswith("{"):
+                data += '\n'
+            if option.strip().startswith('{'):
                 new_val = eval(option)
-                data += new_val["description"]
+                data += new_val['description']
             else:
                 data = option
         self.widgets['options'].value = data
@@ -297,8 +287,8 @@ class View(grok.View):
         self.errors = []
         self.messages = []
 
-        #if the poll is open and anonymous should vote but the parent folder
-        #is private.. inform the user.
+        # if the poll is open and anonymous should vote but the parent folder
+        # is private.. inform the user.
 
         # When the poll's container is the site's root, we do not need to
         # check the permissions.
@@ -313,22 +303,22 @@ class View(grok.View):
             if 'Anonymous' not in roles and self.context.allow_anonymous:
                 messages.addStatusMessage(_(
                     u"Anonymous user won't be able to vote, you forgot to "
-                    u"publish the parent folder, you must sent back the poll "
-                    u"to private state, publish the parent folder and open "
-                    u"the poll again"), type="info")
+                    u'publish the parent folder, you must sent back the poll '
+                    u'to private state, publish the parent folder and open '
+                    u'the poll again'), type='info')
 
         if 'poll.submit' in form:
             self._updateForm(form)
         # Update status messages
         for error in self.errors:
-            messages.addStatusMessage(error, type="warn")
+            messages.addStatusMessage(error, type='warn')
         for msg in self.messages:
-            messages.addStatusMessage(msg, type="info")
+            messages.addStatusMessage(msg, type='info')
 
         # XXX
-        #if 'voting.from' in form:
-            #url = form['voting.from']
-            #self.request.RESPONSE.redirect(url)
+        # if 'voting.from' in form:
+        #     url = form['voting.from']
+        #     self.request.RESPONSE.redirect(url)
 
     def _updateForm(self, form):
         INVALID_OPTION = _(u'Invalid option')
@@ -369,7 +359,7 @@ class View(grok.View):
 
     @property
     def has_voted(self):
-        ''' has the current user voted in this poll? '''
+        """Return True if the current user voted in this poll."""
         if hasattr(self, '_has_voted') and self._has_voted:
             return True
         utility = self.utility
@@ -377,12 +367,12 @@ class View(grok.View):
         return voted
 
     def poll_uid(self):
-        ''' Return uid for current poll '''
+        """Return uid for current poll."""
         utility = self.utility
         return utility.uid_for_poll(self.context)
 
     def getOptions(self):
-        ''' Returns available options '''
+        """Return available options."""
         return self.context.getOptions()
 
     def class_name(self):
@@ -392,7 +382,7 @@ class View(grok.View):
         return ' '.join(classes)
 
     def getResults(self):
-        ''' Returns results so far if allowed'''
+        """Return results so far if allowed."""
         show_results = False
         if self.wf_state == 'open':
             show_results = show_results or self.context.show_results
@@ -406,4 +396,4 @@ class View(grok.View):
             if self.context.show_results_as == 'votes':
                 return results
             else:
-                return [(x[0], "{0:.2f}".format(x[2] * 100)) for x in results]
+                return [(x[0], '{0:.2f}'.format(x[2] * 100)) for x in results]
