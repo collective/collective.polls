@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.6 (unreleased)
+1.6 (2014-05-01)
 ^^^^^^^^^^^^^^^^
 
 - Add a default value to the voting portlet ``poll`` parameter. This fixes an
