@@ -6,7 +6,11 @@ There's a frood who really knows where his towel is.
 1.6 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Remove unnecesary code in portlet (clonse `#73`_).
+- Add a default value to the voting portlet ``poll`` parameter. This fixes an
+  issue happening when importing ``portlets.xml`` assignments.
+  [ericof]
+
+- Remove unnecesary code in portlet (closes `#73`_).
   [nueces]
 
 - In portlet link back to poll page (closes `#47`_).
