@@ -1,12 +1,11 @@
 *** Settings ***
 
-Library  Selenium2Library  timeout=5 seconds  implicit_wait=3 seconds
-Resource  keywords.txt
-Resource  workflow.txt
+Resource  plone/app/robotframework/keywords.robot
 Variables  plone/app/testing/interfaces.py
+Library  Remote  ${PLONE_URL}/RobotRemote
 
-Suite Setup  Start Browser and Log In
-Suite Teardown  Close Browser
+Test Setup  Open Test Browser
+Test Teardown  Close all browsers
 
 *** Variables ***
 
@@ -20,17 +19,29 @@ ${folder_title_selector}  input#title
 *** Test cases ***
 
 Test CRUD
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
     Create Poll  My poll  This is a test
     Update  My poll fixed  This is a fixed test
     Delete
 
 Test Poll in Private Folder
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
     Add Poll in Private Folder  Test Folder  Test Poll
 
 Test Poll in Public Folder
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
     Add Poll in Public Folder  Test Folder  Test Poll
 
 Test portlet poll
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
     Add Poll in Public Folder  Test Folder  Test Poll
     Go to  ${PLONE_URL}/@@manage-portlets
     Select From List By Label  css=#portletmanager-plone-rightcolumn select[name=":action"]  Voting portlet
@@ -51,15 +62,6 @@ Test portlet poll
     Page Should Not Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
 
 *** Keywords ***
-
-Start Browser and Log In
-    Open Browser  ${PLONE_URL}  browser=${BROWSER}
-    Go to  ${PLONE_URL}/login_form
-    Page should contain element  __ac_name
-    Input text  __ac_name  ${SITE_OWNER_NAME}
-    Input text  __ac_password  ${SITE_OWNER_PASSWORD}
-    Click Button  Log in
-    Goto Homepage
 
 Add Option
     [Arguments]  ${option}
