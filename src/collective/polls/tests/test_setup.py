@@ -35,8 +35,8 @@ class InstallTestCase(unittest.TestCase):
         permission = 'collective.polls: Add poll'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
-        self.assertEqual(roles, ['Contributor', 'Manager', 'Owner',
-                                 'Site Administrator'])
+        self.assertEqual(
+            roles, ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
     def test_vote_permission(self):
         permission = 'collective.polls: Vote'
@@ -53,12 +53,12 @@ class InstallTestCase(unittest.TestCase):
     def test_jsregistry(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         for id in JAVASCRIPTS:
-            self.assertTrue(id in resource_ids, '%s not installed' % id)
+            self.assertIn(id, resource_ids, '%s not installed' % id)
 
     def test_cssregistry(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
-            self.assertTrue(id in resource_ids, '%s not installed' % id)
+            self.assertIn(id, resource_ids, '%s not installed' % id)
 
 
 class UninstallTestCase(unittest.TestCase):
@@ -77,9 +77,9 @@ class UninstallTestCase(unittest.TestCase):
     def test_jsregistry_removed(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         for id in JAVASCRIPTS:
-            self.assertTrue(id not in resource_ids, '%s not removed' % id)
+            self.assertNotIn(id, resource_ids, '%s not removed' % id)
 
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
-            self.assertTrue(id not in resource_ids, '%s not removed' % id)
+            self.assertNotIn(id, resource_ids, '%s not removed' % id)
