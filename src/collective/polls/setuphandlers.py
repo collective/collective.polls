@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+from Products.CMFPlone.interfaces import INonInstallable
 from collective.polls.config import PROJECTNAME
 from five import grok
 from plone import api
-from Products.CMFPlone.interfaces import INonInstallable
 
 import logging
 

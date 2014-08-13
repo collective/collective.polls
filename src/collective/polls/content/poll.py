@@ -3,6 +3,8 @@
 from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from Acquisition import aq_parent
+from Products.CMFCore.interfaces import ISiteRoot
+from Products.statusmessages.interfaces import IStatusMessage
 from collective.polls import MessageFactory as _
 from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
@@ -13,8 +15,6 @@ from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldW
 from five import grok
 from plone.directives import dexterity
 from plone.directives import form
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter

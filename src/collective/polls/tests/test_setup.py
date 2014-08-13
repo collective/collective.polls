@@ -2,8 +2,8 @@
 
 from collective.polls.config import PROJECTNAME
 from collective.polls.testing import INTEGRATION_TESTING
-from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 
 import unittest
 

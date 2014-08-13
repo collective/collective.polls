@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from Products.CMFCore.WorkflowCore import WorkflowException
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.testing import INTEGRATION_TESTING
 from plone import api
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from Products.CMFCore.WorkflowCore import WorkflowException
 
 import unittest
 
