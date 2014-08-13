@@ -7,7 +7,4 @@
 
  <javascript id="++resource++collective.polls/js/collective.poll.js" compression="full" expression="" />
 
- <javascript id="@@legendothers_translation.js" cacheable="False" compression="safe" cookable="False" expression=""
-     enabled="True" inline="False" insert-before="++resource++collective.polls/js/collective.poll.js"
-     />
 </object>
