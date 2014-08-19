@@ -3,8 +3,8 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.7 (unreleased)
-^^^^^^^^^^^^^^^^
+1.6.1 (2014-08-19)
+^^^^^^^^^^^^^^^^^^
 
 - Remove ``@@legendothers_translation.js`` because it is not used anywhere.
   [rafaelbco]
