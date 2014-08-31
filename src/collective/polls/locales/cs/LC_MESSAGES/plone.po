@@ -1,0 +1,92 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: plone\n"
+"POT-Creation-Date: 2014-08-13 12:42+0000\n"
+"PO-Revision-Date: 2014-08-31 10:57+0100\n"
+"Last-Translator: Radim Novotny <novotny.radim@gmail.com>\n"
+"Language-Team: CS <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"Language: cs\n"
+"X-Generator: Poedit 1.6.8\n"
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "A portlet to allow voting on a specific poll"
+msgstr "Portlet umožňující hlasování ve vybrané anketě"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Uzavřít"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Closed"
+msgstr "Uzavřeno"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member retracts submission"
+msgstr "Editor ruší žádost o zveřejnění"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member submits poll for opening"
+msgstr "Editor žádá o otevření ankety"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Otevřít"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
+msgstr "Otevřeno"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Pending review"
+msgstr "Čeká na schválení"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Poll Workflow"
+msgstr "Workflow anket"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Private"
+msgstr "Nepřístupné"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Odmítnout"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Stáhnout"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer closes the poll"
+msgstr "Schvalovatel uzavírá hlasování"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer opens the poll"
+msgstr "Schvalovatel otevírá hlasování"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer rejects the poll"
+msgstr "Schvalovatel zamítá hlasování"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Požádat o zveřejnění"
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "Voting portlet"
+msgstr "Portlet hlasování"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr "Workflow pro ankety"

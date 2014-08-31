@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 1.6.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Added Czech translation
+  [naro]
 
 
 1.6.1 (2014-08-19)
