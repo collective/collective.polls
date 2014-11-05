@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-
-import zope.component
-import zope.interface
-import zope.schema
+from collective.polls import MessageFactory as _
+from collective.polls.widgets.interfaces import IEnhancedTextLinesWidget
 
 from z3c.form import interfaces
 from z3c.form import widget
 from z3c.form.browser import textarea
-
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 
-from collective.polls.widgets.interfaces import IEnhancedTextLinesWidget
-from collective.polls import MessageFactory as _
+import zope.component
+import zope.interface
+import zope.schema
 
 
 class EnhancedTextLinesWidget(textarea.TextAreaWidget):
@@ -19,7 +17,7 @@ class EnhancedTextLinesWidget(textarea.TextAreaWidget):
     system.
     """
     zope.interface.implementsOnly(IEnhancedTextLinesWidget)
-    klass = u"keyword-widget"
+    klass = u'keyword-widget'
     display_template = ViewPageTemplateFile('enhancedtextlines_display.pt')
     input_template = ViewPageTemplateFile('enhancedtextlines_input.pt')
 
@@ -39,10 +37,10 @@ class EnhancedTextLinesWidget(textarea.TextAreaWidget):
     """
 
     def js(self):
-        add = _(u"Add")
-        add_option = _(u"Add Option")
-        delete_option = _(u"Delete Option")
-        edit_option = _(u"Edit Option")
+        add = _(u'Add')
+        add_option = _(u'Add Option')
+        delete_option = _(u'Delete Option')
+        edit_option = _(u'Edit Option')
         return self.js_template % dict(id=self.id, add=add, add_task=add_option,
                                        delete_task=delete_option,
                                        edit_task=edit_option)

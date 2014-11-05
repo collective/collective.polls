@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-
-from collective.polls.widgets.enhancedtextlines import EnhancedTextLinesWidget
 from collective.polls.testing import INTEGRATION_TESTING
-from plone.app.testing import setRoles
+from collective.polls.widgets.enhancedtextlines import EnhancedTextLinesWidget
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from z3c.form.interfaces import DISPLAY_MODE
 
 import unittest2 as unittest
