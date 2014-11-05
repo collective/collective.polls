@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.9b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Removed dependency on collective.z3cform.widgets.
+  [sneridagh, hvelarde]
+
 - Add Catalan translation.
   [sneridagh]
 

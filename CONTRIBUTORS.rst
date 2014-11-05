@@ -15,6 +15,7 @@ the following people:
 - Jean-Michel FRANCOIS
 - Rodrigo Ferreira de Souza
 - `WebDesignerDepot`_ (icon)
+- Víctor Fernández de Alba
 
 You can find an updated list of package contributors on `GitHub`_.
 
