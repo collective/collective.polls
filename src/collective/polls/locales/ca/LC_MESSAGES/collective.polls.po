@@ -1,0 +1,212 @@
+# Víctor Fernández de Alba <sneridagh@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2014-11-05 20:34+0000\n"
+"PO-Revision-Date: 2014-11-05 21:55+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Code: ca\n"
+"Language-Name: Catalan\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.polls\n"
+"X-Generator: Poedit 1.6.10\n"
+"Language: ca\n"
+
+#: collective/polls/configure.zcml
+msgid "A Plone extension providing a Poll content type, portlet and workflow."
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "A poll"
+msgstr "Una enquesta"
+
+#: collective/polls/widgets/enhancedtextlines.py:40
+msgid "Add"
+msgstr "Afegeix"
+
+#: collective/polls/widgets/enhancedtextlines.py:41
+msgid "Add Option"
+msgstr "Afegeix opció"
+
+#: collective/polls/portlet/voteportlet.py:83
+msgid "Add a link to the poll"
+msgstr "Afegeix un enllaç a l'enquesta"
+
+#: collective/polls/content/poll.py:43
+msgid "Allow anonymous"
+msgstr "Permet respostes anònimes"
+
+#: collective/polls/content/poll.py:44
+msgid ""
+"Allow not logged in users to vote. The parent folder of this poll should be "
+"published before opeining the poll for this field to take effect"
+msgstr ""
+"Permet als usuaris que no estan autenticats votar. La carpeta pare d'aquesta "
+"enquesta ha d'estar publicada abans d'obrir l'enquesta."
+
+#: collective/polls/content/poll.py:296
+msgid ""
+"Anonymous user won't be able to vote, you forgot to publish the parent "
+"folder, you must sent back the poll to private state, publish the parent "
+"folder and open the poll again"
+msgstr ""
+"Els usuaris anònims no podran votar porquè ha oblidat publicar la carpeta "
+"pare d'aquesta enquesta. Ha de retirar l'enquesta a un estat privat, "
+"publicar la carpeta pare i obrir la enquesta un altre cop."
+
+#: collective/polls/content/poll.py:73
+msgid "Available options"
+msgstr "Opcions disponibles"
+
+#: collective/polls/content/poll_templates/view.pt:18
+msgid "Available options:"
+msgstr "Opcions disponibles:"
+
+#: collective/polls/content/poll.py:29
+msgid "Bar Chart"
+msgstr "Gràfica de barres"
+
+#: collective/polls/widgets/enhancedtextlines.py:42
+msgid "Delete Option"
+msgstr "Esborra opció"
+
+#: collective/polls/widgets/enhancedtextlines.py:43
+msgid "Edit Option"
+msgstr "Edita opció"
+
+#: collective/polls/content/poll.py:65
+msgid "Format to show the results."
+msgstr "Format per mostrar els resultats"
+
+#: collective/polls/content/poll.py:64
+msgid "Graph"
+msgstr "Gràfica"
+
+#: collective/polls/portlet/voteportlet.py:56
+msgid "Header"
+msgstr "Capçalera"
+
+#: collective/polls/portlet/voteportlet.py:76
+msgid ""
+"If there is no available open poll or the chosen poll is already closed, "
+"should the porlet show the results instead."
+msgstr ""
+"Dessitja que el portlet mostri el resultat de l'enquesta si no hi ha una "
+"enquesta oberta o la enquesta escollida ja està tancada?"
+
+#: collective/polls/content/poll.py:316
+msgid "Invalid option"
+msgstr "Opció invàlida"
+
+#: collective/polls/portlet/voteportlet.py:34
+msgid "Latest opened poll"
+msgstr "Última enquesta oberta"
+
+#: collective/polls/content/poll.py:35
+msgid "Not enought options provided"
+msgstr "No hi han opcions suficients"
+
+#: collective/polls/portlet/voteportlet.pt:59
+msgid "Nothing to see here"
+msgstr "Res a veure aquí"
+
+#: collective/polls/content/poll.py:31
+msgid "Numbers Only"
+msgstr "Només números"
+
+#: collective/polls/portlet/voteportlet.pt:38
+msgid "Partial results"
+msgstr "Resultats parcials"
+
+#: collective/polls/content/poll.py:30
+msgid "Pie Chart"
+msgstr "Gràfica de sectors"
+
+#: collective/polls/portlet/voteportlet.py:62
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Poll"
+msgstr "Enquesta"
+
+#: collective/polls/configure.zcml
+msgid "Polls"
+msgstr "Enquestes"
+
+#: collective/polls/configure.zcml
+msgid "Polls: Uninstall"
+msgstr ""
+
+#: collective/polls/content/poll_templates/view.pt:47
+#: collective/polls/portlet/voteportlet.pt:39
+msgid "Results"
+msgstr "Resultats"
+
+#: collective/polls/portlet/voteportlet.py:75
+msgid "Show closed polls"
+msgstr "Mostra les enquestes tancades"
+
+#: collective/polls/content/poll.py:57
+msgid "Show partial results"
+msgstr "Mostra resultats parcials"
+
+#: collective/polls/content/poll.py:58
+msgid "Show partial results after a voter has already voted."
+msgstr "Mostra resultats parcials després de que un usuari ja ha votat."
+
+#: collective/polls/portlet/voteportlet.py:70
+msgid "Show the number of collected votes so far."
+msgstr "Mostra els resultats de tots els vots fins ara."
+
+#: collective/polls/portlet/voteportlet.py:69
+msgid "Show total votes"
+msgstr "Mostra el número total de vots"
+
+#: collective/polls/content/poll_templates/view.pt:42
+#: collective/polls/portlet/voteportlet.pt:90
+msgid "Submit"
+msgstr "Envia"
+
+#: collective/polls/content/poll.py:329
+msgid "Thanks for your vote"
+msgstr "Gràcies pel seu vot"
+
+#: collective/polls/portlet/voteportlet.py:57
+msgid "The header for the portlet. Leave empty for none."
+msgstr "La capçalera del portlet. Deixar en blanc per que no apareixi."
+
+#: collective/polls/content/poll_templates/view.pt:61
+#: collective/polls/portlet/voteportlet.pt:107
+msgid "Total Votes:"
+msgstr "Vots totals:"
+
+#: collective/polls/configure.zcml
+msgid "Uninstall the collective.polls package."
+msgstr ""
+
+#: collective/polls/content/poll_templates/view.pt:27
+msgid "Vote!"
+msgstr "Voteu!"
+
+#: collective/polls/portlet/voteportlet.py:116
+msgid "Voting portlet"
+msgstr "Enquestes"
+
+#: collective/polls/portlet/voteportlet.py:63
+msgid "Which poll to show in the portlet."
+msgstr "Quina enquesta voleu que mostri el portlet?"
+
+#: collective/polls/content/poll.py:334
+msgid "You are not authorized to vote"
+msgstr "No esteu autoritzats a votar"
+
+#: collective/polls/content/poll.py:86
+msgid "You need to provide at least two options for a poll."
+msgstr "Necessiteu informar dues opcions com a mínim."
+
+#: collective/polls/portlet/voteportlet.pt:97
+msgid "spinner"
+msgstr ""
