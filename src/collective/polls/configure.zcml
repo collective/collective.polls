@@ -56,4 +56,11 @@
       factory="collective.polls.polls.Polls"
       />
 
+  <class class=".widgets.enhancedtextlines.EnhancedTextLinesWidget">
+    <require
+        permission="zope.Public"
+        interface=".widgets.interfaces.IEnhancedTextLinesWidget"
+        />
+  </class>
+
 </configure>

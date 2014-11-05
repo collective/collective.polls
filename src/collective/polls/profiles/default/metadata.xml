@@ -2,6 +2,5 @@
   <version>5</version>
     <dependencies>
         <dependency>profile-plone.app.dexterity:default</dependency>
-        <dependency>profile-collective.z3cform.widgets:default</dependency>
     </dependencies>
 </metadata>
