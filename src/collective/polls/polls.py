@@ -129,17 +129,15 @@ class Polls(grok.GlobalUtility):
 
     def allowed_to_edit(self, poll):
         """Return True if member is allowed to edit a poll."""
-        return (self.mt.checkPermission('Modify portal content', poll)
-                and True) or False
+        return self.mt.checkPermission('Modify portal content', poll) == 1
 
     def allowed_to_view(self, poll):
         """Return True if user is allowed to view this poll."""
-        return (self.mt.checkPermission('View', poll) and True) or False
+        return self.mt.checkPermission('View', poll) == 1
 
     def allowed_to_vote(self, poll, request=None):
         """Return True is user is allowed to vote in a poll."""
-        canVote = (self.mt.checkPermission('collective.polls: Vote', poll)
-                   and True) or False
+        canVote = self.mt.checkPermission('collective.polls: Vote', poll) == 1
         if canVote:
             # User must view the poll
             # and poll must be open to allow votes
