@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.6.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Update German translation.
+  [mbaechtold]
+
 - Added Czech translation
   [naro]
 

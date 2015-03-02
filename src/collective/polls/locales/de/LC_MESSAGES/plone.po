@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-08-13 12:42+0000\n"
+"POT-Creation-Date: 2015-03-02 12:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Close"
-msgstr "Umfrage Schliessen"
+msgstr "Umfrage schliessen"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Closed"
@@ -32,7 +32,7 @@ msgstr "User zieht Vorlage zurück"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Member submits poll for opening"
-msgstr "User reicht Umfrage zum öffnen ein"
+msgstr "User reicht Umfrage zum Öffnen ein"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Open"
@@ -44,7 +44,7 @@ msgstr "Geöffnet"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Pending review"
-msgstr "Überprüfung anstehend"
+msgstr "Überprüfung ausstehend"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Poll Workflow"
@@ -76,11 +76,11 @@ msgstr "Reviewer lehnt die Umfrage ab"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
-msgstr "Für Veröffentlichung einrechen"
+msgstr "Für Veröffentlichung einreichen"
 
 #: collective/polls/profiles/default/portlets.xml
 msgid "Voting portlet"
-msgstr ""
+msgstr "Umfrage-Portlet"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"
