@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from Acquisition import aq_parent
 from Products.CMFCore.interfaces import ISiteRoot
-from Products.statusmessages.interfaces import IStatusMessage
 from collective.polls import MessageFactory as _
 from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
@@ -13,6 +11,7 @@ from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from five import grok
+from plone import api
 from plone.directives import dexterity
 from plone.directives import form
 from zope import schema
@@ -267,7 +266,6 @@ class View(grok.View):
 
     def update(self):
         super(View, self).update()
-        messages = IStatusMessage(self.request)
         context = aq_inner(self.context)
         self.context = context
         self.state = getMultiAdapter(
@@ -293,19 +291,21 @@ class View(grok.View):
                 if r['selected']]
 
             if 'Anonymous' not in roles and self.context.allow_anonymous:
-                messages.addStatusMessage(_(
+                msg = _(
                     u"Anonymous user won't be able to vote, you forgot to "
                     u'publish the parent folder, you must sent back the poll '
                     u'to private state, publish the parent folder and open '
-                    u'the poll again'), type='info')
+                    u'the poll again'
+                )
+                api.portal.show_message(msg, self.request, type='warn')
 
         if 'poll.submit' in form:
             self._updateForm(form)
         # Update status messages
         for error in self.errors:
-            messages.addStatusMessage(error, type='warn')
+            api.portal.show_message(error, self.request, type='warn')
         for msg in self.messages:
-            messages.addStatusMessage(msg, type='info')
+            api.portal.show_message(msg, self.request, type='info')
 
         # XXX
         # if 'voting.from' in form:
