@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.6.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add upgrade step to remove missing resource from JS registry (fixes `#83`_).
+  [hvelarde]
+
 - Update German translation.
   [mbaechtold]
 
@@ -202,3 +205,4 @@ There's a frood who really knows where his towel is.
 .. _`#61`: https://github.com/collective/collective.polls/issues/61
 .. _`#64`: https://github.com/collective/collective.polls/issues/64
 .. _`#73`: https://github.com/collective/collective.polls/issues/73
+.. _`#83`: https://github.com/collective/collective.polls/issues/83

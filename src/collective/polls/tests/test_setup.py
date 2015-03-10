@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from collective.polls.config import PROFILE
 from collective.polls.config import PROJECTNAME
 from collective.polls.testing import INTEGRATION_TESTING
 from plone.app.testing import TEST_USER_ID
@@ -29,6 +29,11 @@ class InstallTestCase(unittest.TestCase):
     def test_installed(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
         self.assertTrue(qi.isProductInstalled(PROJECTNAME))
+
+    def test_profile_version(self):
+        setup_tool = self.portal['portal_setup']
+        self.assertEqual(
+            setup_tool.getLastVersionForProfile(PROFILE), (u'2',))
 
     def test_add_permission(self):
         permission = 'collective.polls: Add poll'
