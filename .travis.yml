@@ -1,23 +1,27 @@
 language: python
 python: 2.7
+sudo: false
+cache:
+  directories:
+  - eggs
 env:
-  - PLONE_VERSION=4.2
-  - PLONE_VERSION=4.3
-  - PLONE_VERSION=5.0
+- PLONE_VERSION=4.2
+- PLONE_VERSION=4.3
+- PLONE_VERSION=5.0
 matrix:
   allow_failures:
-    - env: PLONE_VERSION=5.0
+  - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
-  - sed -i "s#test-4.x.cfg#test-$PLONE_VERSION.x.cfg#" buildout.cfg
-  - test $PLONE_VERSION = 4.2 && sed -i "/\[versions\]/a collective.js.jqueryui = 1.8.16.9" buildout.cfg || true
-  - python bootstrap.py
-  - bin/buildout annotate
-  - bin/buildout -Nq
+- sed -i "s#test-4.x.cfg#test-$PLONE_VERSION.x.cfg#" buildout.cfg
+- test $PLONE_VERSION = 4.2 && sed -i "/\[versions\]/a collective.js.jqueryui = 1.8.16.9" buildout.cfg || true
+- python bootstrap.py
+- bin/buildout annotate
+- bin/buildout -Nq
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - firefox -v
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- firefox -v
 script:
 - bin/code-analysis
 - bin/test
