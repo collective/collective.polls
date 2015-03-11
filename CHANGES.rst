@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.6.2 (unreleased)
+1.6.2 (2015-03-11)
 ^^^^^^^^^^^^^^^^^^
 
 - Add upgrade step to remove missing resource from JS registry (fixes `#83`_).
