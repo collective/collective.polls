@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.polls">
+
+  <genericsetup:upgradeSteps
+      source="1"
+      destination="2"
+      profile="collective.polls:default">
+
+    <genericsetup:upgradeStep
+        title="issue 83"
+        description="Remove missing resource from JS registry."
+        handler=".v2.issue_83"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>
