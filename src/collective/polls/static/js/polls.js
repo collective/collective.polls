@@ -22,9 +22,9 @@
             if (this.options.type == 'bar') {
                 this.setup_bars_poll();
             }
-            
+
             if (this.options.type == 'pie') {
-                this.setup_pie_poll();            
+                this.setup_pie_poll();
             }
         },
 
@@ -66,21 +66,21 @@
 
             return bar_row
         },
-        
+
         _calculate_values: function(total_votes){
             var global_this = this;
             var rows = this.$element.find('.bar-row');
             var max_width = this.options['width'] ? this.options['width'] : this.$element.width();
-        
+
             rows.each(function(){
                 var $this = $(this);
                 var porcentual = 100 / total_votes * $this.data('bar_row_value');
                 var porcentual_real_str = (porcentual+'').substring(0,4) + ' %';
-                
+
                 $this.find('.bar').css({
                     'width': max_width / 100 * porcentual + 'px'
                 });
-                
+
                 if (global_this.options['show_porcentual']) {
                     $this.find('.bar').append($('<span/>')
                                       .html(porcentual_real_str));
@@ -109,23 +109,23 @@
                 var bar_row = this._create_bar(bar);
                 this.$element.append(bar_row);
             }
-            
+
             this._calculate_values(total_votes);
         },
-        
+
         setup_pie_poll: function () {
             var data = this.options.data;
             $.plot(this.$element, data,
-	            {
-		            series: {
-			            pie: { 
-			        	    show: true
-			            }
-		            },
-		            legend: {
+                {
+                    series: {
+                        pie: {
+                            show: true
+                        }
+                    },
+                    legend: {
                         show: this.options.show_labels
                     }
-	            }
+                }
             );
         }
 
@@ -158,7 +158,7 @@
         show_votes: true,
         show_porcentual: true,
         colors: ['#599B10', '#008B88', '#009ADD', '#F1AD00', '#FA5600',
-                 '#F8002A', '#599B10', '#008B88', '#009ADD', '#F1AD00', 
+                 '#F8002A', '#599B10', '#008B88', '#009ADD', '#F1AD00',
                  '#FA5600', '#F8002A'],
         data: []
     };

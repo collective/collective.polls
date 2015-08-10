@@ -31,7 +31,7 @@
                 <tal:title content="poll/Title"/>
             </a>
         </h3>
-   
+
 
         <tal:results condition="python:(not can_vote) and results">
         <tal:poll_results condition="nocall:results">
