@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+"""Setup of test for the package.
+
+We install collective.cover to test the availibility and features of
+the tile included for that package.
+"""
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -12,12 +17,13 @@ class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
+        import collective.cover
+        self.loadZCML(package=collective.cover)
         import collective.polls
         self.loadZCML(package=collective.polls)
 
     def setUpPloneSite(self, portal):
-        # Install into Plone site using portal_setup
+        self.applyProfile(portal, 'collective.cover:default')
         self.applyProfile(portal, 'collective.polls:default')
         wf = getattr(portal, 'portal_workflow')
         types = ('Folder', )

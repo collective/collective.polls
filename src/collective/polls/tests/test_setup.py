@@ -2,6 +2,7 @@
 from collective.polls.config import PROFILE
 from collective.polls.config import PROJECTNAME
 from collective.polls.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
@@ -33,7 +34,7 @@ class InstallTestCase(unittest.TestCase):
     def test_profile_version(self):
         setup_tool = self.portal['portal_setup']
         self.assertEqual(
-            setup_tool.getLastVersionForProfile(PROFILE), (u'2',))
+            setup_tool.getLastVersionForProfile(PROFILE), (u'3',))
 
     def test_add_permission(self):
         permission = 'collective.polls: Add poll'
@@ -64,6 +65,10 @@ class InstallTestCase(unittest.TestCase):
         for id in CSS:
             self.assertIn(id, resource_ids, '%s not installed' % id)
 
+    def test_tile(self):
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertIn(u'collective.polls', tiles)
+
 
 class UninstallTestCase(unittest.TestCase):
 
@@ -87,3 +92,7 @@ class UninstallTestCase(unittest.TestCase):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
             self.assertNotIn(id, resource_ids, '%s not removed' % id)
+
+    def test_tile_removed(self):
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertNotIn(u'collective.polls', tiles)

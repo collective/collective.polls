@@ -63,6 +63,8 @@ setup(name='collective.polls',
       ],
       extras_require={
           'test': [
+              'collective.cover',
+              'mock',
               'plone.app.robotframework',
               'plone.app.testing [robot] >=4.2.2',
               'plone.dexterity',

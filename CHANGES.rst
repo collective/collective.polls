@@ -3,10 +3,11 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.6.3 (unreleased)
+1.7 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Add Poll tile for collective.cover.
+  [hvelarde]
 
 
 1.6.2 (2015-03-11)

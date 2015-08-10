@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.polls.config import PROFILE
 from collective.polls.testing import INTEGRATION_TESTING
+from plone import api
 
 import unittest
 
@@ -72,3 +73,31 @@ class Upgrade1to2TestCase(UpgradeTestCaseBase):
         # run the upgrade step to validate the update
         self._do_upgrade_step(step)
         self.assertNotIn(id, js_tool.getResourceIds())
+
+
+class Upgrade2to3TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'2', u'3')
+
+    def test_upgrade_to_3_registrations(self):
+        version = self.setup.getLastVersionForProfile(PROFILE)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self._how_many_upgrades_to_do(), 1)
+
+    def test_add_poll_tile(self):
+        # check if the upgrade step is registered
+        title = u'Add poll tile'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        from collective.polls.Extensions.Install import remove_tile
+        remove_tile(api.portal.get())
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertNotIn(u'collective.polls', tiles)
+
+        # run the upgrade step to validate the update
+        self._do_upgrade_step(step)
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertIn(u'collective.polls', tiles)

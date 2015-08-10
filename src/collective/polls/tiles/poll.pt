@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="collective.polls">
+
+  <body>
+    <div class="poll-tile vote-container">
+      <div
+          tal:define="closed view/is_closed; poll view/poll;"
+          tal:condition="nocall:poll">
+        <div class="poll-tile-header">
+          <div class="header" i18n:translate="">Poll</div>
+        </div>
+        <div class="tile-content-wrapper"
+            tal:define="portal_url context/@@plone_portal_state/portal_url">
+          <h3 tal:content="poll/Title"/>
+          <form action="#" method="post"
+              tal:attributes="action poll/absolute_url">
+            <tal:one_choice repeat="option poll/options">
+              <input type="radio" name="#" value="#"
+                  tal:attributes="name string:options;
+                                  value option/option_id;"
+                  />
+              <span tal:content="option/description" />
+              <br/>
+            </tal:one_choice>
+
+            <input type="hidden" name="voting.from" value=""
+                tal:attributes="value context/absolute_url" />
+            <input type="hidden" name="poll.uuid" value=""
+                tal:attributes="value view/poll_uid" />
+            <input type="submit" name="poll.submit" value="Submit"
+                i18n:attributes="value" />
+          </form>
+
+          <tal:spinner>
+            <div class="poll-spinner">
+              <img alt="spiner" src="spinner.gif"
+                  tal:attributes="src string:${portal_url}/spinner.gif"
+                  i18n:attributes="alt" />
+            </div>
+          </tal:spinner>
+
+          <div class="tile-poll-more">
+            <a tal:attributes="href string:${portal_url}/polls"
+                i18n:translate="">See previous polls</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
