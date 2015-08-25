@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-02 12:33+0000\n"
+"POT-Creation-Date: 2015-08-25 12:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,19 +26,19 @@ msgstr "Eine Umfrage"
 msgid "Add a link to the poll"
 msgstr "Link zur Umfrage hinzufügen"
 
-#: collective/polls/content/poll.py:43
+#: collective/polls/content/poll.py:42
 msgid "Allow anonymous"
 msgstr "Anonym erlauben"
 
-#: collective/polls/content/poll.py:44
+#: collective/polls/content/poll.py:43
 msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
 msgstr "Nicht eingeloggte Benutzer dürfen teilnehmen. Das übergeordnete Verzeichnis dieser Umfrage sollte veröffenlticht werden, bevor die Umfrage geöffnet wird. Ansonsten hat diese Option keine Wirkung."
 
-#: collective/polls/content/poll.py:296
+#: collective/polls/content/poll.py:294
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr "Anonyme Benutzer können nicht teilnehmen, da das übergeordnete Verzeichnis nicht veröffentlicht ist. "
 
-#: collective/polls/content/poll.py:73
+#: collective/polls/content/poll.py:72
 msgid "Available options"
 msgstr "Verfügbare Optionen"
 
@@ -46,15 +46,15 @@ msgstr "Verfügbare Optionen"
 msgid "Available options:"
 msgstr "Verfügbare Optionen:"
 
-#: collective/polls/content/poll.py:29
+#: collective/polls/content/poll.py:28
 msgid "Bar Chart"
 msgstr "Balkendiagramm"
 
-#: collective/polls/content/poll.py:65
+#: collective/polls/content/poll.py:64
 msgid "Format to show the results."
 msgstr "Format zum Anzeigen des Resultates."
 
-#: collective/polls/content/poll.py:64
+#: collective/polls/content/poll.py:63
 msgid "Graph"
 msgstr "Diagramm"
 
@@ -74,7 +74,7 @@ msgstr "Ungültige Option"
 msgid "Latest opened poll"
 msgstr "Zuletzt geöffnete Umfrage"
 
-#: collective/polls/content/poll.py:35
+#: collective/polls/content/poll.py:34
 msgid "Not enought options provided"
 msgstr "Es stehen nicht genug Optionen zur Verfügung"
 
@@ -82,7 +82,7 @@ msgstr "Es stehen nicht genug Optionen zur Verfügung"
 msgid "Nothing to see here"
 msgstr "Hier gibt es nichts zu sehen"
 
-#: collective/polls/content/poll.py:31
+#: collective/polls/content/poll.py:30
 msgid "Numbers Only"
 msgstr "Nur Zahlen"
 
@@ -90,14 +90,19 @@ msgstr "Nur Zahlen"
 msgid "Partial results"
 msgstr "Teilresultat"
 
-#: collective/polls/content/poll.py:30
+#: collective/polls/content/poll.py:29
 msgid "Pie Chart"
 msgstr "Kuchendiagramm"
 
 #: collective/polls/portlet/voteportlet.py:62
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
+#: collective/polls/tiles/poll.pt:13
 msgid "Poll"
 msgstr "Umfrage"
+
+#: collective/polls/tiles/poll.py:20
+msgid "Poll uuid"
+msgstr ""
 
 #: collective/polls/configure.zcml
 msgid "Polls"
@@ -112,15 +117,19 @@ msgstr "Umfragen: Deinstallieren"
 msgid "Results"
 msgstr "Ergebnis"
 
+#: collective/polls/tiles/poll.pt:46
+msgid "See previous polls"
+msgstr ""
+
 #: collective/polls/portlet/voteportlet.py:75
 msgid "Show closed polls"
 msgstr "Geschlossene Umfragen anzeigen"
 
-#: collective/polls/content/poll.py:57
+#: collective/polls/content/poll.py:56
 msgid "Show partial results"
 msgstr "Teilergebnisse anzeigen"
 
-#: collective/polls/content/poll.py:58
+#: collective/polls/content/poll.py:57
 msgid "Show partial results after a voter has already voted."
 msgstr "Teilergebnisse anzeigen nachdem ein Benutzer abgestimmt hat."
 
@@ -134,6 +143,7 @@ msgstr "Anzahl Teilnahmen anzeigen"
 
 #: collective/polls/content/poll_templates/view.pt:42
 #: collective/polls/portlet/voteportlet.pt:90
+#: collective/polls/tiles/poll.pt:33
 msgid "Submit"
 msgstr "Absenden"
 
@@ -170,9 +180,13 @@ msgstr "Welche Umfrage soll im Portlet angezeigt werden."
 msgid "You are not authorized to vote"
 msgstr "Sie sind nicht zum Abstimmen berechtigt"
 
-#: collective/polls/content/poll.py:86
+#: collective/polls/content/poll.py:85
 msgid "You need to provide at least two options for a poll."
 msgstr "Sie müssen mindestens zwei Optionen für eine Umfrage angeben."
+
+#: collective/polls/tiles/poll.pt:39
+msgid "spiner"
+msgstr ""
 
 #: collective/polls/portlet/voteportlet.pt:97
 msgid "spinner"
