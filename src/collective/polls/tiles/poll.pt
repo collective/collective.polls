@@ -41,11 +41,6 @@
                   i18n:attributes="alt" />
             </div>
           </tal:spinner>
-
-          <div class="tile-poll-more">
-            <a tal:attributes="href string:${portal_url}/polls"
-                i18n:translate="">See previous polls</a>
-          </div>
         </div>
       </div>
     </div>
