@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.polls">
+
+  <include package="plone.tiles" file="meta.zcml" />
+
+  <plone:tile
+      name="collective.polls"
+      title="Poll Tile"
+      description="A tile that shows a poll."
+      icon="++resource++collective.polls/tile-poll.png"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".poll.IPollTile"
+      class=".poll.PollTile"
+      permission="zope2.View"
+      for="*"
+      />
+
+</configure>

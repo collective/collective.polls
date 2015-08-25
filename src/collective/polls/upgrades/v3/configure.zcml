@@ -5,18 +5,16 @@
     i18n_domain="collective.polls">
 
   <genericsetup:upgradeSteps
-      source="1"
-      destination="2"
+      source="2"
+      destination="3"
       profile="collective.polls:default">
 
     <genericsetup:upgradeStep
-        title="issue 83"
-        description="Remove missing resource from JS registry."
-        handler=".v2.issue_83"
+        title="Add poll tile"
+        description="Add Poll tile for collective.cover."
+        handler=".add_poll_tile"
         />
 
   </genericsetup:upgradeSteps>
-
-  <include package=".v3" />
 
 </configure>
