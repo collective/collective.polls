@@ -157,7 +157,7 @@ msgstr "Portlettitel. Leer lassen um keinen Titel darzustellen."
 
 #: collective/polls/content/poll_templates/view.pt:61
 #: collective/polls/portlet/voteportlet.pt:107
-msgid "Total Votes:"
+msgid "Total votes:"
 msgstr "Anzahl Teilnahmen:"
 
 #: collective/polls/configure.zcml

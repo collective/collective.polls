@@ -162,8 +162,8 @@ msgstr "Le titre de la portlet. Laisser vide pour ne pas afficher le titre."
 
 #: collective/polls/content/poll_templates/view.pt:61
 #: collective/polls/portlet/voteportlet.pt:107
-msgid "Total Votes:"
-msgstr "Total des votes :"
+msgid "Total votes:"
+msgstr "Total des votes:"
 
 #: collective/polls/configure.zcml
 msgid "Uninstall the collective.polls package."

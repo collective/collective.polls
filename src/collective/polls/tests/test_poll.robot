@@ -49,7 +49,7 @@ Test portlet poll
     Select From List By Label  id=form.poll  Latest opened poll
     Click Button  Save
     Goto Homepage
-    Page Should Contain  Total Votes
+    Page Should Contain  Total votes
     Page Should Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
     Go to  ${PLONE_URL}/@@manage-portlets
     Click Element  link=Voting portlet
@@ -57,7 +57,7 @@ Test portlet poll
     Unselect Checkbox  name=form.link_poll
     Click Button  Save
     Goto Homepage
-    Page Should Not Contain  Total Votes
+    Page Should Not Contain  Total votes
     Page Should Contain Element  css=#portal-column-two dl.votePortlet h3
     Page Should Not Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
 

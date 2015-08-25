@@ -157,7 +157,7 @@ msgstr "Portlettitel. Laat leeg voor geen titel."
 
 #: collective/polls/content/poll_templates/view.pt:61
 #: collective/polls/portlet/voteportlet.pt:107
-msgid "Total Votes:"
+msgid "Total votes:"
 msgstr "Aantal stemmen:"
 
 #: collective/polls/configure.zcml

@@ -160,7 +160,7 @@ msgstr ""
 
 #: collective/polls/content/poll_templates/view.pt:61
 #: collective/polls/portlet/voteportlet.pt:107
-msgid "Total Votes:"
+msgid "Total votes:"
 msgstr ""
 
 #: collective/polls/configure.zcml

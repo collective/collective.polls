@@ -160,7 +160,7 @@ msgstr "El encabezado del portlet. Déjelo en blanco si no desea uno."
 
 #: collective/polls/content/poll_templates/view.pt:61
 #: collective/polls/portlet/voteportlet.pt:107
-msgid "Total Votes:"
+msgid "Total votes:"
 msgstr "Votos totales:"
 
 #: collective/polls/configure.zcml

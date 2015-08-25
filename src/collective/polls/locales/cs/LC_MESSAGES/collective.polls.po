@@ -162,7 +162,7 @@ msgstr "Název portletu. Můžete nechat prázdné."
 
 #: collective/polls/content/poll_templates/view.pt:61
 #: collective/polls/portlet/voteportlet.pt:107
-msgid "Total Votes:"
+msgid "Total votes:"
 msgstr "Celkový počet výsledků: "
 
 #: collective/polls/configure.zcml
