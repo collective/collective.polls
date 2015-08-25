@@ -13,17 +13,14 @@ anonymous and logged-in users.
 Mostly Harmless
 ---------------
 
-.. image:: https://secure.travis-ci.org/collective/collective.polls.png?branch=master
+.. image:: http://img.shields.io/pypi/v/collective.polls.svg
+   :target: https://pypi.python.org/pypi/collective.polls
+
+.. image:: https://img.shields.io/travis/collective/collective.polls/master.svg
     :target: http://travis-ci.org/collective/collective.polls
-    :alt: Travis CI badge
 
-.. image:: https://coveralls.io/repos/collective/collective.polls/badge.png?branch=master
+.. image:: https://img.shields.io/coveralls/collective/collective.polls/master.svg
     :target: https://coveralls.io/r/collective/collective.polls
-    :alt: Coveralls badge
-
-.. image:: https://pypip.in/d/collective.polls/badge.png
-    :target: https://pypi.python.org/pypi/collective.polls/
-    :alt: Downloads
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
