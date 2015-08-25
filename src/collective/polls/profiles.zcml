@@ -27,6 +27,9 @@
      handler="collective.polls.setuphandlers.setupVarious"
      />
 
+  <utility factory=".setuphandlers.HiddenProfiles" name="collective.polls" />
+  <utility factory=".setuphandlers.HiddenProducts" name="collective.polls" />
+
   <include package=".upgrades" />
 
 </configure>
