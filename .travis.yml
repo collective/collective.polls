@@ -4,6 +4,7 @@ sudo: false
 cache:
   directories:
   - eggs
+  - parts/node
 env:
 - PLONE_VERSION=4.2
 - PLONE_VERSION=4.3
