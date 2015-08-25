@@ -1,23 +1,34 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces import INonInstallable
 from collective.polls.config import PROJECTNAME
-from five import grok
 from plone import api
+from Products.CMFPlone import interfaces as Plone
+from Products.CMFQuickInstallerTool import interfaces as QuickInstaller
+from zope.interface import implements
 
 import logging
 
 logger = logging.getLogger(PROJECTNAME)
 
 
-class HiddenProfiles(grok.GlobalUtility):
+class HiddenProfiles(object):
 
-    grok.implements(INonInstallable)
-    grok.provides(INonInstallable)
-    grok.name('collective.polls')
+    implements(Plone.INonInstallable)
 
     def getNonInstallableProfiles(self):
-        profiles = ['collective.polls:uninstall', ]
-        return profiles
+        """Do not show on Plone's list of installable profiles."""
+        return [
+            u'collective.polls:uninstall',
+        ]
+
+
+class HiddenProducts(object):
+
+    implements(QuickInstaller.INonInstallable)
+
+    def getNonInstallableProducts(self):
+        """Do not show on QuickInstaller's list of installable products."""
+        return [
+        ]
 
 
 def updateWorkflowDefinitions(portal):
