@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<registry>
+  <record field="available_tiles"
+          interface="collective.cover.controlpanel.ICoverSettings"
+          name="collective.cover.controlpanel.ICoverSettings.available_tiles">
+    <value purge="false">
+      <element>collective.polls</element>
+    </value>
+  </record>
+</registry>

@@ -58,10 +58,9 @@ class PollTile(PersistentCoverTile):
 
     def getVotingResults(self):
         poll = self.poll()
-        if poll.show_results:
+        if poll and poll.show_results:
             return poll.getResults()
-        else:
-            return None
+        return None
 
     @property
     def can_vote(self):

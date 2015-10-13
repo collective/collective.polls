@@ -20,6 +20,14 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:registerProfile
+      name="testfixture"
+      title="collective.polls: testfixture"
+      directory="profiles/testfixture"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
   <genericsetup:importStep
      name="collective.polls"
      title="collective.polls special import handlers"

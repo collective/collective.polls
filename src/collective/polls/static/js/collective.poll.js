@@ -2,6 +2,44 @@
 
     "use strict"; // jshint ;_;
 
+  $(function() {
+    if ($('.poll-tile').length > 0) {
+      var update_tile = function($tile) {
+        // Get updated page with ajax
+        $.ajax({
+          url: location.href,
+          context: $tile,
+          success: function(info) {
+            var $tile = this;
+            // Filter just the current tile data
+            var updated_info = $(info).find('#' + $tile.attr('id'));
+            // Update html and draw the poll
+            $tile.html(updated_info.html());
+            $('.poll-data, .votePortlet form').drawpoll();
+          }
+      });
+    };
+
+    $('.poll-tile form').on('submit', function(e) {
+        // stop form submit and submit with ajax
+        e.preventDefault();
+        var $form = $(this);
+        $.ajax({
+          type: 'POST',
+          url: $form.attr('action'),
+          data: $form.serialize() + '&poll.submit=Submit',
+          context: this,
+          success: function(data) {
+            var $form = $(this);
+            var $tile = $form.parents('.tile');
+            // After ajax submit, update the tile
+            update_tile($tile);
+          }
+        });
+      });
+    }
+  });
+
     var DrawPoll = function (element, options) {
         this.init(element);
     };

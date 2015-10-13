@@ -25,6 +25,7 @@ class Fixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'collective.cover:default')
         self.applyProfile(portal, 'collective.polls:default')
+        self.applyProfile(portal, 'collective.polls:testfixture')
         wf = getattr(portal, 'portal_workflow')
         types = ('Folder', )
         wf.setChainForPortalTypes(types, 'simple_publication_workflow')

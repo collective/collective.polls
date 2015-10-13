@@ -1,6 +1,6 @@
 *** Settings ***
 
-Resource  plone/app/robotframework/keywords.robot
+Resource  collective/cover/tests/cover.robot
 Variables  plone/app/testing/interfaces.py
 Library  Remote  ${PLONE_URL}/RobotRemote
 
@@ -15,6 +15,9 @@ ${description_selector}  textarea#form-widgets-IBasic-description
 ${option_placeholder}  textarea.task-description
 ${folder_link_placeholder}  a#folder
 ${folder_title_selector}  input#title
+${polls_tile_location}  'collective.polls'
+${tile_selector}  div.tile-container div.tile
+${poll_selector}  .ui-draggable .contenttype-collective-polls-poll
 
 *** Test cases ***
 
@@ -60,6 +63,41 @@ Test portlet poll
     Page Should Not Contain  Total votes
     Page Should Contain Element  css=#portal-column-two dl.votePortlet h3
     Page Should Not Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
+
+Test tile poll
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
+    Add Poll in Public Folder  Test Folder  Test Poll
+    Go to Homepage
+
+    Create Cover  Title  Description  Empty layout
+
+    # add a poll tile to the layout
+    Edit Cover Layout
+    Add Tile  ${polls_tile_location}
+    Save Cover Layout
+
+    # as tile is empty, we see default message
+    Compose Cover
+    Page Should Contain  Poll Tile
+
+    # populate tile
+    Open Content Chooser
+    Click Element  link=Content tree
+    Click Element  css=.ui-draggable a[href*=test-folder]
+    Drag And Drop  css=${poll_selector}  css=${tile_selector}
+    Wait Until Page Contains Element  css=div.poll-tile.vote-container
+
+    # move to the default view and check tile persisted
+    Click Link  link=View
+    Page Should Contain Element  css=div.poll-tile.vote-container
+
+    # select a poll and check if there is a bar chart
+    Click Element  css=input[type="radio"][value="1"]
+    Click Element  css=input[name="poll.submit"]
+    Wait Until Page Contains Element  css=div.poll-data.bar-poll
+
 
 *** Keywords ***
 

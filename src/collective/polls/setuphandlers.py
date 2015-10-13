@@ -17,6 +17,7 @@ class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         """Do not show on Plone's list of installable profiles."""
         return [
+            u'collective.polls:testfixture',
             u'collective.polls:uninstall',
         ]
 
