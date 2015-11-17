@@ -14,8 +14,8 @@ matrix:
   - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
-- sed -i "s#test-4.x#test-$PLONE_VERSION#" buildout.cfg
-- test $PLONE_VERSION = 4.2 && sed -i "/\[versions\]/a collective.js.jqueryui = 1.8.16.9" buildout.cfg || true
+- sed -i "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
+- sed -i "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
 - python bootstrap.py
 - bin/buildout annotate
 - bin/buildout -Nq
@@ -28,7 +28,7 @@ script:
 - bin/test
 after_success:
 - bin/createcoverage -t "--layer=!Robot"
-- pip install -q coveralls
+- pip install --upgrade coveralls
 - coveralls
 notifications:
   irc: irc.freenode.org#simplesconsultoria
