@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 1.8 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Poll tile now displays the results of the poll after a vote has been cast (closes `#90`_).
+  [rodfersou]
 
 
 1.7 (2015-08-25)
@@ -219,3 +220,4 @@ There's a frood who really knows where his towel is.
 .. _`#64`: https://github.com/collective/collective.polls/issues/64
 .. _`#73`: https://github.com/collective/collective.polls/issues/73
 .. _`#83`: https://github.com/collective/collective.polls/issues/83
+.. _`#90`: https://github.com/collective/collective.polls/issues/90
