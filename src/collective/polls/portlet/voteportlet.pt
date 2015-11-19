@@ -1,120 +1,115 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      tal:omit-tag="">
-
-<dl class="portlet votePortlet vote-container"
-    tal:define="portal_state context/@@plone_portal_state;
-                portal_url portal_state/portal_url;
-                poll view/poll;
-                has_poll nocall:poll"
-    tal:attributes="data-manager view/portlet_manager_name;
-                    data-url context/absolute_url;"
-    i18n:domain="collective.polls">
-
-    <dt class="portletHeader" tal:condition="view/data/header">
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    tal:omit-tag="">
+  <dl class="portlet votePortlet vote-container"
+      tal:define="portal_state context/@@plone_portal_state;
+                  portal_url portal_state/portal_url;
+                  poll view/poll;
+                  has_poll nocall:poll"
+      tal:attributes="data-manager view/portlet_manager_name;
+                      data-url context/absolute_url;"
+      i18n:domain="collective.polls">
+    <dt class="portletHeader"
+        tal:condition="view/data/header">
         <span class="portletTopLeft" />
         <span tal:content="view/data/header" />
         <span class="portletTopRight" />
     </dt>
-
     <dd class="portletItem odd"
         tal:define="can_vote view/can_vote;
                     closed view/is_closed;
                     results view/getVotingResults;
                     toLocalizedTime nocall:context/@@plone/toLocalizedTime"
         tal:condition="has_poll">
-
-        <h3>
-            <a tal:omit-tag="not:view/data/link_poll"
-               tal:attributes="href poll/absolute_url">
-                <tal:title content="poll/Title"/>
-            </a>
-        </h3>
-
-
-        <tal:results condition="python:(not can_vote) and results">
+      <h3>
+        <a tal:omit-tag="not:view/data/link_poll"
+            tal:attributes="href poll/absolute_url">
+          <tal:title content="poll/Title"/>
+        </a>
+      </h3>
+      <tal:results condition="python:(not can_vote) and results">
         <tal:poll_results condition="nocall:results">
-        <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
-        <h4 tal:condition="closed" i18n:translate="">Results</h4>
-        <div class="poll-data"
-             tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
+          <h4 tal:condition="not:closed"
+              i18n:translate="">Partial results</h4>
+          <h4 tal:condition="closed"
+              i18n:translate="">Results</h4>
+          <div class="poll-data"
+              tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
             <div class="portletpollresultholder"></div>
             <ul class="poll-results">
-                <li tal:repeat="option_result results">
-                    <span class="option_description"
-                        tal:content="python: option_result[0]" />:
-                    <span class="option_result"
-                        tal:content="python: option_result[1]" />
-                </li>
+              <li tal:repeat="option_result results">
+                <span class="option_description"
+                    tal:content="python: option_result[0]" />:
+                <span class="option_result"
+                    tal:content="python: option_result[1]" />
+              </li>
             </ul>
-        </div>
+          </div>
         </tal:poll_results>
-        </tal:results>
-
-        <tal:comments replace="nothing">
+      </tal:results>
+      <tal:comments replace="nothing">
         <!-- XXX: Why is this necessary ? -->
-        </tal:comments>
-        <tal:no_results condition="python:not(can_vote or results)">
+      </tal:comments>
+      <tal:no_results condition="python:not(can_vote or results)">
         <h4 i18n:translate="">Nothing to see here</h4>
-        </tal:no_results>
-
-        <tal:voting condition="view/can_vote">
+      </tal:no_results>
+      <tal:voting condition="view/can_vote">
         <form method="post"
             tal:attributes="action poll/absolute_url">
-
-            <tal:comments replace="nothing">
+          <tal:comments replace="nothing">
             <tal:one_choice repeat="answer current_poll/answers"
                 condition="not: current_poll/multivalue" />
-            </tal:comments>
-            <tal:one_choice repeat="option poll/options">
-                <input type="radio"
-                    tal:attributes="name string:options;
+          </tal:comments>
+          <tal:one_choice repeat="option poll/options">
+            <input type="radio"
+                tal:attributes="name string:options;
                                     value option/option_id" />
-                <span tal:content="option/description" /><br />
-            </tal:one_choice>
-
-            <tal:comments replace="nothing">
+            <span tal:content="option/description" />
+            <br />
+          </tal:one_choice>
+          <tal:comments replace="nothing">
             <tal:multi_choice repeat="answer current_poll/answers"
                 condition="current_poll/multivalue">
-                <input type="checkbox" name="answers:list"
-                    tal:attributes="value answer" />
-                <span tal:content="answer" /><br />
+              <input type="checkbox"
+                  name="answers:list"
+                  tal:attributes="value answer" />
+              <span tal:content="answer" />
+              <br />
             </tal:multi_choice>
-            </tal:comments>
-
-            <input type="hidden" name="voting.from"
-                tal:attributes="value context/absolute_url" />
-            <input type="hidden" name="poll.uuid"
-                tal:attributes="value view/poll_uid" />
-            <input type="submit" name="poll.submit" value="Submit" class="context"
-                i18n:attributes="value" />
+          </tal:comments>
+          <input type="hidden"
+              name="voting.from"
+              tal:attributes="value context/absolute_url" />
+          <input type="hidden"
+              name="poll.uuid"
+              tal:attributes="value view/poll_uid" />
+          <input type="submit"
+              name="poll.submit"
+              value="Submit"
+              class="context"
+              i18n:attributes="value" />
         </form>
-        </tal:voting>
-
-        <tal:spinner>
+      </tal:voting>
+      <tal:spinner>
         <div class="poll-spinner">
-            <img alt="spinner" i18n:attributes="alt"
-                tal:attributes="src string:${portal_url}/spinner.gif" />
+          <img alt="spinner"
+              i18n:attributes="alt"
+              tal:attributes="src string:${portal_url}/spinner.gif" />
         </div>
-        </tal:spinner>
-
+      </tal:spinner>
     </dd>
-
     <dd class="portletFooter"
         tal:condition="python:has_poll and view.data.show_total">
-        <span class="portletBottomLeft" />
-        <span i18n:translate="">Total votes:</span>
-        <span tal:content="poll/total_votes">23</span>
-        <span class="portletBottomRight" />
+      <span class="portletBottomLeft" />
+      <span i18n:translate="">Total votes:</span>
+      <span tal:content="poll/total_votes">23</span>
+      <span class="portletBottomRight" />
     </dd>
-
     <dd class="portletFooter"
         tal:condition="python:not has_poll or not view.data.show_total">
-        <span class="portletBottomLeft" />
-        <span class="portletBottomRight" />
+      <span class="portletBottomLeft" />
+      <span class="portletBottomRight" />
     </dd>
-
-</dl>
-
+  </dl>
 </html>
