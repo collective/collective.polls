@@ -2,8 +2,8 @@
 from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from Acquisition import aq_parent
-from Products.CMFCore.interfaces import ISiteRoot
 from collective.polls import MessageFactory as _
+from collective.polls.browser import PollsViewMixin
 from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
@@ -14,6 +14,7 @@ from five import grok
 from plone import api
 from plone.directives import dexterity
 from plone.directives import form
+from Products.CMFCore.interfaces import ISiteRoot
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
@@ -257,7 +258,7 @@ class PollEditForm(dexterity.EditForm):
         super(PollEditForm, self).applyChanges(data)
 
 
-class View(grok.View):
+class View(PollsViewMixin, grok.View):
 
     grok.context(IPoll)
     grok.require('zope2.View')
@@ -271,7 +272,6 @@ class View(grok.View):
         self.state = getMultiAdapter(
             (context, self.request), name=u'plone_context_state')
         self.wf_state = self.state.workflow_state()
-        self.utility = context.utility
         # Handle vote
         form = self.request.form
         self.errors = []
@@ -333,45 +333,9 @@ class View(grok.View):
             except Unauthorized:
                 self.errors.append(_(u'You are not authorized to vote'))
 
-    @property
-    def can_vote(self):
-        if hasattr(self, '_has_voted') and self._has_voted:
-            # This is mainly to avoid anonymous users seeing the form again
-            return False
-        utility = self.utility
-        try:
-            return utility.allowed_to_vote(self.context, self.request)
-        except Unauthorized:
-            return False
-
-    @property
-    def can_edit(self):
-        utility = self.utility
-        return utility.allowed_to_edit(self.context)
-
-    @property
-    def has_voted(self):
-        """Return True if the current user voted in this poll."""
-        if hasattr(self, '_has_voted') and self._has_voted:
-            return True
-        utility = self.utility
-        voted = utility.voted_in_a_poll(self.context, self.request)
-        return voted
-
-    def poll_uid(self):
-        """Return uid for current poll."""
-        utility = self.utility
-        return utility.uid_for_poll(self.context)
+    def poll(self):
+        return self.context
 
     def getOptions(self):
         """Return available options."""
         return self.context.getOptions()
-
-    def getResults(self):
-        """Return results so far if allowed."""
-        show_results = False
-        if self.wf_state == 'open':
-            show_results = show_results or self.context.show_results
-        elif self.wf_state == 'closed':
-            show_results = True
-        return (show_results and self.context.getResults()) or None

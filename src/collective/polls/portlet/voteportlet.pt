@@ -19,7 +19,7 @@
     <dd class="portletItem odd"
         tal:define="can_vote view/can_vote;
                     closed view/is_closed;
-                    results view/getVotingResults;
+                    results view/voting_results;
                     toLocalizedTime nocall:context/@@plone/toLocalizedTime"
         tal:condition="has_poll">
       <h3>

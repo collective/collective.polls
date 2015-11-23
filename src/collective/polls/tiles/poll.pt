@@ -8,7 +8,7 @@
       <div tal:define="closed view/is_closed;
                        poll view/poll;
                        can_vote view/can_vote;
-                       results view/getVotingResults;"
+                       results view/voting_results;"
           tal:condition="nocall:poll">
         <div class="poll-tile-header">
           <div class="header"

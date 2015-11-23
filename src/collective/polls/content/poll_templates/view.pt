@@ -9,7 +9,7 @@
   <body>
     <metal:main fill-slot="content-core">
       <metal:content-core define-macro="content-core"
-          tal:define="results view/getResults;
+          tal:define="results view/voting_results;
                       has_voted view/has_voted;
                       can_vote view/can_vote;
                       can_edit view/can_edit;">
