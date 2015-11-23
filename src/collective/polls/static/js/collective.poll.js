@@ -38,6 +38,11 @@
         });
       });
     }
+    $('a.toggle-result').on('click', function(e) {
+      e.preventDefault();
+      var $poll = $(this).parents('.poll');
+      $('.poll-result', $poll).toggleClass('active');
+    });
   });
 
   var DrawPoll = function(element, options) {
@@ -132,8 +137,11 @@
     },
 
     setup_portlet: function(type) {
-      if (type == 'pie') {
+      if (type === 'pie') {
         this.content_handler.height(150);
+      } else if (type === 'bar') {
+        var width = this.poll.parents('.portletItem').width();
+        this.content_handler.width(width);
       }
     },
     setup_default: function(type) {
@@ -214,7 +222,8 @@
 
       if (!data) $this.data('drawpoll', (data = new DrawPoll(this, options)));
       if (typeof option == 'string') data[option]();
-    })
+    });
+
   };
 
   $.fn.drawpoll.Constructor = DrawPoll;

@@ -16,6 +16,7 @@ class PollsViewMixin:
 
     @property
     def available(self):
+        """Check if Poll is available."""
         utility = self.utility
         poll = self.poll()
         if poll:
@@ -31,7 +32,8 @@ class PollsViewMixin:
 
     @property
     def can_vote(self):
-        if hasattr(self, '_has_voted') and self._has_voted:
+        """Check if user can vote."""
+        if getattr(self, '_has_voted', False) and self._has_voted:
             # This is mainly to avoid anonymous users seeing the form again
             return False
         utility = self.utility
@@ -45,27 +47,39 @@ class PollsViewMixin:
 
     @property
     def can_edit(self):
+        """Check if user can edit the poll."""
         utility = self.utility
-        return utility.allowed_to_edit(self.context)
+        poll = self.poll()
+        return utility.allowed_to_edit(poll)
 
     def is_closed(self):
+        """Check if poll is closed."""
         state = 'closed'
-        if self.poll():
-            state = self.context.portal_workflow.getInfoFor(
-                self.poll(), 'review_state')
+        poll = self.poll()
+        if poll:
+            state = poll.portal_workflow.getInfoFor(
+                poll, 'review_state')
         return state == 'closed'
 
     @property
     def has_voted(self):
         """Return True if the current user voted in this poll."""
-        if hasattr(self, '_has_voted') and self._has_voted:
+        if getattr(self, '_has_voted', False) and self._has_voted:
             return True
+        poll = self.poll()
         utility = self.utility
-        voted = utility.voted_in_a_poll(self.context, self.request)
+        voted = utility.voted_in_a_poll(poll, self.request)
         return voted
 
     def voting_results(self):
+        """Get the voting results."""
         poll = self.poll()
         if poll and poll.show_results:
             return poll.getResults()
         return None
+
+    @property
+    def total_votes(self):
+        """Return the number of votes so far."""
+        poll = self.poll()
+        return poll.total_votes

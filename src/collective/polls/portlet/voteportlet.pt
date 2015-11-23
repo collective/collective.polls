@@ -2,11 +2,17 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     tal:omit-tag="">
-  <dl class="portlet votePortlet vote-container"
+  <dl class="poll portlet votePortlet vote-container"
       tal:define="portal_state context/@@plone_portal_state;
                   portal_url portal_state/portal_url;
                   poll view/poll;
-                  has_poll nocall:poll"
+                  has_poll nocall:poll;
+                  can_edit view/can_edit;
+                  can_vote view/can_vote;
+                  has_voted view/has_voted;
+                  closed view/is_closed;
+                  results view/voting_results;
+                  toLocalizedTime nocall:context/@@plone/toLocalizedTime"
       tal:attributes="data-manager view/portlet_manager_name;
                       data-url context/absolute_url;"
       i18n:domain="collective.polls">
@@ -17,10 +23,6 @@
         <span class="portletTopRight" />
     </dt>
     <dd class="portletItem odd"
-        tal:define="can_vote view/can_vote;
-                    closed view/is_closed;
-                    results view/voting_results;
-                    toLocalizedTime nocall:context/@@plone/toLocalizedTime"
         tal:condition="has_poll">
       <h3>
         <a tal:omit-tag="not:view/data/link_poll"
@@ -28,12 +30,11 @@
           <tal:title content="poll/Title"/>
         </a>
       </h3>
-      <tal:results condition="python:(not can_vote) and results">
+      <div tal:attributes="class python:'poll-result' + (' active' if has_voted or closed else '')"
+          tal:condition="results">
         <tal:poll_results condition="nocall:results">
-          <h4 tal:condition="not:closed"
-              i18n:translate="">Partial results</h4>
-          <h4 tal:condition="closed"
-              i18n:translate="">Results</h4>
+          <h4 tal:condition="closed" i18n:translate="">Results</h4>
+          <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
           <div class="poll-data"
               tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
             <div class="portletpollresultholder"></div>
@@ -47,14 +48,22 @@
             </ul>
           </div>
         </tal:poll_results>
-      </tal:results>
-      <tal:comments replace="nothing">
-        <!-- XXX: Why is this necessary ? -->
-      </tal:comments>
+        <tal:total condition="python:has_poll and view.data.show_total and not(can_edit)">
+          <div class="total-votes">
+            <span i18n:translate="">Total votes:</span>
+            <span tal:content="poll/total_votes">23</span>
+          </div>
+        </tal:total>
+        <a href="#"
+            class="toggle-result"
+            i18n:translate=""
+            tal:condition="python: not has_voted and not closed">Vote</a>
+      </div>
       <tal:no_results condition="python:not(can_vote or results)">
         <h4 i18n:translate="">Nothing to see here</h4>
       </tal:no_results>
-      <tal:voting condition="view/can_vote">
+      <div class="poll-result active"
+          tal:condition="python: not has_voted and not closed">
         <form method="post"
             tal:attributes="action poll/absolute_url">
           <tal:comments replace="nothing">
@@ -90,7 +99,11 @@
               class="context"
               i18n:attributes="value" />
         </form>
-      </tal:voting>
+        <a href="#"
+            class="toggle-result"
+            i18n:translate=""
+            tal:condition="results">Partial results</a>
+      </div>
       <tal:spinner>
         <div class="poll-spinner">
           <img alt="spinner"
@@ -99,15 +112,7 @@
         </div>
       </tal:spinner>
     </dd>
-    <dd class="portletFooter"
-        tal:condition="python:has_poll and view.data.show_total">
-      <span class="portletBottomLeft" />
-      <span i18n:translate="">Total votes:</span>
-      <span tal:content="poll/total_votes">23</span>
-      <span class="portletBottomRight" />
-    </dd>
-    <dd class="portletFooter"
-        tal:condition="python:not has_poll or not view.data.show_total">
+    <dd class="portletFooter">
       <span class="portletBottomLeft" />
       <span class="portletBottomRight" />
     </dd>

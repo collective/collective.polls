@@ -52,17 +52,16 @@ Test portlet poll
     Select From List By Label  id=form.poll  Latest opened poll
     Click Button  Save
     Goto Homepage
-    Page Should Contain  Total votes
+    Page Should Contain  Latest poll
     Page Should Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
     Go to  ${PLONE_URL}/@@manage-portlets
     Click Element  link=Voting portlet
-    Unselect Checkbox  name=form.show_total
     Unselect Checkbox  name=form.link_poll
     Click Button  Save
     Goto Homepage
-    Page Should Not Contain  Total votes
-    Page Should Contain Element  css=#portal-column-two dl.votePortlet h3
+    Page Should Contain  Latest poll
     Page Should Not Contain Element  css=#portal-column-two dl.votePortlet h3 a[href$="test-poll"]
+    Page Should Contain Element  css=#portal-column-two dl.votePortlet h3
 
 Test tile poll
     Enable Autologin as  Site Administrator

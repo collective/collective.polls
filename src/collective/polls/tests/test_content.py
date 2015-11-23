@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from AccessControl import Unauthorized
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.content.poll import IPoll
@@ -207,7 +206,7 @@ class VotingTest(unittest.TestCase):
             self.p1.setVote(options)
 
         results = self.p1.getResults()
-        self.assertEqual(results[options][1], 0)
+        self.assertEqual(results, [])
 
         total = self.p1.total_votes
         self.assertEqual(total, 0)
@@ -265,7 +264,7 @@ class VotingTest(unittest.TestCase):
             self.p1.setVote(options)
 
         results = self.p1.getResults()
-        self.assertEqual(results[options][1], 0)
+        self.assertEqual(results, [])
         total = self.p1.total_votes
         self.assertEqual(total, 0)
 
@@ -277,7 +276,7 @@ class VotingTest(unittest.TestCase):
             self.p1.setVote(options)
 
         results = self.p2.getResults()
-        self.assertEqual(results[options][1], 0)
+        self.assertEqual(results, [])
         total = self.p2.total_votes
         self.assertEqual(total, 0)
 

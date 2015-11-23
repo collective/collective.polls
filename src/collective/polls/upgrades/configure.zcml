@@ -18,5 +18,6 @@
   </genericsetup:upgradeSteps>
 
   <include package=".v3" />
+  <include package=".v4" />
 
 </configure>

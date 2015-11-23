@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.8 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- Add link to show partial results of an open poll (closes `#93`_).
+  [rodfersou]
+
 - Poll tile now displays the results of the poll after a vote has been cast (closes `#90`_).
   [rodfersou]
 
@@ -221,3 +224,4 @@ There's a frood who really knows where his towel is.
 .. _`#73`: https://github.com/collective/collective.polls/issues/73
 .. _`#83`: https://github.com/collective/collective.polls/issues/83
 .. _`#90`: https://github.com/collective/collective.polls/issues/90
+.. _`#93`: https://github.com/collective/collective.polls/issues/93

@@ -130,6 +130,9 @@ class Poll(dexterity.Item):
     def getResults(self):
         """Return results so far."""
         votes = self._getVotes()
+        # Bars show wrong when there are no vote
+        if votes['total'] == 0:
+            return []
         all_results = []
         for item in votes['options']:
             all_results.append((item['description'],
