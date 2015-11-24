@@ -18,3 +18,9 @@
 .bar-row .bar span {
     display:none;
 }
+.poll-result {
+    display: none;
+}
+.poll-result.active {
+    display: block;
+}

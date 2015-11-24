@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-from AccessControl import Unauthorized
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.polls import MessageFactory as _
-from collective.polls.polls import IPolls
+from collective.polls.browser import PollsViewMixin
 from plone.app.uuid.utils import uuidToObject
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.component import queryUtility
 from zope.schema import TextLine
 
 
@@ -22,7 +20,7 @@ class IPollTile(IPersistentCoverTile):
     )
 
 
-class PollTile(PersistentCoverTile):
+class PollTile(PollsViewMixin, PersistentCoverTile):
 
     """A tile that shows a poll."""
 
@@ -35,12 +33,6 @@ class PollTile(PersistentCoverTile):
         if uuid is not None:
             obj = uuidToObject(uuid)
             return obj
-
-    @property
-    def utility(self):
-        """Access to IPolls utility."""
-        utility = queryUtility(IPolls, name='collective.polls')
-        return utility
 
     def poll(self):
         utility = self.utility
@@ -56,43 +48,11 @@ class PollTile(PersistentCoverTile):
             poll = results and results[0].getObject() or None
         return poll
 
-    def getVotingResults(self):
-        poll = self.poll()
-        if poll and poll.show_results:
-            return poll.getResults()
-        return None
-
-    @property
-    def can_vote(self):
-        utility = self.utility
-        poll = self.poll()
-        if poll:
-            try:
-                return utility.allowed_to_vote(poll, self.request)
-            except Unauthorized:
-                return False
-        return False
-
-    @property
-    def available(self):
-        utility = self.utility
-        poll = self.poll()
-        if poll:
-            can_view = utility.allowed_to_view(poll)
-            # Do not show this portlet in the poll context
-            return can_view and not (poll == self.context)
-        return False
-
     def populate_with_object(self, obj):
         super(PollTile, self).populate_with_object(obj)
         uuid = IUUID(obj, None)
         data_mgr = ITileDataManager(self)
         data_mgr.set({'uuid': uuid})
-
-    def poll_uid(self):
-        """Return uid for current poll."""
-        utility = self.utility
-        return utility.uid_for_poll(self.poll())
 
     def delete(self):
         data_mgr = ITileDataManager(self)
@@ -104,10 +64,3 @@ class PollTile(PersistentCoverTile):
     def has_data(self):
         uuid = self.data.get('uuid', None)
         return uuid is not None
-
-    def is_closed(self):
-        state = 'closed'
-        if self.poll():
-            state = self.context.portal_workflow.getInfoFor(
-                self.poll(), 'review_state')
-        return state == 'closed'

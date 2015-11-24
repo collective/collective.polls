@@ -9,62 +9,80 @@
   <body>
     <metal:main fill-slot="content-core">
       <metal:content-core define-macro="content-core"
-          tal:define="results view/getResults;
+          tal:define="results view/voting_results;
                       has_voted view/has_voted;
                       can_vote view/can_vote;
+                      closed view/is_closed;
                       can_edit view/can_edit;">
-        <tal:editing tal:condition="can_edit">
-          <h2 i18n:translate="">Available options:</h2>
-          <ul>
-            <li tal:repeat="option view/getOptions">
-              <span tal:content="option/description" />
-            </li>
-          </ul>
-        </tal:editing>
-        <tal:vote tal:condition="can_vote">
-          <h2 i18n:translate="">Vote!</h2>
-          <form action="#"
-              method="post"
-              tal:attributes="action context/absolute_url">
-            <tal:one_choice repeat="option context/options">
-              <input type="radio"
-                  name="#"
-                  value="#"
-                  tal:attributes="name string:options;
-                                  value option/option_id;" />
-              <span tal:content="option/description" />
-              <br/>
-            </tal:one_choice>
-            <input type="hidden"
-                name="poll.uuid"
-                value=""
-                tal:attributes="value view/poll_uid" />
-            <input type="submit"
-                name="poll.submit"
-                value="Submit"
-                i18n:attributes="value" />
-          </form>
-        </tal:vote>
-        <tal:results tal:condition="python:results and not can_vote">
-          <h2 i18n:translate="">Results</h2>
-          <div class="poll-data"
-              tal:attributes="class python:'poll-data ' + ('bar-poll' if context.results_graph == 'bar' else 'pie-poll')">
-            <div class="pollresultholder"></div>
-            <ul class="poll-results">
-              <li tal:repeat="option_result results">
-                <span class="option_description"
-                    tal:content="python: option_result[0]" />:
-                <span class="option_result"
-                    tal:content="python: option_result[1]" />
+        <div class="poll">
+          <tal:editing tal:condition="can_edit">
+            <h2 i18n:translate="">Available options:</h2>
+            <ul>
+              <li tal:repeat="option view/getOptions">
+                <span tal:content="option/description" />
               </li>
             </ul>
-          </div>
-        </tal:results>
-        <tal:total_votes condition="not:can_edit">
-          <div class="total-votes">
-            <span i18n:translate="">Total votes:</span> <span tal:content="context/total_votes">23</span>
-          </div>
-        </tal:total_votes>
+          </tal:editing>
+          <tal:editing tal:condition="not:can_edit">
+            <div class="poll-result active"
+                tal:condition="python: not has_voted and not closed">
+              <form action="#"
+                  method="post"
+                  tal:attributes="action context/absolute_url">
+                <tal:one_choice repeat="option context/options">
+                  <input type="radio"
+                      name="#"
+                      value="#"
+                      tal:attributes="name string:options;
+                                      value option/option_id;" />
+                  <span tal:content="option/description" />
+                  <br/>
+                </tal:one_choice>
+                <input type="hidden"
+                    name="poll.uuid"
+                    value=""
+                    tal:attributes="value view/poll_uid" />
+                <input type="submit"
+                    name="poll.submit"
+                    value="Submit"
+                    i18n:attributes="value" />
+              </form>
+              <a href="#"
+                  class="toggle-result"
+                  i18n:translate=""
+                  tal:condition="results">Partial results</a>
+            </div>
+            <div class=""
+                tal:condition="results"
+                tal:define="closed view/is_closed"
+                tal:attributes="class python:'poll-result' + (' active' if has_voted or closed else '')">
+              <h2 tal:condition="closed" i18n:translate="">Results</h2>
+              <h2 tal:condition="not:closed" i18n:translate="">Partial results</h2>
+              <div class="poll-data"
+                  tal:attributes="class python:'poll-data ' + ('bar-poll' if context.results_graph == 'bar' else 'pie-poll')">
+                <div class="pollresultholder"></div>
+                <ul class="poll-results">
+                  <li tal:repeat="option_result results">
+                    <span class="option_description"
+                        tal:content="python: option_result[0]" />:
+                    <span class="option_result"
+                        tal:content="python: option_result[1]" />
+                  </li>
+                </ul>
+              </div>
+              <tal:total_votes condition="not:can_edit">
+                <div class="total-votes">
+                  <span i18n:translate="">Total votes:</span>
+                  <span tal:content="view/total_votes">23</span>
+                </div>
+              </tal:total_votes>
+              <a href="#"
+                  class="toggle-result"
+                  i18n:translate=""
+                  tal:condition="python: not has_voted and not closed">Vote</a>
+            </div>
+          </tal:editing>
+        </div>
       </metal:content-core>
     </metal:main>
   </body>

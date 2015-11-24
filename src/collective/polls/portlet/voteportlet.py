@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-from AccessControl import Unauthorized
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from collective.polls import MessageFactory as _
+from collective.polls.browser import PollsViewMixin
 from collective.polls.polls import IPolls
 from plone import api
 from plone.app.portlets.portlets import base
@@ -116,7 +115,7 @@ class Assignment(base.Assignment):
         return _(u'Voting portlet')
 
 
-class Renderer(base.Renderer):
+class Renderer(PollsViewMixin, base.Renderer):
 
     """Portlet renderer.
 
@@ -126,12 +125,6 @@ class Renderer(base.Renderer):
     """
 
     render = ViewPageTemplateFile('voteportlet.pt')
-
-    @property
-    def utility(self):
-        """Access to IPolls utility."""
-        utility = queryUtility(IPolls, name='collective.polls')
-        return utility
 
     def portlet_manager_name(self):
         column = self.manager.__name__
@@ -167,41 +160,6 @@ class Renderer(base.Renderer):
             )
             poll = results and results[0].getObject() or None
         return poll
-
-    def poll_uid(self):
-        """Return uid for current poll."""
-        utility = self.utility
-        return utility.uid_for_poll(self.poll())
-
-    def getVotingResults(self):
-        poll = self.poll()
-        if poll and poll.show_results:
-            return poll.getResults()
-        return None
-
-    @property
-    def can_vote(self):
-        utility = self.utility
-        poll = self.poll()
-        try:
-            return utility.allowed_to_vote(poll, self.request)
-        except Unauthorized:
-            return False
-
-    @property
-    def available(self):
-        utility = self.utility
-        poll = self.poll()
-        if poll:
-            can_view = utility.allowed_to_view(poll)
-            # Do not show this portlet in the poll context
-            return can_view and not (poll == self.context)
-        return False
-
-    def is_closed(self):
-        state = self.context.portal_workflow.getInfoFor(
-            self.poll(), 'review_state')
-        return state == 'closed'
 
 
 class AddForm(base.AddForm):
