@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.8 (unreleased)
+1.8 (2015-11-24)
 ^^^^^^^^^^^^^^^^
 
 - Add link to show partial results of an open poll (closes `#93`_).
