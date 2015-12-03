@@ -153,7 +153,6 @@
           break;
         case 'bar':
           width = 300;
-          this.content_handler.width(width);
           break;
       }
       this.extra_conf['width'] = width;
