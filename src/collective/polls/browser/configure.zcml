@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+      name="poll-macros"
+      template="templates/poll_macros.pt"
+      for="*"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      name="update-poll"
+      template="templates/update_poll.pt"
+      for="collective.polls.content.poll.IPoll"
+      class=".update_poll.UpdatePollView"
+      permission="zope2.View"
+      />
+
+</configure>

@@ -15,12 +15,15 @@
     text-align:center;
     left:50%;
 }
+.bar-row .bar {
+    max-width: 100%;
+}
 .bar-row .bar span {
     display:none;
 }
-.poll-result {
+.poll-toggle {
     display: none;
 }
-.poll-result.active {
+.poll-toggle.active {
     display: block;
 }

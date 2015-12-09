@@ -7,14 +7,12 @@
                   portal_url portal_state/portal_url;
                   poll view/poll;
                   has_poll nocall:poll;
-                  can_edit view/can_edit;
                   can_vote view/can_vote;
-                  has_voted view/has_voted;
-                  closed view/is_closed;
-                  results view/voting_results;
-                  toLocalizedTime nocall:context/@@plone/toLocalizedTime"
-      tal:attributes="data-manager view/portlet_manager_name;
-                      data-url context/absolute_url;"
+                  results view/voting_results;"
+      tal:attributes="data-poll-uid view/poll_uid;
+                      data-poll-closed view/is_closed;
+                      data-poll-totalvotes view/total_votes;
+                      data-poll-url poll/absolute_url;"
       i18n:domain="collective.polls">
     <dt class="portletHeader"
         tal:condition="view/data/header">
@@ -30,80 +28,21 @@
           <tal:title content="poll/Title"/>
         </a>
       </h3>
-      <div tal:attributes="class python:'poll-result' + (' active' if has_voted or closed else '')"
-          tal:condition="results">
-        <tal:poll_results condition="nocall:results">
-          <h4 tal:condition="closed" i18n:translate="">Results</h4>
-          <h4 tal:condition="not:closed" i18n:translate="">Partial results</h4>
-          <div class="poll-data"
-              tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
-            <div class="portletpollresultholder"></div>
-            <ul class="poll-results">
-              <li tal:repeat="option_result results">
-                <span class="option_description"
-                    tal:content="python: option_result[0]" />:
-                <span class="option_result"
-                    tal:content="python: option_result[1]" />
-              </li>
-            </ul>
-          </div>
-        </tal:poll_results>
-        <tal:total condition="python:has_poll and view.data.show_total and not(can_edit)">
-          <div class="total-votes">
-            <span i18n:translate="">Total votes:</span>
-            <span tal:content="poll/total_votes">23</span>
-          </div>
-        </tal:total>
-        <a href="#"
-            class="toggle-result"
-            i18n:translate=""
-            tal:condition="python: not has_voted and not closed">Vote</a>
+      <div class="poll-graph poll-toggle">
+        <span metal:use-macro="context/@@poll-macros/results" />
       </div>
       <tal:no_results condition="python:not(can_vote or results)">
         <h4 i18n:translate="">Nothing to see here</h4>
       </tal:no_results>
-      <div class="poll-result active"
-          tal:condition="python: not has_voted and not closed">
-        <form method="post"
-            tal:attributes="action poll/absolute_url">
-          <tal:comments replace="nothing">
-            <tal:one_choice repeat="answer current_poll/answers"
-                condition="not: current_poll/multivalue" />
-          </tal:comments>
-          <tal:one_choice repeat="option poll/options">
-            <input type="radio"
-                tal:attributes="name string:options;
-                                    value option/option_id" />
-            <span tal:content="option/description" />
-            <br />
-          </tal:one_choice>
-          <tal:comments replace="nothing">
-            <tal:multi_choice repeat="answer current_poll/answers"
-                condition="current_poll/multivalue">
-              <input type="checkbox"
-                  name="answers:list"
-                  tal:attributes="value answer" />
-              <span tal:content="answer" />
-              <br />
-            </tal:multi_choice>
-          </tal:comments>
-          <input type="hidden"
-              name="voting.from"
-              tal:attributes="value context/absolute_url" />
-          <input type="hidden"
-              name="poll.uuid"
-              tal:attributes="value view/poll_uid" />
-          <input type="submit"
-              name="poll.submit"
-              value="Submit"
-              class="context"
-              i18n:attributes="value" />
-        </form>
-        <a href="#"
-            class="toggle-result"
-            i18n:translate=""
-            tal:condition="results">Partial results</a>
+      <div class="poll-form poll-toggle">
+        <span metal:use-macro="context/@@poll-macros/form" />
       </div>
+      <noscript>
+        <div class="error" i18n:translate="">
+          Your browser is currently not supporting Javascript,
+          for this reason some functionality may not be accessible.
+        </div>
+      </noscript>
       <tal:spinner>
         <div class="poll-spinner">
           <img alt="spinner"
