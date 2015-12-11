@@ -3,8 +3,8 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.9 (unreleased)
-^^^^^^^^^^^^^^^^
+1.8.1 (2015-12-11)
+^^^^^^^^^^^^^^^^^^
 
 - The display of poll results was refactored to avoid issues with reverse proxies like Varnish;
   updates are now handled client-side using AJAX calls (closes `#96`_).
