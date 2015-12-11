@@ -36,6 +36,7 @@
            directory="static"
            />
 
+  <include package=".browser" />
   <include package=".portlet" />
 
   <include file="profiles.zcml" />

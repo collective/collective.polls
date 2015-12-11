@@ -3,10 +3,18 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.9 (unreleased)
-^^^^^^^^^^^^^^^^
+1.8.2 (unreleased)
+^^^^^^^^^^^^^^^^^^
 
 - Nothing changed yet.
+
+
+1.8.1 (2015-12-11)
+^^^^^^^^^^^^^^^^^^
+
+- The display of poll results was refactored to avoid issues with reverse proxies like Varnish;
+  updates are now handled client-side using AJAX calls (closes `#96`_).
+  [rodfersou]
 
 
 1.8 (2015-11-24)
@@ -231,3 +239,4 @@ There's a frood who really knows where his towel is.
 .. _`#83`: https://github.com/collective/collective.polls/issues/83
 .. _`#90`: https://github.com/collective/collective.polls/issues/90
 .. _`#93`: https://github.com/collective/collective.polls/issues/93
+.. _`#96`: https://github.com/collective/collective.polls/issues/96

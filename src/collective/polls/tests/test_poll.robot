@@ -97,6 +97,31 @@ Test tile poll
     Click Element  css=input[name="poll.submit"]
     Wait Until Page Contains Element  css=div.poll-data.bar-poll
 
+# Robot Framework can't see the cookie information
+# May be related to: https://github.com/robotframework/Selenium2Library/issues/273
+Test poll workflow
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
+    Add Poll in Public Folder  Test Folder  Test Poll
+
+    # select a poll and check if there is a bar chart
+    Click Element  css=input[type="radio"][value="1"]
+    Click Element  css=input[name="poll.submit"]
+    Wait Until Page Contains Element  css=div.poll-data.bar-poll
+
+    Workflow Reject
+    Wait Until Page Contains  Available options:
+    Element Should Not Be Visible  css=input[name="poll.submit"]
+    
+    Workflow Open
+    Click Element  css=input[type="radio"][value="1"]
+    Click Element  css=input[name="poll.submit"]
+    Wait Until Page Contains Element  css=div.poll-data.bar-poll
+
+    Workflow Close
+    Wait Until Page Contains Element  css=div.poll-data.bar-poll
+
 
 *** Keywords ***
 
@@ -162,6 +187,12 @@ Create Folder
 
 Workflow Open
     Trigger Workflow Transition  open
+
+Workflow Reject
+    Trigger Workflow Transition  reject
+
+Workflow Close
+    Trigger Workflow Transition  close
 
 Add Poll in Private Folder
     [arguments]  ${folder_title}  ${poll_title}

@@ -4,87 +4,34 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.polls">
   <body>
-    <div class="poll poll-tile vote-container">
-      <div tal:define="closed view/is_closed;
-                       poll view/poll;
-                       can_vote view/can_vote;
-                       can_edit view/can_edit;
-                       has_voted view/has_voted;
-                       closed view/is_closed;
-                       results view/voting_results;"
-          tal:condition="nocall:poll">
+    <div class="poll poll-tile vote-container"
+        tal:define="poll view/poll"
+        tal:attributes="data-poll-uid view/poll_uid;
+                        data-poll-closed view/is_closed;
+                        data-poll-totalvotes view/total_votes;
+                        data-poll-url poll/absolute_url;">
+      <div tal:condition="nocall:poll">
         <div class="poll-tile-header">
-          <div class="header"
-              i18n:translate="">
-            Poll
-          </div>
+          <h3 tal:content="poll/Title">Title</h3>
         </div>
-        <div class="tile-content-wrapper"
-            tal:define="portal_url context/@@plone_portal_state/portal_url">
-          <div class="poll-result active"
-              tal:condition="python: not has_voted and not closed">
-            <h3 tal:content="poll/Title" />
-            <form action="#"
-                method="post"
-                tal:attributes="action poll/absolute_url">
-              <tal:one_choice repeat="option poll/options">
-                <input type="radio"
-                    name="#"
-                    value="#"
-                    tal:attributes="name string:options;
-                                    value option/option_id;" />
-                <span tal:content="option/description" />
-                <br/>
-              </tal:one_choice>
-              <input type="hidden"
-                  name="voting.from"
-                  value=""
-                  tal:attributes="value context/absolute_url" />
-              <input type="hidden"
-                  name="poll.uuid"
-                  value=""
-                  tal:attributes="value view/poll_uid" />
-              <input type="submit"
-                  name="poll.submit"
-                  value="Submit"
-                  i18n:attributes="value" />
-            </form>
-            <a href="#"
-                class="toggle-result"
-                i18n:translate=""
-                tal:condition="results">Partial results</a>
+        <div class="tile-content-wrapper">
+          <div class="poll-form poll-toggle">
+            <span metal:use-macro="context/@@poll-macros/form" />
           </div>
-          <div tal:attributes="class python:'poll-result' + (' active' if has_voted or closed else '')"
-              tal:condition="results">
-            <h2 tal:condition="closed" i18n:translate="">Results</h2>
-            <h2 tal:condition="not:closed" i18n:translate="">Partial results</h2>
-            <div class="poll-data"
-                tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
-              <div class="pollresultholder"></div>
-              <ul class="poll-results">
-                <li tal:repeat="option_result results">
-                  <span class="option_description"
-                      tal:content="python: option_result[0]" />:
-                  <span class="option_result"
-                      tal:content="python: option_result[1]" />
-                </li>
-              </ul>
+          <div class="poll-graph poll-toggle">
+            <span metal:use-macro="context/@@poll-macros/results" />
+          </div>
+          <noscript>
+            <div class="error" i18n:translate="">
+              Your browser is currently not supporting Javascript,
+              for this reason some functionality may not be accessible.
             </div>
-            <tal:total_votes condition="not:can_edit">
-              <div class="total-votes">
-                <span i18n:translate="">Total votes:</span>
-                <span tal:content="view/total_votes">23</span>
-              </div>
-            </tal:total_votes>
-            <a href="#"
-                class="toggle-result"
-                i18n:translate=""
-                tal:condition="python: not has_voted and not closed">Vote</a>
-          </div>
+          </noscript>
           <tal:spinner>
             <div class="poll-spinner">
               <img alt="spiner"
                   src="spinner.gif"
+                  tal:define="portal_url context/@@plone_portal_state/portal_url"
                   tal:attributes="src string:${portal_url}/spinner.gif"
                   i18n:attributes="alt" />
             </div>

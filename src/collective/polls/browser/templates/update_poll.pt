@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="collective.polls"
+    tal:omit-tag="">
+  <body tal:omit-tag="">
+    <span metal:use-macro="context/@@poll-macros/results" />
+  </body>
+</html>
+

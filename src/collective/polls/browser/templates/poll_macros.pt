@@ -1,0 +1,61 @@
+<metal:form define-macro="form"
+    tal:define="poll view/poll;
+                results view/voting_results;">
+  <form method="post"
+      tal:attributes="action poll/absolute_url">
+    <tal:one_choice repeat="option poll/options">
+      <input type="radio"
+          name="#"
+          value="#"
+          tal:attributes="name string:options;
+                          value option/option_id;" />
+      <span tal:content="option/description" />
+      <br/>
+    </tal:one_choice>
+    <input type="hidden"
+        name="voting.from"
+        value=""
+        tal:attributes="value poll/absolute_url" />
+    <input type="hidden"
+        name="poll.uuid"
+        value=""
+        tal:attributes="value view/poll_uid" />
+    <input type="submit"
+        name="poll.submit"
+        value="Submit"
+        i18n:attributes="value" />
+  </form>
+  <a href="#"
+      class="toggle-result"
+      i18n:translate="">Partial results</a>
+</metal:form>
+
+<metal:results define-macro="results"
+    tal:define="closed view/is_closed;
+                poll view/poll;
+                can_edit view/can_edit;
+                results view/voting_results;"
+    tal:condition="results">
+  <p tal:condition="not:closed" i18n:translate="">Partial results</p>
+  <div class="poll-data"
+      tal:attributes="class python:'poll-data ' + ('bar-poll' if poll.results_graph == 'bar' else 'pie-poll')">
+    <div class="pollresultholder"></div>
+    <ul class="poll-results">
+      <li tal:repeat="option_result results">
+        <span class="option_description"
+            tal:content="python: option_result[0]" />:
+        <span class="option_result"
+            tal:content="python: option_result[1]" />
+      </li>
+    </ul>
+  </div>
+  <tal:total_votes condition="not:can_edit">
+    <div class="total-votes">
+      <span i18n:translate="">Total votes:</span>
+      <span tal:content="view/total_votes">23</span>
+    </div>
+  </tal:total_votes>
+  <a href="#"
+      class="toggle-result"
+      i18n:translate="">Vote</a>
+</metal:results>

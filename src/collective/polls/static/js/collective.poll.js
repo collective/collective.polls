@@ -3,45 +3,71 @@
   "use strict"; // jshint ;_;
 
   $(function() {
-    if ($('.poll-tile').length > 0) {
-      var update_tile = function($tile) {
-        // Get updated page with ajax
-        $.ajax({
-          url: location.href,
-          context: $tile,
-          success: function(info) {
-            var $tile = this;
-            // Filter just the current tile data
-            var updated_info = $(info).find('#' + $tile.attr('id'));
-            // Update html and draw the poll
-            $tile.html(updated_info.html());
-            $('.poll-data, .votePortlet form').drawpoll();
-          }
-        });
-      };
+    var init_poll = function($poll) {
+      var url = $poll.attr('data-poll-url');
+      // Get updated results with ajax
+      $.ajax({
+        url: url + '/@@update-poll',
+        context: $poll,
+        success: function(data) {
+          var $poll = this;
+          var uid = $poll.attr('data-poll-uid');
+          var base_css = '.poll[data-poll-uid=' + uid + '] ';
+          // Update html
+          $(base_css + '.poll-graph').html(data);
 
-      $('.poll-tile form').on('submit', function(e) {
-        // stop form submit and submit with ajax
-        e.preventDefault();
-        var $form = $(this);
-        $.ajax({
-          type: 'POST',
-          url: $form.attr('action'),
-          data: $form.serialize() + '&poll.submit=Submit',
-          context: this,
-          success: function(data) {
-            var $form = $(this);
-            var $tile = $form.parents('.tile');
-            // After ajax submit, update the tile
-            update_tile($tile);
+          // Check cookie and update poll state
+          var cookie = 'collective.poll.' + uid;
+          var has_votted = (document.cookie.indexOf(cookie) >= 0);
+          var closed = ($poll.attr('data-poll-closed') === "True");
+          var total_votes = parseInt($poll.attr('data-poll-totalvotes'), 10);
+          if (total_votes === 0) {
+            $(base_css + '.toggle-result').hide();
+          } else {
+            $(base_css + '.toggle-result').show();
           }
-        });
+          if (has_votted || closed) {
+            $(base_css + '.poll-form').remove();
+            $(base_css + '.toggle-result').remove();
+            $(base_css + '.poll-graph').addClass('active');
+          } else { // not has_votted
+            $(base_css + '.poll-form').addClass('active');
+          }
+
+          // Redraw the graphs
+          $(base_css + '.poll-data, ' + base_css + ' .votePortlet form').drawpoll();
+        }
       });
-    }
-    $('a.toggle-result').on('click', function(e) {
+    };
+
+    // Register click event on poll to persist when html change
+    $('.poll').on('click', 'a.toggle-result', function(e) {
       e.preventDefault();
       var $poll = $(this).parents('.poll');
-      $('.poll-result', $poll).toggleClass('active');
+      $('.poll-toggle', $poll).toggleClass('active');
+    });
+
+    $('.poll form').on('submit', function(e) {
+      // stop form submit and submit with ajax
+      e.preventDefault();
+      var $form = $(this);
+      $.ajax({
+        type: 'POST',
+        url: $form.attr('action'),
+        data: $form.serialize() + '&poll.submit=Submit',
+        context: this,
+        success: function(data) {
+          var $form = $(this);
+          var $poll = $form.parents('.poll');
+          // After ajax submit, update the poll
+          init_poll($poll);
+        }
+      });
+    });
+
+    $('.poll').each(function() {
+      var $poll = $(this);
+      init_poll($poll);
     });
   });
 
@@ -55,7 +81,6 @@
 
     init: function(poll) {
       this.poll = $(poll);
-      this.ajax_submit();
       this.content_handler = this.get_handler();
       if (this.content_handler[0] !== undefined) {
         this.type = this.get_type();
@@ -156,57 +181,6 @@
           break;
       }
       this.extra_conf['width'] = width;
-    },
-
-    ajax_submit: function() {
-      this.poll.submit(function(event) {
-        var $this = $(this);
-        var $parent = $this.parents('.votePortlet');
-        var url = $this.attr('action');
-        var data = $this.serialize() + '&ajax_load=True&poll.submit=True';
-        //show the ajax load spinner
-        $('.poll-spinner', $parent).show();
-        $this.css({
-          'visibility': 'hidden'
-        });
-
-        $.ajax({
-          url: url,
-          data: data,
-          type: 'POST',
-          success: function(html) {
-            //gets the portlet assigment column
-            var manager = ''
-            if ($parent[0] !== undefined) {
-              manager = $parent.attr('data-manager');
-            }
-            if (!manager) {
-              // Portlet reload will not work, so we refresh the page.
-              window.location = window.location;
-            } else {
-              // Get the base for the url, which could
-              // be the url of the front-page.
-              var base = $parent.attr('data-url');
-              if (!base) {
-                base = '.';
-              }
-              $.ajax({
-                url: base + '/@@poll_portlet_render',
-                data: {
-                  'column': manager
-                },
-                success: function(data) {
-                  $parent.replaceWith(data);
-                  $('.poll-data').drawpoll();
-                  $('.spinner', $parent).hide();
-                }
-              })
-            };
-
-          }
-        });
-        return false;
-      });
     }
   };
 
@@ -226,9 +200,5 @@
   };
 
   $.fn.drawpoll.Constructor = DrawPoll;
-
-  $(function() {
-    $('.poll-data, .votePortlet form').drawpoll();
-  });
 
 }(window.jQuery);

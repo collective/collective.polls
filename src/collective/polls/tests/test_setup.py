@@ -34,7 +34,7 @@ class InstallTestCase(unittest.TestCase):
     def test_profile_version(self):
         setup_tool = self.portal['portal_setup']
         self.assertEqual(
-            setup_tool.getLastVersionForProfile(PROFILE), (u'4',))
+            setup_tool.getLastVersionForProfile(PROFILE), (u'5',))
 
     def test_add_permission(self):
         permission = 'collective.polls: Add poll'
