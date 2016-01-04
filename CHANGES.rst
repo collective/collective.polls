@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 1.8.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Add Traditional Chinese translation.
+  [l34marr]
 
 
 1.8.1 (2015-12-11)
