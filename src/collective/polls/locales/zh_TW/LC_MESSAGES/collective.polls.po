@@ -90,35 +90,35 @@ msgstr ""
 #: collective/polls/portlet/voteportlet.pt:37
 #: collective/polls/tiles/poll.pt:52
 msgid "Partial results"
-msgstr ""
+msgstr "目前結果"
 
 #: collective/polls/content/poll.py:30
 msgid "Pie Chart"
-msgstr ""
+msgstr "圓餅圖"
 
 #: collective/polls/portlet/voteportlet.py:61
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 #: collective/polls/tiles/poll.pt:17
 msgid "Poll"
-msgstr ""
+msgstr "投票"
 
 #: collective/polls/tiles/poll.py:18
 msgid "Poll uuid"
-msgstr ""
+msgstr "UUID"
 
 #: collective/polls/configure.zcml
 msgid "Polls"
-msgstr ""
+msgstr "投票"
 
 #: collective/polls/configure.zcml
 msgid "Polls: Uninstall"
-msgstr ""
+msgstr "投票: 解除安裝"
 
 #: collective/polls/content/poll_templates/view.pt:59
 #: collective/polls/portlet/voteportlet.pt:36
 #: collective/polls/tiles/poll.pt:59
 msgid "Results"
-msgstr ""
+msgstr "結果"
 
 #: collective/polls/portlet/voteportlet.py:74
 msgid "Show closed polls"

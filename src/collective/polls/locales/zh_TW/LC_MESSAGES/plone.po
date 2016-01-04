@@ -12,7 +12,7 @@ msgstr ""
 "Language-Code: zh-tw\n"
 "Language-Name: Traditional Chinese\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: collective.polls\n"
+"Domain: plone\n"
 
 #: collective/polls/profiles/default/portlets.xml
 msgid "A portlet to allow voting on a specific poll"
@@ -80,9 +80,9 @@ msgstr ""
 
 #: collective/polls/profiles/default/portlets.xml
 msgid "Voting portlet"
-msgstr ""
+msgstr "投票方框"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"
-msgstr ""
+msgstr "投票工作流程"
 
