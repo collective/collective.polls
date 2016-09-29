@@ -2,7 +2,6 @@
 from collective.polls.logger import logger
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
-from Products.CMFQuickInstallerTool import interfaces as QuickInstaller
 from zope.interface import implementer
 
 
@@ -14,16 +13,6 @@ class HiddenProfiles(object):
         return [
             u'collective.polls:testfixture',
             u'collective.polls:uninstall',
-        ]
-
-
-class HiddenProducts(object):
-
-    implements(QuickInstaller.INonInstallable)
-
-    def getNonInstallableProducts(self):
-        """Do not show on QuickInstaller's list of installable products."""
-        return [
         ]
 
 
