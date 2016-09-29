@@ -22,9 +22,14 @@ Mostly Harmless
 .. image:: https://img.shields.io/coveralls/collective/collective.polls/master.svg
     :target: https://coveralls.io/r/collective/collective.polls
 
-Got an idea? Found a bug? Let us know by `opening a support ticket`_.
+Got an idea? Found a bug? Let us know by `opening a support ticket <https://github.com/collective/collective.polls/issues>`_.
 
-.. _`opening a support ticket`: https://github.com/collective/collective.polls/issues
+Known issues
+^^^^^^^^^^^^
+
+* `Can't add a portlet under Plone 5 <https://github.com/collective/collective.polls/issues/106>`_.
+
+See the `complete list of bugs on GitHub <https://github.com/collective/collective.polls/labels/bug>`_.
 
 Don't Panic
 -----------
