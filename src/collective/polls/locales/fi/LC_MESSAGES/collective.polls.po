@@ -1,0 +1,195 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-11-24 20:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/polls/configure.zcml
+msgid "A Plone extension providing a Poll content type, portlet and workflow."
+msgstr "Asentaa äänestyssisältötyypin, -portletin ja -työnkulun."
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "A poll"
+msgstr "Äänestys"
+
+#: collective/polls/portlet/voteportlet.py:82
+msgid "Add a link to the poll"
+msgstr "Lisää linkki äänestykseen"
+
+#: collective/polls/content/poll.py:43
+msgid "Allow anonymous"
+msgstr "Salli kirjautumattomille"
+
+#: collective/polls/content/poll.py:44
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
+msgstr "Salli äänestykseen osallistuminen kirjautumattomille. Edellyttää, että äänestys on julkaistussa kansiossa."
+
+#: collective/polls/content/poll.py:297
+msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
+msgstr "Kirjautumattomat käyttäjät eivät voi äänestää, koska äänestys ei ole julkaistussa kansiossa. Julkaise kansio, jos haluat, että kirjautumattomat käyttäjät voivat äänestää."
+
+#: collective/polls/content/poll.py:73
+msgid "Available options"
+msgstr "Vaihtoehdot:"
+
+#: collective/polls/content/poll_templates/view.pt:19
+msgid "Available options:"
+msgstr "Äänestysvaihtoehdot:"
+
+#: collective/polls/content/poll.py:29
+msgid "Bar Chart"
+msgstr "Pylväskaavio"
+
+#: collective/polls/content/poll.py:65
+msgid "Format to show the results."
+msgstr "Tulosten esitysmuoto"
+
+#: collective/polls/content/poll.py:64
+msgid "Graph"
+msgstr "Graafi"
+
+#: collective/polls/portlet/voteportlet.py:55
+msgid "Header"
+msgstr "Otsikko"
+
+#: collective/polls/portlet/voteportlet.py:75
+msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
+msgstr "Jos yhtään äänetystä ei ole saatavilla tai valittu äänestys on jo suljettu, näytetäänkö tulokset äänestyksen sijaan?"
+
+#: collective/polls/content/poll.py:319
+msgid "Invalid option"
+msgstr "Virheellinen valinta"
+
+#: collective/polls/portlet/voteportlet.py:33
+msgid "Latest opened poll"
+msgstr "Viimeisin avoin äänestys"
+
+#: collective/polls/content/poll.py:35
+msgid "Not enought options provided"
+msgstr "Ei riittävästi vaihtoehtoja"
+
+#: collective/polls/portlet/voteportlet.pt:63
+msgid "Nothing to see here"
+msgstr "Ei mitään nähtävää"
+
+#: collective/polls/content/poll.py:31
+msgid "Numbers Only"
+msgstr "Vain numerot"
+
+#: collective/polls/content/poll_templates/view.pt:50
+#: collective/polls/portlet/voteportlet.pt:37
+#: collective/polls/tiles/poll.pt:52
+msgid "Partial results"
+msgstr "Tulokset tähän mennessä"
+
+#: collective/polls/content/poll.py:30
+msgid "Pie Chart"
+msgstr "Piirakkakaavio"
+
+#: collective/polls/portlet/voteportlet.py:61
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+#: collective/polls/tiles/poll.pt:17
+msgid "Poll"
+msgstr "Äänestys"
+
+#: collective/polls/tiles/poll.py:18
+msgid "Poll uuid"
+msgstr "Äänestyksen yksilöivä tunniste"
+
+#: collective/polls/configure.zcml
+msgid "Polls"
+msgstr "Äänestykset"
+
+#: collective/polls/configure.zcml
+msgid "Polls: Uninstall"
+msgstr "Äänestykset: Asennuksen poisto"
+
+#: collective/polls/content/poll_templates/view.pt:59
+#: collective/polls/portlet/voteportlet.pt:36
+#: collective/polls/tiles/poll.pt:59
+msgid "Results"
+msgstr "Tulokset"
+
+#: collective/polls/portlet/voteportlet.py:74
+msgid "Show closed polls"
+msgstr "Näytä suljetut äänestykset"
+
+#: collective/polls/content/poll.py:57
+msgid "Show partial results"
+msgstr "Näytä osittaiset tulokset"
+
+#: collective/polls/content/poll.py:58
+msgid "Show partial results after a voter has already voted."
+msgstr "Näyttää tähänastiset tulokset vielä avoimelle äänestykselle"
+
+#: collective/polls/portlet/voteportlet.py:69
+msgid "Show the number of collected votes so far."
+msgstr "Näyttää tähänastisten äänimäärän."
+
+#: collective/polls/portlet/voteportlet.py:68
+msgid "Show total votes"
+msgstr "Näytä äänimäärä"
+
+#: collective/polls/content/poll_templates/view.pt:45
+#: collective/polls/portlet/voteportlet.pt:96
+#: collective/polls/tiles/poll.pt:47
+msgid "Submit"
+msgstr "Äänestä"
+
+#: collective/polls/content/poll.py:332
+msgid "Thanks for your vote"
+msgstr "Kiitos osallistumisestasi"
+
+#: collective/polls/portlet/voteportlet.py:56
+msgid "The header for the portlet. Leave empty for none."
+msgstr "Sovelman otsikko. Jätä tyhjäksi piilottaaksesi otsikon."
+
+#: collective/polls/content/poll_templates/view.pt:75
+#: collective/polls/portlet/voteportlet.pt:53
+#: collective/polls/tiles/poll.pt:75
+msgid "Total votes:"
+msgstr "Ääniä yhteensä:"
+
+#: collective/polls/configure.zcml
+msgid "Uninstall the collective.polls package."
+msgstr "Poistaa collective.polls-lisäosan."
+
+#: collective/polls/content/poll_templates/view.pt:79
+#: collective/polls/portlet/voteportlet.pt:57
+#: collective/polls/tiles/poll.pt:79
+msgid "Vote"
+msgstr "Äänestä"
+
+#: collective/polls/portlet/voteportlet.py:115
+msgid "Voting portlet"
+msgstr "Äänestyssovelma"
+
+#: collective/polls/portlet/voteportlet.py:62
+msgid "Which poll to show in the portlet."
+msgstr "Sovelmassa näytettävä äänestys"
+
+#: collective/polls/content/poll.py:337
+msgid "You are not authorized to vote"
+msgstr "Käyttöoikeutesi eivät riitä äänestämiseen"
+
+#: collective/polls/content/poll.py:86
+msgid "You need to provide at least two options for a poll."
+msgstr "Äänestyksessä pitää olla vähintään kaksi vaihtoehtoa."
+
+#: collective/polls/tiles/poll.pt:86
+msgid "spiner"
+msgstr "latauskuvake"
+
+#: collective/polls/portlet/voteportlet.pt:109
+msgid "spinner"
+msgstr "latauskuvake"
