@@ -1,17 +1,27 @@
 # -*- coding: utf-8 -*-
-"""Setup of test for the package.
+"""Setup testing infrastructure.
 
-We install collective.cover to test the availibility and features of
-the tile included for that package.
+For Plone 5 we need to install plone.app.contenttypes.
+
+Tile for collective.cover is only tested in Plone 4.3.
 """
+from plone import api
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
-from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
 import pkg_resources
+
+try:
+    pkg_resources.get_distribution('plone.app.contenttypes')
+except pkg_resources.DistributionNotFound:
+    from plone.app.testing import PLONE_FIXTURE
+    DEXTERITY_ONLY = False
+else:
+    from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE
+    DEXTERITY_ONLY = True
 
 try:
     pkg_resources.get_distribution('collective.cover')
@@ -19,6 +29,9 @@ except pkg_resources.DistributionNotFound:
     HAS_COVER = False
 else:
     HAS_COVER = True
+
+IS_PLONE_42 = api.env.plone_version().startswith('4.2')
+IS_PLONE_5 = api.env.plone_version().startswith('5')
 
 
 class Fixture(PloneSandboxLayer):
