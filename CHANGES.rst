@@ -6,6 +6,12 @@ There's a frood who really knows where his towel is.
 1.9.0 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    This release removes some packages from the list of dependencies.
+    Be sure to read the whole changelog and apply the related changes to your buildout configuration while upgrading.
+    Also, note that this is the first release marked as compatible with Plone 5;
+    it still has some issues and must not be used in production with that version.
+
 - Package is now compatible with Plone 5.0 and Plone 5.1.
   [hvelarde]
 
