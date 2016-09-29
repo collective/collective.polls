@@ -9,9 +9,8 @@ env:
 - PLONE_VERSION=4.2 TEST_EGGS=Pillow
 - PLONE_VERSION=4.3 TEST_EGGS=collective.cover[test]
 - PLONE_VERSION=5.0
+- PLONE_VERSION=5.1
 matrix:
-  allow_failures:
-  - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
 - sed -i "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
