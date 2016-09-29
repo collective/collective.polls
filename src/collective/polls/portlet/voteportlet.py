@@ -14,7 +14,7 @@ from zope.component import getUtility
 from zope.component import queryUtility
 from zope.formlib import form
 from zope.interface import alsoProvides
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -85,6 +85,7 @@ class IVotePortlet(IPortletDataProvider):
     )
 
 
+@implementer(IVotePortlet)
 class Assignment(base.Assignment):
 
     """Portlet assignment.
@@ -92,8 +93,6 @@ class Assignment(base.Assignment):
     This is what is actually managed through the portlets UI and associated
     with columns.
     """
-
-    implements(IVotePortlet)
 
     poll = None
     header = u''
