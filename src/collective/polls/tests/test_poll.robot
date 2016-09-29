@@ -73,7 +73,7 @@ Test tile poll
     Create Cover  Title  Description  Empty layout
 
     # add a poll tile to the layout
-    Edit Cover Layout
+    Open Layout Tab
     Add Tile  ${polls_tile_location}
     Save Cover Layout
 
@@ -113,7 +113,7 @@ Test poll workflow
     Workflow Reject
     Wait Until Page Contains  Available options:
     Element Should Not Be Visible  css=input[name="poll.submit"]
-    
+
     Workflow Open
     Click Element  css=input[type="radio"][value="1"]
     Click Element  css=input[name="poll.submit"]
