@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
-from collective.polls.config import PROJECTNAME
+from collective.polls.logger import logger
 from plone import api
 from Products.CMFPlone import interfaces as Plone
 from Products.CMFQuickInstallerTool import interfaces as QuickInstaller
 from zope.interface import implements
-
-import logging
-
-logger = logging.getLogger(PROJECTNAME)
 
 
 class HiddenProfiles(object):

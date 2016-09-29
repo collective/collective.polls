@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.polls.config import PROJECTNAME
+from collective.polls.logger import logger
 from plone import api
-
-import logging
-
-logger = logging.getLogger(PROJECTNAME)
 
 
 def issue_83(context):
