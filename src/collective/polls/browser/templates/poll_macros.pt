@@ -5,12 +5,12 @@
       tal:attributes="action poll/absolute_url">
     <tal:one_choice repeat="option poll/options">
       <label>
-      <input type="radio"
-          name="#"
-          value="#"
-          tal:attributes="name string:options;
-                          value option/option_id;" />
-      <span tal:content="option/description" />
+        <input type="radio"
+            name="#"
+            value="#"
+            tal:attributes="name string:options;
+                            value option/option_id;" />
+        <span tal:content="option/description" />
       </label>
       <br/>
     </tal:one_choice>
