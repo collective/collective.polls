@@ -5,14 +5,12 @@ from collective.polls.content.poll import IPoll
 from collective.polls.content.poll import InsuficientOptions
 from collective.polls.testing import INTEGRATION_TESTING
 from plone import api
-from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
 
@@ -57,10 +55,6 @@ class IntegrationTest(unittest.TestCase):
         factory = fti.factory
         new_object = createObject(factory)
         self.assertTrue(IPoll.providedBy(new_object))
-
-    def test_is_referenceable(self):
-        self.assertTrue(IReferenceable.providedBy(self.poll))
-        self.assertTrue(IAttributeUUID.providedBy(self.poll))
 
     def test_validate_no_options(self):
         data = MockPoll()

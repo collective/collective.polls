@@ -6,19 +6,18 @@ cache:
   - eggs
   - parts/node
 env:
-- PLONE_VERSION=4.2
-- PLONE_VERSION=4.3
+- PLONE_VERSION=4.2 TEST_EGGS=Pillow
+- PLONE_VERSION=4.3 TEST_EGGS=collective.cover[test]
 - PLONE_VERSION=5.0
+- PLONE_VERSION=5.1
 matrix:
-  allow_failures:
-  - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
 - sed -i "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
 - sed -i "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
 - python bootstrap.py
-- bin/buildout annotate
-- bin/buildout
+- bin/buildout buildout:test-eggs=$TEST_EGGS annotate
+- bin/buildout buildout:test-eggs=$TEST_EGGS
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start

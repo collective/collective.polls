@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from collective.polls.config import PROFILE
 from collective.polls.config import PROJECTNAME
+from collective.polls.testing import HAS_COVER
 from collective.polls.testing import INTEGRATION_TESTING
+from collective.polls.testing import IS_PLONE_5
 from plone import api
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
 
 import unittest
 
@@ -55,16 +55,19 @@ class InstallTestCase(unittest.TestCase):
         roles = [r['name'] for r in roles if r['selected']]
         self.assertEqual(roles, ['Manager', 'Reviewer', 'Site Administrator'])
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         for id in JAVASCRIPTS:
             self.assertIn(id, resource_ids, '%s not installed' % id)
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_cssregistry(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
             self.assertIn(id, resource_ids, '%s not installed' % id)
 
+    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
     def test_tile(self):
         tiles = api.portal.get_registry_record('plone.app.tiles')
         self.assertIn(u'collective.polls', tiles)
@@ -76,23 +79,25 @@ class UninstallTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.qi = getattr(self.portal, 'portal_quickinstaller')
+        self.qi = self.portal['portal_quickinstaller']
         self.qi.uninstallProducts(products=[PROJECTNAME])
 
     def test_uninstalled(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry_removed(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         for id in JAVASCRIPTS:
             self.assertNotIn(id, resource_ids, '%s not removed' % id)
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
             self.assertNotIn(id, resource_ids, '%s not removed' % id)
 
+    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
     def test_tile_removed(self):
         tiles = api.portal.get_registry_record('plone.app.tiles')
         self.assertNotIn(u'collective.polls', tiles)
