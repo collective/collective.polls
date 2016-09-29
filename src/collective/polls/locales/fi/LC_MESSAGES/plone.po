@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-11-24 20:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "A portlet to allow voting on a specific poll"
+msgstr "Sovelma, joka näyttää siihen valitun äänestyksen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Sulje"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Closed"
+msgstr "Suljettu"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member retracts submission"
+msgstr "Käyttäjä perui tarkastuksen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member submits poll for opening"
+msgstr "Käyttäjä lähettää äänestyksen tarkastettavaksi"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Avaa äänestys"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
+msgstr "Avoin"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Pending review"
+msgstr "Odottaa tarkastusta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Poll Workflow"
+msgstr "Äänestystyönkulku"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Private"
+msgstr "Yksityinen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Peru"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Peru tarkastus"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer closes the poll"
+msgstr "Tarkastaja sulkee äänestyksen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer opens the poll"
+msgstr "Tarkastaja avaa äänestyksen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer rejects the poll"
+msgstr "Tarkastaja peruu äänestyksen"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Lähetä tarkastettavaksi"
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "Voting portlet"
+msgstr "Äänestyssovelma"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr "Äänestyksissä käytettävä työnkulku"
