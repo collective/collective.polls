@@ -19,7 +19,7 @@ install:
 - sed -i "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
 - python bootstrap.py
 - bin/buildout annotate
-- bin/buildout -Nq
+- bin/buildout
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
@@ -29,7 +29,7 @@ script:
 - bin/test
 after_success:
 - bin/createcoverage -t "--layer=!Robot"
-- pip install --upgrade coveralls
+- pip install coveralls
 - coveralls
 notifications:
   irc: irc.freenode.org#simplesconsultoria
