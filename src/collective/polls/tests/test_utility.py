@@ -93,14 +93,6 @@ class IntegrationTest(unittest.TestCase):
         poll = utility.poll_by_uid(uid=uid)
         self.assertEqual(poll, base_poll)
 
-    def test_uid_for_poll(self):
-        ''' Get uid for a poll '''
-        utility = queryUtility(IPolls, name='collective.polls')
-        poll = self.subfolder['p5']
-        uid = IUUID(poll)
-        poll_uid = utility.uid_for_poll(poll=poll)
-        self.assertEqual(uid, poll_uid)
-
     def test_voted_in_a_poll(self):
         ''' test if a user voted in a poll '''
         utility = queryUtility(IPolls, name='collective.polls')

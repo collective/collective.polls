@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from collective.polls.polls import IPolls
+from plone import api
 from zope.component import queryUtility
 
 
@@ -26,9 +27,8 @@ class PollsViewMixin:
         return False
 
     def poll_uid(self):
-        """Return uid for current poll."""
-        utility = self.utility
-        return utility.uid_for_poll(self.poll())
+        """Return UUID for current poll."""
+        return api.content.get_uuid(self.poll())
 
     @property
     def can_vote(self):

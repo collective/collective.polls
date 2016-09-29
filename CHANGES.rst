@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.9.0 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Get rid of the ``uid_for_poll`` function.
+  [hvelarde]
+
 - Wrap poll choices with label-tag for easier option selection.
   [datakurre]
 

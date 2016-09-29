@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from AccessControl import Unauthorized
 from collective.polls.config import COOKIE_KEY
 from five import grok
@@ -7,7 +6,6 @@ from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletRetriever
-from plone.uuid.interfaces import IUUID
 from zope.component import ComponentLookupError
 from zope.component import getMultiAdapter
 from zope.component import getUtility
@@ -24,9 +22,6 @@ class IPolls(Interface):
 
     def recent_polls(show_all=False, limit=5, kw={}):
         """Return recent polls."""
-
-    def uid_for_poll(poll):
-        """Return a uid for a poll."""
 
     def poll_by_uid(uid):
         """Return the poll for the given uid."""
@@ -80,10 +75,6 @@ class Polls(grok.GlobalUtility):
         results = self.ct.searchResults(**kw)
         return results
 
-    def uid_for_poll(self, poll):
-        """Return a uid for a poll."""
-        return IUUID(poll)
-
     def recent_polls(self, context=None, show_all=False, limit=5, **kw):
         """Return recent polls."""
         if context is not None:
@@ -111,7 +102,7 @@ class Polls(grok.GlobalUtility):
     def voted_in_a_poll(self, poll, request=None):
         """Check if current user already voted."""
         anonymous_allowed = poll.allow_anonymous
-        poll_uid = self.uid_for_poll(poll)
+        poll_uid = api.content.get_uuid(poll)
         member = self.member
         member_id = member.getId()
         voters = poll.voters()
