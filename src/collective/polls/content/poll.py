@@ -10,7 +10,6 @@ from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
-from five import grok
 from plone import api
 from plone.directives import dexterity
 from plone.directives import form
@@ -89,8 +88,6 @@ class IPoll(form.Schema):
 class Poll(dexterity.Item):
 
     """A Poll in a Plone site."""
-
-    grok.implements(IPoll)
 
     __ac_permissions__ = (
         (PERMISSION_VOTE, ('setVote', '_setVoter', )),
@@ -212,8 +209,6 @@ class PollAddForm(dexterity.AddForm):
 
     """Form to handle creation of new Polls."""
 
-    grok.name('collective.polls.poll')
-
     def create(self, data):
         options = data['options']
         new_data = []
@@ -229,8 +224,6 @@ class PollAddForm(dexterity.AddForm):
 class PollEditForm(dexterity.EditForm):
 
     """Form to handle edition of existing polls."""
-
-    grok.context(IPoll)
 
     def updateWidgets(self):
         """Update form widgets to hide column option_id from end user."""
@@ -260,12 +253,7 @@ class PollEditForm(dexterity.EditForm):
         super(PollEditForm, self).applyChanges(data)
 
 
-class View(PollsViewMixin, grok.View):
-
-    grok.context(IPoll)
-    grok.require('zope2.View')
-
-    grok.name('view')
+class View(PollsViewMixin):
 
     def update(self):
         super(View, self).update()

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from collective.polls.config import COOKIE_KEY
-from five import grok
 from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
@@ -45,13 +44,9 @@ class IPolls(Interface):
         """Return a identifier for vote_id."""
 
 
-class Polls(grok.GlobalUtility):
+class Polls:
 
     """Utility methods for dealing with polls."""
-
-    grok.implements(IPolls)
-    grok.provides(IPolls)
-    grok.name('collective.polls')
 
     @property
     def ct(self):
@@ -143,13 +138,9 @@ class Polls(grok.GlobalUtility):
         return vote_id
 
 
-class PollPortletRender(grok.View):
+class PollPortletRender:
 
     """This methods allow to use the portlet render in a view."""
-
-    grok.context(Interface)
-    grok.name('poll_portlet_render')
-    grok.require('zope2.View')
 
     def get_portlet_manager(self, column=''):
         """Return one of default Plone portlet managers.
