@@ -43,13 +43,7 @@ alsoProvides(PossiblePolls, IContextSourceBinder)
 
 
 class IVotePortlet(IPortletDataProvider):
-
-    """A portlet.
-
-    It inherits from IPortletDataProvider because for this portlet, the
-    data that is being rendered and the portlet assignment itself are the
-    same.
-    """
+    """A portlet."""
 
     header = schema.TextLine(
         title=_(u'Header'),
@@ -87,12 +81,7 @@ class IVotePortlet(IPortletDataProvider):
 
 @implementer(IVotePortlet)
 class Assignment(base.Assignment):
-
-    """Portlet assignment.
-
-    This is what is actually managed through the portlets UI and associated
-    with columns.
-    """
+    """Portlet assignment."""
 
     poll = None
     header = u''
@@ -115,13 +104,7 @@ class Assignment(base.Assignment):
 
 
 class Renderer(PollsViewMixin, base.Renderer):
-
-    """Portlet renderer.
-
-    This is registered in configure.zcml. The referenced page template is
-    rendered, and the implicit variable 'view' will refer to an instance
-    of this class. Other methods can be added and referenced in the template.
-    """
+    """Portlet renderer."""
 
     render = ViewPageTemplateFile('voteportlet.pt')
 
@@ -162,14 +145,9 @@ class Renderer(PollsViewMixin, base.Renderer):
 
 
 class AddForm(base.AddForm):
+    """Portlet add form."""
 
-    """Portlet add form.
-
-    This is registered in configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display. The create() method actually
-    constructs the assignment that is being added.
-    """
-
+    schema = IVotePortlet
     form_fields = form.Fields(IVotePortlet)
 
     def create(self, data):
@@ -177,11 +155,7 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
+    """Portlet edit form."""
 
-    """Portlet edit form.
-
-    This is registered with configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display.
-    """
-
+    schema = IVotePortlet
     form_fields = form.Fields(IVotePortlet)
