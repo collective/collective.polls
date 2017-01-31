@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
 from collective.polls.polls import IPolls
@@ -8,6 +7,7 @@ from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.component import ComponentLookupError
 from zope.component import getUtility

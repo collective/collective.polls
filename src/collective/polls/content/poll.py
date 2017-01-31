@@ -158,8 +158,7 @@ class Poll(dexterity.Item):
         member = utility.member
         member_id = member.getId()
         if not member_id and request:
-            poll_uid = api.content.get_uuid(self)
-            cookie = COOKIE_KEY % str(poll_uid)
+            cookie = COOKIE_KEY + api.content.get_uuid(self)
             expires = 'Wed, 19 Feb 2020 14:28:00 GMT'  # XXX: why hardcoded?
             vote_id = str(utility.anonymous_vote_id())
             request.response[cookie] = vote_id
@@ -167,7 +166,7 @@ class Poll(dexterity.Item):
                                        vote_id,
                                        path='/',
                                        expires=expires)
-            member_id = 'Anonymous-%s' % vote_id
+            member_id = 'Anonymous-' + vote_id
 
         if member_id:
             voters.append(member_id)

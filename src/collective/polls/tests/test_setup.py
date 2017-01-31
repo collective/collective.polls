@@ -8,16 +8,17 @@ from plone import api
 
 import unittest
 
-JAVASCRIPTS = [
+
+JS = (
     '++resource++collective.polls/js/jquery.flot.js',
     '++resource++collective.polls/js/jquery.flot.pie.js',
     '++resource++collective.polls/js/polls.js',
     '++resource++collective.polls/js/collective.poll.js',
-]
+)
 
-CSS = [
+CSS = (
     '++resource++collective.polls/css/collective.polls.css',
-]
+)
 
 
 class InstallTestCase(unittest.TestCase):
@@ -58,14 +59,14 @@ class InstallTestCase(unittest.TestCase):
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
-        for id in JAVASCRIPTS:
-            self.assertIn(id, resource_ids, '%s not installed' % id)
+        for js in JS:
+            self.assertIn(js, resource_ids, '{0} not installed'.format(js))
 
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_cssregistry(self):
         resource_ids = self.portal.portal_css.getResourceIds()
-        for id in CSS:
-            self.assertIn(id, resource_ids, '%s not installed' % id)
+        for css in CSS:
+            self.assertIn(css, resource_ids, '{0} not installed'.format(css))
 
     @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
     def test_tile(self):
@@ -88,14 +89,14 @@ class UninstallTestCase(unittest.TestCase):
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry_removed(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
-        for id in JAVASCRIPTS:
-            self.assertNotIn(id, resource_ids, '%s not removed' % id)
+        for js in JS:
+            self.assertNotIn(js, resource_ids, '{0} not installed'.format(js))
 
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
-        for id in CSS:
-            self.assertNotIn(id, resource_ids, '%s not removed' % id)
+        for css in CSS:
+            self.assertNotIn(css, resource_ids, '{0} not installed'.format(css))
 
     @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
     def test_tile_removed(self):

@@ -5,6 +5,7 @@ from collective.polls.testing import INTEGRATION_TESTING
 
 import unittest
 
+
 if HAS_COVER:
     from collective.cover.tests.base import TestTileMixin
     from collective.polls.tiles.poll import IPollTile
