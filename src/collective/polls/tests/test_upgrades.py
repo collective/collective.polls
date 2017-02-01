@@ -93,7 +93,7 @@ class Upgrade2to3TestCase(UpgradeTestCaseBase):
 
         # simulate state on previous version
         from collective.polls.Extensions.Install import remove_tile
-        remove_tile(api.portal.get())
+        remove_tile()
         tiles = api.portal.get_registry_record('plone.app.tiles')
         self.assertNotIn(u'collective.polls', tiles)
 

@@ -102,17 +102,16 @@ class Polls(grok.GlobalUtility):
     def voted_in_a_poll(self, poll, request=None):
         """Check if current user already voted."""
         anonymous_allowed = poll.allow_anonymous
-        poll_uid = api.content.get_uuid(poll)
         member = self.member
         member_id = member.getId()
         voters = poll.voters()
         if member_id:
             return member_id in voters
         elif anonymous_allowed and request:
-            cookie = COOKIE_KEY % poll_uid
+            cookie = COOKIE_KEY + api.content.get_uuid(poll)
             value = request.cookies.get(cookie, '')
             if value:
-                value = 'Anonymous-%s' % value in voters
+                value = 'Anonymous-' + value in voters
             return value
         else:
             # If we cannot be sure, we will block this user from voting again

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-from collective.polls.testing import IS_PLONE_42
 from collective.polls.testing import IS_PLONE_5
+from collective.polls.testing import IS_PLONE_42
 from collective.polls.testing import ROBOT_TESTING
 from plone.testing import layered
 
 import os
 import robotsuite
 import unittest
+
 
 dirname = os.path.dirname(__file__)
 files = os.listdir(dirname)
