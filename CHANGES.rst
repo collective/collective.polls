@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 1.9b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Do not fail while adding a portlet under Plone 5 (closes `#106`_).
+  [hvelarde]
 
 
 1.9b1 (2016-09-29)
@@ -269,3 +270,4 @@ There's a frood who really knows where his towel is.
 .. _`#90`: https://github.com/collective/collective.polls/issues/90
 .. _`#93`: https://github.com/collective/collective.polls/issues/93
 .. _`#96`: https://github.com/collective/collective.polls/issues/96
+.. _`#106`: https://github.com/collective/collective.polls/issues/106
