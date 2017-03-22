@@ -5,7 +5,7 @@
   <!-- View -->
   <browser:page
     name="view"
-    template="templates/update_poll.pt"
+    template="poll_templates/view.pt"
     for="collective.polls.content.poll.IPoll"
     class=".poll.PollView"
     permission="zope2.View"
