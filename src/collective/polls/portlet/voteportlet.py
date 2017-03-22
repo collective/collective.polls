@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
-from collective.polls.polls import IPolls
+from collective.polls.polls import IPollUtility
 from collective.polls.testing import IS_PLONE_5
 from plone import api
 from plone.app.portlets.portlets import base
@@ -30,7 +30,7 @@ def PossiblePolls(context):
         context=context,
         request=context.REQUEST
     )
-    utility = queryUtility(IPolls, name='collective.polls')
+    utility = queryUtility(IPollUtility, name='collective.polls')
     navigation_root = portal_state.navigation_root()
     polls = utility.recent_polls(context=navigation_root, show_all=False, limit=999999)
 

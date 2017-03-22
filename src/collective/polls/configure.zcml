@@ -43,7 +43,7 @@
   <browser:page
       name="poll_portlet_render"
       for="*"
-      class=".poll.PollPortletRender"
+      class=".polls.PollPortletRender"
       permission="zope2.View"
       />
   <!-- Subscribers for events -->
@@ -58,8 +58,8 @@
 
   <!-- Utility -->
   <utility
-      provides="collective.polls.polls.IPoll"
-      factory="collective.polls.polls.Poll"
+      provides="collective.polls.polls.IPollUtility"
+      factory="collective.polls.polls.PollUtility"
       name="collective.polls" />
 
 </configure>

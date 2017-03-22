@@ -11,13 +11,14 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
+from zope.interface import implements
 import random
 import time
 
 
-class IPolls(Interface):
+class IPollUtility(Interface):
 
-    """A poll."""
+    """ Interface for poll utility."""
 
     def recent_polls(show_all=False, limit=5, kw={}):
         """Return recent polls."""
@@ -44,7 +45,8 @@ class IPolls(Interface):
         """Return a identifier for vote_id."""
 
 
-class Polls(object):
+class PollUtility(object):
+    implements(IPollUtility)
 
     """Utility methods for dealing with polls."""
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
-from collective.polls.polls import IPolls
+from collective.polls.polls import IPollUtility
 from plone import api
 from zope.component import queryUtility
 
@@ -11,8 +11,8 @@ class PollsViewMixin(object):
 
     @property
     def utility(self):
-        """Access to IPolls utility."""
-        utility = queryUtility(IPolls, name='collective.polls')
+        """Access to IPollUtility utility."""
+        utility = queryUtility(IPollUtility, name='collective.polls')
         return utility
 
     @property
