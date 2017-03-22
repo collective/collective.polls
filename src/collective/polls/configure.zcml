@@ -31,11 +31,35 @@
            directory="static"
            />
 
+  <include package=".content" />
   <include package=".browser" />
   <include package=".portlet" />
 
   <include file="profiles.zcml" />
 
   <include package=".tiles" zcml:condition="installed collective.cover" />
+
+  <!-- Portlet renderer -->
+  <browser:page
+      name="poll_portlet_render"
+      for="*"
+      class=".poll.PollPortletRender"
+      permission="zope2.View"
+      />
+  <!-- Subscribers for events -->
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           Products.CMFCore.interfaces.IActionSucceededEvent"
+      handler=".subscribers.fix_permissions" />
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           Products.CMFCore.interfaces.IActionSucceededEvent"
+      handler=".subscribers.remove_votes" />
+
+  <!-- Utility -->
+  <utility
+      provides="collective.polls.polls.IPoll"
+      factory="collective.polls.polls.Poll"
+      name="collective.polls" />
 
 </configure>

@@ -11,13 +11,16 @@ from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from plone import api
+from plone.dexterity.browser import add
 from plone.directives import dexterity
 from plone.directives import form
 from Products.CMFCore.interfaces import ISiteRoot
+from Products.Five.browser import BrowserView
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
+from zope.interface import implementer
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema.vocabulary import SimpleTerm
@@ -85,6 +88,7 @@ class IPoll(form.Schema):
                 _(u'You need to provide at least two options for a poll.'))
 
 
+@implementer(IPoll)
 class Poll(dexterity.Item):
 
     """A Poll in a Plone site."""
@@ -206,6 +210,7 @@ class Poll(dexterity.Item):
 
 
 class PollAddForm(dexterity.AddForm):
+    portal_type = 'collective.polls.poll'
 
     """Form to handle creation of new Polls."""
 
@@ -219,6 +224,10 @@ class PollAddForm(dexterity.AddForm):
             new_data.append(option_new)
         data['options'] = new_data
         return super(PollAddForm, self).create(data)
+
+
+class PollAddView(add.DefaultAddView):
+    form = PollAddForm
 
 
 class PollEditForm(dexterity.EditForm):
@@ -253,10 +262,10 @@ class PollEditForm(dexterity.EditForm):
         super(PollEditForm, self).applyChanges(data)
 
 
-class View(PollsViewMixin):
+class PollView(BrowserView, PollsViewMixin):
 
     def update(self):
-        super(View, self).update()
+        super(PollView, self).update()
         context = aq_inner(self.context)
         self.context = context
         self.state = getMultiAdapter(

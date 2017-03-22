@@ -5,12 +5,12 @@ from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletRetriever
+from Products.Five.browser import BrowserView
 from zope.component import ComponentLookupError
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
-
 import random
 import time
 
@@ -44,7 +44,7 @@ class IPolls(Interface):
         """Return a identifier for vote_id."""
 
 
-class Polls:
+class Polls(object):
 
     """Utility methods for dealing with polls."""
 
@@ -138,7 +138,7 @@ class Polls:
         return vote_id
 
 
-class PollPortletRender:
+class PollPortletRender(BrowserView):
 
     """This methods allow to use the portlet render in a view."""
 
