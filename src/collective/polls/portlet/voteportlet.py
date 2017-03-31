@@ -2,6 +2,7 @@
 from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
 from collective.polls.polls import IPolls
+from collective.polls.testing import IS_PLONE_5
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
@@ -12,12 +13,15 @@ from zope import schema
 from zope.component import ComponentLookupError
 from zope.component import getUtility
 from zope.component import queryUtility
-from zope.formlib import form
 from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+
+if not IS_PLONE_5:  # BBB
+    from zope.formlib import form
 
 
 def PossiblePolls(context):
@@ -147,8 +151,10 @@ class Renderer(PollsViewMixin, base.Renderer):
 class AddForm(base.AddForm):
     """Portlet add form."""
 
-    schema = IVotePortlet
-    form_fields = form.Fields(IVotePortlet)
+    if IS_PLONE_5:
+        schema = IVotePortlet
+    else:  # BBB
+        form_fields = form.Fields(IVotePortlet)
 
     def create(self, data):
         return Assignment(**data)
@@ -157,5 +163,7 @@ class AddForm(base.AddForm):
 class EditForm(base.EditForm):
     """Portlet edit form."""
 
-    schema = IVotePortlet
-    form_fields = form.Fields(IVotePortlet)
+    if IS_PLONE_5:
+        schema = IVotePortlet
+    else:  # BBB
+        form_fields = form.Fields(IVotePortlet)
