@@ -11,9 +11,12 @@ from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPollUtility
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from plone import api
-from plone.dexterity.browser import add
-from plone.directives import dexterity
-from plone.directives import form
+from plone.autoform import directives as form
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
+from plone.dexterity.content import Item
+from plone.supermodel import model
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.Five.browser import BrowserView
 from zope import schema
@@ -37,7 +40,7 @@ class InsuficientOptions(Invalid):
     __doc__ = _(u'Not enought options provided')
 
 
-class IPoll(form.Schema):
+class IPoll(model.Schema):
 
     """A Poll in a Plone site."""
 
@@ -89,7 +92,7 @@ class IPoll(form.Schema):
 
 
 @implementer(IPoll)
-class Poll(dexterity.Item):
+class Poll(Item):
 
     """A Poll in a Plone site."""
 
@@ -209,10 +212,10 @@ class Poll(dexterity.Item):
         return True
 
 
-class PollAddForm(dexterity.AddForm):
-    portal_type = 'collective.polls.poll'
-
+class PollAddForm(DefaultAddForm):
     """Form to handle creation of new Polls."""
+
+    portal_type = 'collective.polls.poll'
 
     def create(self, data):
         options = data['options']
@@ -226,12 +229,11 @@ class PollAddForm(dexterity.AddForm):
         return super(PollAddForm, self).create(data)
 
 
-class PollAddView(add.DefaultAddView):
+class PollAddView(DefaultAddView):
     form = PollAddForm
 
 
-class PollEditForm(dexterity.EditForm):
-
+class PollEditForm(DefaultEditForm):
     """Form to handle edition of existing polls."""
 
     def updateWidgets(self):
