@@ -52,8 +52,8 @@
 
   <utility
       name="collective.polls"
-      provides="collective.polls.polls.IPollUtility"
-      factory="collective.polls.polls.PollUtility"
+      provides="collective.polls.polls.IPolls"
+      factory="collective.polls.polls.Polls"
       />
 
 </configure>

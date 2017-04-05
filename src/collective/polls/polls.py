@@ -17,9 +17,9 @@ import random
 import time
 
 
-class IPollUtility(Interface):
+class IPolls(Interface):
 
-    """ Interface for poll utility."""
+    """Interface for poll utility."""
 
     def recent_polls(show_all=False, limit=5, kw={}):
         """Return recent polls."""
@@ -46,8 +46,8 @@ class IPollUtility(Interface):
         """Return a identifier for vote_id."""
 
 
-@implementer(IPollUtility)
-class PollUtility(object):
+@implementer(IPolls)
+class Polls(object):
 
     """Utility methods for dealing with polls."""
 

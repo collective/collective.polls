@@ -8,7 +8,7 @@ from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
-from collective.polls.polls import IPollUtility
+from collective.polls.polls import IPolls
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from plone import api
 from plone.autoform import directives as form
@@ -108,7 +108,7 @@ class Poll(Item):
 
     @property
     def utility(self):
-        utility = queryUtility(IPollUtility, name='collective.polls')
+        utility = queryUtility(IPolls, name='collective.polls')
         return utility
 
     def getOptions(self):
