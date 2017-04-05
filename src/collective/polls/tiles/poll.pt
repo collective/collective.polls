@@ -3,9 +3,15 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.polls">
-  <body>
+
+  <body tal:define="is_empty view/is_empty">
+    <p tal:condition="python: is_empty and view.is_compose_mode()" i18n:translate="" >
+        Drag&amp;drop a poll here to populate the tile.
+    </p>
+
     <div class="poll poll-tile vote-container"
         tal:define="poll view/poll"
+        tal:condition="not: is_empty"
         tal:attributes="data-poll-uid view/poll_uid;
                         data-poll-closed view/is_closed;
                         data-poll-totalvotes view/total_votes;

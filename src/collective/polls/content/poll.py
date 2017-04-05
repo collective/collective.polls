@@ -10,15 +10,21 @@ from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
 from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
-from five import grok
 from plone import api
-from plone.directives import dexterity
-from plone.directives import form
+from plone.autoform import directives as form
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
+from plone.dexterity.content import Item
+from plone.supermodel import model
 from Products.CMFCore.interfaces import ISiteRoot
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
+from zope.interface import implementer
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema.vocabulary import SimpleTerm
@@ -35,7 +41,8 @@ class InsuficientOptions(Invalid):
     __doc__ = _(u'Not enought options provided')
 
 
-class IPoll(form.Schema):
+# TODO: move to interfaces module
+class IPoll(model.Schema):
 
     """A Poll in a Plone site."""
 
@@ -86,11 +93,10 @@ class IPoll(form.Schema):
                 _(u'You need to provide at least two options for a poll.'))
 
 
-class Poll(dexterity.Item):
+@implementer(IPoll)
+class Poll(Item):
 
     """A Poll in a Plone site."""
-
-    grok.implements(IPoll)
 
     __ac_permissions__ = (
         (PERMISSION_VOTE, ('setVote', '_setVoter', )),
@@ -208,11 +214,11 @@ class Poll(dexterity.Item):
         return True
 
 
-class PollAddForm(dexterity.AddForm):
-
+# TODO: move to browser module
+class PollAddForm(DefaultAddForm):
     """Form to handle creation of new Polls."""
 
-    grok.name('collective.polls.poll')
+    portal_type = 'collective.polls.poll'
 
     def create(self, data):
         options = data['options']
@@ -226,11 +232,14 @@ class PollAddForm(dexterity.AddForm):
         return super(PollAddForm, self).create(data)
 
 
-class PollEditForm(dexterity.EditForm):
+# TODO: move to browser module
+class PollAddView(DefaultAddView):
+    form = PollAddForm
 
+
+# TODO: move to browser module
+class PollEditForm(DefaultEditForm):
     """Form to handle edition of existing polls."""
-
-    grok.context(IPoll)
 
     def updateWidgets(self):
         """Update form widgets to hide column option_id from end user."""
@@ -260,15 +269,19 @@ class PollEditForm(dexterity.EditForm):
         super(PollEditForm, self).applyChanges(data)
 
 
-class View(PollsViewMixin, grok.View):
+# TODO: move to browser module
+class View(PollsViewMixin, BrowserView):
 
-    grok.context(IPoll)
-    grok.require('zope2.View')
+    index = ViewPageTemplateFile('templates/view.pt')
 
-    grok.name('view')
+    def render(self):
+        return self.index()
+
+    def __call__(self):
+        self.update()
+        return self.render()
 
     def update(self):
-        super(View, self).update()
         context = aq_inner(self.context)
         self.context = context
         self.state = getMultiAdapter(

@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.9b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove hard dependency on five.grok.
+  [rodfersou, puittenbroek, hvelarde]
+
 - Remove soft dependency on zope.formlib under Plone 5 (HT @ale-rt).
   [hvelarde]
 
