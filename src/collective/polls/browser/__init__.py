@@ -5,7 +5,7 @@ from plone import api
 from zope.component import queryUtility
 
 
-class PollsViewMixin(object):
+class PollsViewMixin:
 
     """Common methods and functions used by views, tiles and portlets."""
 

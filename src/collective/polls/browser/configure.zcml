@@ -3,6 +3,36 @@
     xmlns:browser="http://namespaces.zope.org/browser">
 
   <browser:page
+      name="view"
+      for="collective.polls.content.poll.IPoll"
+      class="..content.poll.View"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="edit"
+      for="collective.polls.content.poll.IPoll"
+      class="..content.poll.PollEditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <adapter
+      name="collective.polls.poll"
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory="..content.poll.PollAddView"
+      />
+
+  <class class="..content.poll.PollAddView">
+    <require
+        permission="cmf.AddPortalContent"
+        interface="zope.publisher.interfaces.browser.IBrowserPage"
+        />
+  </class>
+
+  <browser:page
       name="poll-macros"
       template="templates/poll_macros.pt"
       for="*"
@@ -14,6 +44,13 @@
       template="templates/update_poll.pt"
       for="collective.polls.content.poll.IPoll"
       class=".update_poll.UpdatePollView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="poll_portlet_render"
+      for="*"
+      class="..polls.PollPortletRender"
       permission="zope2.View"
       />
 

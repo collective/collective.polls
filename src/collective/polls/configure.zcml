@@ -31,7 +31,6 @@
            directory="static"
            />
 
-  <include package=".content" />
   <include package=".browser" />
   <include package=".portlet" />
 
@@ -39,27 +38,22 @@
 
   <include package=".tiles" zcml:condition="installed collective.cover" />
 
-  <!-- Portlet renderer -->
-  <browser:page
-      name="poll_portlet_render"
-      for="*"
-      class=".polls.PollPortletRender"
-      permission="zope2.View"
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           Products.CMFCore.interfaces.IActionSucceededEvent"
+      handler=".subscribers.fix_permissions"
       />
-  <!-- Subscribers for events -->
-  <subscriber
-      for="collective.polls.content.poll.IPoll
-           Products.CMFCore.interfaces.IActionSucceededEvent"
-      handler=".subscribers.fix_permissions" />
-  <subscriber
-      for="collective.polls.content.poll.IPoll
-           Products.CMFCore.interfaces.IActionSucceededEvent"
-      handler=".subscribers.remove_votes" />
 
-  <!-- Utility -->
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           Products.CMFCore.interfaces.IActionSucceededEvent"
+      handler=".subscribers.remove_votes"
+      />
+
   <utility
+      name="collective.polls"
       provides="collective.polls.polls.IPollUtility"
       factory="collective.polls.polls.PollUtility"
-      name="collective.polls" />
+      />
 
 </configure>

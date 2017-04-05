@@ -19,6 +19,7 @@ from plone.dexterity.content import Item
 from plone.supermodel import model
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
@@ -40,6 +41,7 @@ class InsuficientOptions(Invalid):
     __doc__ = _(u'Not enought options provided')
 
 
+# TODO: move to interfaces module
 class IPoll(model.Schema):
 
     """A Poll in a Plone site."""
@@ -212,6 +214,7 @@ class Poll(Item):
         return True
 
 
+# TODO: move to browser module
 class PollAddForm(DefaultAddForm):
     """Form to handle creation of new Polls."""
 
@@ -229,10 +232,12 @@ class PollAddForm(DefaultAddForm):
         return super(PollAddForm, self).create(data)
 
 
+# TODO: move to browser module
 class PollAddView(DefaultAddView):
     form = PollAddForm
 
 
+# TODO: move to browser module
 class PollEditForm(DefaultEditForm):
     """Form to handle edition of existing polls."""
 
@@ -264,12 +269,17 @@ class PollEditForm(DefaultEditForm):
         super(PollEditForm, self).applyChanges(data)
 
 
-class PollView(BrowserView, PollsViewMixin):
+# TODO: move to browser module
+class View(PollsViewMixin, BrowserView):
 
-    def __call__(self, *args, **kwargs):
-        """ Browsersviews do not call update, manually call it """
+    index = ViewPageTemplateFile('templates/view.pt')
+
+    def render(self):
+        return self.index()
+
+    def __call__(self):
         self.update()
-        return super(PollView, self).__call__(*args, **kwargs)
+        return self.render()
 
     def update(self):
         context = aq_inner(self.context)

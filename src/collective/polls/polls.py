@@ -10,7 +10,7 @@ from zope.component import ComponentLookupError
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryMultiAdapter
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 import random
@@ -46,8 +46,8 @@ class IPollUtility(Interface):
         """Return a identifier for vote_id."""
 
 
+@implementer(IPollUtility)
 class PollUtility(object):
-    implements(IPollUtility)
 
     """Utility methods for dealing with polls."""
 
@@ -141,6 +141,7 @@ class PollUtility(object):
         return vote_id
 
 
+# TODO: move to browser module
 class PollPortletRender(BrowserView):
 
     """This methods allow to use the portlet render in a view."""
