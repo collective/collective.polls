@@ -4,9 +4,11 @@ from collective.cover.tiles.base import PersistentCoverTile
 from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
 from plone.app.uuid.utils import uuidToObject
+from plone.memoize.view import memoize
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.interface import implementer
 from zope.schema import TextLine
 
 
@@ -20,6 +22,7 @@ class IPollTile(IPersistentCoverTile):
     )
 
 
+@implementer(IPollTile)
 class PollTile(PollsViewMixin, PersistentCoverTile):
 
     """A tile that shows a poll."""
@@ -34,7 +37,9 @@ class PollTile(PollsViewMixin, PersistentCoverTile):
             obj = uuidToObject(uuid)
             return obj
 
+    @memoize
     def poll(self):
+        """ Get the inserted poll or a closed one """
         utility = self.utility
         uid = uuid = self.data.get('uuid', None)
         poll = None
@@ -47,6 +52,10 @@ class PollTile(PollsViewMixin, PersistentCoverTile):
                                            review_state='closed')
             poll = results and results[0].getObject() or None
         return poll
+
+    def is_empty(self):
+        """ If there is no poll, or none can be found, tile is empty """
+        return self.poll() is None
 
     def populate_with_object(self, obj):
         super(PollTile, self).populate_with_object(obj)

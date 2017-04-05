@@ -3,41 +3,47 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.polls">
-  <body>
-    <div class="poll poll-tile vote-container"
-        tal:define="poll view/poll"
-        tal:attributes="data-poll-uid view/poll_uid;
-                        data-poll-closed view/is_closed;
-                        data-poll-totalvotes view/total_votes;
-                        data-poll-url poll/absolute_url;">
-      <div tal:condition="nocall:poll">
-        <div class="poll-tile-header">
-          <h3 tal:content="poll/Title">Title</h3>
-        </div>
-        <div class="tile-content-wrapper">
-          <div class="poll-form poll-toggle">
-            <span metal:use-macro="context/@@poll-macros/form" />
+
+  <body tal:define="is_empty view/is_empty">
+    <p tal:condition="python: is_empty and view.is_compose_mode()" i18n:translate="" >
+        Please drag&amp;drop some content here to populate the tile.
+    </p>
+    <tal:notempty tal:condition="not: is_empty">
+      <div class="poll poll-tile vote-container"
+          tal:define="poll view/poll"
+          tal:attributes="data-poll-uid view/poll_uid;
+                          data-poll-closed view/is_closed;
+                          data-poll-totalvotes view/total_votes;
+                          data-poll-url poll/absolute_url;">
+        <div tal:condition="nocall:poll">
+          <div class="poll-tile-header">
+            <h3 tal:content="poll/Title">Title</h3>
           </div>
-          <div class="poll-graph poll-toggle">
-            <span metal:use-macro="context/@@poll-macros/results" />
+          <div class="tile-content-wrapper">
+            <div class="poll-form poll-toggle">
+              <span metal:use-macro="context/@@poll-macros/form" />
+            </div>
+            <div class="poll-graph poll-toggle">
+              <span metal:use-macro="context/@@poll-macros/results" />
+            </div>
+            <noscript>
+              <div class="error" i18n:translate="">
+                Your browser is currently not supporting Javascript,
+                for this reason some functionality may not be accessible.
+              </div>
+            </noscript>
+            <tal:spinner>
+              <div class="poll-spinner">
+                <img alt="spiner"
+                    src="spinner.gif"
+                    tal:define="portal_url context/@@plone_portal_state/portal_url"
+                    tal:attributes="src string:${portal_url}/spinner.gif"
+                    i18n:attributes="alt" />
+              </div>
+            </tal:spinner>
           </div>
-          <noscript>
-            <div class="error" i18n:translate="">
-              Your browser is currently not supporting Javascript,
-              for this reason some functionality may not be accessible.
-            </div>
-          </noscript>
-          <tal:spinner>
-            <div class="poll-spinner">
-              <img alt="spiner"
-                  src="spinner.gif"
-                  tal:define="portal_url context/@@plone_portal_state/portal_url"
-                  tal:attributes="src string:${portal_url}/spinner.gif"
-                  i18n:attributes="alt" />
-            </div>
-          </tal:spinner>
         </div>
       </div>
-    </div>
+    </tal:notempty>
   </body>
 </html>
