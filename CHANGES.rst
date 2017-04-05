@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.9b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add Catalan translation.
+  [sneridagh]
+
 - Remove hard dependency on five.grok.
   [rodfersou, puittenbroek, hvelarde]
 

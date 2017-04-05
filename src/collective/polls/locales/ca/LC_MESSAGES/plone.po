@@ -1,0 +1,92 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2014-11-05 20:34+0000\n"
+"PO-Revision-Date: 2014-11-05 22:39+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"X-Generator: Poedit 1.6.10\n"
+"Language: ca\n"
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "A portlet to allow voting on a specific poll"
+msgstr "Un portlet que permet votar en una enquesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Close"
+msgstr "Tanca"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Closed"
+msgstr "Tancada"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member retracts submission"
+msgstr "L'usuari retira la enquesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Member submits poll for opening"
+msgstr "L'usuari envia l'enquesta per obrir-la"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Open"
+msgstr "Obre"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Opened"
+msgstr "Oberta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Pending review"
+msgstr "Pendent de revisió"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Poll Workflow"
+msgstr "Cicle de vida de l'enquesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Private"
+msgstr "Privat"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reject"
+msgstr "Rebutja"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Retract"
+msgstr "Retira"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer closes the poll"
+msgstr "El revisor tanca l'enquesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer opens the poll"
+msgstr "El revisor obre l'enquesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Reviewer rejects the poll"
+msgstr "El revisor rebutja l'enquesta"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Submit for opening"
+msgstr "Envia per obrir l'enquesta"
+
+#: collective/polls/profiles/default/portlets.xml
+msgid "Voting portlet"
+msgstr "Enquestes"
+
+#: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
+msgid "Workflow to be used with polls"
+msgstr "El workflow per ser utilitzat a les enquestes"
