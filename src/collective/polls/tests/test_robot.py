@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.polls.testing import IS_PLONE_5
+from collective.polls.config import IS_PLONE_5
 from collective.polls.testing import IS_PLONE_42
 from collective.polls.testing import ROBOT_TESTING
 from plone.testing import layered

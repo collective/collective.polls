@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+from collective.polls.config import IS_PLONE_5
 from collective.polls.config import PROFILE
 from collective.polls.config import PROJECTNAME
 from collective.polls.testing import HAS_COVER
 from collective.polls.testing import INTEGRATION_TESTING
-from collective.polls.testing import IS_PLONE_5
 from plone import api
 
 import unittest

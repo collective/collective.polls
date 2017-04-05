@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
+from collective.polls.config import IS_PLONE_5
 from collective.polls.polls import IPolls
-from collective.polls.testing import IS_PLONE_5
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize

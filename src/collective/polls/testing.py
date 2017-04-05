@@ -32,7 +32,6 @@ else:
     HAS_COVER = True
 
 IS_PLONE_42 = api.env.plone_version().startswith('4.2')
-IS_PLONE_5 = api.env.plone_version().startswith('5')
 
 
 class Fixture(PloneSandboxLayer):
