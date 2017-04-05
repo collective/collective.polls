@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:omit-tag="">
-<span id="" class=""
+  <span id="" class=""
       tal:attributes="id view/id;
                       class view/klass;
                       style view/style;
@@ -16,7 +16,7 @@
                       onmouseout view/onmouseout;
                       onkeypress view/onkeypress;
                       onkeydown view/onkeydown;
-                      onkeyup view/onkeyup"><tal:block
-      condition="view/value" content="view/value"
-/></span>
+                      onkeyup view/onkeyup">
+    <tal:block condition="view/value" content="view/value" />
+  </span>
 </html>

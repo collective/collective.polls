@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from z3c.form import interfaces
+from z3c.form.interfaces import ITextLinesWidget
 
 
-class IEnhancedTextLinesWidget(interfaces.ITextLinesWidget):
+class IEnhancedTextLinesWidget(ITextLinesWidget):
     """Text lines widget."""
