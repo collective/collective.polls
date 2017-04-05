@@ -266,8 +266,12 @@ class PollEditForm(DefaultEditForm):
 
 class PollView(BrowserView, PollsViewMixin):
 
+    def __call__(self, *args, **kwargs):
+        """ Browsersviews do not call update, manually call it """
+        self.update()
+        return super(PollView, self).__call__(*args, **kwargs)
+
     def update(self):
-        super(PollView, self).update()
         context = aq_inner(self.context)
         self.context = context
         self.state = getMultiAdapter(
