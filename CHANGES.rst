@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 1.9b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Removed dependency on collective.z3cform.widgets.
+- Remove dependency on collective.z3cform.widgets.
+  After running the upgrade step you can safely uninstall collective.z3cform.widgets from your site if you don't have any other add-on depending on it.
   [sneridagh, hvelarde]
 
 - Add Catalan translation.

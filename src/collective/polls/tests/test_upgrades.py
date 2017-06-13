@@ -101,3 +101,31 @@ class Upgrade2to3TestCase(UpgradeTestCaseBase):
         self._do_upgrade_step(step)
         tiles = api.portal.get_registry_record('plone.app.tiles')
         self.assertIn(u'collective.polls', tiles)
+
+
+class Upgrade5to6TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'5', u'6')
+
+    def test_upgrade_to_6_registrations(self):
+        version = self.setup.getLastVersionForProfile(PROFILE)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self._how_many_upgrades_to_do(), 2)
+
+    def test_register_tasksplease_script(self):
+        # address also an issue with Setup permission
+        title = u'Register TasksPlease script'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        script = '++resource++collective.polls/js/jquery.tasksplease.js'
+        js_tool = api.portal.get_tool('portal_javascripts')
+        js_tool.unregisterResource(script)
+        self.assertNotIn(script, js_tool.getResourceIds())
+
+        # run the upgrade step to validate the update
+        self._do_upgrade_step(step)
+
+        self.assertIn(script, js_tool.getResourceIds())
