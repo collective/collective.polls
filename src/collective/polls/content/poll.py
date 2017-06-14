@@ -123,7 +123,7 @@ class Poll(Item):
         for option in self.getOptions():
             index = option.get('option_id')
             description = option.get('description')
-            option_votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
+            option_votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)  # noqa: S001
             votes['options'].append({'description': description,
                                      'votes': option_votes,
                                      'percentage': 0.0})
@@ -208,7 +208,7 @@ class Poll(Item):
             return False
         # set vote in annotation storage
         for option in options:
-            vote_key = VOTE_ANNO_KEY % option
+            vote_key = VOTE_ANNO_KEY % option  # noqa: S001
             votes = annotations.get(vote_key, 0)
             annotations[vote_key] = votes + 1
         return True

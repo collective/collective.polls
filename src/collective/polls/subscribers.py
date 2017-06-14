@@ -36,4 +36,4 @@ def remove_votes(poll, event):
         annotations[MEMBERS_ANNO_KEY] = []
         # Erase Votes
         for option in options:
-            annotations[VOTE_ANNO_KEY % option] = 0
+            annotations[VOTE_ANNO_KEY % option] = 0  # noqa: S001
