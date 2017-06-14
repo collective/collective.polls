@@ -28,7 +28,7 @@ class BasePortlet(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def _set_request_cookies(self, request):
-        ''' For each cookie in response, we set a cookie in request '''
+        """For each cookie in response, we set a cookie in request."""
         response_cookies = request.response.cookies
         for key, cookie in response_cookies.items():
             request.cookies[key] = cookie['value']
@@ -121,14 +121,14 @@ class PortletRegistrationTest(BasePortlet):
         self.assertTrue(isinstance(editview, voteportlet.EditForm))
 
     def test_vocab_possible_polls(self):
-        ''' test vocabulary source for possible polls '''
+        """Test vocabulary source for possible polls."""
         portal = self.portal
         vocab = voteportlet.PossiblePolls(portal)
         # We should list here 2 open polls + latest as options
         self.assertEqual(len(vocab), 3)
 
     def test_vocab_possible_polls_encoding(self):
-        ''' test encoding of vocabulary '''
+        """Test encoding of vocabulary."""
 
         portal = self.portal
         vocab = voteportlet.PossiblePolls(portal)

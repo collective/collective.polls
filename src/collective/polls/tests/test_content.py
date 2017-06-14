@@ -86,7 +86,7 @@ class VotingTest(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def _set_request_cookies(self, request):
-        ''' For each cookie in response, we set a cookie in request '''
+        """For each cookie in response, we set a cookie in request."""
         response_cookies = request.response.cookies
         for key, cookie in response_cookies.items():
             request.cookies[key] = cookie['value']
