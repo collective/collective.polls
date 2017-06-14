@@ -11,6 +11,10 @@ There's a frood who really knows where his towel is.
     so, it would be a good idea to add this package on the `eggs` part of your buildout configuration before upgrading to avoid ending with a broken dependency.
     After running the upgrade step you can safely uninstall collective.z3cform.widgets and remove it from your buildout configuration if you don't have any other add-on depending on it.
 
+- Remove ExplorerCanvas script;
+  this will break compatibility with IE8 and below but… who cares?
+  [hvelarde]
+
 - Remove dependency on collective.z3cform.widgets.
   [sneridagh, hvelarde]
 

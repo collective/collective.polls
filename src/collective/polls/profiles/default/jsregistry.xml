@@ -2,9 +2,7 @@
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
  <javascript id="++resource++collective.polls/js/jquery.flot.js" compression="none" expression="" />
  <javascript id="++resource++collective.polls/js/jquery.flot.pie.js" compression="none" expression="" />
- <javascript id="++resource++collective.polls/js/excanvas.min.js" compression="full" expression="" conditionalcomment="lte IE 8"/>
  <javascript id="++resource++collective.polls/js/polls.js" compression="full" expression="" />
-
  <javascript id="++resource++collective.polls/js/collective.poll.js" compression="full" expression="" />
 
  <javascript id="++resource++collective.polls/js/jquery.tasksplease.js"

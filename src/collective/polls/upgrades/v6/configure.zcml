@@ -16,6 +16,12 @@
         />
 
     <genericsetup:upgradeStep
+        title="Remove ExplorerCanvas script"
+        description="Remove script used to add support for the canvas tag on IE8 and below."
+        handler=".remove_excanvas_script"
+        />
+
+    <genericsetup:upgradeStep
         title="Cook JS resources"
         description="There were changes in the JS files, so we need to cook the resources."
         handler="..cook_javascript_resources"

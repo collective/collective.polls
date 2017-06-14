@@ -111,10 +111,9 @@ class Upgrade5to6TestCase(UpgradeTestCaseBase):
     def test_upgrade_to_6_registrations(self):
         version = self.setup.getLastVersionForProfile(PROFILE)[0]
         self.assertGreaterEqual(int(version), int(self.to_version))
-        self.assertEqual(self._how_many_upgrades_to_do(), 2)
+        self.assertEqual(self._how_many_upgrades_to_do(), 3)
 
     def test_register_tasksplease_script(self):
-        # address also an issue with Setup permission
         title = u'Register TasksPlease script'
         step = self._get_upgrade_step(title)
         self.assertIsNotNone(step)
@@ -127,5 +126,19 @@ class Upgrade5to6TestCase(UpgradeTestCaseBase):
 
         # run the upgrade step to validate the update
         self._do_upgrade_step(step)
-
         self.assertIn(script, js_tool.getResourceIds())
+
+    def test_remove_excanvas_script(self):
+        title = u'Remove ExplorerCanvas script'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        script = '++resource++collective.polls/js/excanvas.min.js'
+        js_tool = api.portal.get_tool('portal_javascripts')
+        js_tool.registerResource(script)
+        self.assertIn(script, js_tool.getResourceIds())
+
+        # run the upgrade step to validate the update
+        self._do_upgrade_step(step)
+        self.assertNotIn(script, js_tool.getResourceIds())
