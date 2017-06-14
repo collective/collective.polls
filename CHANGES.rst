@@ -6,6 +6,14 @@ There's a frood who really knows where his towel is.
 1.9b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    This release removes collective.z3cform.widgets from the list of dependencies;
+    so, it would be a good idea to add this package on the `eggs` part of your buildout configuration before upgrading to avoid ending with a broken dependency.
+    After running the upgrade step you can safely uninstall collective.z3cform.widgets and remove it from your buildout configuration if you don't have any other add-on depending on it.
+
+- Remove dependency on collective.z3cform.widgets.
+  [sneridagh, hvelarde]
+
 - Add Catalan translation.
   [sneridagh]
 

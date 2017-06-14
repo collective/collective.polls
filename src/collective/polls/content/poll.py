@@ -9,7 +9,7 @@ from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
 from collective.polls.polls import IPolls
-from collective.z3cform.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
+from collective.polls.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from plone import api
 from plone.autoform import directives as form
 from plone.dexterity.browser.add import DefaultAddForm

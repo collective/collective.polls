@@ -45,7 +45,6 @@ setup(name='collective.polls',
       install_requires=[
           'AccessControl',
           'Acquisition',
-          'collective.z3cform.widgets >=1.0b3',
           'plone.api',
           'plone.app.content',
           'plone.app.dexterity [relations]',
