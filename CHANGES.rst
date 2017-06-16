@@ -3,8 +3,8 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.9b2 (unreleased)
-^^^^^^^^^^^^^^^^^^
+1.10b1 (2017-06-16)
+^^^^^^^^^^^^^^^^^^^
 
 .. Warning::
     This release removes collective.z3cform.widgets from the list of dependencies;
@@ -12,7 +12,7 @@ There's a frood who really knows where his towel is.
     After running the upgrade step you can safely uninstall collective.z3cform.widgets and remove it from your buildout configuration if you don't have any other add-on depending on it.
 
 - Remove ExplorerCanvas script;
-  this will break compatibility with IE8 and below but… who cares?
+  this will break compatibility with IE8 and below butâŚ who cares?
   [hvelarde]
 
 - Remove dependency on collective.z3cform.widgets.
