@@ -8,7 +8,6 @@ cache:
 addons:
   firefox: 45.8.0esr
 env:
-- PLONE_VERSION=4.2
 - PLONE_VERSION=4.3 TEST_EGGS=collective.cover[test]
 - PLONE_VERSION=5.0
 - PLONE_VERSION=5.1
