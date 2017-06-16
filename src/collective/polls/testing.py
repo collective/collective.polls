@@ -5,7 +5,6 @@ For Plone 5 we need to install plone.app.contenttypes.
 
 Tile for collective.cover is only tested in Plone 4.3.
 """
-from plone import api
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -31,8 +30,6 @@ except pkg_resources.DistributionNotFound:
 else:
     HAS_COVER = True
 
-IS_PLONE_42 = api.env.plone_version().startswith('4.2')
-
 
 class Fixture(PloneSandboxLayer):
 
@@ -55,6 +52,7 @@ class Fixture(PloneSandboxLayer):
         wf = getattr(portal, 'portal_workflow')
         types = ('Folder', )
         wf.setChainForPortalTypes(types, 'simple_publication_workflow')
+
 
 FIXTURE = Fixture()
 
