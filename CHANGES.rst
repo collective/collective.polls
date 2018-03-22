@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+- Translation support with LinguaPlone for poll fixed.
+  [SyZn]
 - Drop support for Plone 4.2.
   [hvelarde]
 
