@@ -28,7 +28,7 @@ def PossiblePolls(context):
     portal_state = api.content.get_view(
         name='plone_portal_state',
         context=context,
-        request=context.REQUEST
+        request=context.REQUEST,
     )
     utility = queryUtility(IPolls, name='collective.polls')
     navigation_root = portal_state.navigation_root()
@@ -130,7 +130,7 @@ class Renderer(PollsViewMixin, base.Renderer):
         portal_state = api.content.get_view(
             name='plone_portal_state',
             context=self.context,
-            request=self.context.REQUEST
+            request=self.context.REQUEST,
         )
         navigation_root = portal_state.navigation_root()
         utility = self.utility
@@ -142,7 +142,7 @@ class Renderer(PollsViewMixin, base.Renderer):
                 context=navigation_root,
                 show_all=True,
                 limit=1,
-                review_state='closed'
+                review_state='closed',
             )
             poll = results and results[0].getObject() or None
         return poll

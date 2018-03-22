@@ -12,7 +12,7 @@ ALL_ROLES = ['Anonymous', 'Contributor', 'Editor', 'Manager', 'Member',
 
 def fix_permissions(poll, event):
     """Fix permission on poll object if allow_anonymous is enabled."""
-    if event.action in ['open', ]:
+    if event.action in ['open']:
         parent = aq_parent(poll)
         parent_view_roles = parent.rolesOfPermission('View')
         parent_view_roles = [
@@ -29,7 +29,7 @@ def fix_permissions(poll, event):
 
 def remove_votes(poll, event):
     """Remove existing votes on poll object if reject transaction happens."""
-    if event.action in ['reject', ]:
+    if event.action in ['reject']:
         options = [o.get('option_id') for o in poll.getOptions()]
         annotations = poll.annotations
         # Erase Voters
