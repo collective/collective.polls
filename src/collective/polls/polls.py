@@ -218,8 +218,7 @@ class PollPortletRender(BrowserView):
 
         renderer = queryMultiAdapter(
             (context, request, view, manager, assignment),
-            IPortletRenderer
-        )
+            IPortletRenderer)
 
         # Make sure we have working acquisition chain
         renderer = renderer.__of__(context)
