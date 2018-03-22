@@ -13,6 +13,9 @@ env:
 - PLONE_VERSION=5.1
 matrix:
   fast_finish: true
+before_install:
+# FIXME: I have no idea how and why six==1.11.0 is being installed
+- pip uninstall -y six
 install:
 - sed -i "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
 - sed -i "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
