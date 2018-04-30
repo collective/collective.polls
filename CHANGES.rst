@@ -8,7 +8,8 @@ There's a frood who really knows where his towel is.
 
 - Translation support with LinguaPlone for poll fixed.
   [SyZn]
-- Drop support for Plone 4.2.
+
+- Drop support for Plone 4.2 and Plone 5.0.
   [hvelarde]
 
 
