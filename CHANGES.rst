@@ -6,7 +6,7 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Drop support for Plone 4.2.
+- Drop support for Plone 4.2 and Plone 5.0.
   [hvelarde]
 
 
