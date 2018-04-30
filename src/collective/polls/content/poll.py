@@ -99,7 +99,7 @@ class Poll(Item):
     """A Poll in a Plone site."""
 
     __ac_permissions__ = (
-        (PERMISSION_VOTE, ('setVote', '_setVoter', )),
+        (PERMISSION_VOTE, ('setVote', '_setVoter')),
     )
 
     @property
@@ -202,7 +202,7 @@ class Poll(Item):
         if not self._validateVote(options):
             return False
         if not isinstance(options, list):
-            options = [options, ]
+            options = [options]
         if not self._setVoter(request):
             # We failed to set voter, so we will not compute its votes
             return False
@@ -310,8 +310,7 @@ class View(PollsViewMixin, BrowserView):
                     u"Anonymous user won't be able to vote, you forgot to "
                     u'publish the parent folder, you must sent back the poll '
                     u'to private state, publish the parent folder and open '
-                    u'the poll again'
-                )
+                    u'the poll again')
                 api.portal.show_message(msg, self.request, type='warn')
 
         if 'poll.submit' in form:

@@ -97,7 +97,7 @@ class IntegrationTest(unittest.TestCase):
         """Test if a user voted in a poll."""
         utility = queryUtility(IPolls, name='collective.polls')
         poll = self.subfolder['p5']
-        poll.options = [{'option_id': 0, 'description': 'Option 1'}, ]
+        poll.options = [{'option_id': 0, 'description': 'Option 1'}]
         self.assertFalse(utility.voted_in_a_poll(poll))
         # Vote in a poll
         poll.setVote(0)

@@ -13,6 +13,9 @@ env:
 - PLONE_VERSION=5.1
 matrix:
   fast_finish: true
+before_install:
+# FIXME: I have no idea how and why six==1.11.0 is being installed
+- pip uninstall -y six
 install:
 - sed -i "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
 - sed -i "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
@@ -27,13 +30,8 @@ script:
 - bin/code-analysis
 - bin/test
 after_success:
-- bin/createcoverage -t "--layer=!Robot"
+- bin/createcoverage --output-dir=htmlcov -t "--layer=!Robot"
 - pip install coveralls
 - coveralls
-after_script:
-# Firefox complains: GConf-WARNING **: Got Disconnected from DBus.
-# And then it keeps hanging, causing a failed job after 30-50 minutes.
-# So we just kill Firefox.
-- pkill -9 firefox
 notifications:
   irc: irc.freenode.org#simplesconsultoria
