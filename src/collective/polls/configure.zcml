@@ -52,8 +52,8 @@
 
   <utility
       name="collective.polls"
-      provides="collective.polls.polls.IPolls"
-      factory="collective.polls.polls.Polls"
+      provides="collective.polls.utility.IPolls"
+      factory="collective.polls.utility.Polls"
       />
 
   <class class=".widgets.enhancedtextlines.EnhancedTextLinesWidget">

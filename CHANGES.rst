@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+- Move ``IPolls`` utility to the ``utility`` module.
+  [hvelarde]
+
 - Move ``View`` class to the ``browser`` module.
   [hvelarde]
 
