@@ -47,11 +47,4 @@
       permission="zope2.View"
       />
 
-  <browser:page
-      name="poll_portlet_render"
-      for="*"
-      class="..polls.PollPortletRender"
-      permission="zope2.View"
-      />
-
 </configure>
