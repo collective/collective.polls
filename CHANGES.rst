@@ -9,7 +9,7 @@ There's a frood who really knows where his towel is.
 - Move ``View`` class to the ``browser`` module.
   [hvelarde]
 
-- Remove unused ``poll_portlet_render`` view.
+- Remove unused ``poll_portlet_render`` view and empty ``poll.xml`` model.
   [hvelarde]
 
 - Translation support with LinguaPlone for poll fixed.
