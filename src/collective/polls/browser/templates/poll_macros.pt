@@ -1,4 +1,5 @@
 <metal:form define-macro="form"
+    i18n:domain="collective.polls"
     tal:define="poll view/poll;
                 results view/voting_results;">
   <form method="post"
@@ -33,6 +34,7 @@
 </metal:form>
 
 <metal:results define-macro="results"
+    i18n:domain="collective.polls"
     tal:define="closed view/is_closed;
                 poll view/poll;
                 can_edit view/can_edit;
