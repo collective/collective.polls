@@ -7,7 +7,8 @@ There's a frood who really knows where his towel is.
 ^^^^^^^^^^^^^^^^^^^
 
 - Code clean up and refactor:
-  ``View`` and ``PollPortletRender`` classes were moved to the ``browser`` module.
+  ``View`` and ``PollPortletRender`` classes were moved to the ``browser`` module;
+  empty ``poll.xml`` model was removed.
   [hvelarde]
 
 - Drop support for Plone 4.2 and Plone 5.0.
