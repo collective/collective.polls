@@ -6,7 +6,13 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Drop support for Plone 4.2.
+- Code clean up and refactor:
+  ``View`` and ``PollPortletRender`` classes were moved to the ``browser`` module;
+  ``IPolls`` utility was moved to the ``utility`` module;
+  empty ``poll.xml`` model was removed.
+  [hvelarde]
+
+- Drop support for Plone 4.2 and Plone 5.0.
   [hvelarde]
 
 

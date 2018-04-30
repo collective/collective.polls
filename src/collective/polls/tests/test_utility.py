@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from AccessControl import Unauthorized
-from collective.polls.polls import IPolls
 from collective.polls.testing import INTEGRATION_TESTING
+from collective.polls.utility import IPolls
 from plone import api
 from plone.app.testing import logout
 from plone.uuid.interfaces import IUUID

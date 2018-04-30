@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
-from Acquisition import aq_inner
-from Acquisition import aq_parent
 from collective.polls import MessageFactory as _
-from collective.polls.browser import PollsViewMixin
 from collective.polls.config import COOKIE_KEY
 from collective.polls.config import MEMBERS_ANNO_KEY
 from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import VOTE_ANNO_KEY
-from collective.polls.polls import IPolls
+from collective.polls.utility import IPolls
 from collective.polls.widgets.enhancedtextlines import EnhancedTextLinesFieldWidget
 from plone import api
 from plone.autoform import directives as form
@@ -17,12 +14,8 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.content import Item
 from plone.supermodel import model
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
-from zope.component import getMultiAdapter
 from zope.component import queryUtility
 from zope.interface import implementer
 from zope.interface import Invalid
@@ -267,89 +260,3 @@ class PollEditForm(DefaultEditForm):
             new_data.append(option_new)
         data['options'] = new_data
         super(PollEditForm, self).applyChanges(data)
-
-
-# TODO: move to browser module
-class View(PollsViewMixin, BrowserView):
-
-    index = ViewPageTemplateFile('templates/view.pt')
-
-    def render(self):
-        return self.index()
-
-    def __call__(self):
-        self.update()
-        return self.render()
-
-    def update(self):
-        context = aq_inner(self.context)
-        self.context = context
-        self.state = getMultiAdapter(
-            (context, self.request), name=u'plone_context_state')
-        self.wf_state = self.state.workflow_state()
-        # Handle vote
-        form = self.request.form
-        self.errors = []
-        self.messages = []
-
-        # if the poll is open and anonymous should vote but the parent folder
-        # is private.. inform the user.
-
-        # When the poll's container is the site's root, we do not need to
-        # check the permissions.
-        container = aq_parent(aq_inner(self.context))
-
-        if 'open' == self.wf_state and not ISiteRoot.providedBy(container):
-            roles = [
-                r['name'] for r in
-                self.context.rolesOfPermission('collective.polls: Vote')
-                if r['selected']]
-
-            if 'Anonymous' not in roles and self.context.allow_anonymous:
-                msg = _(
-                    u"Anonymous user won't be able to vote, you forgot to "
-                    u'publish the parent folder, you must sent back the poll '
-                    u'to private state, publish the parent folder and open '
-                    u'the poll again')
-                api.portal.show_message(msg, self.request, type='warn')
-
-        if 'poll.submit' in form:
-            self._updateForm(form)
-        # Update status messages
-        for error in self.errors:
-            api.portal.show_message(error, self.request, type='warn')
-        for msg in self.messages:
-            api.portal.show_message(msg, self.request, type='info')
-
-        # XXX
-        # if 'voting.from' in form:
-        #     url = form['voting.from']
-        #     self.request.RESPONSE.redirect(url)
-
-    def _updateForm(self, form):
-        INVALID_OPTION = _(u'Invalid option')
-        options = form.get('options', '')
-        if isinstance(options, list):
-            self.errors.append(INVALID_OPTION)
-        elif isinstance(options, str):
-            if not options.isdigit():
-                self.errors.append(INVALID_OPTION)
-            else:
-                options = int(options)
-        if not self.errors:
-            # Let's vote
-            try:
-                self.context.setVote(options, self.request)
-                self.messages.append(_(u'Thanks for your vote'))
-                # We do this to avoid redirecting anonymous user as
-                # we just sent them the cookie
-                self._has_voted = True
-            except Unauthorized:
-                self.errors.append(_(u'You are not authorized to vote'))
-
-    def poll(self):
-        return self.context
-
-    def getOptions(self):
-        """Return available options."""
-        return self.context.getOptions()

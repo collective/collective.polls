@@ -5,7 +5,7 @@
   <browser:page
       name="view"
       for="collective.polls.content.poll.IPoll"
-      class="..content.poll.View"
+      class=".View"
       permission="zope2.View"
       />
 
@@ -50,7 +50,7 @@
   <browser:page
       name="poll_portlet_render"
       for="*"
-      class="..polls.PollPortletRender"
+      class=".PollPortletRender"
       permission="zope2.View"
       />
 

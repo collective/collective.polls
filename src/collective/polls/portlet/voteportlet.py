@@ -2,7 +2,7 @@
 from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
 from collective.polls.config import IS_PLONE_5
-from collective.polls.polls import IPolls
+from collective.polls.utility import IPolls
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
