@@ -8,8 +8,10 @@
     i18n_domain="collective.polls">
 
   <five:registerPackage package="." />
-  <includeDependencies package="." />
+
   <i18n:registerTranslations directory="locales" />
+
+  <include package="plone.app.dexterity" />
 
   <permission
     id="collective.polls.AddPoll"
