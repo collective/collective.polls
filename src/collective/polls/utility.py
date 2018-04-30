@@ -44,38 +44,26 @@ class Polls(object):
     """Utility methods for dealing with polls."""
 
     @property
-    def ct(self):
-        return api.portal.get_tool(name='portal_catalog')
-
-    @property
     def mt(self):
         return api.portal.get_tool(name='portal_membership')
 
     @property
-    def wt(self):
-        return api.portal.get_tool(name='portal_workflow')
-
-    @property
     def member(self):
         return self.mt.getAuthenticatedMember()
-
-    def _query_for_polls(self, **kw):
-        """Use Portal Catalog to return a list of polls."""
-        kw['portal_type'] = 'collective.polls.poll'
-        results = self.ct.searchResults(**kw)
-        return results
 
     def recent_polls(self, context=None, show_all=False, limit=5, **kw):
         """Return recent polls."""
         if context is not None:
             kw['path'] = '/'.join(context.getPhysicalPath())
 
+        kw['portal_type'] = 'collective.polls.poll'
         kw['sort_on'] = 'created'
         kw['sort_order'] = 'reverse'
         kw['sort_limit'] = limit
         if not show_all:
             kw['review_state'] = 'open'
-        results = self._query_for_polls(**kw)
+
+        results = api.content.find(**kw)
         return results[:limit]
 
     def poll_by_uid(self, uid, context=None):
@@ -83,8 +71,7 @@ class Polls(object):
         if uid == 'latest':
             results = self.recent_polls(context=context, show_all=False, limit=1)
         else:
-            kw = {'UID': uid}
-            results = self._query_for_polls(**kw)
+            results = api.content.find(UID=uid)
         if results:
             poll = results[0].getObject()
             return poll
