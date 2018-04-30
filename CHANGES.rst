@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+- Move ``View`` class to the ``browser`` module.
+  [hvelarde]
+
 - Remove unused ``poll_portlet_render`` view.
   [hvelarde]
 
