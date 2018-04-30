@@ -8,6 +8,7 @@ There's a frood who really knows where his towel is.
 
 - Code clean up and refactor:
   ``View`` and ``PollPortletRender`` classes were moved to the ``browser`` module;
+  ``IPolls`` utility was moved to the ``utility`` module;
   empty ``poll.xml`` model was removed.
   [hvelarde]
 

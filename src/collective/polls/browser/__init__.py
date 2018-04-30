@@ -3,7 +3,7 @@ from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from Acquisition import aq_parent
 from collective.polls import MessageFactory as _
-from collective.polls.polls import IPolls
+from collective.polls.utility import IPolls
 from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
