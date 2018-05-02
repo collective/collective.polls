@@ -343,3 +343,17 @@ class VotingTest(unittest.TestCase):
         self.assertEqual(results[options][1], 1)
         # 50%
         self.assertEqual(results[options][2], 0.5)
+
+    def test_modification_time(self):
+        poll = self.p3
+        logout()
+
+        # a vote must modify the poll
+        last_modified = poll.modified()
+        poll.setVote(0, self.request)
+        self. assertGreater(poll.modified(), last_modified)
+
+        # another vote also modifies the poll
+        last_modified = poll.modified()
+        poll.setVote(0, self.request)
+        self. assertGreater(poll.modified(), last_modified)

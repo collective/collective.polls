@@ -17,9 +17,11 @@ from plone.supermodel import model
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.component import queryUtility
+from zope.event import notify
 from zope.interface import implementer
 from zope.interface import Invalid
 from zope.interface import invariant
+from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -204,6 +206,7 @@ class Poll(Item):
             vote_key = VOTE_ANNO_KEY % option  # noqa: S001
             votes = annotations.get(vote_key, 0)
             annotations[vote_key] = votes + 1
+        notify(ObjectModifiedEvent(self))
         return True
 
 

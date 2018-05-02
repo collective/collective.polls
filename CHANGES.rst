@@ -13,6 +13,10 @@ There's a frood who really knows where his towel is.
 - Update i18n, Brazilian Portuguese and Spanish translations.
   [hvelarde]
 
+- Fix HTTP caching headers on ``update-poll`` browser view (fixes `#117 <https://github.com/collective/collective.polls/issues/117>`_);
+  a poll now updates its modification date on every vote.
+  [hvelarde]
+
 - Upgrade steps 2, 3 and 4 were removed.
   [hvelarde]
 
