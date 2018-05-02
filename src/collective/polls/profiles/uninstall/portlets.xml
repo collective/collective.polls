@@ -1,14 +1,5 @@
 <?xml version="1.0"?>
-<portlets
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="plone">
-
- <portlet title="Voting portlet"
-    addview="collective.polls.VotePortlet"
-    description="A portlet to allow voting on a specific poll"
-    i18n:attributes="title; description">
-  <for interface="plone.app.portlets.interfaces.IColumn" remove="True" />
-  <for interface="plone.app.portlets.interfaces.IDashboard" remove="True" />
- </portlet>
-
+<portlets>
+  <!-- FIXME: this does not remove any assignments -->
+  <portlet remove="True" addview="collective.polls.VotePortlet" />
 </portlets>

@@ -6,6 +6,11 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+- Manage deprecation of CMFQuickInstallerTool on Plone >= 5.1;
+  fix removal of portlet definition;
+  remove needless tile registration/removal when using plone.app.tiles >= 3.0.0.
+  [hvelarde]
+
 - Fix dependencies inclussion.
   [hvelarde]
 

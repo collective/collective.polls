@@ -5,6 +5,8 @@ For Plone 5 we need to install plone.app.contenttypes.
 
 Tile for collective.cover is only tested in Plone 4.3.
 """
+from collective.polls.config import PROJECTNAME
+from plone import api
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -29,6 +31,24 @@ except pkg_resources.DistributionNotFound:
     HAS_COVER = False
 else:
     HAS_COVER = True
+
+
+IS_BBB = api.env.plone_version().startswith('4.3')
+
+
+class QIBBB:
+    """BBB: remove on deprecation of Plone 4.3."""
+    def uninstall(self):
+        if IS_BBB:
+            qi = self.portal['portal_quickinstaller']
+            with api.env.adopt_roles(['Manager']):
+                qi.uninstallProducts([PROJECTNAME])
+        else:
+            from Products.CMFPlone.utils import get_installer
+            qi = get_installer(self.portal, self.request)
+            with api.env.adopt_roles(['Manager']):
+                qi.uninstall_product(PROJECTNAME)
+        return qi
 
 
 class Fixture(PloneSandboxLayer):
