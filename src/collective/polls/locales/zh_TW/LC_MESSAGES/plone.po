@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2015-11-24 20:25+0000\n"
+"POT-Creation-Date: 2018-05-02 20:29+0000\n"
 "PO-Revision-Date: 2016-01-04 22:25+0800\n"
 "Last-Translator: TsungWei Hu <marr.tw@gmail.com>\n"
 "Language-Team: Plone I18N <plone-i18n@lists.sourceforge.net>\n"
@@ -85,4 +85,3 @@ msgstr "投票方框"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"
 msgstr "投票工作流程"
-

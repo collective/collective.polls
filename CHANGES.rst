@@ -10,6 +10,9 @@ There's a frood who really knows where his towel is.
     This release removes code for old upgrade steps;
     upgrading from a version below 1.8 is no longer supported.
 
+- Update i18n, Brazilian Portuguese and Spanish translations.
+  [hvelarde]
+
 - Upgrade steps 2, 3 and 4 were removed.
   [hvelarde]
 

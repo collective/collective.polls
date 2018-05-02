@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
-from collective.polls import MessageFactory as _
 from collective.polls.browser import PollsViewMixin
 from plone.app.uuid.utils import uuidToObject
 from plone.memoize import view
@@ -17,7 +16,7 @@ class IPollTile(IPersistentCoverTile):
     """A tile that shows a poll."""
 
     uuid = TextLine(
-        title=_(u'Poll uuid'),
+        title=u'UUID',
         readonly=True,
     )
 
