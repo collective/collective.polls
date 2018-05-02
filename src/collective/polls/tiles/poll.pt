@@ -28,18 +28,17 @@
             <span metal:use-macro="context/@@poll-macros/results" />
           </div>
           <noscript>
-            <div class="error" i18n:translate="">
-              Your browser is currently not supporting Javascript,
+            <div class="error" i18n:translate="no_javascript_error">
+              Your browser is currently not supporting JavaScript,
               for this reason some functionality may not be accessible.
             </div>
           </noscript>
           <tal:spinner>
             <div class="poll-spinner">
-              <img alt="spiner"
-                  src="spinner.gif"
+              <img alt="" src="spinner.gif"
                   tal:define="portal_url context/@@plone_portal_state/portal_url"
                   tal:attributes="src string:${portal_url}/spinner.gif"
-                  i18n:attributes="alt" />
+                  />
             </div>
           </tal:spinner>
         </div>

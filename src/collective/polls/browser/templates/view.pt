@@ -32,8 +32,8 @@
               <span metal:use-macro="context/@@poll-macros/results" />
             </div>
             <noscript>
-              <div class="error" i18n:translate="">
-                Your browser is currently not supporting Javascript,
+              <div class="error" i18n:translate="no_javascript_error">
+                Your browser is currently not supporting JavaScript,
                 for this reason some functionality may not be accessible.
               </div>
             </noscript>
