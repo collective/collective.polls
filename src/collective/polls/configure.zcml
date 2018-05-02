@@ -56,6 +56,10 @@
       factory="collective.polls.utility.Polls"
       />
 
+  <class class="collective.polls.content.poll.Poll">
+    <implements interface="z3c.caching.interfaces.IPurgeable" />
+  </class>
+
   <class class=".widgets.enhancedtextlines.EnhancedTextLinesWidget">
     <require
         permission="zope.Public"

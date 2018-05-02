@@ -56,6 +56,28 @@ class IntegrationTest(unittest.TestCase):
         new_object = createObject(factory)
         self.assertTrue(IPoll.providedBy(new_object))
 
+    def assertEventFiredOnce(self, event, iterable):
+        """Assert the event is present at least once on iterable."""
+        filtered = [e for e in iterable if event.providedBy(e)]
+        self.assertTrue(filtered)
+
+    def test_automatic_purging(self):
+        # z3c.caching must purge objects automatically on modified,
+        # moved, renamed or removed; testing the whole enchilada is out
+        # of the scope of this package
+        from z3c.caching.interfaces import IPurgeEvent
+        from zope.component import eventtesting
+        from zope.event import notify
+        from zope.lifecycleevent import ObjectModifiedEvent
+        eventtesting.setUp()
+
+        # modifying the poll must fire a Purge event
+        notify(ObjectModifiedEvent(self.poll))
+        events = eventtesting.getEvents()
+        # XXX: Purge event is fired more than once
+        #      https://community.plone.org/t/6411?u=hvelarde
+        self.assertEventFiredOnce(IPurgeEvent, events)
+
     def test_validate_no_options(self):
         data = MockPoll()
 
