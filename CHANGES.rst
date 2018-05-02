@@ -6,6 +6,13 @@ There's a frood who really knows where his towel is.
 1.10b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    This release removes code for old upgrade steps;
+    upgrading from a version below 1.8 is no longer supported.
+
+- Upgrade steps 2, 3 and 4 were removed.
+  [hvelarde]
+
 - Manage deprecation of CMFQuickInstallerTool on Plone >= 5.1;
   fix removal of portlet definition;
   remove needless tile registration/removal when using plone.app.tiles >= 3.0.0.
