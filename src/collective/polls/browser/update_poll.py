@@ -18,9 +18,9 @@ class UpdatePollView(PollsViewMixin, BrowserView):
         """Render the results of a poll.
 
         Make use of HTTP caching headers to decrease server usage:
-        results are cached 120 seconds on browsers and 60 seconds on
-        intermediate caches. We use the last modified date as ETag to
-        return a 304 (Not Modified) status in case the poll has not
+        results are not cached on browsers and are cached 120 seconds
+        on intermediate caches. We use the last modified date as ETag
+        to return a 304 (Not Modified) status in case the poll has not
         being modified since last time it was accessed.
 
         More information: https://httpwg.org/specs/rfc7234.html
@@ -30,7 +30,7 @@ class UpdatePollView(PollsViewMixin, BrowserView):
             return ''
 
         modified = str(self.context.modified().timeTime())
-        self.request.response.setHeader('Cache-Control', 'max-age=120, s-maxage=60')
+        self.request.response.setHeader('Cache-Control', 'max-age=0, s-maxage=120')
         self.request.response.setHeader('ETag', modified)
 
         match = self.request.get_header('If-None-Match', '')

@@ -29,7 +29,7 @@ class UpdatePollViewTestCase(ViewTestCase):
 
         headers = self.request.response.headers
         self.assertEqual(self.request.response.getStatus(), 200)
-        self.assertEqual(headers['cache-control'], 'max-age=120, s-maxage=60')
+        self.assertEqual(headers['cache-control'], 'max-age=0, s-maxage=120')
         self.assertEqual(headers['etag'], last_modified)
 
     def test_headers_match(self):
@@ -39,7 +39,7 @@ class UpdatePollViewTestCase(ViewTestCase):
 
         headers = self.request.response.headers
         self.assertEqual(self.request.response.getStatus(), 304)
-        self.assertEqual(headers['cache-control'], 'max-age=120, s-maxage=60')
+        self.assertEqual(headers['cache-control'], 'max-age=0, s-maxage=120')
         self.assertEqual(headers['etag'], last_modified)
 
     def test_non_safe_method(self):
