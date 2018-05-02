@@ -10,13 +10,13 @@
       directory="profiles/default"
       description="A Plone extension providing a Poll content type, portlet and workflow."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler="collective.polls.setuphandlers.run_after"
       />
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="Polls: Uninstall"
+      title="collective.polls: uninstall"
       directory="profiles/uninstall"
-      description="Uninstall the collective.polls package."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
@@ -27,13 +27,6 @@
       description=""
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-
-  <genericsetup:importStep
-     name="collective.polls"
-     title="collective.polls special import handlers"
-     description=""
-     handler="collective.polls.setuphandlers.setupVarious"
-     />
 
   <utility factory=".setuphandlers.HiddenProfiles" name="collective.polls" />
 

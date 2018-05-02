@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.polls.portlet import voteportlet
 from collective.polls.testing import INTEGRATION_TESTING
+from collective.polls.testing import QIBBB
 from plone import api
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.portlets.storage import PortletAssignmentMapping
@@ -71,12 +72,18 @@ class BasePortlet(unittest.TestCase):
         self.p3 = p3
 
 
-class PortletRegistrationTest(BasePortlet):
+class PortletRegistrationTest(BasePortlet, QIBBB):
 
     def test_portlet_registered(self):
-        portlet = queryUtility(IPortletType,
-                               name='collective.polls.VotePortlet')
+        portlet = queryUtility(
+            IPortletType, name='collective.polls.VotePortlet')
         self.assertEqual(portlet.addview, 'collective.polls.VotePortlet')
+
+    def test_portlet_removed(self):
+        self.uninstall()  # BBB: QI compatibility
+        portlet = queryUtility(
+            IPortletType, name='collective.polls.VotePortlet')
+        self.assertIsNone(portlet)
 
     def test_registered_interfaces(self):
         portlet = queryUtility(IPortletType,

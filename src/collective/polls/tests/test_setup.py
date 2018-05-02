@@ -2,9 +2,9 @@
 from collective.polls.config import IS_PLONE_5
 from collective.polls.config import PROFILE
 from collective.polls.config import PROJECTNAME
-from collective.polls.testing import HAS_COVER
 from collective.polls.testing import INTEGRATION_TESTING
-from plone import api
+from collective.polls.testing import IS_BBB
+from collective.polls.testing import QIBBB
 
 import unittest
 
@@ -22,14 +22,22 @@ CSS = (
 )
 
 
-class InstallTestCase(unittest.TestCase):
+class InstallTestCase(unittest.TestCase, QIBBB):
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.request = self.layer['request']
 
+    @unittest.skipIf(IS_BBB, 'Plone >= 5.1')
     def test_installed(self):
+        from Products.CMFPlone.utils import get_installer
+        qi = get_installer(self.portal, self.request)
+        self.assertTrue(qi.is_product_installed(PROJECTNAME))
+
+    @unittest.skipUnless(IS_BBB, 'Plone < 5.1')
+    def test_installed_BBB(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
         self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
@@ -69,22 +77,22 @@ class InstallTestCase(unittest.TestCase):
         for css in CSS:
             self.assertIn(css, resource_ids, '{0} not installed'.format(css))
 
-    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
-    def test_tile(self):
-        tiles = api.portal.get_registry_record('plone.app.tiles')
-        self.assertIn(u'collective.polls', tiles)
 
-
-class UninstallTestCase(unittest.TestCase):
+class UninstallTestCase(unittest.TestCase, QIBBB):
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.qi = self.portal['portal_quickinstaller']
-        self.qi.uninstallProducts(products=[PROJECTNAME])
+        self.request = self.layer['request']
+        self.qi = self.uninstall()  # BBB: QI compatibility
 
+    @unittest.skipIf(IS_BBB, 'Plone >= 5.1')
     def test_uninstalled(self):
+        self.assertFalse(self.qi.is_product_installed(PROJECTNAME))
+
+    @unittest.skipUnless(IS_BBB, 'Plone < 5.1')
+    def test_uninstalled_BBB(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
@@ -98,8 +106,3 @@ class UninstallTestCase(unittest.TestCase):
         resource_ids = self.portal.portal_css.getResourceIds()
         for css in CSS:
             self.assertNotIn(css, resource_ids, '{0} not installed'.format(css))
-
-    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
-    def test_tile_removed(self):
-        tiles = api.portal.get_registry_record('plone.app.tiles')
-        self.assertNotIn(u'collective.polls', tiles)

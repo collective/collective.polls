@@ -16,16 +16,11 @@ class HiddenProfiles(object):
         ]
 
 
-def updateWorkflowDefinitions(portal):
+def update_workflow_definitions():
     wf_tool = api.portal.get_tool(name='portal_workflow')
     wf_tool.updateRoleMappings()
     logger.info(u'Workflow definitions updated')
 
 
-def setupVarious(context):
-    if context.readDataFile('collective.polls.marker.txt') is None:
-        # not your add-on
-        return
-
-    portal = context.getSite()
-    updateWorkflowDefinitions(portal)
+def run_after(context):
+    update_workflow_definitions()
