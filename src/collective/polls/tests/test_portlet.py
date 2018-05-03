@@ -18,7 +18,6 @@ from Products.GenericSetup.utils import _getDottedName
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryUtility
-from zope.i18n import translate
 from zope.interface import alsoProvides
 
 import unittest
@@ -133,17 +132,6 @@ class PortletRegistrationTest(BasePortlet, QIBBB):
         vocab = voteportlet.PossiblePolls(portal)
         # We should list here 2 open polls + latest as options
         self.assertEqual(len(vocab), 3)
-
-    def test_vocab_possible_polls_encoding(self):
-        """Test encoding of vocabulary."""
-
-        portal = self.portal
-        vocab = voteportlet.PossiblePolls(portal)
-
-        # The title should be stored in unicode
-        for term in vocab:
-            title = translate(term.title)
-            self.assertTrue(type(title) == unicode)
 
     def test_renderer(self):
         context = self.folder

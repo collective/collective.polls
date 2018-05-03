@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from AccessControl import Unauthorized
 from collective.polls import MessageFactory as _
 from collective.polls.config import COOKIE_KEY
@@ -125,7 +126,7 @@ class Poll(Item):
             votes['total'] = votes['total'] + option_votes
         for option in votes['options']:
             if option['votes']:
-                option['percentage'] = option['votes'] / float(votes['total'])
+                option['percentage'] = option['votes'] / votes['total']
         return votes
 
     def getResults(self):
