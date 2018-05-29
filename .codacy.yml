@@ -1,3 +1,5 @@
 exclude_paths:
 - bootstrap.py
 - setup.py
+- src/collective/polls/static/js/jquery.flot.js
+- src/collective/polls/static/js/jquery.flot.pie.js
