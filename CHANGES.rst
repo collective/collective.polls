@@ -9,6 +9,8 @@ There's a frood who really knows where his towel is.
 .. Warning::
     This release removes code for old upgrade steps;
     upgrading from a version below 1.8 is no longer supported.
+    This version removes tile registration/removal;
+    you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.polls`` tile.
 
 - Add dependency on z3c.caching to implement automatic purging on poll modified, moved, renamed or removed.
   [hvelarde]
@@ -23,9 +25,13 @@ There's a frood who really knows where his towel is.
 - Upgrade steps 2, 3 and 4 were removed.
   [hvelarde]
 
+- Remove needless tile registration/removal when using plone.app.tiles >= 3.0.0.
+  [hvelarde]
+
+- Fix removal of portlet definition.
+  [hvelarde]
+
 - Manage deprecation of CMFQuickInstallerTool on Plone >= 5.1;
-  fix removal of portlet definition;
-  remove needless tile registration/removal when using plone.app.tiles >= 3.0.0.
   [hvelarde]
 
 - Fix dependencies inclussion.
