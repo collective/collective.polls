@@ -7,4 +7,5 @@ import pkg_resources
 package = pkg_resources.get_distribution('plone.app.tiles')
 if package.version < '3.0.0':
     logger.error(
-        'Tile support needs plone.app.tiles >= 3.0.0; tile may be unavailable')
+        'Tile support needs plone.app.tiles >= 3.0.0; '
+        '"collective.polls" tile may be unavailable')
