@@ -41,4 +41,4 @@ after_success:
 - pip install codacy-coverage
 - python-codacy-coverage -r coverage.xml
 notifications:
-  irc: irc.freenode.org#simplesconsultoria
+  irc: irc.freenode.org#plone-testing
