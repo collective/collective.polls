@@ -51,7 +51,7 @@
       // stop form submit and submit with ajax
       e.preventDefault();
       var $form = $(this);
-      $('input', $form).attr('disabled', 'disabled');
+      $('input[type=submit]', $form).attr('disabled', 'disabled');
       $.ajax({
         type: 'POST',
         url: $form.attr('action'),

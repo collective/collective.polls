@@ -84,3 +84,14 @@ class Upgrade5to6TestCase(UpgradeTestCaseBase):
         # run the upgrade step to validate the update
         self._do_upgrade_step(step)
         self.assertNotIn(script, js_tool.getResourceIds())
+
+
+class Upgrade6to7TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'6', u'7')
+
+    def test_upgrade_to_6_registrations(self):
+        version = self.setup.getLastVersionForProfile(PROFILE)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self._how_many_upgrades_to_do(), 1)
