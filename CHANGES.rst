@@ -3,10 +3,11 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.0b2 (unreleased)
-^^^^^^^^^^^^^^^^^^
+2.0.1b2 (unreleased)
+^^^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Disable poll form after submit (fixes `#132 <https://github.com/collective/collective.polls/issues/132>`_).
+  [rodfersou]
 
 
 2.0b1 (2018-07-23)

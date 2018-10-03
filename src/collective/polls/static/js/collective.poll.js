@@ -51,6 +51,8 @@
       // stop form submit and submit with ajax
       e.preventDefault();
       var $form = $(this);
+      // avoid multiple submits
+      $('input[type=submit]', $form).attr('disabled', 'disabled');
       $.ajax({
         type: 'POST',
         url: $form.attr('action'),
