@@ -7,7 +7,7 @@ from z3c.form.interfaces import DISPLAY_MODE
 from z3c.form.interfaces import IFieldWidget
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.interface import implementer
-from zope.interface import implementsOnly
+from zope.interface import implementer_only
 
 
 JS_TEMPLATE = """\
@@ -25,11 +25,11 @@ JS_TEMPLATE = """\
 """
 
 
+@implementer_only(IEnhancedTextLinesWidget)
 class EnhancedTextLinesWidget(textarea.TextAreaWidget):
     """Widget for adding new keywords and autocomplete with the ones in the
     system.
     """
-    implementsOnly(IEnhancedTextLinesWidget)
     klass = u'keyword-widget'
     display_template = ViewPageTemplateFile('enhancedtextlines_display.pt')
     input_template = ViewPageTemplateFile('enhancedtextlines_input.pt')
