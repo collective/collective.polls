@@ -12,4 +12,5 @@ VOTE_ANNO_KEY = 'option.%02d'
 
 PERMISSION_VOTE = 'collective.polls: Vote'
 
-IS_PLONE_5 = api.env.plone_version().startswith('5')
+# Is this Plone 5 or higher?
+IS_PLONE_5 = int(api.env.plone_version()[0]) >= 5
