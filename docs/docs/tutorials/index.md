@@ -1,19 +1,31 @@
 ---
 myst:
   html_meta:
-    "description": "Polls for Plone Tutorials"
-    "property=og:description": "Polls for Plone Tutorials"
-    "property=og:title": "Polls for Plone Tutorials"
-    "keywords": "Plone, Polls for Plone, tutorials"
+    "description": "Tutorials for collective.polls: learn to run polls in a Plone site by doing it."
+    "property=og:description": "Tutorials for collective.polls: learn to run polls in a Plone site by doing it."
+    "property=og:title": "Tutorials"
+    "keywords": "Plone, Volto, polls, tutorial"
 ---
 
 # Tutorials
 
-This part of the documentation contains tutorials.
+Tutorials take you through a complete task, step by step, in a site you run on your own computer.
+Start here if you are new to the add-ons.
 
-> A tutorial is an experience that takes place under the guidance of a tutor.
-> A tutorial is always learning-oriented.
+`````{grid} 1 1 2 2
+:gutter: 3
 
-```{seealso}
-https://diataxis.fr/tutorials/
+````{grid-item-card} 🗳️ Run your first poll
+:link: first-poll
+:link-type: doc
+
+Create a poll, open it, vote as a visitor, show it on the home page, and close it.
+````
+`````
+
+```{toctree}
+:maxdepth: 1
+:hidden: true
+
+first-poll
 ```

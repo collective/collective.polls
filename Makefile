@@ -65,6 +65,10 @@ docs-install:  ## Install the documentation toolchain
 docs-build:  ## Build the documentation, warnings as errors
 	$(MAKE) -C "./docs/" html SPHINXOPTS="-W"
 
+.PHONY: docs-livehtml
+docs-livehtml:  ## Build the documentation with live-reload in the browser
+	$(MAKE) -C "./docs/" livehtml
+
 .PHONY: docs-clean
 docs-clean:  ## Remove the documentation build
 	$(MAKE) -C "./docs/" clean

@@ -1,0 +1,5 @@
+Cookieplone
+[Dd]eserializer
+pnpm
+[Pp]ortlets?
+[Ss]erializer

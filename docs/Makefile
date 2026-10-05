@@ -133,6 +133,23 @@ vale: .venv/bin/python  ## Run Vale style, grammar, and spell checks
 	@echo "Vale is finished; look for any errors in the above output."
 	@echo
 
+# screenshots
+.PHONY: screenshots-install
+screenshots-install:  ## Install dependencies and the browser for screenshots
+	@# --inexact: without it, sync removes everything outside this group,
+	@# which would uninstall the Sphinx toolchain this project is built with.
+	@uv sync --inexact --group screenshots
+	@uv run playwright install chromium
+
+.PHONY: screenshots
+screenshots:  ## Capture every screenshot against the running development site
+	@uv run pytest screenshots/ -q
+# /screenshots
+
+.PHONY: favicon
+favicon:  ## Rebuild docs/_static/favicon.ico from logo.svg (needs rsvg-convert)
+	@python3 scripts/favicon.py
+
 .PHONY: test
 test: clean vale linkcheckbroken doctest  ## Clean docs build, then run vale, linkcheckbroken, and doctest
 

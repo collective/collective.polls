@@ -1,6 +1,8 @@
 # Python related
 *.egg-info
 .venv
+__pycache__
+.pytest_cache
 
 # Documentation builds
 _build

@@ -15,6 +15,10 @@ A poll asks one question with two or more options.
 Editors decide whether visitors pick one option or several, whether anonymous visitors may vote, whether voters see partial results, and how to draw the results.
 The poll moves through its own workflow: it collects votes only while open, and shows its final results once closed.
 
+```{image} /_static/screens/home-poll-blocks.png
+:alt: A page with three Poll blocks in a grid: a multiple choice poll, a single choice poll, and a closed poll showing its results as a pie chart
+```
+
 ## Two add-ons, installed together
 
 | Package | Is | Gives you |
@@ -25,18 +29,18 @@ The poll moves through its own workflow: it collects votes only while open, and 
 `````{grid} 1 1 2 2
 :gutter: 3
 
-````{grid-item-card} 🚀 Tutorials
-:link: tutorials/index
-:link-type: doc
-
-Learn by doing.
-````
-
 ````{grid-item-card} 🧭 How-to guides
 :link: how-to-guides/index
 :link-type: doc
 
 Install the add-ons and get a result.
+````
+
+````{grid-item-card} 🚀 Tutorials
+:link: tutorials/index
+:link-type: doc
+
+Learn by doing.
 ````
 
 ````{grid-item-card} 📖 Reference
@@ -66,8 +70,8 @@ Why the add-on works the way it does.
 :maxdepth: 2
 :hidden: true
 
-tutorials/index
 how-to-guides/index
+tutorials/index
 reference/index
 concepts/index
 ```

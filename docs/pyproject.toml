@@ -49,6 +49,13 @@ dev = [
     "sphinxext-opengraph",
     "vale",
 ]
+# Captures the screenshots from the running development site; see
+# screenshots/README.md.
+screenshots = [
+    "playwright",
+    "pytest",
+    "pytest-playwright",
+]
 
 [project.urls]
 Repository = "https://github.com/collective/collective.polls"

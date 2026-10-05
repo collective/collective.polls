@@ -1,18 +1,11 @@
 ---
 myst:
   html_meta:
-    "description": "Terms and definitions used throughout the Plone Sphinx Theme documentation."
-    "property=og:description": "Terms and definitions used throughout the Plone Sphinx Theme documentation."
+    "description": "Terms used throughout the collective.polls documentation."
+    "property=og:description": "Terms used throughout the collective.polls documentation."
     "property=og:title": "Glossary"
-    "keywords": "Plone, documentation, glossary, term, definition"
+    "keywords": "Plone, Volto, polls, glossary, term, definition"
 ---
-
-This glossary provides example terms and definitions relevant to **Polls for Plone**.
-Online polls support for Plone and Volto.
-
-```{note}
-This is an example glossary demonstrating MyST Markdown’s `{glossary}` directive. You can adapt it for your project’s appendix by editing or replacing these entries with your own terms and definitions.
-```
 
 (glossary-label)=
 
@@ -22,36 +15,44 @@ This is an example glossary demonstrating MyST Markdown’s `{glossary}` directi
 :sorted: true
 
 Plone
-    [Plone](https://plone.org/) is an open-source content management system that is used to create, edit, and manage digital content, like websites, intranets and custom solutions.
-    It comes with over 20 years of growth, optimisations, and refinements.
-    The result is a system trusted by governments, universities, businesses, and other organisations all over the world.
+    [Plone](https://plone.org/) is an open source content management system, used to create, edit, and manage websites, intranets, and custom solutions.
+
+Volto
+    [Volto](https://6.docs.plone.org/volto/index.html) is the React frontend for Plone 6.
+    `@plone-collective/volto-polls` is a Volto add-on.
 
 add-on
-    An add-on in Plone extends its functionality.
-    It is code that is released as a package to make it easier to install.
+    A package that extends Plone.
+    A backend add-on is a Python package, such as `collective.polls`; a frontend add-on is a JavaScript package, such as `@plone-collective/volto-polls`.
 
-    In Volto, an add-on is a JavaScript package.
+poll
+    A content item of the type `collective.polls.poll`, which asks one question with two or more options.
 
-    In Plone core, an add-on is a Python package.
+option
+    One of the answers a poll offers.
+    Each option has an id, which never changes, and a description.
 
-    -   [Plone core add-ons](https://github.com/collective/awesome-plone#readme)
-    -   [Volto add-ons](https://github.com/collective/awesome-volto#readme)
-    -   [Add-ons tagged with the trove classifier `Framework :: Plone` on PyPI](https://pypi.org/search/?c=Framework+%3A%3A+Plone)
+single choice poll
+    A poll whose voters pick exactly one option: its **Number of options a voter can pick** is `1`.
 
-Plone Sphinx Theme
-plone-sphinx-theme
-    [Plone Sphinx Theme](https://plone-sphinx-theme.readthedocs.io/) is a Sphinx theme for [Plone 6 Documentation](https://6.docs.plone.org/), [Plone Conference Training](https://training.plone.org/), and documentation of various Plone packages.
-    This scaffold uses Plone Sphinx Theme.
+multiple choice poll
+    A poll whose voters pick from one option up to its **Number of options a voter can pick**.
 
-Markedly Structured Text
-MyST
-    [Markedly Structured Text (MyST)](https://myst-parser.readthedocs.io/en/latest/) is a rich and extensible flavor of Markdown, for authoring Plone Documentation.
-    The sample documentation in this scaffold is written in MyST.
+partial results
+    The results of a poll while it is still open.
+    Voters see them when the poll's **Show partial results** setting is on.
 
-Sphinx
-    [Sphinx](https://www.sphinx-doc.org/en/master/) is a tool that makes it easy to create intelligent and beautiful documentation.
-    It was originally created for Python documentation, and it has excellent facilities for the documentation of software projects in a range of languages.
-    It can generate multiple output formats, including HTML and PDF, from a single source.
-    This scaffold uses Sphinx to generate documentation in HTML format.
+Poll block
+    A Volto block that shows a poll in any page, either the latest open one or one the editor picks.
 
+anonymous voting
+    Voting by visitors who are not logged in.
+    A poll allows it with its **Allow anonymous** setting, and a cookie keeps each browser from voting twice.
+
+plone.exportimport
+    [`plone.exportimport`](https://github.com/plone/plone.exportimport) exports a Plone site's content to files, and imports it into another site.
+
+workflow
+    The states a content item goes through, and the transitions between them.
+    Polls use their own workflow, with the states *Private*, *Pending review*, *Open*, and *Closed*.
 ```

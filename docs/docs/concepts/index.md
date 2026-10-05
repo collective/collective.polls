@@ -1,20 +1,39 @@
 ---
 myst:
   html_meta:
-    "description": "Polls for Plone concepts"
-    "property=og:description": "Polls for Plone concepts"
-    "property=og:title": "Polls for Plone concepts"
-    "keywords": "Plone, Polls for Plone, concepts"
+    "description": "Concepts behind collective.polls: who can vote, how votes are counted, and how they are stored."
+    "property=og:description": "Concepts behind collective.polls: who can vote, how votes are counted, and how they are stored."
+    "property=og:title": "Concepts"
+    "keywords": "Plone, polls, concepts, voting, results, vote storage"
 ---
 
 # Concepts
 
-This part of the documentation contains conceptual guides, including design defense and explanation of concepts for deeper study.
-The Diátaxis framework also calls this class of documentation _explanation_.
+Concept pages explain why the add-ons work the way they do.
+Read them to understand a behavior, rather than to get a task done.
 
-> Explanation is a discursive treatment of a subject, that permits reflection.
-> Explanation is understanding-oriented.
+`````{grid} 1 1 2 2
+:gutter: 3
 
-```{seealso}
-https://diataxis.fr/explanation/
+````{grid-item-card} 🗳️ Voting and results
+:link: voting-and-results
+:link-type: doc
+
+Who can vote, how a second vote is refused, how votes are counted, and who sees the results.
+````
+
+````{grid-item-card} 🗄️ Vote storage
+:link: vote-storage
+:link-type: doc
+
+Where votes live, why the REST API cannot change them, and how they survive an export.
+````
+`````
+
+```{toctree}
+:maxdepth: 1
+:hidden: true
+
+voting-and-results
+vote-storage
 ```

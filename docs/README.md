@@ -82,9 +82,25 @@ uv remove --dev my-requirement
 After adding a Sphinx extension, also add it to the `extensions` key of `conf.py`.
 See also uv's documentation, [Development dependencies](https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies).
 
+### Capture the screenshots
+
+The screenshots are captured from the development site's example content by Playwright scripts.
+See `screenshots/README.md`, then issue the following commands with the site running.
+
+```shell
+make screenshots-install
+make screenshots
+```
+
 ### Replace static files
 
 The logo and the favicon are `docs/_static/logo.svg` and `docs/_static/favicon.ico`.
+The favicon is built from the logo; after changing `logo.svg`, rebuild it with the following command, which needs `rsvg-convert` from [librsvg](https://gitlab.gnome.org/GNOME/librsvg).
+
+```shell
+make favicon
+```
+
 If you rename `logo.svg`, update the `html_logo`, `ogp_image`, and `latex_logo` keys in `conf.py`.
 
 ## Credits and acknowledgements 🙏
