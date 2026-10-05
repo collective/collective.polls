@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/collective/collective.polls/poll.schema.json",
+  "title": "collective.polls @poll payload",
+  "description": "The state of a poll as GET @poll and POST @vote answer it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "@id",
+    "uid",
+    "state",
+    "allow_anonymous",
+    "anonymous_blocked",
+    "show_results",
+    "results_graph",
+    "options",
+    "can_vote",
+    "has_voted",
+    "total_votes",
+    "results"
+  ],
+  "properties": {
+    "@id": {"type": "string", "minLength": 1},
+    "uid": {"type": "string", "minLength": 1},
+    "state": {"enum": ["private", "pending", "open", "closed"]},
+    "allow_anonymous": {"type": "boolean"},
+    "anonymous_blocked": {"type": "boolean"},
+    "show_results": {"type": "boolean"},
+    "results_graph": {"enum": ["bar", "pie", "numbers"]},
+    "options": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/option"}
+    },
+    "can_vote": {"type": "boolean"},
+    "has_voted": {"type": ["boolean", "null"]},
+    "total_votes": {"type": ["integer", "null"], "minimum": 0},
+    "results": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "array", "items": {"$ref": "#/definitions/result"}}
+      ]
+    }
+  },
+  "if": {"properties": {"results": {"type": "null"}}},
+  "then": {"properties": {"total_votes": {"type": "null"}}},
+  "else": {"properties": {"total_votes": {"type": "integer"}}},
+  "definitions": {
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["option_id", "description"],
+      "properties": {
+        "option_id": {"type": "integer", "minimum": 0},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["option_id", "description", "votes", "percentage"],
+      "properties": {
+        "option_id": {"type": "integer", "minimum": 0},
+        "description": {"type": "string", "minLength": 1},
+        "votes": {"type": "integer", "minimum": 0},
+        "percentage": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    }
+  }
+}

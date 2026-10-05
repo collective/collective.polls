@@ -19,6 +19,7 @@
   <include package=".controlpanels" />
   <include package=".indexers" />
   <include package=".serializers" />
+  <include package=".services" />
   <include package=".subscribers" />
   <include package=".vocabularies" />
 

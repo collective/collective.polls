@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <!-- No cache ruleset on purpose: the service sets its own caching
+       headers, and plone.app.caching leaves views without a ruleset alone. -->
+  <plone:service
+      method="GET"
+      factory=".get.PollGet"
+      for="collective.polls.content.poll.IPoll"
+      permission="zope2.View"
+      layer="collective.polls.interfaces.IBrowserLayer"
+      name="@poll"
+      />
+
+</configure>

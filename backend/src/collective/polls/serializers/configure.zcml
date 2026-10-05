@@ -7,4 +7,7 @@
       name="collective.polls.summary_serializer_metadata"
       />
 
+  <!-- The @poll payload, shared by the @poll and @vote services. -->
+  <adapter factory=".poll.PollStateSerializer" />
+
 </configure>

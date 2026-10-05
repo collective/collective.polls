@@ -31,6 +31,52 @@ class PollOptionDict(_PollOptionBase, total=False):
     option_id: int
 
 
+class PollResultDict(TypedDict):
+    """Votes for one option, as the ``@poll`` service reports them."""
+
+    option_id: int
+    description: str
+    votes: int
+    #: Share of the votes, a fraction in ``[0, 1]``; ``0.0`` with no votes.
+    percentage: float
+
+
+# A functional TypedDict, since ``@id`` is not a Python identifier.
+PollStateDict = TypedDict(
+    "PollStateDict",
+    {
+        "@id": str,
+        "uid": str,
+        "state": str,
+        "allow_anonymous": bool,
+        "anonymous_blocked": bool,
+        "show_results": bool,
+        "results_graph": str,
+        "options": list[PollOptionDict],
+        "can_vote": bool,
+        "has_voted": bool | None,
+        "total_votes": int | None,
+        "results": list[PollResultDict] | None,
+    },
+)
+PollStateDict.__doc__ = """The state of a poll, as the ``@poll`` service reports it."""
+
+
+class ISerializePollState(Interface):
+    """Build the ``@poll`` payload for a poll and a request.
+
+    Registered as a multi-adapter of the poll and the request, so both
+    services answer with exactly the same shape.
+    """
+
+    def __call__(has_voted: bool | None = None) -> PollStateDict:
+        """Return the state of the poll, as seen by the current user.
+
+        :param has_voted: Override for ``has_voted``; the vote service passes
+            ``True`` right after recording a vote.
+        """
+
+
 class IPollVotes(Interface):
     """The votes of one poll.
 
