@@ -1,0 +1,160 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2026-10-05 17:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/polls/content/poll.py:86
+msgid "1 makes a single choice poll. More than 1 lets voters pick up to that many options."
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "A poll"
+msgstr "Een enquête"
+
+#: collective/polls/content/poll.py:75
+msgid "Allow anonymous"
+msgstr "Anoniem stemmen toestaan"
+
+#: collective/polls/content/poll.py:76
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opening the poll for this field to take effect"
+msgstr "Niet ingelogd gebruikers toestaan om te stemmen. De map waar deze enquête in staat moet gepubliceerd zijn, anders heeft dit veld geen functie."
+
+#: collective/polls/content/poll.py:119
+msgid "Available options"
+msgstr "Beschikbare opties"
+
+#: collective/polls/vocabularies/results_graph.py:12
+msgid "Bar Chart"
+msgstr "Staafdiagram"
+
+#: collective/polls/profiles.zcml:22
+msgid "Create example content to showcase this addon."
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Edit"
+msgstr ""
+
+#: collective/polls/content/poll.py:112
+msgid "Format to show the results."
+msgstr "Formaat voor het tonen van de uitslag."
+
+#: collective/polls/content/poll.py:111
+msgid "Graph"
+msgstr "Diagram"
+
+#: collective/polls/content/poll.py:96
+msgid "Legend"
+msgstr ""
+
+#: collective/polls/content/poll.py:39
+msgid "Not enough options provided"
+msgstr "Onvoldoende opties ingevoerd"
+
+#: collective/polls/content/poll.py:85
+msgid "Number of options a voter can pick"
+msgstr ""
+
+#: collective/polls/vocabularies/results_graph.py:14
+msgid "Numbers Only"
+msgstr "Alleen getallen"
+
+#: collective/polls/profiles.zcml:13
+msgid "Online polls support for Plone and Volto."
+msgstr ""
+
+#: collective/polls/services/vote/post.py:96
+msgid "Pick from 1 to ${count} of this poll's options, each once."
+msgstr ""
+
+#: collective/polls/vocabularies/results_graph.py:13
+msgid "Pie Chart"
+msgstr "Taartdiagram"
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Poll"
+msgstr "Enquête"
+
+#: collective/polls/profiles.zcml:22
+msgid "Polls for Plone: Example content"
+msgstr ""
+
+#: collective/polls/profiles.zcml:13
+msgid "Polls for Plone: Install"
+msgstr ""
+
+#: collective/polls/profiles.zcml:30
+msgid "Polls for Plone: Uninstall"
+msgstr ""
+
+#: collective/polls/content/poll.py:70
+msgid "Results"
+msgstr ""
+
+#: collective/polls/content/poll.py:105
+msgid "Show partial results"
+msgstr "Voorlopige resultaten weergeven"
+
+#: collective/polls/content/poll.py:106
+msgid "Show partial results after a voter has already voted."
+msgstr "Toon voorlopig resultaten nadat een gebruiker gestemd heeft."
+
+#: collective/polls/content/poll.py:128
+msgid "Show the options in a random order to each voter, so their position does not favor any of them."
+msgstr ""
+
+#: collective/polls/content/poll.py:97
+msgid "Shown above the options. Leave empty for \"Select one option\" or \"Select up to N options\"."
+msgstr ""
+
+#: collective/polls/content/poll.py:127
+msgid "Shuffle options"
+msgstr ""
+
+#: collective/polls/services/vote/post.py:77
+msgid "The request body must be a JSON object with an integer option_id or a list of integers option_ids."
+msgstr ""
+
+#: collective/polls/services/vote/post.py:91
+msgid "This poll has no such option."
+msgstr ""
+
+#: collective/polls/content/poll.py:150
+msgid "Two options cannot share an id."
+msgstr ""
+
+#: collective/polls/profiles.zcml:30
+msgid "Uninstall Polls for Plone setup."
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "View"
+msgstr ""
+
+#: collective/polls/content/poll.py:162
+msgid "Voters cannot pick more options than the poll has."
+msgstr ""
+
+#: collective/polls/content/poll.py:59
+msgid "Voting"
+msgstr ""
+
+#: collective/polls/services/vote/post.py:86
+msgid "You already voted in this poll."
+msgstr ""
+
+#: collective/polls/content/poll.py:145
+msgid "You need to provide at least two options for a poll."
+msgstr "U moet minimaal twee opties voor een enquête opgeven."

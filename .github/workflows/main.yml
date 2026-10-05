@@ -1,0 +1,131 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - "backend/**"
+      - "devops/**"
+      - "docs/**"
+      - "frontend/**"
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
+      - ".readthedocs.yaml"
+      - "*.md"
+      - "*.toml"
+      - "docker-compose*"
+
+  workflow_dispatch:
+
+jobs:
+  config:
+    uses: ./.github/workflows/config.yml
+
+  backend:
+    uses: ./.github/workflows/backend.yml
+    needs:
+        - config
+    with:
+        base-tag: ${{ needs.config.outputs.base-tag }}
+        image-name-prefix: ${{ needs.config.outputs.image-name-prefix }}
+        image-name-suffix: backend
+        python-version: ${{ needs.config.outputs.python-version }}
+        plone-version: ${{ needs.config.outputs.plone-version }}
+    if: ${{ needs.config.outputs.backend == 'true' }}
+    permissions:
+      contents: read
+      packages: write
+
+  # Built whenever the docs changed, and unconditionally on the branch that
+  # publishes. `deploy-docs` assembles this run's artifacts, and
+  # `download-artifact` only ever looks in this run -- so a push that changes
+  # no docs path would leave the deploy with nothing to fetch, and the
+  # published site would have to be stale or the deploy red. Building it is
+  # cheaper than either.
+  docs:
+    uses: ./.github/workflows/docs.yaml
+    needs:
+        - config
+    with:
+        python-version: ${{ needs.config.outputs.python-version }}
+    if: ${{ needs.config.outputs.docs == 'true' || (needs.config.outputs.deploy-docs == 'true' && github.ref == 'refs/heads/main') }}
+    permissions:
+      contents: read
+
+  frontend:
+    uses: ./.github/workflows/frontend.yml
+    needs:
+        - config
+    with:
+        base-tag: ${{ needs.config.outputs.base-tag }}
+        image-name-prefix: ${{ needs.config.outputs.image-name-prefix }}
+        image-name-suffix: frontend
+        node-version: ${{ needs.config.outputs.node-version }}
+        volto-version: ${{ needs.config.outputs.volto-version }}
+    if: ${{ needs.config.outputs.frontend == 'true' }}
+    permissions:
+      contents: read
+      packages: write
+
+  storybook:
+    name: "Storybook"
+    uses: ./.github/workflows/tmp-frontend-storybook.yml
+    needs:
+      - config
+      - frontend
+    # Built only where it is published from, and only once the frontend jobs
+    # it would otherwise duplicate have passed. `always()` lets it run when
+    # `frontend` was skipped for a docs-only change; the failure check keeps it
+    # from publishing on top of a broken build.
+    if: ${{ needs.config.outputs.deploy-docs == 'true' && always() && github.ref == 'refs/heads/main' && !contains(needs.*.result, 'failure') }}
+    with:
+      node-version: ${{ needs.config.outputs.node-version }}
+      working-directory: "frontend"
+      artifacts-store: true
+
+  deploy-docs:
+    name: "Deploy documentation and Storybook"
+    uses: ./.github/workflows/tmp-docs-publish.yml
+    needs:
+      - config
+      - docs
+      - storybook
+    if: ${{ needs.config.outputs.deploy-docs == 'true' && always() && github.ref == 'refs/heads/main' && !contains(needs.*.result, 'failure') }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    with:
+      # Both builders run on this branch, so both artifacts exist in this run.
+      # The fallback that used to be here named an artifact rather than
+      # producing one, and `download-artifact` only looks in the current run --
+      # so it turned a skipped builder into a failed deploy instead of
+      # rescuing it.
+      artifacts-docs-name: ${{ needs.docs.outputs.artifacts-name }}
+      artifacts-storybook-name: ${{ needs.storybook.outputs.artifacts-name }}
+
+  report:
+    name: "Final report"
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs:
+      - config
+      - backend
+      - docs
+      - frontend
+      - storybook
+      - deploy-docs
+    steps:
+      - name: Write report
+        run: |
+          echo '# Workflow Report' >> $GITHUB_STEP_SUMMARY
+          echo '| Job ID | Conclusion |' >> $GITHUB_STEP_SUMMARY
+          echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
+          echo '| config | ${{ needs.config.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| backend | ${{ needs.backend.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| docs | ${{ needs.docs.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| frontend | ${{ needs.frontend.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| storybook | ${{ needs.storybook.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| deploy-docs | ${{ needs.deploy-docs.result }} |' >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: nl\n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Default: "A chosen poll"
+#: components/Blocks/Poll/schema
+msgid "A chosen poll"
+msgstr ""
+
+#. Default: "Add Option"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Add Option"
+msgstr ""
+
+#. Default: "Add a link to the poll"
+#: components/Blocks/Poll/schema
+msgid "Add a link to the poll"
+msgstr ""
+
+#. Default: "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
+#: components/PollStatus/PollStatus
+msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
+msgstr "Anonieme bezoekers kunnen niet stemmen, de map waar de enquête in staat moet eerst gepubliceed worden. Trek de enquête in, publiceer de map en open de enquête opnieuw."
+
+#. Default: "Chosen poll"
+#: components/Blocks/Poll/schema
+msgid "Chosen poll"
+msgstr ""
+
+#. Default: "Delete Option"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Delete Option"
+msgstr ""
+
+#. Default: "Header"
+#: components/Blocks/Poll/schema
+msgid "Header"
+msgstr "Titel"
+
+#. Default: "Latest opened poll"
+#: components/Blocks/Poll/schema
+msgid "Latest opened poll"
+msgstr "Meest recente enquête"
+
+#. Default: "Move option down"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Move option down"
+msgstr ""
+
+#. Default: "Move option up"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Move option up"
+msgstr ""
+
+#. Default: "Nothing to see here"
+#: components/PollStatus/PollStatus
+msgid "Nothing to see here"
+msgstr "Niets te zien"
+
+#. Default: "Option"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Option"
+msgstr ""
+
+#. Default: "Option {number}"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Option {number}"
+msgstr ""
+
+#. Default: "Partial results"
+#: components/PollResults/PollResults
+msgid "Partial results"
+msgstr "Voorlopige resultaten"
+
+#. Default: "Percentage"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Percentage"
+msgstr ""
+
+#. Default: "Poll"
+#: components/Blocks/Poll/schema
+msgid "Poll"
+msgstr "Enquête"
+
+#. Default: "Poll results"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Poll results"
+msgstr ""
+
+#. Default: "Results"
+#: components/PollResults/PollResults
+msgid "Results"
+msgstr ""
+
+#. Default: "Select one option"
+#: components/PollForm/PollForm
+msgid "Select one option"
+msgstr ""
+
+#. Default: "Select up to {count} options"
+#: components/PollForm/PollForm
+msgid "Select up to {count} options"
+msgstr ""
+
+#. Default: "Settings"
+#: components/Blocks/Poll/schema
+msgid "Settings"
+msgstr ""
+
+#. Default: "Show closed polls"
+#: components/Blocks/Poll/schema
+msgid "Show closed polls"
+msgstr "Toon gesloten enquêtes"
+
+#. Default: "Show partial results"
+#: components/Poll/Poll
+msgid "Show partial results"
+msgstr "Voorlopige resultaten weergeven"
+
+#. Default: "Show the number of collected votes so far."
+#: components/Blocks/Poll/schema
+msgid "Show the number of collected votes so far."
+msgstr ""
+
+#. Default: "Show total votes"
+#: components/Blocks/Poll/schema
+msgid "Show total votes"
+msgstr ""
+
+#. Default: "Thanks for your vote"
+#: components/PollStatus/PollStatus
+msgid "Thanks for your vote"
+msgstr "Hartelijk dank voor uw stem"
+
+#. Default: "The header for the block. Leave empty for none."
+#: components/Blocks/Poll/schema
+msgid "The header for the block. Leave empty for none."
+msgstr ""
+
+#. Default: "There is no poll to show."
+#: components/Blocks/Poll/View
+msgid "There is no poll to show."
+msgstr ""
+
+#. Default: "This poll is closed."
+#: components/PollStatus/PollStatus
+msgid "This poll is closed."
+msgstr ""
+
+#. Default: "This poll is not open yet."
+#: components/PollStatus/PollStatus
+msgid "This poll is not open yet."
+msgstr ""
+
+#. Default: "Total votes:"
+#: components/TotalVotes/TotalVotes
+msgid "Total votes:"
+msgstr "Aantal stemmen:"
+
+#. Default: "Vote"
+#: components/Poll/Poll
+#: components/PollForm/PollForm
+msgid "Vote"
+msgstr ""
+
+#. Default: "Votes"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Votes"
+msgstr ""
+
+#. Default: "When no poll is open, show the results of the latest closed one instead."
+#: components/Blocks/Poll/schema
+msgid "When no poll is open, show the results of the latest closed one instead."
+msgstr ""
+
+#. Default: "Which poll"
+#: components/Blocks/Poll/schema
+msgid "Which poll"
+msgstr ""
+
+#. Default: "Which poll to show in the block."
+#: components/Blocks/Poll/schema
+msgid "Which poll to show in the block."
+msgstr ""
+
+#. Default: "You already voted in this poll."
+#: components/PollStatus/PollStatus
+msgid "You already voted in this poll."
+msgstr ""
+
+#. Default: "You are not authorized to vote"
+#: components/PollStatus/PollStatus
+msgid "You are not authorized to vote"
+msgstr "Het is niet toegestaan voor u om te stemmen."
+
+#. Default: "You need to provide at least two options for a poll."
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "You need to provide at least two options for a poll."
+msgstr "U moet minimaal twee opties voor een enquête opgeven."
+
+#. Default: "Your vote could not be registered. Please try again."
+#: components/PollStatus/PollStatus
+msgid "Your vote could not be registered. Please try again."
+msgstr ""

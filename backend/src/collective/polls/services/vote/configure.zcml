@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <!-- Guarded by the vote permission itself, which the workflow grants only
+       while a poll is open, so a caller who may not vote never reaches the
+       service and gets plone.rest's own 401 or 403. -->
+  <plone:service
+      method="POST"
+      factory=".post.VotePost"
+      for="collective.polls.content.poll.IPoll"
+      permission="collective.polls.Vote"
+      layer="collective.polls.interfaces.IBrowserLayer"
+      name="@vote"
+      />
+
+</configure>

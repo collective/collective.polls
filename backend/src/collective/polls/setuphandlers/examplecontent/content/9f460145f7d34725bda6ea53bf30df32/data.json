@@ -1,0 +1,39 @@
+{
+  "@id": "/all-polls/away-team/crew.jpg",
+  "@type": "Image",
+  "UID": "9f460145f7d34725bda6ea53bf30df32",
+  "allow_discussion": null,
+  "contributors": [],
+  "created": "2026-10-05T17:38:37+00:00",
+  "creators": [
+    "admin"
+  ],
+  "description": "",
+  "effective": null,
+  "expires": null,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "crew.jpg",
+  "image": {
+    "blob_path": "9f460145f7d34725bda6ea53bf30df32/image/crew.jpg",
+    "content-type": "image/jpeg",
+    "filename": "crew.jpg",
+    "height": 375,
+    "size": 67548,
+    "width": 500
+  },
+  "is_folderish": false,
+  "language": "##DEFAULT##",
+  "layout": "image_view",
+  "lock": {},
+  "modified": "2026-10-05T17:38:37+00:00",
+  "review_state": null,
+  "rights": "",
+  "subjects": [],
+  "title": "crew.jpg",
+  "type_title": "Image",
+  "version": "current",
+  "workflow_history": {},
+  "working_copy": null,
+  "working_copy_of": null
+}

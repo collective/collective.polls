@@ -1,0 +1,1 @@
+Removed the Classic UI: the poll views, the vote portlet, the collective.cover tile, the options widget and the JavaScript and CSS resources. Polls are shown and voted on in Volto, with the `@plone-collective/volto-polls` add-on. @ericof

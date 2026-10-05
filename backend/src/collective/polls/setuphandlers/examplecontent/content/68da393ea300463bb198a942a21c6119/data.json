@@ -1,0 +1,39 @@
+{
+  "@id": "/all-polls/favorite-ship/ncc-1701-d.jpg",
+  "@type": "Image",
+  "UID": "68da393ea300463bb198a942a21c6119",
+  "allow_discussion": null,
+  "contributors": [],
+  "created": "2026-10-05T16:12:54+00:00",
+  "creators": [
+    "admin"
+  ],
+  "description": "",
+  "effective": null,
+  "expires": null,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "ncc-1701-d.jpg",
+  "image": {
+    "blob_path": "68da393ea300463bb198a942a21c6119/image/ncc-1701-d.jpg",
+    "content-type": "image/jpeg",
+    "filename": "ncc-1701-d.jpg",
+    "height": 237,
+    "size": 65468,
+    "width": 421
+  },
+  "is_folderish": false,
+  "language": "##DEFAULT##",
+  "layout": "image_view",
+  "lock": {},
+  "modified": "2026-10-05T16:12:54+00:00",
+  "review_state": null,
+  "rights": "",
+  "subjects": [],
+  "title": "USS Enterprise",
+  "type_title": "Image",
+  "version": "current",
+  "workflow_history": {},
+  "working_copy": null,
+  "working_copy_of": null
+}

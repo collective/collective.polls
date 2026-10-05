@@ -1,0 +1,57 @@
+name: Documentation Deploy
+
+# Assembles the documentation and Storybook artifacts into one site and
+# deploys it to GitHub Pages in a single operation:
+#
+#     site/           the documentation
+#     site/storybook/ Storybook
+#
+# One artifact, one deployment, so neither half can overwrite the other. This
+# is why neither builder deploys on its own — see docs.yaml and
+# tmp-frontend-storybook.yml.
+#
+# Requires the repository's Pages source to be set to "GitHub Actions".
+
+on:
+  workflow_call:
+    inputs:
+      artifacts-docs-name:
+        type: string
+        required: true
+      artifacts-storybook-name:
+        type: string
+        required: true
+
+jobs:
+
+  deploy:
+    name: "Deploy to GitHub Pages"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download docs artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.artifacts-docs-name }}
+          path: site
+
+      - name: Download Storybook artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.artifacts-storybook-name }}
+          path: site/storybook
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             description="Workflow to be used with polls"
+             initial_state="private"
+             manager_bypass="False"
+             state_variable="review_state"
+             title="Poll Workflow"
+             workflow_id="poll_workflow"
+             i18n:attributes="title; description"
+             i18n:domain="plone"
+>
+
+  <permission>Access contents information</permission>
+  <permission>Modify portal content</permission>
+  <permission>View</permission>
+  <permission>collective.polls: Vote</permission>
+
+  <state state_id="closed"
+         title="Closed"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="open" />
+    <permission-map acquired="True"
+                    name="Access contents information"
+    >
+  </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+  </permission-map>
+    <permission-map acquired="True"
+                    name="View"
+    >
+  </permission-map>
+    <permission-map acquired="False"
+                    name="collective.polls: Vote"
+    >
+  </permission-map>
+  </state>
+
+  <state state_id="open"
+         title="Opened"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="close" />
+    <exit-transition transition_id="reject" />
+    <permission-map acquired="True"
+                    name="Access contents information"
+    >
+  </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+  </permission-map>
+    <permission-map acquired="True"
+                    name="View"
+    >
+  </permission-map>
+    <permission-map acquired="False"
+                    name="collective.polls: Vote"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Member</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+  </state>
+
+  <state state_id="pending"
+         title="Pending review"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="open" />
+    <exit-transition transition_id="retract" />
+    <exit-transition transition_id="reject" />
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="collective.polls: Vote"
+    >
+  </permission-map>
+  </state>
+
+  <state state_id="private"
+         title="Private"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="open" />
+    <exit-transition transition_id="submit" />
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="collective.polls: Vote"
+    >
+  </permission-map>
+  </state>
+
+  <transition after_script=""
+              before_script=""
+              new_state="closed"
+              title="Reviewer closes the poll"
+              transition_id="close"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=close"
+            i18n:translate=""
+    >Close</action>
+    <guard>
+      <guard-permission>collective.polls: Close poll</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="open"
+              title="Reviewer opens the poll"
+              transition_id="open"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=open"
+            i18n:translate=""
+    >Open</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="private"
+              title="Member retracts submission"
+              transition_id="retract"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=retract"
+            i18n:translate=""
+    >Retract</action>
+    <guard>
+      <guard-permission>Request review</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="private"
+              title="Reviewer rejects the poll"
+              transition_id="reject"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=reject"
+            i18n:translate=""
+    >Reject</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="pending"
+              title="Member submits poll for opening"
+              transition_id="submit"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=submit"
+            i18n:translate=""
+    >Submit for opening</action>
+    <guard>
+      <guard-permission>Request review</guard-permission>
+    </guard>
+  </transition>
+
+  <worklist title=""
+            worklist_id="reviewer_queue"
+  >
+    <description>Reviewer tasks</description>
+    <action category="global"
+            icon=""
+            url="%(portal_url)s/search?review_state=pending"
+    >Pending (%(count)d)</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+    <match name="review_state"
+           values="pending"
+    />
+  </worklist>
+
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="action"
+  >
+    <description>Previous transition</description>
+    <default>
+      <expression>transition/getId|nothing</expression>
+    </default>
+    <guard>
+  </guard>
+  </variable>
+
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="actor"
+  >
+    <description>The ID of the user who performed the previous transition</description>
+    <default>
+      <expression>user/getId</expression>
+    </default>
+    <guard>
+  </guard>
+  </variable>
+
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="comments"
+  >
+    <description>Comment about the last transition</description>
+    <default>
+      <expression>python:state_change.kwargs.get('comment', '')</expression>
+    </default>
+    <guard>
+  </guard>
+  </variable>
+
+  <variable for_catalog="False"
+            for_status="False"
+            update_always="False"
+            variable_id="review_history"
+  >
+    <description>Provides access to workflow history</description>
+    <default>
+      <expression>state_change/getHistory</expression>
+    </default>
+    <guard>
+      <guard-permission>Request review</guard-permission>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </variable>
+
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="time"
+  >
+    <description>When the previous transition was performed</description>
+    <default>
+      <expression>state_change/getDateTime</expression>
+    </default>
+    <guard>
+  </guard>
+  </variable>
+</dc-workflow>

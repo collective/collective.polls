@@ -1,0 +1,49 @@
+{
+  "@id": "http://localhost:8080/Plone/a-poll/@poll",
+  "uid": "0f2c6e1a9b8d4c3e8f7a6b5c4d3e2f1a",
+  "state": "open",
+  "allow_anonymous": true,
+  "anonymous_blocked": false,
+  "show_results": true,
+  "results_graph": "bar",
+  "options": [
+    {
+      "option_id": 0,
+      "description": "Red"
+    },
+    {
+      "option_id": 1,
+      "description": "Green"
+    },
+    {
+      "option_id": 2,
+      "description": "Blue"
+    }
+  ],
+  "max_choices": 2,
+  "legend": "Pick your favourite colours",
+  "shuffle_options": true,
+  "can_vote": true,
+  "has_voted": true,
+  "total_votes": 3,
+  "results": [
+    {
+      "option_id": 0,
+      "description": "Red",
+      "votes": 2,
+      "percentage": 0.6666666666666666
+    },
+    {
+      "option_id": 1,
+      "description": "Green",
+      "votes": 1,
+      "percentage": 0.3333333333333333
+    },
+    {
+      "option_id": 2,
+      "description": "Blue",
+      "votes": 2,
+      "percentage": 0.6666666666666666
+    }
+  ]
+}

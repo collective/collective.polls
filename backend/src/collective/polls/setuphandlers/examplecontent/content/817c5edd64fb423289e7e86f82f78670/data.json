@@ -1,0 +1,77 @@
+{
+  "@id": "/all-polls/away-team",
+  "@type": "collective.polls.poll",
+  "UID": "817c5edd64fb423289e7e86f82f78670",
+  "allow_anonymous": true,
+  "allow_discussion": null,
+  "created": "2026-10-05T17:36:39+00:00",
+  "description": "Please choose two members for your away team",
+  "exclude_from_nav": false,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "away-team",
+  "is_folderish": true,
+  "language": "##DEFAULT##",
+  "layout": "view",
+  "legend": null,
+  "lock": {},
+  "max_choices": 2,
+  "modified": "2026-10-05T17:38:53+00:00",
+  "options": [
+    {
+      "description": "Spock",
+      "option_id": 0
+    },
+    {
+      "description": "Scotty",
+      "option_id": 1
+    },
+    {
+      "description": "Ortegas",
+      "option_id": 2
+    },
+    {
+      "description": "Una",
+      "option_id": 3
+    },
+    {
+      "description": "La'an",
+      "option_id": 4
+    },
+    {
+      "description": "Uhura",
+      "option_id": 5
+    },
+    {
+      "description": "A random crew member wearing red",
+      "option_id": 6
+    }
+  ],
+  "preview_caption_link": null,
+  "results_graph": "bar",
+  "review_state": "open",
+  "show_results": false,
+  "title": "Away team",
+  "type_title": "Poll",
+  "version": "current",
+  "workflow_history": {
+    "poll_workflow": [
+      {
+        "action": null,
+        "actor": "admin",
+        "comments": "",
+        "review_state": "private",
+        "time": "2026-10-05T17:36:39+00:00"
+      },
+      {
+        "action": "open",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "open",
+        "time": "2026-10-05T17:38:53+00:00"
+      }
+    ]
+  },
+  "working_copy": null,
+  "working_copy_of": null
+}

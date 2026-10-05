@@ -1,0 +1,1 @@
+Fixed duplicate-vote protection for anonymous visitors: their cookie had a fixed expiry date in 2020. It now lasts one year, with `SameSite=Lax`, and is `Secure` on HTTPS. @ericof

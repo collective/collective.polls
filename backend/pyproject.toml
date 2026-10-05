@@ -1,0 +1,234 @@
+[project]
+name = "collective.polls"
+dynamic = ["version"]
+description = "A content type, workflow, and Volto block for conducting online polls, for anonymous and logged-in users."
+readme = "README.md"
+license = "GPL-2.0-only"
+requires-python = ">=3.10"
+authors = [
+    { name = "Franco Pellegrini", email = "frapell@ravvit.net" },
+]
+keywords = [
+    "CMS",
+    "Plone",
+    "Python",
+    "Volto",
+    "dexterity",
+    "polls",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.2",
+    "Framework :: Plone :: Addon",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Office/Business :: News/Diary",
+]
+dependencies = [
+    "BTrees",
+    "Products.CMFPlone>=6.2.0",
+    "plone.api",
+    "plone.app.portlets",
+    "plone.restapi",
+    "plone.schema",
+    "plone.volto",
+    "z3c.caching",
+]
+
+[project.optional-dependencies]
+test = [
+    "horse-with-no-namespace",
+    "jsonschema",
+    "plone.app.testing",
+    "plone.restapi[test]",
+    "pytest",
+    "pytest-cov",
+    "pytest-plone>=1.1.0",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/collective/collective.polls"
+PyPI = "https://pypi.org/project/collective.polls"
+Source = "https://github.com/collective/collective.polls"
+Tracker = "https://github.com/collective/collective.polls/issues"
+
+
+[project.entry-points."plone.autoinclude.plugin"]
+target = "plone"
+
+[tool.uv]
+managed = false
+
+[tool.hatch.version]
+path = "src/collective/polls/__init__.py"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+strict-naming = true
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/collective"]
+
+[tool.towncrier]
+directory = "news/"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## {version} ({project_date})"
+template = "news/.changelog_template.jinja"
+issue_format = "[#{issue}](https://github.com/collective/collective.polls/issues/{issue})"
+underlines = ["", "", ""]
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "Feature"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bugfix"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "internal"
+name = "Internal"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "tests"
+name = "Tests"
+showcontent = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+fix = true
+lint.select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # flake8-annotations: every function in src/ is fully annotated
+    "ANN",
+]
+lint.ignore = [
+    # DoNotAssignLambda
+    "E731",
+    # AnyType: Zope and Plone objects (contexts, requests, brains) are
+    # untyped, so `Any` is the honest annotation for them.
+    "ANN401",
+]
+
+[tool.ruff.lint.isort]
+case-sensitive = false
+no-sections = true
+force-single-line = true
+from-first = true
+lines-after-imports = 2
+lines-between-types = 1
+order-by-type = false
+
+[tool.ruff.format]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ANN", "E501", "RUF001", "S101"]
+"scripts/*" = ["ANN"]
+# S311: the model-based test draws seeded random sequences for coverage of
+# orderings, not for unpredictability; fixed seeds make them repeat.
+# S106: its test members get an obviously fake password.
+"tests/votes/test_votes_model.py" = ["ANN", "E501", "S101", "S106", "S311"]
+
+[tool.check-manifest]
+ignore = [
+    ".editorconfig",
+    ".flake8",
+    "dependabot.yml",
+    "mx.ini",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source_pkgs = ["collective.polls", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/collective/polls/locales/*.py",
+]
+
+# Branch coverage, enforced. Every line in src/ is exercised by a test;
+# `make check-pragmas` keeps the few allowed exclusions honest.
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+skip_covered = true
+
+[tool.mypy]
+# plone-stubs uses 3.12 syntax in its stubs; ruff's py310 target keeps
+# this package's own code 3.10-compatible.
+python_version = "3.12"
+files = ["src"]
+# Native namespace: resolve modules as collective.polls.*, not polls.*.
+mypy_path = "src"
+explicit_package_bases = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+# zope.interface methods declare an explicit self, as plone-stubs does, and
+# a docstring for a body: there is nothing to return.
+[[tool.mypy.overrides]]
+module = ["collective.polls.interfaces", "collective.polls.utility"]
+disable_error_code = ["empty-body"]

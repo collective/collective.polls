@@ -1,0 +1,44 @@
+.poll-form {
+  fieldset {
+    padding: 0;
+    border: 0;
+    margin: 0 0 var(--polls-gap);
+  }
+
+  legend {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0;
+    gap: 0.5rem;
+
+    input {
+      width: 1.125rem;
+      height: 1.125rem;
+      margin: 0;
+    }
+  }
+
+  &__submit {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--polls-color-1);
+    border-radius: 0.25rem;
+    background: var(--polls-color-1);
+    color: #fff;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--polls-color-1);
+      outline-offset: 2px;
+    }
+  }
+}

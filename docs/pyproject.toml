@@ -1,0 +1,58 @@
+[project]
+name = "collective-polls-docs"
+description = "A content type, workflow, and Volto block for conducting online polls, for anonymous and logged-in users."
+version = "1.0.0"
+keywords = [
+    "documentation",
+    "Plone",
+    "polls",
+    "Diátaxis",
+]
+readme = "README.md"
+requires-python = "==3.14.*"
+license = "GPL-2.0-only"
+maintainers = [
+    { name = "Franco Pellegrini", email = "frapell@ravvit.net" },
+]
+authors = [
+    { name = "Franco Pellegrini", email = "frapell@ravvit.net" },
+]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+]
+# The backend package is installed so conf.py reads its version from it.
+dependencies = [
+    "collective.polls",
+]
+
+[dependency-groups]
+dev = [
+    "graphviz",
+    "linkify-it-py",
+    "myst-parser",
+    "plone-sphinx-theme",
+    "sphinx-autobuild",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "sphinx-examples",
+    "sphinx-notfound-page",
+    "sphinx-reredirects",
+    "sphinx-sitemap",
+    "sphinx-tippy",
+    "sphinxcontrib-httpdomain",
+    "sphinxcontrib-httpexample",
+    "sphinxcontrib-mermaid",
+    "sphinxext-opengraph",
+    "vale",
+]
+
+[project.urls]
+Repository = "https://github.com/collective/collective.polls"
+Documentation = "https://collective.github.io/collective.polls/"
+
+[tool.uv.sources]
+"collective.polls" = { path = "../backend/", editable = true }

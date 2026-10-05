@@ -1,0 +1,71 @@
+name: Docs
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: false
+        type: string
+        default: "3.14"
+      artifacts-name-prefix:
+        required: false
+        type: string
+        default: 'docs-artifacts'
+    outputs:
+      artifacts-name:
+        description: "Name of the uploaded docs artifact, for tmp-docs-publish.yml"
+        value: ${{ jobs.build.outputs.artifacts-name }}
+
+jobs:
+  build:
+    name: "Docs: Build"
+    runs-on: ubuntu-latest
+    outputs:
+      artifacts-name: ${{ steps.artifact-name.outputs.name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: docs/uv.lock
+
+      - name: Setup Python
+        run: uv python install ${{ inputs.python-version }}
+        working-directory: docs
+
+      - name: Install
+        run: uv sync
+        working-directory: docs
+
+      # The build this replaced, plone/meta's docs-build, checked the style
+      # too; Vale fails on errors, and only reports warnings and suggestions.
+      - name: Check style
+        run: make vale
+        working-directory: docs
+
+      # -W turns a warning into an error, so a dead cross reference, an
+      # orphaned page or a malformed directive fails here rather than
+      # shipping.
+      - name: Build
+        run: make docs-build
+
+      # Named after the ref so the publish job can find it without an
+      # output when this job was skipped for a frontend-only change.
+      - name: Compute artifact name
+        id: artifact-name
+        shell: bash
+        run: |
+          echo "name=${{ inputs.artifacts-name-prefix }}-${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.artifact-name.outputs.name }}
+          path: docs/_build/html
+          if-no-files-found: error
+          retention-days: 7

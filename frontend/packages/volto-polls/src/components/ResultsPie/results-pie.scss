@@ -1,0 +1,39 @@
+.poll-results-pie {
+  &__chart {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--polls-gap);
+
+    svg {
+      width: 10rem;
+      height: 10rem;
+      flex: none;
+    }
+  }
+
+  &__empty {
+    fill: var(--polls-track);
+  }
+
+  &__legend {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.25rem;
+      gap: 0.5rem;
+    }
+  }
+
+  &__swatch {
+    display: inline-block;
+    width: 0.875rem;
+    height: 0.875rem;
+    flex: none;
+    border-radius: 0.125rem;
+  }
+}

@@ -1,4 +1,0 @@
---format=compact
---quiet
---ignore=adjoining-classes,floats,font-faces,font-sizes,ids,important,qualified-headings,unique-headings
---exclude-list=

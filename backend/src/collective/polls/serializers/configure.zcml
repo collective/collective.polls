@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <!-- Serializers -->
+
+  <utility
+      factory=".summary.JSONSummarySerializerMetadata"
+      name="collective.polls.summary_serializer_metadata"
+      />
+
+  <!-- The @poll payload, shared by the @poll and @vote services. -->
+  <adapter factory=".poll.PollStateSerializer" />
+
+  <!-- A closed poll's votes, only while plone.exportimport runs. -->
+  <adapter factory=".exportimport.ExportPollSerializer" />
+  <adapter factory=".exportimport.ImportPollDeserializer" />
+
+</configure>

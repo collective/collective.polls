@@ -1,0 +1,162 @@
+# Héctor Velarde <hector.velarde@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.polls\n"
+"POT-Creation-Date: 2026-10-05 17:42+0000\n"
+"PO-Revision-Date: 2018-05-02 17:15-0300\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
+"Language-Team: Portuguese <https://github.com/collective>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.polls\n"
+"Language: pt_BR\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: collective/polls/content/poll.py:86
+msgid "1 makes a single choice poll. More than 1 lets voters pick up to that many options."
+msgstr "1 cria uma enquete de escolha única. Mais de 1 permite que os votantes escolham até essa quantidade de opções."
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "A poll"
+msgstr "Uma enquete"
+
+#: collective/polls/content/poll.py:75
+msgid "Allow anonymous"
+msgstr "Permitir voto anônimo"
+
+#: collective/polls/content/poll.py:76
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opening the poll for this field to take effect"
+msgstr "Permite que usuários não autenticados votem. A pasta de nível acima desta enquete deve ser publicada antes da enquete ser aberta."
+
+#: collective/polls/content/poll.py:119
+msgid "Available options"
+msgstr "Opções disponíveis"
+
+#: collective/polls/vocabularies/results_graph.py:12
+msgid "Bar Chart"
+msgstr "Gráfico de barras"
+
+#: collective/polls/profiles.zcml:22
+msgid "Create example content to showcase this addon."
+msgstr "Cria conteúdo de exemplo para demonstrar este complemento."
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Edit"
+msgstr "Editar"
+
+#: collective/polls/content/poll.py:112
+msgid "Format to show the results."
+msgstr "Formato para mostrar os resultados"
+
+#: collective/polls/content/poll.py:111
+msgid "Graph"
+msgstr "Gráfico"
+
+#: collective/polls/content/poll.py:96
+msgid "Legend"
+msgstr "Legenda"
+
+#: collective/polls/content/poll.py:39
+msgid "Not enough options provided"
+msgstr "Número de opções informado não é o suficiente para uma enquete"
+
+#: collective/polls/content/poll.py:85
+msgid "Number of options a voter can pick"
+msgstr "Número de opções que um votante pode escolher"
+
+#: collective/polls/vocabularies/results_graph.py:14
+msgid "Numbers Only"
+msgstr "Apenas números"
+
+#: collective/polls/profiles.zcml:13
+msgid "Online polls support for Plone and Volto."
+msgstr "Suporte a enquetes on-line para Plone e Volto."
+
+#: collective/polls/services/vote/post.py:96
+msgid "Pick from 1 to ${count} of this poll's options, each once."
+msgstr "Escolha de 1 a ${count} opções desta enquete, cada uma uma única vez."
+
+#: collective/polls/vocabularies/results_graph.py:13
+msgid "Pie Chart"
+msgstr "Gráfico de pizza"
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Poll"
+msgstr "Enquete"
+
+#: collective/polls/profiles.zcml:22
+msgid "Polls for Plone: Example content"
+msgstr "Enquetes para Plone: conteúdo de exemplo"
+
+#: collective/polls/profiles.zcml:13
+msgid "Polls for Plone: Install"
+msgstr "Enquetes para Plone: instalação"
+
+#: collective/polls/profiles.zcml:30
+msgid "Polls for Plone: Uninstall"
+msgstr "Enquetes para Plone: desinstalação"
+
+#: collective/polls/content/poll.py:70
+msgid "Results"
+msgstr "Resultados"
+
+#: collective/polls/content/poll.py:105
+msgid "Show partial results"
+msgstr "Mostrar resultados parciais"
+
+#: collective/polls/content/poll.py:106
+msgid "Show partial results after a voter has already voted."
+msgstr "Mostrar resultados parciais, após o usuário já ter votado."
+
+#: collective/polls/content/poll.py:128
+msgid "Show the options in a random order to each voter, so their position does not favor any of them."
+msgstr "Exibe as opções em ordem aleatória para cada votante, para que a posição não favoreça nenhuma delas."
+
+#: collective/polls/content/poll.py:97
+msgid "Shown above the options. Leave empty for \"Select one option\" or \"Select up to N options\"."
+msgstr "Exibida acima das opções. Deixe em branco para \"Escolha uma opção\" ou \"Escolha até N opções\"."
+
+#: collective/polls/content/poll.py:127
+msgid "Shuffle options"
+msgstr "Embaralhar opções"
+
+#: collective/polls/services/vote/post.py:77
+msgid "The request body must be a JSON object with an integer option_id or a list of integers option_ids."
+msgstr "O corpo da requisição deve ser um objeto JSON com um option_id inteiro ou uma lista de inteiros option_ids."
+
+#: collective/polls/services/vote/post.py:91
+msgid "This poll has no such option."
+msgstr "Esta enquete não tem essa opção."
+
+#: collective/polls/content/poll.py:150
+msgid "Two options cannot share an id."
+msgstr "Duas opções não podem ter o mesmo id."
+
+#: collective/polls/profiles.zcml:30
+msgid "Uninstall Polls for Plone setup."
+msgstr "Desinstala a configuração de Enquetes para Plone."
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "View"
+msgstr "Visualizar"
+
+#: collective/polls/content/poll.py:162
+msgid "Voters cannot pick more options than the poll has."
+msgstr "Os votantes não podem escolher mais opções do que a enquete tem."
+
+#: collective/polls/content/poll.py:59
+msgid "Voting"
+msgstr "Votação"
+
+#: collective/polls/services/vote/post.py:86
+msgid "You already voted in this poll."
+msgstr "Você já votou nesta enquete."
+
+#: collective/polls/content/poll.py:145
+msgid "You need to provide at least two options for a poll."
+msgstr "Você deve informar ao menos duas opções em uma enquete."

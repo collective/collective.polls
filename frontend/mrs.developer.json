@@ -1,0 +1,10 @@
+{
+  "core": {
+    "output": "./",
+    "package": "@plone/volto",
+    "url": "git@github.com:plone/volto.git",
+    "https": "https://github.com/plone/volto.git",
+    "tag": "19.4.1",
+    "filterBlobs": true
+  }
+}

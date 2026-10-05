@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    >
+
+  <genericsetup:upgradeSteps
+      profile="collective.polls:default"
+      source="*"
+      destination="3000"
+      >
+    <!-- Without the browser layer the REST services do not exist on an
+         upgraded site. Re-importing the workflow and rolemap does not touch
+         the role mappings stored on each poll. -->
+    <genericsetup:upgradeDepends
+        title="Re-apply the browser layer, type, workflow and permissions"
+        import_steps="browserlayer typeinfo workflow rolemap"
+        />
+    <genericsetup:upgradeStep
+        title="Move votes to the 3.0 storage"
+        handler=".votes.migrate_votes"
+        />
+    <genericsetup:upgradeStep
+        title="Remove vote portlets"
+        handler=".portlets.remove_vote_portlets"
+        />
+    <genericsetup:upgradeStep
+        title="Let anonymous visitors vote in open polls again"
+        handler=".permissions.restore_anonymous_vote"
+        />
+    <genericsetup:upgradeStep
+        title="Remove registrations of 2.x tiles and resources"
+        handler=".cleanup.remove_legacy_registrations"
+        />
+    <genericsetup:upgradeStep
+        title="Check that plone.volto is installed"
+        handler=".cleanup.warn_without_plone_volto"
+        />
+  </genericsetup:upgradeSteps>
+
+</configure>

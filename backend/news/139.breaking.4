@@ -1,0 +1,1 @@
+Changed the Python API: anonymous voter ids are random strings, so `IPolls.anonymous_vote_id()` returns a `str`; `Poll.voters()` is sorted; `Poll.setVote(option, request=None)` takes `option`, does not count `True` or `False` as an option, and raises `AlreadyVoted`, a subclass of `Unauthorized`, for a second vote. @ericof

@@ -1,0 +1,39 @@
+{
+  "@id": "http://localhost:8080/Plone/a-poll/@poll",
+  "uid": "0f2c6e1a9b8d4c3e8f7a6b5c4d3e2f1a",
+  "state": "private",
+  "allow_anonymous": true,
+  "anonymous_blocked": false,
+  "show_results": true,
+  "results_graph": "bar",
+  "options": [
+    {
+      "option_id": 0,
+      "description": "Yes"
+    },
+    {
+      "option_id": 1,
+      "description": "No"
+    }
+  ],
+  "max_choices": 1,
+  "legend": null,
+  "shuffle_options": false,
+  "can_vote": false,
+  "has_voted": false,
+  "total_votes": 0,
+  "results": [
+    {
+      "option_id": 0,
+      "description": "Yes",
+      "votes": 0,
+      "percentage": 0.0
+    },
+    {
+      "option_id": 1,
+      "description": "No",
+      "votes": 0,
+      "percentage": 0.0
+    }
+  ]
+}
