@@ -126,6 +126,13 @@ class TestOrphansAndClear:
         assert self.votes.orphans() == {2: 1}
         assert self.votes.counts() == {0: 0, 1: 0}
 
+    def test_merge(self):
+        """Bulk counts add to stored ones, for current and gone options."""
+        self.votes.merge({2: 3, 9: 1}, ["member-a", "member-c"])
+        assert self.votes.counts() == {0: 1, 1: 0, 2: 4}
+        assert self.votes.orphans() == {9: 1}
+        assert self.votes.voters() == ["member-a", "member-b", "member-c"]
+
     def test_vote_again_after_clear(self):
         self.votes.clear()
         self.votes.register(1, "member-a")

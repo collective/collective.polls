@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: plone\n"
-"POT-Creation-Date: 2018-05-02 20:29+0000\n"
+"POT-Creation-Date: 2026-10-05 03:25+0000\n"
 "PO-Revision-Date: 2014-08-31 10:57+0100\n"
 "Last-Translator: Radim Novotny <novotny.radim@gmail.com>\n"
 "Language-Team: CS <cs@li.org>\n"
@@ -18,10 +18,6 @@ msgstr ""
 "Domain: plone\n"
 "Language: cs\n"
 "X-Generator: Poedit 1.6.8\n"
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "A portlet to allow voting on a specific poll"
-msgstr "Portlet umožňující hlasování ve vybrané anketě"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Close"
@@ -82,10 +78,6 @@ msgstr "Schvalovatel zamítá hlasování"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
 msgstr "Požádat o zveřejnění"
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "Voting portlet"
-msgstr "Portlet hlasování"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"

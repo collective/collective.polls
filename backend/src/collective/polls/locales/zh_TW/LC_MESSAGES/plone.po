@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2018-05-02 20:29+0000\n"
+"POT-Creation-Date: 2026-10-05 03:25+0000\n"
 "PO-Revision-Date: 2016-01-04 22:25+0800\n"
 "Last-Translator: TsungWei Hu <marr.tw@gmail.com>\n"
 "Language-Team: Plone I18N <plone-i18n@lists.sourceforge.net>\n"
@@ -13,10 +13,6 @@ msgstr ""
 "Language-Name: Traditional Chinese\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "A portlet to allow voting on a specific poll"
-msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Close"
@@ -77,10 +73,6 @@ msgstr ""
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
 msgstr ""
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "Voting portlet"
-msgstr "投票方框"
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"

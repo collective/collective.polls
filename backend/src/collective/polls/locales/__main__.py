@@ -17,6 +17,13 @@ locale_path = Path(__file__).parent.resolve()
 target_path = locale_path.parent.resolve()
 domains = [path.name[:-4] for path in locale_path.glob("*.pot")]
 
+#: Where to extract a domain's messages from, when not the whole package.
+#: i18ndude cannot tell which domain a Python ``_()`` call belongs to, so
+#: rebuilding ``plone`` from the package would pull in every message of
+#: ``collective.polls``. That domain only holds the workflow and type
+#: titles, which live in the profiles.
+SOURCES = {"plone": target_path / "profiles"}
+
 i18ndude = "uvx i18ndude"
 
 # ignore node_modules files resulting in errors
@@ -44,7 +51,7 @@ def _rebuild(domain: str) -> None:
     cmd = (
         f"{i18ndude} rebuild-pot --pot {locale_path}/{domain}.pot "
         f"--exclude {excludes} "
-        f"--create {domain} {target_path}"
+        f"--create {domain} {SOURCES.get(domain, target_path)}"
     )
     subprocess.call(cmd, shell=True)  # noQA: S602
 

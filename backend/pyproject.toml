@@ -37,6 +37,7 @@ dependencies = [
     "BTrees",
     "Products.CMFPlone>=6.2.0",
     "plone.api",
+    "plone.app.portlets",
     "plone.restapi",
     "plone.schema",
     "plone.volto",

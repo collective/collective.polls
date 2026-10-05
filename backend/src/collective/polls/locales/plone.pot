@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-05-02 20:29+0000\n"
+"POT-Creation-Date: 2026-10-05 03:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,6 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "A portlet to allow voting on a specific poll"
-msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Close"
@@ -79,10 +75,6 @@ msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
-msgstr ""
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "Voting portlet"
 msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml

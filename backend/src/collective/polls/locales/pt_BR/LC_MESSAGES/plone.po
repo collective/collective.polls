@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2018-05-02 20:29+0000\n"
+"POT-Creation-Date: 2026-10-05 03:25+0000\n"
 "PO-Revision-Date: 2012-06-11 20:18-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -15,10 +15,6 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 "X-Generator: Lokalize 1.2\n"
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "A portlet to allow voting on a specific poll"
-msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Close"
@@ -79,10 +75,6 @@ msgstr "Revisor rejeita uma enquete"
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Submit for opening"
 msgstr "Submeter para abertura"
-
-#: collective/polls/profiles/default/portlets.xml
-msgid "Voting portlet"
-msgstr ""
 
 #: collective/polls/profiles/default/workflows/poll_workflow/definition.xml
 msgid "Workflow to be used with polls"

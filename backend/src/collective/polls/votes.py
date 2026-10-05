@@ -16,6 +16,7 @@ from BTrees.IOBTree import IOBTree
 from BTrees.Length import Length
 from BTrees.OOBTree import OOBTree
 from BTrees.OOBTree import OOTreeSet
+from collections.abc import Iterable
 from collective.polls.config import VOTES_ANNO_KEY
 from collective.polls.content.poll import IPoll
 from collective.polls.interfaces import AlreadyVoted
@@ -135,3 +136,18 @@ class PollVotes:
         for option_id in self._option_ids():
             if option_id in counts:
                 del counts[option_id]
+
+    def merge(self, counts: dict[int, int], voters: Iterable[str]) -> None:
+        """Add votes in bulk, as a migration or an import does.
+
+        :param counts: Option id to number of votes to add; ids need not be
+            current options, so nothing recorded is dropped.
+        :param voters: Voter ids to add to the stored ones.
+        """
+        storage = self._create_storage()
+        storage["voters"].update(voters)
+        stored = storage["counts"]
+        for option_id, votes in counts.items():
+            if option_id not in stored:
+                stored[option_id] = Length()
+            stored[option_id].change(votes)

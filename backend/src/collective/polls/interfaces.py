@@ -1,6 +1,7 @@
 """Module where all interfaces, events and exceptions live."""
 
 from AccessControl import Unauthorized
+from collections.abc import Iterable
 from typing import TypedDict
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
@@ -108,3 +109,11 @@ class IPollVotes(Interface):
 
     def clear() -> None:
         """Remove the votes of the current options, and every voter."""
+
+    def merge(counts: dict[int, int], voters: Iterable[str]) -> None:
+        """Add votes in bulk, as a migration or an import does.
+
+        Counts are added to what is stored, for any option id, current or
+        not, and voters join the stored ones. Nothing is validated: the
+        votes were valid where they came from.
+        """

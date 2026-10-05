@@ -3,8 +3,10 @@
 from . import COOKIE_KEY
 from collective.polls.config import COOKIE_MAX_AGE
 from collective.polls.interfaces import IPollVotes
+from plone import api
 
 import pytest
+import transaction
 
 
 class TestVote:
@@ -178,3 +180,31 @@ class TestRefused:
         assert response.status_code == 401
         assert response.json()["type"] == "Unauthorized"
         self.assert_untouched(poll)
+
+
+class TestTranslated:
+    """Error messages follow the language the site negotiates."""
+
+    @pytest.fixture(autouse=True)
+    def _setup(self, portal, make_poll, session_for) -> None:
+        api.portal.set_registry_record("plone.available_languages", ["en", "pt-br"])
+        api.portal.set_registry_record("plone.use_request_negotiation", True)
+        transaction.commit()
+        make_poll(voters={"member": 0})
+        self.session = session_for("member")
+
+    @pytest.mark.parametrize(
+        "body,message",
+        [
+            (
+                {"option_id": "x"},
+                "O corpo da requisição deve ser um objeto JSON com um option_id inteiro.",
+            ),
+            ({"option_id": 0}, "Você já votou nesta enquete."),
+        ],
+    )
+    def test_pt_br(self, body, message):
+        response = self.session.post(
+            "polls/poll/@vote", json=body, headers={"Accept-Language": "pt-br"}
+        )
+        assert response.json()["error"]["message"] == message

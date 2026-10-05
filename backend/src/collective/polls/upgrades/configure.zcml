@@ -3,18 +3,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     >
 
-  <!-- Example upgrade step
-  <genericsetup:upgradeSteps
-      profile="collective.polls:default"
-      source="1000"
-      destination="1001"
-      >
-    <genericsetup:upgradeDepends
-        title="Update registry value"
-        import_steps="plone.app.registry"
-        />
-  </genericsetup:upgradeSteps>
-  -->
+  <include package=".v3000" />
 
   <!-- -*- extra stuff goes here -*- -->
 

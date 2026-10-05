@@ -1,7 +1,8 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-25 17:12+0000\n"
+"POT-Creation-Date: 2026-10-05 03:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,3 +14,107 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "A poll"
+msgstr ""
+
+#: collective/polls/content/poll.py:53
+msgid "Allow anonymous"
+msgstr ""
+
+#: collective/polls/content/poll.py:54
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opening the poll for this field to take effect"
+msgstr ""
+
+#: collective/polls/content/poll.py:77
+msgid "Available options"
+msgstr ""
+
+#: collective/polls/vocabularies/results_graph.py:12
+msgid "Bar Chart"
+msgstr ""
+
+#: collective/polls/profiles.zcml:22
+msgid "Create example content to showcase this addon."
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Edit"
+msgstr ""
+
+#: collective/polls/content/poll.py:70
+msgid "Format to show the results."
+msgstr ""
+
+#: collective/polls/content/poll.py:69
+msgid "Graph"
+msgstr ""
+
+#: collective/polls/content/poll.py:38
+msgid "Not enough options provided"
+msgstr ""
+
+#: collective/polls/vocabularies/results_graph.py:14
+msgid "Numbers Only"
+msgstr ""
+
+#: collective/polls/profiles.zcml:13
+msgid "Online polls support for Plone and Volto."
+msgstr ""
+
+#: collective/polls/vocabularies/results_graph.py:13
+msgid "Pie Chart"
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Poll"
+msgstr ""
+
+#: collective/polls/profiles.zcml:22
+msgid "Polls for Plone: Example content"
+msgstr ""
+
+#: collective/polls/profiles.zcml:13
+msgid "Polls for Plone: Install"
+msgstr ""
+
+#: collective/polls/profiles.zcml:30
+msgid "Polls for Plone: Uninstall"
+msgstr ""
+
+#: collective/polls/content/poll.py:63
+msgid "Show partial results"
+msgstr ""
+
+#: collective/polls/content/poll.py:64
+msgid "Show partial results after a voter has already voted."
+msgstr ""
+
+#: collective/polls/services/vote/post.py:67
+msgid "The request body must be a JSON object with an integer option_id."
+msgstr ""
+
+#: collective/polls/services/vote/post.py:76
+msgid "This poll has no such option."
+msgstr ""
+
+#: collective/polls/content/poll.py:99
+msgid "Two options cannot share an id."
+msgstr ""
+
+#: collective/polls/profiles.zcml:30
+msgid "Uninstall Polls for Plone setup."
+msgstr ""
+
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "View"
+msgstr ""
+
+#: collective/polls/services/vote/post.py:73
+msgid "You already voted in this poll."
+msgstr ""
+
+#: collective/polls/content/poll.py:94
+msgid "You need to provide at least two options for a poll."
+msgstr ""

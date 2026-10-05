@@ -1,0 +1,1 @@
+Rebuilt the package on the cookieplone monorepo add-on template: hatchling, a native namespace package, type hints checked with mypy, and a pytest suite with full branch coverage. @ericof

@@ -1,7 +1,8 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.polls\n"
-"POT-Creation-Date: 2018-05-02 20:29+0000\n"
+"POT-Creation-Date: 2026-10-05 03:25+0000\n"
 "PO-Revision-Date: 2016-01-04 22:11+0800\n"
 "Last-Translator: TsungWei Hu <marr.tw@gmail.com>\n"
 "Language-Team: Plone I18N <plone-i18n@lists.sourceforge.net>\n"
@@ -14,198 +15,106 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.polls\n"
 
-#: collective/polls/profiles.zcml:14
-msgid "A Plone extension providing a Poll content type, portlet and workflow."
-msgstr "提供投票功能的模組，包括型別、資訊方框、工作流程等。"
-
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
 msgstr "投票型別"
 
-#: collective/polls/tiles/configure.zcml:19
-msgid "A tile that shows a poll."
-msgstr ""
-
-#: collective/polls/widgets/enhancedtextlines.py:38
-msgid "Add"
-msgstr ""
-
-#: collective/polls/widgets/enhancedtextlines.py:39
-msgid "Add Option"
-msgstr ""
-
-#: collective/polls/portlet/voteportlet.py:80
-msgid "Add a link to the poll"
-msgstr "新增連結到投票頁面"
-
-#: collective/polls/content/poll.py:43
+#: collective/polls/content/poll.py:53
 msgid "Allow anonymous"
 msgstr "允許匿名投票"
 
-#: collective/polls/content/poll.py:44
-msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opeining the poll for this field to take effect"
+#: collective/polls/content/poll.py:54
+msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opening the poll for this field to take effect"
 msgstr ""
 
-#: collective/polls/browser/__init__.py:120
-msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
-msgstr ""
-
-#: collective/polls/content/poll.py:73
+#: collective/polls/content/poll.py:77
 msgid "Available options"
 msgstr "選項"
 
-#: collective/polls/browser/templates/view.pt:20
-msgid "Available options:"
-msgstr "選項:"
-
-#: collective/polls/content/poll.py:28
+#: collective/polls/vocabularies/results_graph.py:12
 msgid "Bar Chart"
 msgstr "柱狀圖"
 
-#: collective/polls/widgets/enhancedtextlines.py:40
-msgid "Delete Option"
+#: collective/polls/profiles.zcml:22
+msgid "Create example content to showcase this addon."
 msgstr ""
 
-#: collective/polls/tiles/poll.pt:8
-msgid "Drag&amp;drop a poll here to populate the tile."
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "Edit"
 msgstr ""
 
-#: collective/polls/widgets/enhancedtextlines.py:41
-msgid "Edit Option"
-msgstr ""
-
-#: collective/polls/content/poll.py:65
+#: collective/polls/content/poll.py:70
 msgid "Format to show the results."
 msgstr "結果的圖形格式。"
 
-#: collective/polls/content/poll.py:64
+#: collective/polls/content/poll.py:69
 msgid "Graph"
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:53
-msgid "Header"
-msgstr "標題"
-
-#: collective/polls/portlet/voteportlet.py:73
-msgid "If there is no available open poll or the chosen poll is already closed, should the porlet show the results instead."
+#: collective/polls/content/poll.py:38
+msgid "Not enough options provided"
 msgstr ""
 
-#: collective/polls/browser/__init__.py:141
-msgid "Invalid option"
-msgstr "選項有誤"
-
-#: collective/polls/portlet/voteportlet.py:37
-msgid "Latest opened poll"
-msgstr ""
-
-#: collective/polls/content/poll.py:34
-msgid "Not enought options provided"
-msgstr ""
-
-#: collective/polls/portlet/voteportlet.pt:33
-msgid "Nothing to see here"
-msgstr ""
-
-#: collective/polls/content/poll.py:30
+#: collective/polls/vocabularies/results_graph.py:14
 msgid "Numbers Only"
 msgstr ""
 
-#: collective/polls/browser/templates/poll_macros.pt:31
-msgid "Partial results"
-msgstr "目前結果"
+#: collective/polls/profiles.zcml:13
+msgid "Online polls support for Plone and Volto."
+msgstr ""
 
-#: collective/polls/content/poll.py:29
+#: collective/polls/vocabularies/results_graph.py:13
 msgid "Pie Chart"
 msgstr "圓餅圖"
 
-#: collective/polls/portlet/voteportlet.py:59
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "Poll"
 msgstr "投票"
 
-#: collective/polls/tiles/configure.zcml:19
-msgid "Poll Tile"
+#: collective/polls/profiles.zcml:22
+msgid "Polls for Plone: Example content"
 msgstr ""
 
-#: collective/polls/profiles.zcml:14
-msgid "Polls"
-msgstr "投票"
-
-#: collective/polls/configure.zcml
-msgid "Polls: Uninstall"
-msgstr "投票: 解除安裝"
-
-#: collective/polls/portlet/voteportlet.py:72
-msgid "Show closed polls"
+#: collective/polls/profiles.zcml:13
+msgid "Polls for Plone: Install"
 msgstr ""
 
-#: collective/polls/content/poll.py:57
+#: collective/polls/profiles.zcml:30
+msgid "Polls for Plone: Uninstall"
+msgstr ""
+
+#: collective/polls/content/poll.py:63
 msgid "Show partial results"
 msgstr ""
 
-#: collective/polls/content/poll.py:58
+#: collective/polls/content/poll.py:64
 msgid "Show partial results after a voter has already voted."
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:67
-msgid "Show the number of collected votes so far."
+#: collective/polls/services/vote/post.py:67
+msgid "The request body must be a JSON object with an integer option_id."
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:66
-msgid "Show total votes"
+#: collective/polls/services/vote/post.py:76
+msgid "This poll has no such option."
 msgstr ""
 
-#: collective/polls/browser/templates/poll_macros.pt:26
-msgid "Submit"
+#: collective/polls/content/poll.py:99
+msgid "Two options cannot share an id."
 msgstr ""
 
-#: collective/polls/browser/__init__.py:154
-msgid "Thanks for your vote"
+#: collective/polls/profiles.zcml:30
+msgid "Uninstall Polls for Plone setup."
 msgstr ""
 
-#: collective/polls/portlet/voteportlet.py:54
-msgid "The header for the portlet. Leave empty for none."
+#: collective/polls/profiles/default/types/collective.polls.poll.xml
+msgid "View"
 msgstr ""
 
-#: collective/polls/browser/templates/poll_macros.pt:58
-msgid "Total votes:"
-msgstr "總票數:"
-
-#: collective/polls/configure.zcml
-msgid "Uninstall the collective.polls package."
+#: collective/polls/services/vote/post.py:73
+msgid "You already voted in this poll."
 msgstr ""
 
-#: collective/polls/browser/templates/poll_macros.pt:62
-msgid "Vote"
-msgstr ""
-
-#: collective/polls/portlet/voteportlet.py:107
-msgid "Voting portlet"
-msgstr ""
-
-#: collective/polls/portlet/voteportlet.py:60
-msgid "Which poll to show in the portlet."
-msgstr ""
-
-#: collective/polls/browser/__init__.py:159
-msgid "You are not authorized to vote"
-msgstr ""
-
-#: collective/polls/content/poll.py:86
+#: collective/polls/content/poll.py:94
 msgid "You need to provide at least two options for a poll."
-msgstr ""
-
-#: collective/polls/profiles.zcml:29
-msgid "collective.polls: testfixture"
-msgstr ""
-
-#: collective/polls/profiles.zcml:21
-msgid "collective.polls: uninstall"
-msgstr ""
-
-#. Default: "Your browser is currently not supporting JavaScript, for this reason some functionality may not be accessible."
-#: collective/polls/browser/templates/view.pt:35
-#: collective/polls/portlet/voteportlet.pt:39
-#: collective/polls/tiles/poll.pt:31
-msgid "no_javascript_error"
 msgstr ""
