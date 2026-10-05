@@ -58,6 +58,7 @@ test = [
 
 [project.urls]
 Homepage = "https://github.com/collective/collective.polls"
+Documentation = "https://collective.github.io/collective.polls/"
 PyPI = "https://pypi.org/project/collective.polls"
 Source = "https://github.com/collective/collective.polls"
 Tracker = "https://github.com/collective/collective.polls/issues"
