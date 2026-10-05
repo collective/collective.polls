@@ -23,9 +23,10 @@ ifeq (, $(shell which $(UV) ))
   $(error "UV=$(UV) not found in $(PATH)")
 endif
 
-# repoplone needs Python 3.11 or later; pin it so UV_PYTHON, the version
-# under test in CI, does not decide which Python runs it.
-REPOSITORY_SETTINGS := $(shell uvx --python 3.12 repoplone settings dump)
+# repoplone needs Python 3.11 or later, and calls uv itself. Drop UV_PYTHON,
+# the version under test in CI, so it decides neither the Python that runs
+# repoplone nor the environment its uv looks for.
+REPOSITORY_SETTINGS := $(shell env -u UV_PYTHON uvx --python 3.12 repoplone settings dump)
 IMAGE_NAME_PREFIX := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.container_images_prefix')
 IMAGE_NAME_SEPARATOR := -
 IMAGE_NAME_PREFIX_WITH_SEPARATOR := $(IMAGE_NAME_PREFIX)$(IMAGE_NAME_SEPARATOR)

@@ -11,9 +11,10 @@ MAKEFLAGS+=--no-builtin-rules
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 GIT_FOLDER=$(CURRENT_DIR)/.git
 
-# repoplone needs Python 3.11 or later; pin it so UV_PYTHON, the version
-# under test in CI, does not decide which Python runs it.
-REPOSITORY_SETTINGS := $(shell uvx --python 3.12 repoplone settings dump)
+# repoplone needs Python 3.11 or later, and calls uv itself. Drop UV_PYTHON,
+# the version under test in CI, so it decides neither the Python that runs
+# repoplone nor the environment its uv looks for.
+REPOSITORY_SETTINGS := $(shell env -u UV_PYTHON uvx --python 3.12 repoplone settings dump)
 
 PROJECT_NAME=$(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.name')
 STACK_NAME=${PROJECT_NAME}
