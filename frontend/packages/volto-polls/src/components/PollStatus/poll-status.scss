@@ -1,0 +1,14 @@
+.poll-status__message {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  margin: 0.5rem 0;
+  background: var(--polls-notice-bg);
+
+  &--warning {
+    background: var(--polls-warning-bg);
+  }
+
+  &--error {
+    background: var(--polls-error-bg);
+  }
+}

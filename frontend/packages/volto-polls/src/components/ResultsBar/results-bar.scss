@@ -1,0 +1,36 @@
+.poll-results-bar {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: grid;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 0.25rem 0.75rem;
+    grid-template-columns: 1fr auto;
+  }
+
+  &__label {
+    grid-column: 1 / -1;
+  }
+
+  &__track {
+    overflow: hidden;
+    height: var(--polls-bar-height);
+    border-radius: 0.25rem;
+    background: var(--polls-track);
+  }
+
+  &__fill {
+    display: block;
+    height: 100%;
+  }
+
+  &__value {
+    color: var(--polls-muted);
+    font-variant-numeric: tabular-nums;
+  }
+}

@@ -15,3 +15,199 @@ msgstr ""
 "Language-Name: Português do Brasil\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
+
+#. Default: "A chosen poll"
+#: components/Blocks/Poll/schema
+msgid "A chosen poll"
+msgstr "Uma enquete escolhida"
+
+#. Default: "Add Option"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Add Option"
+msgstr "Adicionar opção"
+
+#. Default: "Add a link to the poll"
+#: components/Blocks/Poll/schema
+msgid "Add a link to the poll"
+msgstr "Adicionar link à enquete"
+
+#. Default: "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
+#: components/PollStatus/PollStatus
+msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
+msgstr "Usuários anônimos não podem votar, você esqueceu de publicar a pasta acima desta enquete. Você deve colocar a enquete no estado privado, publicar a pasta acima e abrir a enquete novamente."
+
+#. Default: "Available options:"
+#: components/PollForm/PollForm
+msgid "Available options:"
+msgstr "Opções disponíveis:"
+
+#. Default: "Chosen poll"
+#: components/Blocks/Poll/schema
+msgid "Chosen poll"
+msgstr "Enquete escolhida"
+
+#. Default: "Delete Option"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Delete Option"
+msgstr "Excluir opção"
+
+#. Default: "Header"
+#: components/Blocks/Poll/schema
+msgid "Header"
+msgstr "Título"
+
+#. Default: "Latest opened poll"
+#: components/Blocks/Poll/schema
+msgid "Latest opened poll"
+msgstr "Última enquete aberta"
+
+#. Default: "Move option down"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Move option down"
+msgstr "Mover opção para baixo"
+
+#. Default: "Move option up"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Move option up"
+msgstr "Mover opção para cima"
+
+#. Default: "Nothing to see here"
+#: components/PollStatus/PollStatus
+msgid "Nothing to see here"
+msgstr "Nada para ver aqui"
+
+#. Default: "Option"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Option"
+msgstr "Opção"
+
+#. Default: "Option {number}"
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "Option {number}"
+msgstr "Opção {number}"
+
+#. Default: "Partial results"
+#: components/PollResults/PollResults
+msgid "Partial results"
+msgstr "Resultados parciais"
+
+#. Default: "Percentage"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Percentage"
+msgstr "Porcentagem"
+
+#. Default: "Poll"
+#: components/Blocks/Poll/schema
+msgid "Poll"
+msgstr "Enquete"
+
+#. Default: "Poll results"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Poll results"
+msgstr "Resultados da enquete"
+
+#. Default: "Results"
+#: components/PollResults/PollResults
+msgid "Results"
+msgstr "Resultados"
+
+#. Default: "Settings"
+#: components/Blocks/Poll/schema
+msgid "Settings"
+msgstr "Configurações"
+
+#. Default: "Show closed polls"
+#: components/Blocks/Poll/schema
+msgid "Show closed polls"
+msgstr "Exibir enquetes encerradas"
+
+#. Default: "Show partial results"
+#: components/Poll/Poll
+msgid "Show partial results"
+msgstr "Mostrar resultados parciais"
+
+#. Default: "Show the number of collected votes so far."
+#: components/Blocks/Poll/schema
+msgid "Show the number of collected votes so far."
+msgstr "Ver o número de votos emitidos até agora."
+
+#. Default: "Show total votes"
+#: components/Blocks/Poll/schema
+msgid "Show total votes"
+msgstr "Ver total de votos"
+
+#. Default: "Thanks for your vote"
+#: components/PollStatus/PollStatus
+msgid "Thanks for your vote"
+msgstr "Obrigado pelo seu voto"
+
+#. Default: "The header for the block. Leave empty for none."
+#: components/Blocks/Poll/schema
+msgid "The header for the block. Leave empty for none."
+msgstr "O título do bloco. Deixe vazio para não exibir."
+
+#. Default: "There is no poll to show."
+#: components/Blocks/Poll/View
+msgid "There is no poll to show."
+msgstr "Não há enquete para exibir."
+
+#. Default: "This poll is closed."
+#: components/PollStatus/PollStatus
+msgid "This poll is closed."
+msgstr "Esta enquete está encerrada."
+
+#. Default: "This poll is not open yet."
+#: components/PollStatus/PollStatus
+msgid "This poll is not open yet."
+msgstr "Esta enquete ainda não está aberta."
+
+#. Default: "Total votes:"
+#: components/TotalVotes/TotalVotes
+msgid "Total votes:"
+msgstr "Total de votos:"
+
+#. Default: "Vote"
+#: components/Poll/Poll
+#: components/PollForm/PollForm
+msgid "Vote"
+msgstr "Votar"
+
+#. Default: "Votes"
+#: components/ResultsNumbers/ResultsNumbers
+msgid "Votes"
+msgstr "Votos"
+
+#. Default: "When no poll is open, show the results of the latest closed one instead."
+#: components/Blocks/Poll/schema
+msgid "When no poll is open, show the results of the latest closed one instead."
+msgstr "Quando não houver enquete aberta, exibir os resultados da última enquete encerrada."
+
+#. Default: "Which poll"
+#: components/Blocks/Poll/schema
+msgid "Which poll"
+msgstr "Qual enquete"
+
+#. Default: "Which poll to show in the block."
+#: components/Blocks/Poll/schema
+msgid "Which poll to show in the block."
+msgstr "Qual enquete exibir no bloco."
+
+#. Default: "You already voted in this poll."
+#: components/PollStatus/PollStatus
+msgid "You already voted in this poll."
+msgstr "Você já votou nesta enquete."
+
+#. Default: "You are not authorized to vote"
+#: components/PollStatus/PollStatus
+msgid "You are not authorized to vote"
+msgstr "Você não está autorizado a votar"
+
+#. Default: "You need to provide at least two options for a poll."
+#: components/Widgets/PollOptionsWidget/PollOptionsWidget
+msgid "You need to provide at least two options for a poll."
+msgstr "Você deve informar ao menos duas opções em uma enquete."
+
+#. Default: "Your vote could not be registered. Please try again."
+#: components/PollStatus/PollStatus
+msgid "Your vote could not be registered. Please try again."
+msgstr "Não foi possível registrar o seu voto. Tente novamente."

@@ -1,0 +1,40 @@
+.poll-options-widget {
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 0.25rem;
+
+    input {
+      min-width: 0;
+      flex: 1;
+    }
+  }
+
+  &__button,
+  &__add {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    gap: 0.25rem;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+
+  &__hint {
+    margin-top: 0.5rem;
+    color: #a16207;
+  }
+}

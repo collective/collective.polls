@@ -12,6 +12,7 @@
     "react"
   ],
   "scripts": {
+    "typecheck": "pnpm --filter @plone-collective/volto-polls typecheck",
     "preinstall": "npx only-allow pnpm",
     "start": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto start",
     "start:prod": "pnpm --filter @plone/volto start:prod",

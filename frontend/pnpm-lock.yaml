@@ -1362,6 +1362,9 @@ importers:
       '@plone/types':
         specifier: workspace:*
         version: link:../../core/packages/types
+      '@storybook/react':
+        specifier: ^8.0.4
+        version: 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.2.5)))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.6.18(prettier@3.2.5))(typescript@5.9.3)
       '@testing-library/react':
         specifier: ^16.2.0
         version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1371,6 +1374,15 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.1
         version: 18.3.7(@types/react@18.3.31)
+      '@types/react-redux':
+        specifier: ^7.1.34
+        version: 7.1.34
+      react-intl:
+        specifier: 3.12.1
+        version: 3.12.1(@types/react@18.3.31)(react@18.2.0)
+      react-redux:
+        specifier: 8.1.2
+        version: 8.1.2(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1)
       release-it:
         specifier: ^19.0.5
         version: 19.2.4(@types/node@24.19.1)(magicast@0.3.5)

@@ -1,0 +1,33 @@
+// Defaults for every color and size the poll components use. A theme
+// changes them by setting the custom properties, nothing else.
+:root {
+  --polls-color-1: #0b5cad;
+  --polls-color-2: #c2410c;
+  --polls-color-3: #15803d;
+  --polls-color-4: #7e22ce;
+  --polls-color-5: #b91c1c;
+  --polls-color-6: #0f766e;
+  --polls-color-7: #a16207;
+  --polls-color-8: #4b5563;
+  --polls-track: #e5e7eb;
+  --polls-text: inherit;
+  --polls-muted: #4b5563;
+  --polls-border: #d1d5db;
+  --polls-gap: 1rem;
+  --polls-bar-height: 1.25rem;
+  --polls-notice-bg: #eef2ff;
+  --polls-warning-bg: #fef3c7;
+  --polls-error-bg: #fee2e2;
+}
+
+.polls-visually-hidden {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  margin: -1px !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+}
