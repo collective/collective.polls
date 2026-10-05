@@ -54,7 +54,6 @@ test = [
     "pytest-cov",
     "pytest-plone>=1.1.0",
     "mypy",
-    "mypy-zope",
 ]
 
 [project.urls]
@@ -227,5 +226,9 @@ disallow_untyped_defs = true
 check_untyped_defs = true
 warn_unused_ignores = true
 ignore_missing_imports = true
-# Understands zope.interface declarations (methods without self).
-plugins = ["mypy_zope:plugin"]
+
+# zope.interface methods declare an explicit self, as plone-stubs does, and
+# a docstring for a body: there is nothing to return.
+[[tool.mypy.overrides]]
+module = ["collective.polls.interfaces", "collective.polls.utility"]
+disable_error_code = ["empty-body"]

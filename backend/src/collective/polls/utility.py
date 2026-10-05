@@ -32,26 +32,26 @@ class IPolls(Interface):
     """Utility methods for dealing with polls."""
 
     def recent_polls(
-        context: Any = None, show_all: bool = False, limit: int = 5, **kw: Any
+        self, context: Any = None, show_all: bool = False, limit: int = 5, **kw: Any
     ) -> list:
         """Return catalog brains of the most recently created polls."""
 
-    def poll_by_uid(uid: str, context: Any = None) -> Poll | None:
+    def poll_by_uid(self, uid: str, context: Any = None) -> Poll | None:
         """Return the poll with the given UID, or the latest open one."""
 
-    def voted_in_a_poll(poll: Poll, request: HTTPRequest | None = None) -> bool:
+    def voted_in_a_poll(self, poll: Poll, request: HTTPRequest | None = None) -> bool:
         """Check whether the current user already voted in a poll."""
 
-    def allowed_to_edit(poll: Poll) -> bool:
+    def allowed_to_edit(self, poll: Poll) -> bool:
         """Check whether the current user may edit a poll."""
 
-    def allowed_to_view(poll: Poll) -> bool:
+    def allowed_to_view(self, poll: Poll) -> bool:
         """Check whether the current user may view a poll."""
 
-    def allowed_to_vote(poll: Poll, request: HTTPRequest | None = None) -> bool:
+    def allowed_to_vote(self, poll: Poll, request: HTTPRequest | None = None) -> bool:
         """Return ``True`` when the current user may vote, else raise."""
 
-    def anonymous_vote_id() -> str:
+    def anonymous_vote_id(self) -> str:
         """Return a new identifier for an anonymous vote."""
 
 

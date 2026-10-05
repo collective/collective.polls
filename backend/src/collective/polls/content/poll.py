@@ -163,9 +163,7 @@ class IPoll(model.Schema):
             )
 
 
-# IPoll extends plone.supermodel's model.Schema; mypy-zope does not recognize
-# the class plone-stubs declares for it as an interface.
-@implementer(IPoll)  # type: ignore[misc]
+@implementer(IPoll)
 class Poll(Container):
     """A Poll in a Plone site."""
 

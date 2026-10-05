@@ -15,7 +15,9 @@ GRAPHS: tuple[tuple[str, str], ...] = (
 )
 
 
-@provider(IVocabularyFactory)
+# plone-stubs types provider() as a class decorator only; zope.interface
+# accepts any object, and vocabulary factories are plain functions.
+@provider(IVocabularyFactory)  # type: ignore[type-var]
 def results_graph_vocabulary(context: object) -> SimpleVocabulary:
     """Vocabulary of the formats a poll can show its results in.
 

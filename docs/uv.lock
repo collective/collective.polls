@@ -330,7 +330,6 @@ requires-dist = [
     { name = "horse-with-no-namespace", marker = "extra == 'test'" },
     { name = "jsonschema", marker = "extra == 'test'" },
     { name = "mypy", marker = "extra == 'test'" },
-    { name = "mypy-zope", marker = "extra == 'test'" },
     { name = "plone-api" },
     { name = "plone-app-portlets" },
     { name = "plone-app-testing", marker = "extra == 'test'" },

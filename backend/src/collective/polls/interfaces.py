@@ -74,7 +74,7 @@ class ISerializePollState(Interface):
     services answer with exactly the same shape.
     """
 
-    def __call__(has_voted: bool | None = None) -> PollStateDict:
+    def __call__(self, has_voted: bool | None = None) -> PollStateDict:
         """Return the state of the poll, as seen by the current user.
 
         :param has_voted: Override for ``has_voted``; the vote service passes
@@ -89,25 +89,25 @@ class IPollVotes(Interface):
     writes to the database: storage is created on the first vote.
     """
 
-    def counts() -> dict[int, int]:
+    def counts(self) -> dict[int, int]:
         """Votes per option id, for every current option, zero included."""
 
-    def orphans() -> dict[int, int]:
+    def orphans(self) -> dict[int, int]:
         """Votes recorded for option ids the poll no longer has."""
 
-    def total() -> int:
+    def total(self) -> int:
         """Number of votes for the current options."""
 
-    def voters() -> list[str]:
+    def voters(self) -> list[str]:
         """Ids of everyone who voted, sorted."""
 
-    def has_voter(voter_id: str) -> bool:
+    def has_voter(self, voter_id: str) -> bool:
         """Check whether a voter id already voted."""
 
-    def voter_count() -> int:
+    def voter_count(self) -> int:
         """Number of people who voted."""
 
-    def register(option_id: int | Iterable[int], voter_id: str) -> None:
+    def register(self, option_id: int | Iterable[int], voter_id: str) -> None:
         """Record one voter's vote, for one option or several.
 
         Raises ``ValueError`` for an option id the poll does not have, a
@@ -115,19 +115,19 @@ class IPollVotes(Interface):
         already voted.
         """
 
-    def clear() -> None:
+    def clear(self) -> None:
         """Remove the votes of the current options, and every voter."""
 
-    def stored() -> dict[int, int]:
+    def stored(self) -> dict[int, int]:
         """Every vote recorded, for current and removed options, no zeros."""
 
-    def replace(counts: dict[int, int], voters: Iterable[str]) -> None:
+    def replace(self, counts: dict[int, int], voters: Iterable[str]) -> None:
         """Drop every recorded vote and store these ones, as an import does.
 
         Nothing is validated: the votes were valid where they came from.
         """
 
-    def merge(counts: dict[int, int], voters: Iterable[str]) -> None:
+    def merge(self, counts: dict[int, int], voters: Iterable[str]) -> None:
         """Add votes in bulk, as a migration or an import does.
 
         Counts are added to what is stored, for any option id, current or
