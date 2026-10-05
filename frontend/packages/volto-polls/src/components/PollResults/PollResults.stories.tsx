@@ -39,3 +39,7 @@ export const NumbersOpen: Story = { args: { results, graph: 'numbers' } };
 export const NumbersClosed: Story = {
   args: { results, graph: 'numbers', closed: true },
 };
+/** A multiple choice poll asking for a pie gets bars. */
+export const PieMultipleChoice: Story = {
+  args: { results, graph: 'pie', multipleChoice: true },
+};

@@ -25,6 +25,7 @@ export const PollBlockDataForm = ({
       onChangeField={(id: string, value: unknown) =>
         onChangeBlock(block, { ...data, [id]: value })
       }
+      onChangeBlock={onChangeBlock}
       formData={data}
       block={block}
     />

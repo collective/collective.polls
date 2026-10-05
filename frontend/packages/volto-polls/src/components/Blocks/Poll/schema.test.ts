@@ -34,7 +34,9 @@ describe('PollBlockSchema', () => {
     const { poll } = PollBlockSchema({ intl }).properties;
     expect(poll.widget).toBe('object_browser');
     expect(poll.selectableTypes).toEqual([POLL_TYPE]);
-    expect(poll.maximumSelectionSize).toBe(1);
+    // Link mode keeps a single item; a size limit would block the first pick.
+    expect(poll.mode).toBe('link');
+    expect(poll.maximumSelectionSize).toBeUndefined();
   });
 
   it('keeps the 2.x portlet defaults', () => {

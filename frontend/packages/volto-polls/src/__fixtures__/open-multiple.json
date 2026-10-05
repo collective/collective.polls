@@ -9,31 +9,41 @@
   "options": [
     {
       "option_id": 0,
-      "description": "Yes"
+      "description": "Red"
     },
     {
       "option_id": 1,
-      "description": "No"
+      "description": "Green"
+    },
+    {
+      "option_id": 2,
+      "description": "Blue"
     }
   ],
-  "max_choices": 1,
-  "legend": null,
-  "shuffle_options": false,
+  "max_choices": 2,
+  "legend": "Pick your favourite colours",
+  "shuffle_options": true,
   "can_vote": true,
-  "has_voted": null,
+  "has_voted": true,
   "total_votes": 3,
   "results": [
     {
       "option_id": 0,
-      "description": "Yes",
+      "description": "Red",
       "votes": 2,
       "percentage": 0.6666666666666666
     },
     {
       "option_id": 1,
-      "description": "No",
+      "description": "Green",
       "votes": 1,
       "percentage": 0.3333333333333333
+    },
+    {
+      "option_id": 2,
+      "description": "Blue",
+      "votes": 2,
+      "percentage": 0.6666666666666666
     }
   ]
 }

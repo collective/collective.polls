@@ -38,11 +38,6 @@ msgstr "Adicionar un vínculo a la encuesta"
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr "Los usuarios anónimos no podrán votar pues se olvidó de publicar la carpeta contenedora. Debe regresar la encuesta al estado privado, publicar la carpeta padre y reabrir la encuesta"
 
-#. Default: "Available options:"
-#: components/PollForm/PollForm
-msgid "Available options:"
-msgstr "Opciones disponibles:"
-
 #. Default: "Chosen poll"
 #: components/Blocks/Poll/schema
 msgid "Chosen poll"
@@ -111,6 +106,16 @@ msgstr ""
 #. Default: "Results"
 #: components/PollResults/PollResults
 msgid "Results"
+msgstr ""
+
+#. Default: "Select one option"
+#: components/PollForm/PollForm
+msgid "Select one option"
+msgstr ""
+
+#. Default: "Select up to {count} options"
+#: components/PollForm/PollForm
+msgid "Select up to {count} options"
 msgstr ""
 
 #. Default: "Settings"

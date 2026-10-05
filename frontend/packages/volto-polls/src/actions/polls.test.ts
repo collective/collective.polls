@@ -13,16 +13,20 @@ describe('getPoll', () => {
 });
 
 describe('votePoll', () => {
-  it('posts the option id to @vote', () => {
-    expect(votePoll('/a-poll', 2)).toEqual({
+  it('posts the option ids to @vote', () => {
+    expect(votePoll('/a-poll', [0, 2])).toEqual({
       type: VOTE_POLL,
       path: '/a-poll',
-      request: { op: 'post', path: '/a-poll/@vote', data: { option_id: 2 } },
+      request: {
+        op: 'post',
+        path: '/a-poll/@vote',
+        data: { option_ids: [0, 2] },
+      },
     });
   });
 
   it('sends option 0, which is falsy, as is', () => {
-    expect(votePoll('/a-poll', 0).request.data).toEqual({ option_id: 0 });
+    expect(votePoll('/a-poll', [0]).request.data).toEqual({ option_ids: [0] });
   });
 });
 

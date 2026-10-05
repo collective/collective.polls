@@ -31,11 +31,6 @@ msgstr ""
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr ""
 
-#. Default: "Available options:"
-#: components/PollForm/PollForm
-msgid "Available options:"
-msgstr ""
-
 #. Default: "Chosen poll"
 #: components/Blocks/Poll/schema
 msgid "Chosen poll"
@@ -104,6 +99,16 @@ msgstr ""
 #. Default: "Results"
 #: components/PollResults/PollResults
 msgid "Results"
+msgstr ""
+
+#. Default: "Select one option"
+#: components/PollForm/PollForm
+msgid "Select one option"
+msgstr ""
+
+#. Default: "Select up to {count} options"
+#: components/PollForm/PollForm
+msgid "Select up to {count} options"
 msgstr ""
 
 #. Default: "Settings"

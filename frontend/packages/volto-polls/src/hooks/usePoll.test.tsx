@@ -96,12 +96,12 @@ describe('usePoll', () => {
 
   it('votes', async () => {
     const { store, result } = setup('/a-poll', open);
-    await act(() => result.current.vote(1));
+    await act(() => result.current.vote([1]));
     expect(store.actions).toContainEqual(
       expect.objectContaining({
         type: VOTE_POLL,
         path: '/a-poll',
-        request: expect.objectContaining({ data: { option_id: 1 } }),
+        request: expect.objectContaining({ data: { option_ids: [1] } }),
       }),
     );
   });
@@ -113,6 +113,6 @@ describe('usePoll', () => {
         action.type === VOTE_POLL ? Promise.reject(new Error('403')) : action,
     );
     const { result } = setup('/a-poll', undefined, store);
-    await expect(act(() => result.current.vote(0))).resolves.toBeUndefined();
+    await expect(act(() => result.current.vote([0]))).resolves.toBeUndefined();
   });
 });

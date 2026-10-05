@@ -5,6 +5,7 @@ import PollForm from '../PollForm/PollForm';
 import PollResults from '../PollResults/PollResults';
 import PollStatus, { type PollStatusKind } from '../PollStatus/PollStatus';
 import TotalVotes from '../TotalVotes/TotalVotes';
+import useOptionOrder from '../../hooks/useOptionOrder';
 import usePoll from '../../hooks/usePoll';
 import type { PollError, PollOption, PollState } from '../../types/poll';
 import '../../theme/polls.scss';
@@ -33,6 +34,10 @@ export interface PollProps {
   interactive?: boolean;
   /** Options to show until the poll's state arrives, such as on the server. */
   fallbackOptions?: PollOption[];
+  /** How many options a voter can pick, until the poll's state arrives. */
+  fallbackMaxChoices?: number;
+  /** The legend above the options, until the poll's state arrives. */
+  fallbackLegend?: string | null;
 }
 
 /**
@@ -69,7 +74,8 @@ export function statusKinds(
 }
 
 /**
- * A poll: the vote form while the user can vote, the results otherwise.
+ * A poll: the vote form while the user can vote, only the options while
+ * the poll is not open yet, the results otherwise.
  *
  * It fetches the poll's state for the current user in the browser, so the
  * server renders only the question and, given `fallbackOptions`, the
@@ -83,15 +89,23 @@ export const Poll = ({
   linkToPoll = false,
   interactive = true,
   fallbackOptions,
+  fallbackMaxChoices,
+  fallbackLegend,
 }: PollProps) => {
   const intl = useIntl();
   const { poll, error, vote, voting, voteError, hasVoted, canVoteNow } =
     usePoll(path);
   const [justVoted, setJustVoted] = useState(false);
   const [peek, setPeek] = useState(false);
+  // Shuffled once here, not in the form: showing the results and coming
+  // back to the vote must not move the options again.
+  const options = useOptionOrder(
+    poll?.options ?? [],
+    Boolean(poll?.shuffle_options),
+  );
 
-  const onVote = async (optionId: number) => {
-    await vote(optionId);
+  const onVote = async (optionIds: number[]) => {
+    await vote(optionIds);
     setJustVoted(true);
     setPeek(false);
   };
@@ -105,8 +119,11 @@ export const Poll = ({
       results &&
       (poll.total_votes ?? 0) > 0,
   );
+  // Not open yet: show what will be asked, not results nobody voted for.
+  const notOpen = poll?.state === 'private' || poll?.state === 'pending';
   const showForm = poll ? canVoteNow && !(canPeek && peek) : false;
-  const showResults = Boolean(results) && (!canVoteNow || (canPeek && peek));
+  const showResults =
+    !notOpen && Boolean(results) && (!canVoteNow || (canPeek && peek));
   const kinds: PollStatusKind[] = poll
     ? statusKinds(poll, hasVoted, justVoted, voteError)
     : error
@@ -128,19 +145,30 @@ export const Poll = ({
       <PollStatus kinds={kinds} />
       {showForm && poll && (
         <PollForm
-          options={poll.options}
+          options={options}
           onVote={onVote}
+          maxChoices={poll.max_choices}
           submitting={voting}
           disabled={!interactive}
-          legend={title}
+          legend={poll.legend}
+        />
+      )}
+      {notOpen && poll && (
+        <PollForm
+          options={options}
+          onVote={() => undefined}
+          maxChoices={poll.max_choices}
+          readOnly
+          legend={poll.legend}
         />
       )}
       {!poll && !error && fallbackOptions && fallbackOptions.length > 0 && (
         <PollForm
           options={fallbackOptions}
           onVote={() => undefined}
+          maxChoices={fallbackMaxChoices}
           disabled
-          legend={title}
+          legend={fallbackLegend}
         />
       )}
       {showResults && poll && results && (
@@ -148,6 +176,7 @@ export const Poll = ({
           results={results}
           graph={poll.results_graph}
           closed={poll.state === 'closed'}
+          multipleChoice={poll.max_choices > 1}
         />
       )}
       {canPeek && (

@@ -83,9 +83,10 @@ export const PollBlockSchema = ({
         widget: 'object_browser',
         mode: 'link',
         allowExternals: false,
+        // Link mode keeps one item already. A maximumSelectionSize here
+        // makes Volto's object browser refuse the first pick: it compares
+        // the size against the length of `{}` while nothing is picked.
         selectableTypes: [POLL_TYPE],
-        maximumSelectionSize: 1,
-        maximum: 1,
       },
       header: {
         title: intl.formatMessage(messages.header),

@@ -44,6 +44,22 @@ export function graphComponent(
   return registered ?? BUILT_IN[graph] ?? ResultsNumbers;
 }
 
+/**
+ * The graph type to draw a poll's results with.
+ *
+ * A pie shows parts of one whole, and the results of a multiple choice poll
+ * are shares of voters that add up past 100%: those polls get bars instead.
+ *
+ * @param graph The poll's `results_graph`.
+ * @param multipleChoice The poll lets a voter pick more than one option.
+ */
+export function effectiveGraph(
+  graph: ResultsGraph | string,
+  multipleChoice: boolean,
+): ResultsGraph | string {
+  return multipleChoice && graph === 'pie' ? 'bar' : graph;
+}
+
 export interface PollResultsProps {
   /** The results, in option order. */
   results: PollResult[];
@@ -51,15 +67,19 @@ export interface PollResultsProps {
   graph: ResultsGraph | string;
   /** The poll is closed: these are its final results. */
   closed?: boolean;
+  /** The poll lets a voter pick more than one option. */
+  multipleChoice?: boolean;
 }
 
 /** The results of a poll, drawn the way the poll asks for. */
 export const PollResults = ({
   results,
-  graph,
+  graph: requested,
   closed = false,
+  multipleChoice = false,
 }: PollResultsProps) => {
   const intl = useIntl();
+  const graph = effectiveGraph(requested, multipleChoice);
   const Graph = graphComponent(graph);
   return (
     <section className={`poll-results poll-results--${graph}`}>

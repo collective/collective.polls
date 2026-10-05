@@ -23,7 +23,10 @@ export interface PollOption {
 /** The votes for one option. */
 export interface PollResult extends PollOption {
   votes: number;
-  /** Share of the votes, a fraction in `[0, 1]`; `0` with no votes. */
+  /**
+   * Share of `total_votes`, a fraction in `[0, 1]`; `0` with no votes. In a
+   * multiple choice poll, the share of voters who picked the option.
+   */
   percentage: number;
 }
 
@@ -38,6 +41,12 @@ export interface PollState {
   show_results: boolean;
   results_graph: ResultsGraph;
   options: PollOption[];
+  /** How many options a voter can pick; more than 1 is multiple choice. */
+  max_choices: number;
+  /** Shown above the options; `null` for the default wording. */
+  legend: string | null;
+  /** Show the options in a random order to each voter. */
+  shuffle_options: boolean;
   /** The caller holds the vote permission. Says nothing about having voted. */
   can_vote: boolean;
   /** `null` for anonymous callers: the browser answers from the cookie. */
@@ -57,6 +66,9 @@ export interface Term {
 export interface PollContent extends Content {
   '@type': 'collective.polls.poll';
   options: PollOption[];
+  max_choices?: number;
+  legend?: string | null;
+  shuffle_options?: boolean;
   allow_anonymous: boolean;
   show_results: boolean;
   results_graph: Term | ResultsGraph | null;

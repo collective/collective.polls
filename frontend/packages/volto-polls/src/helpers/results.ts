@@ -9,19 +9,24 @@ import type { PollResult } from '../types/poll';
 export const COLOR_COUNT = 8;
 
 /**
- * Round each option's share to whole percents that add up to 100.
+ * Round each option's share, as the backend reports it, to whole percents.
  *
- * Plain rounding can give 99 or 101 in total (three equal thirds round to
- * 33 each). The largest remainder method hands the missing points to the
- * options that lost the most to rounding, in option order on ties.
+ * In a single choice poll the shares add up to 100, and so must the whole
+ * percents: plain rounding can give 99 or 101 in total (three equal thirds
+ * round to 33 each). The largest remainder method hands the missing points
+ * to the options that lost the most to rounding, in option order on ties.
+ *
+ * In a multiple choice poll each share is of the voters, so they can add up
+ * past 100; each is then rounded on its own.
  *
  * @param results The results of a poll.
  * @returns One whole percent per result; all zero while nobody voted.
  */
 export function wholePercents(results: PollResult[]): number[] {
-  const total = results.reduce((sum, r) => sum + r.votes, 0);
-  if (total === 0) return results.map(() => 0);
-  const exact = results.map((r) => (r.votes * 100) / total);
+  const exact = results.map((r) => r.percentage * 100);
+  const sum = exact.reduce((a, b) => a + b, 0);
+  if (sum === 0) return results.map(() => 0);
+  if (Math.abs(sum - 100) > 1e-6) return exact.map(Math.round);
   const floors = exact.map(Math.floor);
   let missing = 100 - floors.reduce((sum, n) => sum + n, 0);
   const order = exact

@@ -36,11 +36,6 @@ msgstr "Adicionar link à enquete"
 msgid "Anonymous user won't be able to vote, you forgot to publish the parent folder, you must sent back the poll to private state, publish the parent folder and open the poll again"
 msgstr "Usuários anônimos não podem votar, você esqueceu de publicar a pasta acima desta enquete. Você deve colocar a enquete no estado privado, publicar a pasta acima e abrir a enquete novamente."
 
-#. Default: "Available options:"
-#: components/PollForm/PollForm
-msgid "Available options:"
-msgstr "Opções disponíveis:"
-
 #. Default: "Chosen poll"
 #: components/Blocks/Poll/schema
 msgid "Chosen poll"
@@ -110,6 +105,16 @@ msgstr "Resultados da enquete"
 #: components/PollResults/PollResults
 msgid "Results"
 msgstr "Resultados"
+
+#. Default: "Select one option"
+#: components/PollForm/PollForm
+msgid "Select one option"
+msgstr "Escolha uma opção"
+
+#. Default: "Select up to {count} options"
+#: components/PollForm/PollForm
+msgid "Select up to {count} options"
+msgstr "Escolha até {count} opções"
 
 #. Default: "Settings"
 #: components/Blocks/Poll/schema

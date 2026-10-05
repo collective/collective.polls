@@ -23,16 +23,17 @@ export function getPoll(path: string) {
  * Vote in a poll. The answer is the new state of the poll.
  *
  * @param path The poll's path, relative to the site.
- * @param optionId The id of the option voted for.
+ * @param optionIds The ids of the options voted for; one in a single
+ *   choice poll.
  */
-export function votePoll(path: string, optionId: number) {
+export function votePoll(path: string, optionIds: number[]) {
   return {
     type: VOTE_POLL,
     path,
     request: {
       op: 'post',
       path: `${path}/@vote`,
-      data: { option_id: optionId },
+      data: { option_ids: optionIds },
     },
   };
 }

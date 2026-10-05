@@ -6,6 +6,7 @@ import Poll from './Poll';
 import { recordingStore } from '../../testing/store';
 import closed from '../../__fixtures__/closed.json';
 import open from '../../__fixtures__/open.json';
+import multiple from '../../__fixtures__/open-multiple.json';
 import openAnonymousBlocked from '../../__fixtures__/open-anonymous-blocked.json';
 import openVoted from '../../__fixtures__/open-voted.json';
 import privatePoll from '../../__fixtures__/private.json';
@@ -62,6 +63,23 @@ export const Closed: Story = {
   decorators: [withPoll(closed)],
 };
 export const NotOpen: Story = { decorators: [withPoll(privatePoll)] };
+/** Up to two choices, under the poll's own legend, in a random order. */
+export const MultipleChoice: Story = {
+  args: { title: 'Which colours do you like?' },
+  decorators: [
+    withPoll({
+      ...multiple,
+      has_voted: false,
+      total_votes: null,
+      results: null,
+    }),
+  ],
+};
+/** Percentages are shares of voters, so they add up past 100%. */
+export const MultipleChoiceResults: Story = {
+  args: { title: 'Which colours do you like?', showTotal: true },
+  decorators: [withPoll(multiple)],
+};
 export const AnonymousBlocked: Story = {
   decorators: [withPoll(openAnonymousBlocked)],
 };

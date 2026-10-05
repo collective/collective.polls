@@ -1,7 +1,11 @@
 import React from 'react';
 import { afterEach, describe, it, expect } from 'vitest';
 import config from '@plone/volto/registry';
-import PollResults, { GRAPH_COMPONENT, graphComponent } from './PollResults';
+import PollResults, {
+  GRAPH_COMPONENT,
+  effectiveGraph,
+  graphComponent,
+} from './PollResults';
 import ResultsBar from '../ResultsBar/ResultsBar';
 import ResultsNumbers from '../ResultsNumbers/ResultsNumbers';
 import ResultsPie from '../ResultsPie/ResultsPie';
@@ -34,6 +38,28 @@ describe('PollResults', () => {
       expect(getByRole('heading').textContent).toBe(heading);
       expect(container.querySelector(selector)).not.toBeNull();
     });
+  });
+
+  it.each([
+    ['pie', true, 'bar'],
+    ['pie', false, 'pie'],
+    ['bar', true, 'bar'],
+    ['numbers', true, 'numbers'],
+  ])('draws %s, multiple choice %s, as %s', (graph, multiple, expected) => {
+    expect(effectiveGraph(graph, multiple)).toBe(expected);
+  });
+
+  it('draws bars, not a pie, for a multiple choice poll', () => {
+    const { container } = renderInVolto(
+      <PollResults results={RESULT_SETS.several} graph="pie" multipleChoice />,
+    );
+    expect(container.querySelector('.poll-results-pie')).toBeNull();
+    expect(container.querySelector('.poll-results-bar')).not.toBeNull();
+    expect(
+      container
+        .querySelector('.poll-results')
+        ?.classList.contains('poll-results--bar'),
+    ).toBe(true);
   });
 
   it('falls back to numbers for a graph it does not know', () => {

@@ -19,8 +19,8 @@ export interface UsePollResult {
   loading: boolean;
   loaded: boolean;
   error: PollError | null;
-  /** Vote for an option; resolves once the vote is answered either way. */
-  vote: (optionId: number) => Promise<void>;
+  /** Vote for options; resolves once the vote is answered either way. */
+  vote: (optionIds: number[]) => Promise<void>;
   voting: boolean;
   voteError: PollError | null;
   /** From the backend for members, from the cookie for anonymous visitors. */
@@ -55,9 +55,9 @@ export function usePoll(path: string): UsePollResult {
   }, [poll]);
 
   const vote = useCallback(
-    async (optionId: number) => {
+    async (optionIds: number[]) => {
       try {
-        await dispatch(votePoll(path, optionId) as any);
+        await dispatch(votePoll(path, optionIds) as any);
       } catch {
         // The failure is in the store as `voteError`.
       }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { afterEach, describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
 import { act, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import Poll, { statusKinds } from './Poll';
@@ -10,6 +10,7 @@ import type { PollError, PollState } from '../../types/poll';
 import closed from '../../__fixtures__/closed.json';
 import noVotes from '../../__fixtures__/no-votes.json';
 import open from '../../__fixtures__/open.json';
+import multiple from '../../__fixtures__/open-multiple.json';
 import openAnonymous from '../../__fixtures__/open-anonymous.json';
 import openAnonymousBlocked from '../../__fixtures__/open-anonymous-blocked.json';
 import openVoted from '../../__fixtures__/open-voted.json';
@@ -101,9 +102,28 @@ describe('Poll', () => {
     expect(kinds()).toEqual(['closed']);
   });
 
-  it('says a private poll is not open', () => {
-    const { form, kinds } = setup({}, entry(privatePoll));
-    expect(form()).toBeNull();
+  it('shows the options of a private poll, without results or vote', () => {
+    const { form, results, kinds, getAllByRole, queryByRole } = setup(
+      {},
+      entry(privatePoll),
+    );
+    expect(form()).not.toBeNull();
+    expect(getAllByRole('radio').every((r) => r.matches(':disabled'))).toBe(
+      true,
+    );
+    expect(queryByRole('button', { name: 'Vote' })).toBeNull();
+    expect(results()).toBeNull();
+    expect(kinds()).toEqual(['notOpen']);
+  });
+
+  it('shows the options of a pending poll, without results or vote', () => {
+    const { form, results, kinds, queryByRole } = setup(
+      { showTotal: true },
+      entry({ ...privatePoll, state: 'pending' }),
+    );
+    expect(form()).not.toBeNull();
+    expect(queryByRole('button', { name: 'Vote' })).toBeNull();
+    expect(results()).toBeNull();
     expect(kinds()).toEqual(['notOpen']);
   });
 
@@ -170,6 +190,124 @@ describe('Poll', () => {
     expect(container.querySelector('.poll')?.getAttribute('aria-busy')).toBe(
       'true',
     );
+  });
+
+  it('uses the default legend, not the question, for a single choice poll', () => {
+    const { getByRole } = setup({ title: 'Do you like polls?' }, entry(open));
+    expect(getByRole('group', { name: 'Select one option' })).toBeTruthy();
+  });
+
+  it('offers checkboxes under the legend of a multiple choice poll', () => {
+    const notVoted = {
+      ...multiple,
+      has_voted: false,
+      total_votes: null,
+      results: null,
+    };
+    const { getByRole, getAllByRole } = setup({}, entry(notVoted));
+    expect(getByRole('group', { name: multiple.legend })).toBeTruthy();
+    expect(getAllByRole('checkbox')).toHaveLength(3);
+  });
+
+  it('votes for every option checked', () => {
+    const notVoted = {
+      ...multiple,
+      shuffle_options: false,
+      has_voted: false,
+      total_votes: null,
+      results: null,
+    };
+    const { getByRole, store } = setup({}, entry(notVoted));
+    fireEvent.click(getByRole('checkbox', { name: 'Red' }));
+    fireEvent.click(getByRole('checkbox', { name: 'Blue' }));
+    fireEvent.click(getByRole('button', { name: 'Vote' }));
+    expect(store.actions).toContainEqual(
+      expect.objectContaining({
+        type: VOTE_POLL,
+        request: expect.objectContaining({ data: { option_ids: [0, 2] } }),
+      }),
+    );
+  });
+
+  describe('shuffled options', () => {
+    const notVoted = {
+      ...multiple,
+      has_voted: false,
+      total_votes: null,
+      results: null,
+    };
+    const labels = (container: HTMLElement) =>
+      Array.from(container.querySelectorAll('.poll-form__option label')).map(
+        (label) => label.textContent,
+      );
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('shows the options in a random order', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0);
+      const { container } = setup({}, entry(notVoted));
+      expect(labels(container)).toEqual(['Green', 'Blue', 'Red']);
+    });
+
+    it('keeps the poll order when the poll does not shuffle', () => {
+      const random = vi.spyOn(Math, 'random').mockReturnValue(0);
+      const { container } = setup(
+        {},
+        entry({ ...notVoted, shuffle_options: false }),
+      );
+      expect(labels(container)).toEqual(['Red', 'Green', 'Blue']);
+      expect(random).not.toHaveBeenCalled();
+    });
+
+    it('still votes for the options checked', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0);
+      const { getByRole, store } = setup({}, entry(notVoted));
+      fireEvent.click(getByRole('checkbox', { name: 'Red' }));
+      fireEvent.click(getByRole('checkbox', { name: 'Blue' }));
+      fireEvent.click(getByRole('button', { name: 'Vote' }));
+      const voted = store.actions.find(
+        (a: { type: string }) => a.type === VOTE_POLL,
+      );
+      expect([...voted.request.data.option_ids].sort()).toEqual([0, 2]);
+    });
+
+    it('keeps the results in the poll order', () => {
+      vi.spyOn(Math, 'random').mockReturnValue(0);
+      const { container } = setup({}, entry(multiple));
+      const rows = Array.from(
+        container.querySelectorAll('table.poll-results-numbers tbody th'),
+      ).map((th) => th.textContent);
+      expect(rows).toEqual(['Red', 'Green', 'Blue']);
+    });
+  });
+
+  it('draws bars when a multiple choice poll asks for a pie', () => {
+    const { container } = setup(
+      {},
+      entry({ ...multiple, results_graph: 'pie' }),
+    );
+    expect(container.querySelector('.poll-results-pie')).toBeNull();
+    expect(container.querySelector('.poll-results-bar')).not.toBeNull();
+  });
+
+  it('keeps the pie of a single choice poll', () => {
+    const { container } = setup(
+      {},
+      entry({ ...openVoted, results_graph: 'pie' }),
+    );
+    expect(container.querySelector('.poll-results-pie')).not.toBeNull();
+  });
+
+  it('shows a multiple choice poll as such until the state arrives', () => {
+    const { getByRole, getAllByRole } = setup({
+      fallbackOptions: multiple.options,
+      fallbackMaxChoices: 2,
+      fallbackLegend: null,
+    });
+    expect(getByRole('group', { name: 'Select up to 2 options' })).toBeTruthy();
+    expect(getAllByRole('checkbox')).toHaveLength(3);
   });
 
   it('says so when the poll cannot be read', () => {

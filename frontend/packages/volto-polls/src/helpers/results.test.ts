@@ -7,12 +7,24 @@ import {
 } from './results';
 import type { PollResult } from '../types/poll';
 
+/** Single choice results: each share is of all the votes. */
 function results(...votes: number[]): PollResult[] {
+  const total = votes.reduce((a, b) => a + b, 0);
   return votes.map((v, i) => ({
     option_id: i,
     description: `Option ${i}`,
     votes: v,
-    percentage: 0,
+    percentage: total ? v / total : 0,
+  }));
+}
+
+/** Multiple choice results: each share is of the voters. */
+function sharesOfVoters(voters: number, ...votes: number[]): PollResult[] {
+  return votes.map((v, i) => ({
+    option_id: i,
+    description: `Option ${i}`,
+    votes: v,
+    percentage: v / voters,
   }));
 }
 
@@ -56,6 +68,15 @@ describe('wholePercents', () => {
 
   it('copes with no options', () => {
     expect(wholePercents([])).toEqual([]);
+  });
+
+  it('rounds shares of voters on their own, past 100 in total', () => {
+    // Three voters, two of them picked option 0 and option 2.
+    expect(wholePercents(sharesOfVoters(3, 2, 1, 2))).toEqual([67, 33, 67]);
+  });
+
+  it('uses the share the backend reports, not one of its own', () => {
+    expect(wholePercents(sharesOfVoters(2, 2, 2))).toEqual([100, 100]);
   });
 });
 

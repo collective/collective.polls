@@ -28,6 +28,8 @@ export const PollView = ({ content }: PollViewProps) => {
       <PollComponent
         path={pollPath(content['@id'])}
         fallbackOptions={content.options}
+        fallbackMaxChoices={content.max_choices}
+        fallbackLegend={content.legend}
       />
     </>
   );
