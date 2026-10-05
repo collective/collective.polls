@@ -22,7 +22,8 @@ class TestPollFTI:
             ("schema", "collective.polls.content.poll.IPoll"),
             ("add_permission", "collective.polls.AddPoll"),
             ("global_allow", True),
-            ("filter_content_types", False),
+            ("filter_content_types", True),
+            ("allowed_content_types", ("Image",)),
             ("allow_discussion", False),
             ("icon_expr", ""),
             ("default_view", "view"),
@@ -38,6 +39,7 @@ class TestPollFTI:
         enumerate((
             "plone.basic",
             "plone.namefromtitle",
+            "volto.preview_image_link",
             "plone.shortname",
             "plone.excludefromnavigation",
         )),
@@ -48,7 +50,7 @@ class TestPollFTI:
 
     def test_behaviors_count(self):
         """No other behavior is enabled."""
-        assert len(self.fti.behaviors) == 4
+        assert len(self.fti.behaviors) == 5
 
     def test_schema(self):
         """The FTI points at IPoll."""

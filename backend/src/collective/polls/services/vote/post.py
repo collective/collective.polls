@@ -30,20 +30,30 @@ class VotePost(PollService):
             "error": {"type": kind, "message": translate(message, context=self.request)}
         }
 
-    def _option_id(self) -> int | None:
-        """Read the option id from the request body.
+    def _option_ids(self) -> list[int] | None:
+        """Read the chosen option ids from the request body.
 
-        :returns: The option id, or ``None`` when the body is not a JSON
-            object with an integer ``option_id``.
+        The body holds either ``option_id``, one integer, or ``option_ids``,
+        a non-empty list of integers, as a multiple choice poll needs.
+
+        :returns: The option ids, or ``None`` when the body is not a JSON
+            object with exactly one of those keys, well formed.
         """
         try:
             data = json.loads(self.request.get("BODY") or "")
         except ValueError:
             return None
-        option_id = data.get("option_id") if isinstance(data, dict) else None
-        if isinstance(option_id, bool) or not isinstance(option_id, int):
+        if not isinstance(data, dict) or ("option_id" in data) == (
+            "option_ids" in data
+        ):
             return None
-        return option_id
+        chosen = data["option_ids"] if "option_ids" in data else [data["option_id"]]
+        if not isinstance(chosen, list) or not chosen:
+            return None
+        for option_id in chosen:
+            if isinstance(option_id, bool) or not isinstance(option_id, int):
+                return None
+        return chosen
 
     def reply(self) -> PollStateDict | dict[str, Any]:
         """Record a vote and answer the new state of the poll.
@@ -59,19 +69,33 @@ class VotePost(PollService):
         # checked at all.
         alsoProvides(self.request, IDisableCSRFProtection)
         self.request.response.setHeader("Cache-Control", PRIVATE_CACHE_CONTROL)
-        option_id = self._option_id()
-        if option_id is None:
+        option_ids = self._option_ids()
+        if option_ids is None:
             return self._error(
                 400,
                 "BadRequest",
-                _("The request body must be a JSON object with an integer option_id."),
+                _(
+                    "The request body must be a JSON object with an integer "
+                    "option_id or a list of integers option_ids."
+                ),
             )
         try:
-            voted = self.context.setVote(option_id, self.request)
+            voted = self.context.setVote(option_ids, self.request)
         except AlreadyVoted:
             return self._error(
                 403, "AlreadyVoted", _("You already voted in this poll.")
             )
         if not voted:
-            return self._error(400, "BadRequest", _("This poll has no such option."))
+            if not self.context.multiple_choice:
+                return self._error(
+                    400, "BadRequest", _("This poll has no such option.")
+                )
+            return self._error(
+                400,
+                "BadRequest",
+                _(
+                    "Pick from 1 to ${count} of this poll's options, each once.",
+                    mapping={"count": self.context.max_choices},
+                ),
+            )
         return self.poll_state(has_voted=True)

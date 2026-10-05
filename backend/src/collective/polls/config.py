@@ -20,3 +20,9 @@ ANONYMOUS_PREFIX = "Anonymous-"
 
 #: Annotation key holding the votes of a poll.
 VOTES_ANNO_KEY = "collective.polls.votes"
+
+#: Key holding a closed poll's votes in a plone.exportimport export.
+EXPORT_VOTES_KEY = "collective.polls.votes"
+
+#: Review state whose votes plone.exportimport exports.
+EXPORT_VOTES_STATE = "closed"

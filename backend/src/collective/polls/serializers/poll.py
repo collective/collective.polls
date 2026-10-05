@@ -61,10 +61,11 @@ def build_results(poll: Poll) -> list[PollResultDict]:
 
     :param poll: The poll.
     :returns: One entry per option, with a fraction of ``0.0`` for every
-        option while nobody voted.
+        option while nobody voted. The fraction is of the poll's
+        ``total_votes``: in a multiple choice poll, the share of voters.
     """
     counts = IPollVotes(poll).counts()
-    total = sum(counts.values())
+    total = poll.total_votes
     return [
         {
             "option_id": option["option_id"],
@@ -123,8 +124,11 @@ class PollStateSerializer:
             "show_results": bool(poll.show_results),
             "results_graph": poll.results_graph,
             "options": poll.getOptions(),
+            "max_choices": poll.max_choices or 1,
+            "legend": poll.legend or None,
+            "shuffle_options": bool(poll.shuffle_options),
             "can_vote": bool(api.user.has_permission(PERMISSION_VOTE, obj=poll)),
             "has_voted": has_voted,
-            "total_votes": IPollVotes(poll).total() if visible else None,
+            "total_votes": poll.total_votes if visible else None,
             "results": build_results(poll) if visible else None,
         }

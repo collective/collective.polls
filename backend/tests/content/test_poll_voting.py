@@ -108,11 +108,18 @@ class TestVoting:
         with pytest.raises(Unauthorized):
             self.p1.setVote(2)
 
-    @pytest.mark.parametrize("option", [5, -1, None, "1", [1]])
+    @pytest.mark.parametrize(
+        "option", [5, -1, None, "1", True, [], [1, 1], [1, 2], [5]], ids=repr
+    )
     def test_invalid_option(self, option):
+        """``[1, 2]`` is one option too many: polls are single choice by default."""
         assert self.p2.setVote(option) is False
         assert self.p2.total_votes == 0
         assert self.p2.voters() == []
+
+    def test_list_of_one(self):
+        assert self.p2.setVote([1]) is True
+        assert self.p2.getResults()[1][1] == 1
 
     def test_anonymous_closed_poll(self):
         logout()
@@ -202,3 +209,40 @@ class TestVoting:
         last_modified = poll.modified()
         poll.setVote(0, self.request)
         assert poll.modified() > last_modified
+
+
+class TestMultipleChoice:
+    @pytest.fixture(autouse=True)
+    def _setup(self, portal, polls, http_request) -> None:
+        self.request = http_request
+        self.poll = polls["p3"]
+        self.poll.max_choices = 2
+
+    def test_multiple_choice(self):
+        assert self.poll.multiple_choice is True
+
+    def test_vote_two(self):
+        assert self.poll.setVote([0, 2], self.request) is True
+        assert self.poll.total_votes == 1
+        assert self.poll.getResults() == [
+            ("Option 1", 1, 1.0),
+            ("Option 2", 0, 0.0),
+            ("Option 3", 1, 1.0),
+        ]
+
+    def test_share_of_voters(self):
+        """Fractions are of voters, so they can add up past 1."""
+        self.poll.setVote([0, 2], self.request)
+        logout()
+        self.poll.setVote([0], self.request)
+        assert self.poll.total_votes == 2
+        assert [fraction for _, _, fraction in self.poll.getResults()] == [
+            1.0,
+            0.0,
+            0.5,
+        ]
+
+    @pytest.mark.parametrize("option", [[0, 1, 2], [0, 0], [], [0, 9]], ids=repr)
+    def test_invalid(self, option):
+        assert self.poll.setVote(option, self.request) is False
+        assert self.poll.voters() == []

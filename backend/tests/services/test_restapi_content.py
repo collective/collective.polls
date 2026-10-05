@@ -1,8 +1,14 @@
 """Polls created and edited through ``plone.restapi``'s own content API."""
 
+from . import EXPORT_VOTES_KEY
 from . import PORTAL_TYPE
+from collective.polls.interfaces import IPollVotes
 
 import pytest
+
+
+#: Votes as plone.exportimport would write them.
+VOTES_PAYLOAD = {"counts": {"0": 5, "1": 2}, "voters": ["member", "voter"]}
 
 
 class TestCreate:
@@ -94,6 +100,48 @@ class TestEdit:
         )
         assert response.status_code == 401
         assert len(self.reload(poll).options) == 2
+
+
+class TestVotesStayOutOfTheContentAPI:
+    """Only plone.exportimport carries votes; the content API never does."""
+
+    @pytest.fixture(autouse=True)
+    def _setup(self, make_poll, session_for, reload) -> None:
+        self.make_poll = make_poll
+        self.session = session_for("manager")
+        self.reload = reload
+
+    def test_get_closed_poll(self):
+        self.make_poll(state="closed", voters={"member": 0, "voter": 1})
+        response = self.session.get("polls/poll")
+        assert response.status_code == 200
+        assert EXPORT_VOTES_KEY not in response.json()
+
+    def test_create_ignores_votes(self):
+        response = self.session.post(
+            "polls",
+            json={
+                "@type": PORTAL_TYPE,
+                "title": "A poll",
+                "options": [{"description": "Yes"}, {"description": "No"}],
+                EXPORT_VOTES_KEY: VOTES_PAYLOAD,
+            },
+        )
+        assert response.status_code == 201, response.text
+        votes = IPollVotes(self.reload("polls/a-poll"))
+        assert votes.stored() == {}
+        assert votes.voters() == []
+
+    def test_edit_ignores_votes(self):
+        poll = self.make_poll(state="private")
+        response = self.session.patch(
+            "polls/poll", json={"title": "Edited", EXPORT_VOTES_KEY: VOTES_PAYLOAD}
+        )
+        assert response.status_code == 204, response.text
+        poll = self.reload(poll)
+        assert poll.title == "Edited"
+        assert IPollVotes(poll).stored() == {}
+        assert IPollVotes(poll).voters() == []
 
 
 def test_types_widget(session_for):

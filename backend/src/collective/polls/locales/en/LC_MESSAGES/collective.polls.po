@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-10-05 03:25+0000\n"
+"POT-Creation-Date: 2026-10-05 17:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,19 +15,23 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: collective/polls/content/poll.py:86
+msgid "1 makes a single choice poll. More than 1 lets voters pick up to that many options."
+msgstr ""
+
 #: collective/polls/profiles/default/types/collective.polls.poll.xml
 msgid "A poll"
 msgstr ""
 
-#: collective/polls/content/poll.py:53
+#: collective/polls/content/poll.py:75
 msgid "Allow anonymous"
 msgstr ""
 
-#: collective/polls/content/poll.py:54
+#: collective/polls/content/poll.py:76
 msgid "Allow not logged in users to vote. The parent folder of this poll should be published before opening the poll for this field to take effect"
 msgstr ""
 
-#: collective/polls/content/poll.py:77
+#: collective/polls/content/poll.py:119
 msgid "Available options"
 msgstr ""
 
@@ -43,16 +47,24 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: collective/polls/content/poll.py:70
+#: collective/polls/content/poll.py:112
 msgid "Format to show the results."
 msgstr ""
 
-#: collective/polls/content/poll.py:69
+#: collective/polls/content/poll.py:111
 msgid "Graph"
 msgstr ""
 
-#: collective/polls/content/poll.py:38
+#: collective/polls/content/poll.py:96
+msgid "Legend"
+msgstr ""
+
+#: collective/polls/content/poll.py:39
 msgid "Not enough options provided"
+msgstr ""
+
+#: collective/polls/content/poll.py:85
+msgid "Number of options a voter can pick"
 msgstr ""
 
 #: collective/polls/vocabularies/results_graph.py:14
@@ -61,6 +73,10 @@ msgstr ""
 
 #: collective/polls/profiles.zcml:13
 msgid "Online polls support for Plone and Volto."
+msgstr ""
+
+#: collective/polls/services/vote/post.py:96
+msgid "Pick from 1 to ${count} of this poll's options, each once."
 msgstr ""
 
 #: collective/polls/vocabularies/results_graph.py:13
@@ -83,23 +99,39 @@ msgstr ""
 msgid "Polls for Plone: Uninstall"
 msgstr ""
 
-#: collective/polls/content/poll.py:63
+#: collective/polls/content/poll.py:70
+msgid "Results"
+msgstr ""
+
+#: collective/polls/content/poll.py:105
 msgid "Show partial results"
 msgstr ""
 
-#: collective/polls/content/poll.py:64
+#: collective/polls/content/poll.py:106
 msgid "Show partial results after a voter has already voted."
 msgstr ""
 
-#: collective/polls/services/vote/post.py:67
-msgid "The request body must be a JSON object with an integer option_id."
+#: collective/polls/content/poll.py:128
+msgid "Show the options in a random order to each voter, so their position does not favor any of them."
 msgstr ""
 
-#: collective/polls/services/vote/post.py:76
+#: collective/polls/content/poll.py:97
+msgid "Shown above the options. Leave empty for \"Select one option\" or \"Select up to N options\"."
+msgstr ""
+
+#: collective/polls/content/poll.py:127
+msgid "Shuffle options"
+msgstr ""
+
+#: collective/polls/services/vote/post.py:77
+msgid "The request body must be a JSON object with an integer option_id or a list of integers option_ids."
+msgstr ""
+
+#: collective/polls/services/vote/post.py:91
 msgid "This poll has no such option."
 msgstr ""
 
-#: collective/polls/content/poll.py:99
+#: collective/polls/content/poll.py:150
 msgid "Two options cannot share an id."
 msgstr ""
 
@@ -111,10 +143,18 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: collective/polls/services/vote/post.py:73
+#: collective/polls/content/poll.py:162
+msgid "Voters cannot pick more options than the poll has."
+msgstr ""
+
+#: collective/polls/content/poll.py:59
+msgid "Voting"
+msgstr ""
+
+#: collective/polls/services/vote/post.py:86
 msgid "You already voted in this poll."
 msgstr ""
 
-#: collective/polls/content/poll.py:94
+#: collective/polls/content/poll.py:145
 msgid "You need to provide at least two options for a poll."
 msgstr ""

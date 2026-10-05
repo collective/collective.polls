@@ -14,9 +14,10 @@ from collective.polls.options import normalize_options
 from collective.polls.options import OPTIONS_SCHEMA
 from collective.polls.utility import IPolls
 from plone import api
-from plone.dexterity.content import Item
+from plone.dexterity.content import Container
 from plone.schema import JSONField
 from plone.supermodel import model
+from plone.supermodel.directives import fieldset
 from typing import Any
 from typing import TYPE_CHECKING
 from zope import schema
@@ -46,8 +47,29 @@ class DuplicateOptions(Invalid):
     """Two options of a poll share an id."""
 
 
+class TooManyChoices(Invalid):
+    """A poll lets voters pick more options than it has."""
+
+
 class IPoll(model.Schema):
     """A Poll in a Plone site."""
+
+    fieldset(
+        "voting",
+        label=_("Voting"),
+        fields=[
+            "allow_anonymous",
+            "max_choices",
+            "legend",
+            "options",
+            "shuffle_options",
+        ],
+    )
+    fieldset(
+        "results",
+        label=_("Results"),
+        fields=["show_results", "results_graph"],
+    )
 
     allow_anonymous = schema.Bool(
         title=_("Allow anonymous"),
@@ -57,6 +79,26 @@ class IPoll(model.Schema):
             "the poll for this field to take effect"
         ),
         default=True,
+    )
+
+    max_choices = schema.Int(
+        title=_("Number of options a voter can pick"),
+        description=_(
+            "1 makes a single choice poll. More than 1 lets voters pick up to "
+            "that many options."
+        ),
+        default=1,
+        min=1,
+        required=True,
+    )
+
+    legend = schema.TextLine(
+        title=_("Legend"),
+        description=_(
+            "Shown above the options. Leave empty for "
+            '"Select one option" or "Select up to N options".'
+        ),
+        required=False,
     )
 
     show_results = schema.Bool(
@@ -81,6 +123,15 @@ class IPoll(model.Schema):
         required=True,
     )
 
+    shuffle_options = schema.Bool(
+        title=_("Shuffle options"),
+        description=_(
+            "Show the options in a random order to each voter, so their "
+            "position does not favor any of them."
+        ),
+        default=False,
+    )
+
     @invariant
     def validate_options(data: Any) -> None:
         """Require at least two options, with distinct ids.
@@ -98,11 +149,24 @@ class IPoll(model.Schema):
         except DuplicateOptionId:
             raise DuplicateOptions(_("Two options cannot share an id.")) from None
 
+    @invariant
+    def validate_max_choices(data: Any) -> None:
+        """Keep the number of options a voter can pick within the options.
+
+        :param data: The object or form data being validated.
+        :raises TooManyChoices: When it exceeds the number of options.
+        """
+        max_choices = getattr(data, "max_choices", None) or 1
+        if max_choices > len(data.options or []):
+            raise TooManyChoices(
+                _("Voters cannot pick more options than the poll has.")
+            )
+
 
 # IPoll extends plone.supermodel's model.Schema; mypy-zope does not recognize
 # the class plone-stubs declares for it as an interface.
 @implementer(IPoll)  # type: ignore[misc]
-class Poll(Item):
+class Poll(Container):
     """A Poll in a Plone site."""
 
     # Declaring the vote permission on the class is what makes it a valid
@@ -117,14 +181,21 @@ class Poll(Item):
         """
         return self.options or []
 
+    @property
+    def multiple_choice(self) -> bool:
+        """Whether a voter can pick more than one option."""
+        return (self.max_choices or 1) > 1
+
     def getResults(self) -> list[tuple[str, int, float]]:
         """Return the results so far.
 
         :returns: ``(description, votes, fraction)`` per option, in option
-            order; an empty list while nobody voted.
+            order; an empty list while nobody voted. The fraction is of
+            :attr:`total_votes`, so in a multiple choice poll it is the share
+            of voters who picked the option.
         """
         counts = IPollVotes(self).counts()
-        total = sum(counts.values())
+        total = self.total_votes
         if total == 0:
             return []
         return [
@@ -146,8 +217,32 @@ class Poll(Item):
 
     @property
     def total_votes(self) -> int:
-        """Number of votes so far."""
-        return IPollVotes(self).total()
+        """Number of votes so far: one per voter, whatever they picked.
+
+        A single choice poll counts the votes for its current options; a
+        multiple choice poll counts its voters, since one voter adds a vote
+        to several options.
+        """
+        votes = IPollVotes(self)
+        return votes.voter_count() if self.multiple_choice else votes.total()
+
+    def _chosen(self, option: Any) -> list[int] | None:
+        """Read the options a vote picks.
+
+        :param option: One option id, or a list of them.
+        :returns: The ids, in the order given; ``None`` unless they are 1 to
+            ``max_choices`` distinct ids of this poll's options.
+        """
+        chosen = option if isinstance(option, list | tuple) else [option]
+        valid = {o["option_id"] for o in self.getOptions()}
+        if not chosen or len(chosen) > (self.max_choices or 1):
+            return None
+        for option_id in chosen:
+            if isinstance(option_id, bool) or option_id not in valid:
+                return None
+        if len(set(chosen)) != len(chosen):
+            return None
+        return list(chosen)
 
     def _anonymous_voter(self, request: Any) -> str:
         """Give an anonymous voter a random id, sent back in a cookie.
@@ -176,19 +271,20 @@ class Poll(Item):
     def setVote(self, option: Any = None, request: HTTPRequest | None = None) -> bool:
         """Vote in this poll as the current user.
 
-        :param option: Id of the option voted for.
+        :param option: Id of the option voted for, or a list of 1 to
+            ``max_choices`` distinct ids.
         :param request: Request carrying, and receiving, the anonymous cookie.
         :returns: ``True`` when the vote was counted; ``False`` for anything
-            that is not the id of one of the options.
+            that is not such an id or list of ids.
         :raises Unauthorized: Without the vote permission.
         :raises AlreadyVoted: When the caller already voted, or is anonymous
             and there is no request to tell by.
         """
         getUtility(IPolls, name="collective.polls").allowed_to_vote(self, request)
-        option_ids = [o["option_id"] for o in self.getOptions()]
-        if isinstance(option, bool) or option not in option_ids:
+        chosen = self._chosen(option)
+        if chosen is None:
             return False
         voter_id = api.user.get_current().getId() or self._anonymous_voter(request)
-        IPollVotes(self).register(option, voter_id)
+        IPollVotes(self).register(chosen, voter_id)
         notify(ObjectModifiedEvent(self))
         return True

@@ -6,6 +6,8 @@ keeps the two halves from drifting apart.
 
 from . import EXAMPLES
 from . import SCHEMA
+from . import THREE_OPTIONS
+from copy import deepcopy
 
 import json
 import jsonschema
@@ -32,6 +34,17 @@ SCENARIOS = {
     "no-votes": ("anonymous", {}),
     "closed": ("anonymous", {"state": "closed", "voters": VOTERS}),
     "private": ("manager", {"state": "private"}),
+    # Three voters, five votes: percentages are shares of voters.
+    "open-multiple": (
+        "voter",
+        {
+            "options": THREE_OPTIONS,
+            "max_choices": 2,
+            "legend": "Pick your favourite colours",
+            "shuffle_options": True,
+            "voters": {"someone": [0, 2], "someone-else": [0], "voter": [1, 2]},
+        },
+    ),
 }
 
 
@@ -52,7 +65,7 @@ def test_valid(name):
 def test_real(name, make_poll, session_for):
     username, kwargs = SCENARIOS[name]
     container = kwargs.get("container", "polls")
-    make_poll(**kwargs)
+    make_poll(**deepcopy(kwargs))
     response = session_for(username).get(f"{container}/poll/@poll")
     assert response.status_code == 200, response.text
     real = {k: v for k, v in response.json().items() if k not in VOLATILE}
@@ -68,8 +81,20 @@ def test_real(name, make_poll, session_for):
         {"total_votes": None},
         {"has_voted": "no"},
         {"extra": 1},
+        {"max_choices": 0},
+        {"legend": ""},
+        {"shuffle_options": None},
     ],
-    ids=["state", "result-keys", "total-without-results", "has-voted", "extra"],
+    ids=[
+        "state",
+        "result-keys",
+        "total-without-results",
+        "has-voted",
+        "extra",
+        "max-choices",
+        "empty-legend",
+        "shuffle-null",
+    ],
 )
 def test_schema_rejects(change):
     """Control: the schema can fail."""

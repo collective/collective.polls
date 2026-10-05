@@ -38,7 +38,8 @@ class PollResultDict(TypedDict):
     option_id: int
     description: str
     votes: int
-    #: Share of the votes, a fraction in ``[0, 1]``; ``0.0`` with no votes.
+    #: Share of ``total_votes``, a fraction in ``[0, 1]``; ``0.0`` with no
+    #: votes. In a multiple choice poll, the share of voters who picked it.
     percentage: float
 
 
@@ -54,6 +55,9 @@ PollStateDict = TypedDict(
         "show_results": bool,
         "results_graph": str,
         "options": list[PollOptionDict],
+        "max_choices": int,
+        "legend": str | None,
+        "shuffle_options": bool,
         "can_vote": bool,
         "has_voted": bool | None,
         "total_votes": int | None,
@@ -100,15 +104,28 @@ class IPollVotes(Interface):
     def has_voter(voter_id: str) -> bool:
         """Check whether a voter id already voted."""
 
-    def register(option_id: int, voter_id: str) -> None:
-        """Record one vote for an option.
+    def voter_count() -> int:
+        """Number of people who voted."""
 
-        Raises ``ValueError`` for an option id the poll does not have, and
-        ``AlreadyVoted`` for a voter id that already voted.
+    def register(option_id: int | Iterable[int], voter_id: str) -> None:
+        """Record one voter's vote, for one option or several.
+
+        Raises ``ValueError`` for an option id the poll does not have, a
+        repeated id or no id at all, and ``AlreadyVoted`` for a voter id that
+        already voted.
         """
 
     def clear() -> None:
         """Remove the votes of the current options, and every voter."""
+
+    def stored() -> dict[int, int]:
+        """Every vote recorded, for current and removed options, no zeros."""
+
+    def replace(counts: dict[int, int], voters: Iterable[str]) -> None:
+        """Drop every recorded vote and store these ones, as an import does.
+
+        Nothing is validated: the votes were valid where they came from.
+        """
 
     def merge(counts: dict[int, int], voters: Iterable[str]) -> None:
         """Add votes in bulk, as a migration or an import does.

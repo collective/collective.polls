@@ -16,6 +16,9 @@
       "description": "No"
     }
   ],
+  "max_choices": 1,
+  "legend": null,
+  "shuffle_options": false,
   "can_vote": false,
   "has_voted": false,
   "total_votes": 0,

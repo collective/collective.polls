@@ -2,7 +2,9 @@ from . import PORTAL_TYPE
 from collective.polls.content.poll import InsufficientOptions
 from collective.polls.content.poll import InsuficientOptions
 from collective.polls.content.poll import IPoll
+from collective.polls.content.poll import TooManyChoices
 from plone import api
+from plone.supermodel.interfaces import FIELDSETS_KEY
 from types import SimpleNamespace
 
 import pytest
@@ -25,6 +27,9 @@ class TestPollSchema:
             ("show_results", True),
             ("results_graph", "bar"),
             ("options", []),
+            ("max_choices", 1),
+            ("legend", None),
+            ("shuffle_options", False),
         ],
     )
     def test_default_values(self, field: str, value):
@@ -63,3 +68,42 @@ class TestPollInvariant:
             ]
         )
         assert IPoll.validateInvariants(data) is None
+
+
+TWO_OPTIONS = [
+    {"option_id": 0, "description": "Foo"},
+    {"option_id": 1, "description": "Bar"},
+]
+
+
+class TestMaxChoicesInvariant:
+    @pytest.mark.parametrize("max_choices", [None, 1, 2])
+    def test_within_options(self, max_choices):
+        data = SimpleNamespace(options=TWO_OPTIONS, max_choices=max_choices)
+        assert IPoll.validateInvariants(data) is None
+
+    def test_more_than_options(self):
+        data = SimpleNamespace(options=TWO_OPTIONS, max_choices=3)
+        with pytest.raises(TooManyChoices):
+            IPoll.validateInvariants(data)
+
+    def test_missing_attribute(self):
+        """Polls saved before the field existed validate as single choice."""
+        assert IPoll.validateInvariants(SimpleNamespace(options=TWO_OPTIONS)) is None
+
+
+class TestFieldsets:
+    def test_fieldsets(self):
+        fieldsets = {
+            fs.__name__: fs.fields for fs in IPoll.queryTaggedValue(FIELDSETS_KEY)
+        }
+        assert fieldsets == {
+            "voting": [
+                "allow_anonymous",
+                "max_choices",
+                "legend",
+                "options",
+                "shuffle_options",
+            ],
+            "results": ["show_results", "results_graph"],
+        }

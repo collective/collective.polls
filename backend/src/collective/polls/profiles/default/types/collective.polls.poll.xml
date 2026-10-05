@@ -19,8 +19,10 @@
   <property name="link_target" />
 
   <!-- Hierarchy control -->
-  <property name="allowed_content_types" />
-  <property name="filter_content_types">False</property>
+  <property name="allowed_content_types">
+    <element value="Image" />
+  </property>
+  <property name="filter_content_types">True</property>
   <property name="global_allow">True</property>
 
   <!-- Schema, class and security -->
@@ -36,6 +38,7 @@
   >
     <element value="plone.basic" />
     <element value="plone.namefromtitle" />
+    <element value="volto.preview_image_link" />
     <element value="plone.shortname" />
     <element value="plone.excludefromnavigation" />
   </property>

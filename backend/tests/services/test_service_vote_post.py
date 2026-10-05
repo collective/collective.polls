@@ -1,8 +1,10 @@
 """``POST @vote``: every outcome of the contract, and what it writes."""
 
 from . import COOKIE_KEY
+from . import THREE_OPTIONS
 from collective.polls.config import COOKIE_MAX_AGE
 from collective.polls.interfaces import IPollVotes
+from copy import deepcopy
 from plone import api
 
 import pytest
@@ -79,6 +81,48 @@ class TestVote:
         assert self.vote("member", {"option_id": 0}).ok
         assert self.reload(self.poll).modified() > before
 
+    def test_list_of_one(self):
+        """``option_ids`` works for a single choice poll too."""
+        response = self.vote("member", {"option_ids": [1]})
+        assert response.status_code == 200, response.text
+        assert IPollVotes(self.reload(self.poll)).counts() == {0: 0, 1: 1}
+
+
+class TestMultipleChoice:
+    @pytest.fixture(autouse=True)
+    def _setup(self, make_poll, session_for, validate, reload) -> None:
+        self.poll = make_poll(options=deepcopy(THREE_OPTIONS), max_choices=2)
+        self.session_for = session_for
+        self.validate = validate
+        self.reload = reload
+
+    def vote(self, username: str, body: object):
+        return self.session_for(username).post("polls/poll/@vote", json=body)
+
+    def test_two_options(self):
+        response = self.vote("member", {"option_ids": [2, 0]})
+        assert response.status_code == 200, response.text
+        data = self.validate(response.json())
+        assert data["max_choices"] == 2
+        assert data["total_votes"] == 1
+        assert [r["votes"] for r in data["results"]] == [1, 0, 1]
+        assert [r["percentage"] for r in data["results"]] == [1.0, 0.0, 1.0]
+        votes = IPollVotes(self.reload(self.poll))
+        assert votes.counts() == {0: 1, 1: 0, 2: 1}
+        assert votes.voters() == ["member"]
+
+    def test_fewer_than_allowed(self):
+        response = self.vote("member", {"option_id": 1})
+        assert response.status_code == 200, response.text
+        assert IPollVotes(self.reload(self.poll)).counts() == {0: 0, 1: 1, 2: 0}
+
+    def test_share_of_voters(self):
+        """Percentages are of voters, so they can add up past 100%."""
+        assert self.vote("member", {"option_ids": [0, 1]}).ok
+        data = self.vote("voter", {"option_ids": [0]}).json()
+        assert data["total_votes"] == 2
+        assert [r["percentage"] for r in data["results"]] == [1.0, 0.5, 0.0]
+
 
 class TestRefused:
     """Every error leaves the poll as it was."""
@@ -109,6 +153,11 @@ class TestRefused:
             {"json": {"option_id": [0]}},
             {"json": [0]},
             {"json": 0},
+            {"json": {"option_ids": []}},
+            {"json": {"option_ids": 0}},
+            {"json": {"option_ids": [0, "1"]}},
+            {"json": {"option_ids": [True]}},
+            {"json": {"option_id": 0, "option_ids": [1]}},
         ],
         ids=[
             "no-body",
@@ -122,6 +171,11 @@ class TestRefused:
             "list-id",
             "list-body",
             "number-body",
+            "ids-empty",
+            "ids-not-list",
+            "ids-string",
+            "ids-bool",
+            "both-keys",
         ],
     )
     def test_bad_body(self, kwargs):
@@ -146,6 +200,36 @@ class TestRefused:
             "message": "This poll has no such option.",
         }
         assert "Set-Cookie" not in response.headers
+        self.assert_untouched(poll)
+
+    @pytest.mark.parametrize(
+        "option_ids", [[0, 1], [0, 0]], ids=["two-of-single", "repeated"]
+    )
+    def test_single_choice_list(self, option_ids):
+        """A single choice poll takes a list of one id, nothing more."""
+        poll = self.make_poll()
+        response = self.session_for("member").post(
+            "polls/poll/@vote", json={"option_ids": option_ids}
+        )
+        assert response.status_code == 400
+        assert response.json()["error"]["message"] == "This poll has no such option."
+        self.assert_untouched(poll)
+
+    @pytest.mark.parametrize(
+        "option_ids",
+        [[0, 1, 2], [0, 0], [0, 9]],
+        ids=["too-many", "repeated", "unknown"],
+    )
+    def test_multiple_choice_refused(self, option_ids):
+        poll = self.make_poll(options=deepcopy(THREE_OPTIONS), max_choices=2)
+        response = self.session_for("member").post(
+            "polls/poll/@vote", json={"option_ids": option_ids}
+        )
+        assert response.status_code == 400
+        assert response.json()["error"] == {
+            "type": "BadRequest",
+            "message": "Pick from 1 to 2 of this poll's options, each once.",
+        }
         self.assert_untouched(poll)
 
     def test_already_voted(self):
@@ -198,7 +282,8 @@ class TestTranslated:
         [
             (
                 {"option_id": "x"},
-                "O corpo da requisição deve ser um objeto JSON com um option_id inteiro.",
+                "O corpo da requisição deve ser um objeto JSON com um option_id "
+                "inteiro ou uma lista de inteiros option_ids.",
             ),
             ({"option_id": 0}, "Você já votou nesta enquete."),
         ],

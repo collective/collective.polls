@@ -71,6 +71,24 @@ class TestRegister:
             self.votes.register(2, "member-a")
         assert self.votes.counts() == {0: 0, 1: 1, 2: 0}
 
+    def test_register_several(self):
+        """One voter, several options: one vote each, one voter."""
+        self.votes.register([2, 0], "member-a")
+        self.votes.register((1,), "member-b")
+        assert self.votes.counts() == {0: 1, 1: 1, 2: 1}
+        assert self.votes.total() == 3
+        assert self.votes.voter_count() == 2
+        assert self.votes.voters() == ["member-a", "member-b"]
+
+    def test_voter_count_without_storage(self):
+        assert self.votes.voter_count() == 0
+
+    @pytest.mark.parametrize("option_ids", [[], [0, 0], [0, 3], [0, True]], ids=str)
+    def test_register_several_refused(self, option_ids):
+        with pytest.raises(ValueError):
+            self.votes.register(option_ids, "member-a")
+        assert IAnnotations(self.poll).get(VOTES_ANNO_KEY) is None
+
     @pytest.mark.parametrize("option_id", [3, -1, "1", None])
     def test_unknown_option(self, option_id):
         with pytest.raises(ValueError):
@@ -137,3 +155,25 @@ class TestOrphansAndClear:
         self.votes.clear()
         self.votes.register(1, "member-a")
         assert self.votes.counts() == {0: 0, 1: 1, 2: 0}
+
+    def test_stored(self):
+        """Every recorded count, orphans included, zeros left out."""
+        self.poll.options = self.poll.options[:2]
+        assert self.votes.stored() == {0: 1, 2: 1}
+
+    def test_stored_after_clear(self):
+        self.votes.clear()
+        assert self.votes.stored() == {}
+
+    def test_replace(self):
+        """Replacing drops everything, orphans included, then stores anew."""
+        self.votes.merge({9: 1}, [])
+        self.votes.replace({1: 3, 8: 2}, ["member-c"])
+        assert self.votes.counts() == {0: 0, 1: 3, 2: 0}
+        assert self.votes.orphans() == {8: 2}
+        assert self.votes.voters() == ["member-c"]
+
+    def test_replace_with_nothing(self):
+        self.votes.replace({}, [])
+        assert IAnnotations(self.poll).get(VOTES_ANNO_KEY) is None
+        assert self.votes.stored() == {}

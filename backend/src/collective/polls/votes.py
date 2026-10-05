@@ -103,24 +103,42 @@ class PollVotes:
         storage = self._storage()
         return storage is not None and voter_id in storage["voters"]
 
-    def register(self, option_id: int, voter_id: str) -> None:
-        """Record one vote for an option.
+    def voter_count(self) -> int:
+        """Number of people who voted.
 
-        :param option_id: Id of one of the poll's options.
+        :returns: How many voter ids are recorded.
+        """
+        storage = self._storage()
+        return len(storage["voters"]) if storage is not None else 0
+
+    def register(self, option_id: int | Iterable[int], voter_id: str) -> None:
+        """Record one voter's vote, for one option or several.
+
+        :param option_id: Id of one of the poll's options, or several
+            distinct ids, each getting one vote.
         :param voter_id: A member id, or ``Anonymous-<id>``.
-        :raises ValueError: For an option id the poll does not have.
+        :raises ValueError: For an option id the poll does not have, a
+            repeated id, or no id at all.
         :raises AlreadyVoted: When the voter already voted.
         """
-        if option_id not in self._option_ids():
-            raise ValueError(f"Unknown option id: {option_id!r}")
+        option_ids = (
+            list(option_id) if isinstance(option_id, list | tuple) else [option_id]
+        )
+        current = self._option_ids()
+        if not option_ids or len(set(option_ids)) != len(option_ids):
+            raise ValueError(f"Invalid option ids: {option_ids!r}")
+        for chosen in option_ids:
+            if isinstance(chosen, bool) or chosen not in current:
+                raise ValueError(f"Unknown option id: {chosen!r}")
         if self.has_voter(voter_id):
             raise AlreadyVoted(voter_id)
         storage = self._create_storage()
         storage["voters"].add(voter_id)
         counts = storage["counts"]
-        if option_id not in counts:
-            counts[option_id] = Length()
-        counts[option_id].change(1)
+        for chosen in option_ids:
+            if chosen not in counts:
+                counts[chosen] = Length()
+            counts[chosen].change(1)
 
     def clear(self) -> None:
         """Remove every voter and the votes of the current options.
@@ -136,6 +154,31 @@ class PollVotes:
         for option_id in self._option_ids():
             if option_id in counts:
                 del counts[option_id]
+
+    def stored(self) -> dict[int, int]:
+        """Every vote recorded, for current options and removed ones alike.
+
+        :returns: Option id to number of votes, without zero counts.
+        """
+        return {
+            option_id: votes
+            for option_id, votes in self._stored_counts().items()
+            if votes
+        }
+
+    def replace(self, counts: dict[int, int], voters: Iterable[str]) -> None:
+        """Drop every recorded vote, then store these ones, as an import does.
+
+        :param counts: Option id to number of votes; ids need not be current
+            options.
+        :param voters: Voter ids.
+        """
+        annotations = IAnnotations(self.context)
+        if VOTES_ANNO_KEY in annotations:
+            del annotations[VOTES_ANNO_KEY]
+        voters = list(voters)
+        if any(counts.values()) or voters:
+            self.merge(counts, voters)
 
     def merge(self, counts: dict[int, int], voters: Iterable[str]) -> None:
         """Add votes in bulk, as a migration or an import does.
