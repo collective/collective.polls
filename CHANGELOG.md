@@ -7,6 +7,75 @@
 -->
 
 <!-- towncrier release notes start -->
+## 3.0.0a1 (2026-10-05)
+
+### Backend
+
+
+#### Breaking
+
+- Changed the `options` field to a JSON field holding `{option_id, description}` objects. Option ids are now stable: they are kept when options are reordered, and new options get the next free id. A poll needs at least two options with distinct ids. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Changed who sees results: everyone once a poll is closed, reviewers always, and people who voted while it is open when the poll shows partial results. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Changed the Python API: anonymous voter ids are random strings, so `IPolls.anonymous_vote_id()` returns a `str`; `Poll.voters()` is sorted; `Poll.setVote(option, request=None)` takes `option`, does not count `True` or `False` as an option, and raises `AlreadyVoted`, a subclass of `Unauthorized`, for a second vote. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Moved votes to a new storage on each poll. Run the upgrade step to profile version 3000 after updating: it moves the votes of every poll, removes vote portlet assignments, lets anonymous visitors vote again in open polls whose permission was reset, and removes the 2.x tile and resource registrations. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Supported Plone 6.2 only, on Python 3.10 to 3.14. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Removed the Classic UI: the poll views, the vote portlet, the collective.cover tile, the options widget and the JavaScript and CSS resources. Polls are shown and voted on in Volto, with the `@plone-collective/volto-polls` add-on. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+
+
+#### Feature
+
+- Completed the Brazilian Portuguese translation. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added the `@poll` and `@vote` REST API services: read the state and results of a poll, and vote in it. Anonymous answers of `@poll` can be cached by a proxy. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Made the poll a container that holds images, and enabled the preview image link behavior on it. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added multiple choice polls: the new "Number of options a user can pick" field lets a voter pick from 1 to that many options, sent to `@vote` as `option_ids`. Results of a multiple choice poll are shares of voters. A new "Legend" field sets the text above the options. The poll form groups its fields in the Voting and Results fieldsets. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added the "Shuffle options" field, so a poll can show its options in random order. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Exported the votes of closed polls with plone.exportimport, and imported them back, so a site keeps its poll results across an export and import. The votes are only written during an import, never through the REST API. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+
+
+#### Bugfix
+
+- Fixed duplicate-vote protection for anonymous visitors: their cookie had a fixed expiry date in 2020. It now lasts one year, with `SameSite=Lax`, and is `Secure` on HTTPS. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+
+
+#### Internal
+
+- Rebuilt the package on the cookieplone monorepo add-on template: hatchling, a native namespace package, type hints checked with mypy, and a pytest suite with full branch coverage. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+
+
+
+### Frontend
+
+
+#### Feature
+
+- Showed the options of a poll that is not open yet, without the vote button. A closed poll still shows its results. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added a Poll block that shows the latest open poll of the site section, or a chosen one, in any page: the voting portlet of 2.x, rebuilt as a block. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Shuffled the options of polls that ask for it, once per page view. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Allowed the Poll block inside a Grid block, and added an icon for the Poll content type. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added a view for polls: voters choose an option and vote, then see the partial or final results as a bar chart, a pie chart or a table. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added multiple choice polls: voters tick up to the number of options the poll allows. The form shows the poll's legend, or "Select one option" / "Select up to n options" when it has none. A multiple choice poll set to a pie chart shows a bar chart, since its shares do not add up to 100%. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added a widget to edit the options of a poll: add, remove and reorder them, keeping the votes of each option. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Added translations into Catalan, Czech, Dutch, Finnish, French, German, Spanish and Traditional Chinese, carried over from 2.x, and a complete Brazilian Portuguese translation. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- The component that displays a poll, and the component that draws each graph type, can be replaced through the component registry, as `Poll` and `PollResultsGraph`. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+
+
+
+### Project
+
+
+#### Internal
+
+- Moved `CONTRIBUTORS.md` to the root of the repository, and made Dependabot pull requests skip the changelog check. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+
+
+#### Documentation
+
+- Published the documentation and the Storybook of the Volto add-on on GitHub Pages, at https://collective.github.io/collective.polls/. @ericof [#139](https://github.com/collective/collective.polls/issues/139)
+- Replaced the documentation logo and favicon with a poll chart icon, and added `make favicon` to rebuild the favicon from the logo. @ericof 
+- Wrote the documentation: a first-poll tutorial; guides to install, upgrade from 2.x, show polls in pages, export and import them, and customize the frontend; reference pages for the content type, workflow, REST API, Poll block, frontend components, Python API, and upgrade steps; and explanations of voting, results, and vote storage. The workflow has a diagram, and screenshots of the example content are captured by `make screenshots`. @ericof 
+
+
+
 
 ## 2.0b2 (never released)
 

@@ -1,6 +1,6 @@
 {
   "name": "@plone-collective/volto-polls",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "Online polls support for Plone and Volto.",
   "main": "src/index.ts",
   "license": "MIT",

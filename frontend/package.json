@@ -1,6 +1,6 @@
 {
   "name": "@plone-collective/volto-polls-dev",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "Online polls support for Plone and Volto.",
   "author": "Franco Pellegrini",
   "homepage": "https://github.com/collective/collective.polls",
