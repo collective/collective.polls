@@ -1,0 +1,47 @@
+{
+  "name": "@plone-collective/volto-polls",
+  "version": "3.0.0-alpha.0",
+  "description": "Online polls support for Plone and Volto.",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react"
+  ],
+  "author": "Franco Pellegrini",
+  "homepage": "https://github.com/collective/collective.polls#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:collective/collective.polls"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
+    "dry-release": "release-it --dry-run",
+    "release": "release-it",
+    "release-major-alpha": "release-it major --preRelease=alpha",
+    "release-alpha": "release-it --preRelease=alpha"
+  },
+  "addons": [],
+  "theme": "",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@plone/registry": "workspace:*",
+    "@plone/scripts": "workspace:*",
+    "@plone/types": "workspace:*",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.7.3",
+    "@testing-library/react": "^16.2.0",
+    "release-it": "^19.0.5",
+    "vitest": "^3.1.2"
+  }
+}

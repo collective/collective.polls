@@ -1,0 +1,16 @@
+{
+    "title": "Polls for Plone",
+    "description": "Online polls support for Plone and Volto.",
+    "project_slug": "collective.polls",
+    "author": "Franco Pellegrini",
+    "email": "frapell@ravvit.net",
+    "use_prerelease_versions": false,
+    "plone_version": "6.2.2",
+    "volto_version": "19.4.1",
+    "python_package_name": "collective.polls",
+    "npm_package_name": "@plone-collective/volto-polls",
+    "github_organization": "collective",
+    "container_registry": "github",
+    "initialize_documentation": true,
+    "__template__": "monorepo_addon"
+}

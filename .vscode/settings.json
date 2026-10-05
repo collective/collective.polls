@@ -1,0 +1,28 @@
+{
+  "eslint.workingDirectories": ["./frontend"],
+  "stylelint.enable": true,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "[css][less][scss]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "ruff.organizeImports": true,
+  "python-envs.workspaceSearchPaths": [
+    "backend/.venv"
+  ],
+  "python.terminal.activateEnvironment": true,
+  "python.testing.pytestArgs": [
+    "backend/tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "[markdown]": {
+    "editor.formatOnSave": false
+  }
+}

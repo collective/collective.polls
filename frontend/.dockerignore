@@ -1,0 +1,6 @@
+*.log
+build
+cache
+cypress
+Dockerfile
+node_modules

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="Plone Workflow Tool"
+        name="portal_workflow"
+>
+  <object meta_type="Workflow"
+          name="poll_workflow"
+  />
+  <bindings>
+    <type type_id="collective.polls.poll">
+      <bound-workflow workflow_id="poll_workflow" />
+    </type>
+  </bindings>
+</object>

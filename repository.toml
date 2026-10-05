@@ -1,0 +1,34 @@
+[repository]
+name = "collective.polls"
+changelog = "CHANGELOG.md"
+version = "version.txt"
+version_format = "semver"
+container_images_prefix = "ghcr.io/collective/collective.polls"
+compose = ["docker-compose.yml"]
+
+[repository.towncrier]
+section = "Project"
+settings = "towncrier.toml"
+
+[backend.package]
+name = "collective.polls"
+path = "backend"
+code_path = "src/collective/polls"
+changelog = "backend/CHANGELOG.md"
+towncrier_settings = "backend/pyproject.toml"
+base_package = "Products.CMFPlone"
+publish = true
+
+[frontend.package]
+name = "@plone-collective/volto-polls"
+path = "frontend/packages/volto-polls"
+code_path = "src"
+changelog = "frontend/packages/volto-polls/CHANGELOG.md"
+towncrier_settings = "frontend/packages/volto-polls/towncrier.toml"
+base_package = "@plone/volto"
+publish = true
+
+[cookieplone]
+template = "monorepo_addon"
+template_version = "99c2201962371b182499a0d71f45ed878da0c33d"
+generated_date = "2026-10-05 01:43:37"

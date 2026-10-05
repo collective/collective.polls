@@ -1,0 +1,22 @@
+name: Documentation
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: true
+        type: string
+      working-directory:
+        required: false
+        type: string
+        default: docs
+
+jobs:
+
+  build:
+    name: "Docs: Build"
+    uses: plone/meta/.github/workflows/docs-build.yml@2.x
+    with:
+      python-version: ${{ inputs.python-version }}
+      working-directory: ${{ inputs.working-directory }}
+      check-vale: true

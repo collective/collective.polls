@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Plone Backend",
+      "type": "debugpy",
+      "request": "launch",
+      "python":"${command:python.interpreterPath}",
+      "program": "${workspaceFolder}/backend/.venv/bin/runwsgi",
+      "args": [
+        "instance/etc/zope.ini"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "justMyCode": false,
+      "subProcess": true
+    }
+  ]
+}

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<portlets>
-  <!-- FIXME: this does not remove any assignments -->
-  <portlet remove="True" addview="collective.polls.VotePortlet" />
-</portlets>

@@ -1,7 +1,0 @@
-<configure xmlns="http://namespaces.zope.org/zope">
-
-  <include package=".v5" />
-  <include package=".v6" />
-  <include package=".v7" />
-
-</configure>

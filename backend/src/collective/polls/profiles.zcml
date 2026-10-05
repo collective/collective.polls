@@ -1,0 +1,41 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.polls"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Polls for Plone: Install"
+      description="Online polls support for Plone and Volto."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="initial"
+      title="Polls for Plone: Example content"
+      description="Create example content to showcase this addon."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/initial"
+      pre_handler=".setuphandlers.initial.create_example_content"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Polls for Plone: Uninstall"
+      description="Uninstall Polls for Plone setup."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <!-- Hide Uninstall Profile-->
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="collective.polls"
+      />
+
+
+  <include package=".upgrades" />
+
+</configure>
