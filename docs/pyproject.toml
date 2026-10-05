@@ -1,16 +1,16 @@
 [project]
-name = "Polls_for_Plone_Documentation"
-description = "Online polls support for Plone and Volto."
+name = "collective-polls-docs"
+description = "A content type, workflow, and Volto block for conducting online polls, for anonymous and logged-in users."
+version = "1.0.0"
 keywords = [
-    "Polls for Plone",
     "documentation",
     "Plone",
+    "polls",
     "Diátaxis",
 ]
-version="1.0.0"
 readme = "README.md"
-requires-python = ">=3.10,<3.14"
-license = { file = "LICENSE" }
+requires-python = "==3.14.*"
+license = "GPL-2.0-only"
 maintainers = [
     { name = "Franco Pellegrini", email = "frapell@ravvit.net" },
 ]
@@ -22,10 +22,11 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+# The backend package is installed so conf.py reads its version from it.
+dependencies = [
+    "collective.polls",
 ]
 
 [dependency-groups]
@@ -33,8 +34,7 @@ dev = [
     "graphviz",
     "linkify-it-py",
     "myst-parser",
-    "plone-sphinx-theme>=1.4.1",  # Use the latest stable version or a minimum
-    "setuptools",  # required by sphinxcontrib.httpexample, remove when it migrates to importlib. See https://github.com/collective/sphinxcontrib-httpexample/issues/106
+    "plone-sphinx-theme",
     "sphinx-autobuild",
     "sphinx-copybutton",
     "sphinx-design",
@@ -46,16 +46,13 @@ dev = [
     "sphinxcontrib-httpdomain",
     "sphinxcontrib-httpexample",
     "sphinxcontrib-mermaid",
-    "sphinxcontrib-video",
-    "sphinxcontrib-youtube",
     "sphinxext-opengraph",
     "vale",
 ]
 
 [project.urls]
-Repository = "https://github.com/collective/pollsforplone"
-Documentation = "https://MY_READTHEDOCS_PROJECT_SLUG.readthedocs.io/"
+Repository = "https://github.com/collective/collective.polls"
+Documentation = "https://collective.github.io/collective.polls/"
 
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+[tool.uv.sources]
+"collective.polls" = { path = "../backend/", editable = true }

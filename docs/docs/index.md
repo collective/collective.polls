@@ -1,52 +1,74 @@
 ---
 myst:
   html_meta:
-    "description": "Online polls support for Plone and Volto."
-    "property=og:description": "Online polls support for Plone and Volto."
-    "property=og:title": "Polls for Plone"
-    "keywords": "Polls for Plone, documentation, Online polls support for Plone and Volto."
+    "description": "A content type, workflow, and Volto block for conducting online polls in Plone, for anonymous and logged-in users."
+    "property=og:description": "A content type, workflow, and Volto block for conducting online polls in Plone, for anonymous and logged-in users."
+    "property=og:title": "collective.polls"
+    "keywords": "Plone, Volto, polls, voting, collective.polls"
 ---
 
-# Polls for Plone
+# collective.polls
 
-Welcome to the documentation for Polls for Plone!
-Online polls support for Plone and Volto.
+A content type, workflow, and Volto block for conducting online polls in Plone, for anonymous and logged-in users.
 
-This scaffold provides a ready-to-use environment for creating comprehensive documentation for {term}`Plone` projects, based on {term}`Plone Sphinx Theme`.
+A poll asks one question with two or more options.
+Editors decide whether visitors pick one option or several, whether anonymous visitors may vote, whether voters see partial results, and how to draw the results.
+The poll moves through its own workflow: it collects votes only while open, and shows its final results once closed.
 
-Built with Markedly Structured Text ({term}`MyST`), this environment supports rich formatting, directives, and extensions tailored for technical documentation.
+## Two add-ons, installed together
 
-It's structured following the [Diátaxis](https://diataxis.fr/) documentation framework.
+| Package | Is | Gives you |
+|---|---|---|
+| `collective.polls` | A Plone backend add-on | The Poll content type and its workflow, vote storage, the `@poll` and `@vote` REST services, and an upgrade step from version 2.x. |
+| `@plone-collective/volto-polls` | A Volto frontend add-on | The poll view, the Poll block, and the widget that edits a poll's options. |
+
+`````{grid} 1 1 2 2
+:gutter: 3
+
+````{grid-item-card} 🚀 Tutorials
+:link: tutorials/index
+:link-type: doc
+
+Learn by doing.
+````
+
+````{grid-item-card} 🧭 How-to guides
+:link: how-to-guides/index
+:link-type: doc
+
+Install the add-ons and get a result.
+````
+
+````{grid-item-card} 📖 Reference
+:link: reference/index
+:link-type: doc
+
+The REST services, settings, and other technical descriptions.
+````
+
+````{grid-item-card} 💡 Concepts
+:link: concepts/index
+:link-type: doc
+
+Why the add-on works the way it does.
+````
+`````
+
+## What you need
+
+| | |
+|---|---|
+| Plone | 6.2 |
+| Python | {SUPPORTED_PYTHON_VERSIONS} |
+| Frontend | Volto 19 |
 
 ```{toctree}
-:caption: How to guides
-:maxdepth: 2
-:hidden: true
-
-how-to-guides/index
-```
-
-```{toctree}
-:caption: Reference
-:maxdepth: 2
-:hidden: true
-
-reference/index
-```
-
-```{toctree}
-:caption: Tutorials
 :maxdepth: 2
 :hidden: true
 
 tutorials/index
-```
-
-```{toctree}
-:caption: Concepts
-:maxdepth: 2
-:hidden: true
-
+how-to-guides/index
+reference/index
 concepts/index
 ```
 

@@ -39,7 +39,10 @@ init: clean clean-python .venv/bin/python  ## Clean docs build directory and Pyt
 
 .PHONY: clean
 clean:  ## Clean docs build directory
-	cd $(DOCS_DIR) && rm -rf $(BUILDDIR)/
+	# Not `cd $(DOCS_DIR) &&` first: BUILDDIR is relative to this Makefile, so
+	# that removed docs/docs/_build, which never exists, and left the real
+	# build in place -- including pages whose source has since been renamed.
+	rm -rf $(BUILDDIR)/
 
 .PHONY: clean-python
 clean-python: clean

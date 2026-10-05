@@ -1,0 +1,81 @@
+name: Storybook
+
+# Fork of plone/meta/.github/workflows/frontend-storybook.yml@2.x. Upstream
+# deploys straight to the gh-pages branch root, which would overwrite the
+# documentation site; this one uploads an artifact instead, and
+# tmp-docs-publish.yml places it under /storybook/ of the published site.
+# The `tmp-` prefix marks it as living here only until plone/meta grows the
+# same capability; keep the diff against upstream small.
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        type: string
+        required: true
+      working-directory:
+        type: string
+        required: false
+        default: '.'
+      artifacts-store:
+        default: false
+        type: boolean
+      artifacts-name-prefix:
+        type: string
+        required: false
+        default: 'storybook-artifacts'
+    outputs:
+      artifacts-name:
+        description: "Name of the uploaded Storybook artifact (only meaningful when artifacts-store: true)"
+        value: ${{ jobs.storybook.outputs.artifacts-name }}
+
+jobs:
+  storybook:
+    name: Storybook
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    outputs:
+      artifacts-name: ${{ steps.artifact-name.outputs.name }}
+
+    steps:
+      - name: Main checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup uv
+        uses: plone/meta/.github/actions/setup_uv@2.x
+        with:
+          working-directory: ${{ inputs.working-directory }}
+
+      - name: Setup codebase
+        uses: plone/meta/.github/actions/setup_frontend@2.x
+        with:
+          node-version: ${{ inputs.node-version }}
+          working-directory: ${{ inputs.working-directory }}
+
+      - name: Generate Storybook
+        shell: bash
+        run: |
+          make storybook-build
+
+      - name: Compute artifact name
+        id: artifact-name
+        shell: bash
+        run: |
+          echo "name=${{ inputs.artifacts-name-prefix }}-${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+
+      - name: Archive storybook artifacts
+        if: ${{ inputs.artifacts-store }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.artifact-name.outputs.name }}
+          path: ${{ inputs.working-directory }}/.storybook-build
+          # `.storybook-build` is a dotfile directory. Without this, the
+          # action's default `include-hidden-files: false` drops every file and
+          # uploads an empty artifact — which fails at deploy time rather than
+          # here, unless `if-no-files-found` catches it first.
+          include-hidden-files: true
+          if-no-files-found: error

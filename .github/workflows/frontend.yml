@@ -18,10 +18,6 @@ on:
       volto-version:
         required: true
         type: string
-      storybook-deploy:
-        required: false
-        type: boolean
-        default: true
       working-directory:
         required: false
         type: string
@@ -49,19 +45,9 @@ jobs:
       node-version: ${{ inputs.node-version }}
       working-directory: ${{ inputs.working-directory }}
 
-  storybook:
-    name: "Storybook"
-    uses: plone/meta/.github/workflows/frontend-storybook.yml@2.x
-    needs:
-      - code-analysis
-      - unit
-      - i18n
-    with:
-      node-version: ${{ inputs.node-version }}
-      working-directory: ${{ inputs.working-directory }}
-      deploy: ${{ inputs.storybook-deploy }}
-    permissions:
-      contents: write
+  # Storybook is not built here. It is built from main.yml, only on the branch
+  # that publishes, because its output is deployed as part of the documentation
+  # site rather than on its own. See tmp-frontend-storybook.yml.
 
   release:
     name: "Frontend: Build and publish container image"
@@ -70,7 +56,6 @@ jobs:
       - code-analysis
       - i18n
       - unit
-      - storybook
     permissions:
       contents: read
       packages: write
@@ -94,7 +79,6 @@ jobs:
       - code-analysis
       - i18n
       - unit
-      - storybook
       - release
     steps:
       - name: Write report
@@ -105,5 +89,4 @@ jobs:
           echo '| code-analysis | ${{ needs.code-analysis.result }} |' >> $GITHUB_STEP_SUMMARY
           echo '| i18n | ${{ needs.i18n.result }} |' >> $GITHUB_STEP_SUMMARY
           echo '| unit | ${{ needs.unit.result }} |' >> $GITHUB_STEP_SUMMARY
-          echo '| storybook | ${{ needs.storybook.result }} |' >> $GITHUB_STEP_SUMMARY
           echo '| release | ${{ needs.release.result }} |' >> $GITHUB_STEP_SUMMARY

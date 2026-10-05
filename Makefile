@@ -51,6 +51,22 @@ debug-settings:  ## Debug settings
 	@echo "IMAGE_NAME_PREFIX_WITH_SEPARATOR: $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)"
 
 ###########################################
+# Docs
+###########################################
+.PHONY: docs-install
+docs-install:  ## Install the documentation toolchain
+	@echo "$(GREEN)==> Install documentation requirements$(RESET)"
+	$(MAKE) -C "./docs/" install
+
+.PHONY: docs-build
+docs-build:  ## Build the documentation, warnings as errors
+	$(MAKE) -C "./docs/" html SPHINXOPTS="-W"
+
+.PHONY: docs-clean
+docs-clean:  ## Remove the documentation build
+	$(MAKE) -C "./docs/" clean
+
+###########################################
 # Frontend
 ###########################################
 .PHONY: frontend-install

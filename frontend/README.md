@@ -1,88 +1,60 @@
-# Polls for Plone (@plone-collective/volto-polls)
+# collective.polls (@plone-collective/volto-polls)
 
-Online polls support for Plone and Volto.
+A content type, workflow, and Volto block for conducting online polls in Plone, for anonymous and logged-in users.
+
+This is the Volto frontend add-on.
+Its Plone backend is [`collective.polls`](https://pypi.org/project/collective.polls/), and a site needs both.
 
 [![npm](https://img.shields.io/npm/v/@plone-collective/volto-polls)](https://www.npmjs.com/package/@plone-collective/volto-polls)
-[![](https://img.shields.io/badge/-Storybook-ff4785?logo=Storybook&logoColor=white&style=flat-square)](https://collective.github.io/volto-polls/)
+[![Documentation](https://img.shields.io/badge/docs-collective.github.io-0083be)](https://collective.github.io/collective.polls/)
 [![CI](https://github.com/collective/collective.polls/actions/workflows/main.yml/badge.svg)](https://github.com/collective/collective.polls/actions/workflows/main.yml)
-
 
 ## Features
 
-<!-- List your awesome features here -->
+- **The poll view.** The view of the `collective.polls.poll` content type: the vote form while the visitor can vote, the results otherwise.
+- **The Poll block.** Shows the latest open poll of the site section, the latest closed one when none is open, or a poll the editor picks. It also works inside a Grid.
+- **Single or multiple choice.** Radio buttons or checkboxes, under the poll's legend or a default one, in the poll's order or a random one.
+- **Results as bars, a pie, or numbers.** Each chart comes with a table for assistive technology.
+- **An options widget.** Editors add, remove, and reorder a poll's options, and each option keeps its id, so its votes stay with it.
+- **Translations** in Catalan, Czech, German, Spanish, Finnish, French, Dutch, Brazilian Portuguese, and Traditional Chinese.
+
+### Customizing
+
+The add-on registers its pieces in the component registry, so a project can replace them without shadowing files.
+
+| Name | Dependencies | Is |
+| --- | --- | --- |
+| `Poll` | -- | The poll itself, used by both the view and the block. |
+| `PollResultsGraph` | `bar`, `pie`, or `numbers` | The chart for one kind of results. |
+
+## Documentation
+
+Read the documentation at [collective.github.io/collective.polls](https://collective.github.io/collective.polls/).
 
 ## Installation
 
-To install your project, you must choose the method appropriate to your version of Volto.
+This add-on requires Volto 19.
 
+Add `@plone-collective/volto-polls` to your project.
 
-### Volto 18 and later
-
-Add `@plone-collective/volto-polls` to your `package.json`.
-
-```json
-"dependencies": {
-    "@plone-collective/volto-polls": "*"
-}
+```shell
+pnpm add @plone-collective/volto-polls
 ```
 
-Add `@plone-collective/volto-polls` to your `volto.config.js`.
+Then list it in the `addons` of your `volto.config.js`.
 
 ```javascript
 const addons = ['@plone-collective/volto-polls'];
 ```
 
-If this package provides a Volto theme, and you want to activate it, then add the following to your `volto.config.js`.
-
-```javascript
-const theme = '@plone-collective/volto-polls';
-```
-
-### Volto 17 and earlier
-
-Create a new Volto project.
-You can skip this step if you already have one.
-
-```
-npm install -g yo @plone/generator-volto
-yo @plone/volto my-volto-project --addon @plone-collective/volto-polls
-cd my-volto-project
-```
-
-Add `@plone-collective/volto-polls` to your `package.json`.
-
-```JSON
-"addons": [
-    "@plone-collective/volto-polls"
-],
-
-"dependencies": {
-    "@plone-collective/volto-polls": "*"
-}
-```
-
-Download and install the new add-on.
-
-```
-yarn install
-```
-
-Start Volto.
-
-```
-yarn start
-```
-
 ## Test installation
 
-Visit http://localhost:3000/ in a browser, login, and check the awesome new features.
-
+Visit http://localhost:3000/ in a browser, log in, and add a Poll.
 
 ## Development
 
 The development of this add-on is done in isolation using pnpm workspaces, the latest `mrs-developer`, and other Volto core improvements.
-For these reasons, it only works with pnpm and Volto 18.
-
+For these reasons, it only works with pnpm and Volto 19.
 
 ### Prerequisites ✅
 
@@ -108,19 +80,9 @@ For these reasons, it only works with pnpm and Volto 18.
     make install
     ```
 
-
 ### Make convenience commands
 
 Run `make help` to list the available Make commands.
-
-
-### Set up development environment
-
-Install package requirements.
-
-```shell
-make install
-```
 
 ### Start developing
 
@@ -152,6 +114,14 @@ Run ESlint, Prettier, and Stylelint in fix mode.
 make format
 ```
 
+### Type check
+
+Run the TypeScript compiler without emitting files.
+
+```shell
+make typecheck
+```
+
 ### i18n
 
 Extract the i18n messages to locales.
@@ -162,10 +132,21 @@ make i18n
 
 ### Unit tests
 
-Run unit tests.
+Run the unit tests once.
 
 ```shell
-make test
+make ci-test
+```
+
+`make test` runs them in watch mode instead, and never returns.
+
+### Storybook
+
+Build Storybook, or start it while you work.
+
+```shell
+make storybook-build
+make storybook-start
 ```
 
 ### Run Cypress tests

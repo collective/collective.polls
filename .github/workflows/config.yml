@@ -63,9 +63,9 @@ on:
       changelog-repository:
         description: "Flag reporting if we should run changelog jobs for the repository"
         value: ${{ jobs.config.outputs.changelog-repository }}
-      storybook-deploy:
-        description: "Whether to deploy storybook or not"
-        value: ${{ jobs.config.outputs.storybook-deploy }}
+      deploy-docs:
+        description: "Whether this repository publishes its documentation site"
+        value: ${{ jobs.config.outputs.deploy-docs }}
 
 jobs:
   config:
@@ -80,7 +80,7 @@ jobs:
       plone-version: ${{ steps.vars.outputs.plone-version }}
       volto-version: ${{ steps.vars.outputs.volto-version }}
       image-name-prefix: ${{ steps.vars.outputs.image-name-prefix }}
-      storybook-deploy: ${{ steps.vars.outputs.storybook-deploy }}
+      deploy-docs: ${{ steps.vars.outputs.deploy-docs }}
       changelog-backend: ${{ steps.filter.outputs.changelog-backend }}
       changelog-frontend: ${{ steps.filter.outputs.changelog-frontend }}
       changelog-repository: ${{ steps.filter.outputs.changelog-repository }}
@@ -113,7 +113,7 @@ jobs:
           echo "path-backend=$(jq -r '.backend.path' <<< "$REPOSITORY_SETTINGS" | sed "s|^${ROOT}/||")" >> "$GITHUB_OUTPUT"
           echo "path-frontend=$(jq -r '.frontend.path' <<< "$REPOSITORY_SETTINGS" | sed "s|^${ROOT}/||")" >> "$GITHUB_OUTPUT"
           echo "path-root=." >> "$GITHUB_OUTPUT"
-          echo "storybook-deploy=${{ github.event.repository.private == false }}" >> $GITHUB_OUTPUT
+          echo "deploy-docs=${{ github.event.repository.private == false }}" >> $GITHUB_OUTPUT
 
       - uses: dorny/paths-filter@v4.0.3
         id: filter
@@ -156,7 +156,7 @@ jobs:
           echo 'path-backend: ${{ steps.vars.outputs.path-backend }}'
           echo 'path-frontend: ${{ steps.vars.outputs.path-frontend }}'
           echo 'path-root: ${{ steps.vars.outputs.path-root }}'
-          echo 'storybook-deploy: ${{ steps.vars.outputs.storybook-deploy }}'
+          echo 'deploy-docs: ${{ steps.vars.outputs.deploy-docs }}'
           echo 'event-name: ${{ github.event_name }}'
           echo 'Paths - acceptance: ${{ steps.filter.outputs.acceptance }}'
           echo 'Paths - backend: ${{ steps.filter.outputs.backend }}'
