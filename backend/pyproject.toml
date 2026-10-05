@@ -34,10 +34,13 @@ classifiers = [
     "Topic :: Office/Business :: News/Diary",
 ]
 dependencies = [
+    "BTrees",
     "Products.CMFPlone>=6.2.0",
     "plone.api",
     "plone.restapi",
+    "plone.schema",
     "plone.volto",
+    "z3c.caching",
 ]
 
 [project.optional-dependencies]
@@ -47,7 +50,9 @@ test = [
     "plone.restapi[test]",
     "pytest",
     "pytest-cov",
-    "pytest-plone>=1.0.0a2",
+    "pytest-plone>=1.1.0",
+    "mypy",
+    "mypy-zope",
 ]
 
 [project.urls]
@@ -151,10 +156,15 @@ lint.select = [
     "UP",
     # ruff
     "RUF",
+    # flake8-annotations: every function in src/ is fully annotated
+    "ANN",
 ]
 lint.ignore = [
     # DoNotAssignLambda
     "E731",
+    # AnyType: Zope and Plone objects (contexts, requests, brains) are
+    # untyped, so `Any` is the honest annotation for them.
+    "ANN401",
 ]
 
 [tool.ruff.lint.isort]
@@ -170,7 +180,12 @@ order-by-type = false
 preview = true
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["E501", "RUF001", "S101"]
+"tests/*" = ["ANN", "E501", "RUF001", "S101"]
+"scripts/*" = ["ANN"]
+# S311: the model-based test draws seeded random sequences for coverage of
+# orderings, not for unpredictability; fixed seeds make them repeat.
+# S106: its test members get an obviously fake password.
+"tests/votes/test_votes_model.py" = ["ANN", "E501", "S101", "S106", "S311"]
 
 [tool.check-manifest]
 ignore = [
@@ -190,3 +205,25 @@ parallel = true
 omit = [
   "src/collective/polls/locales/*.py",
 ]
+
+# Branch coverage, enforced. Every line in src/ is exercised by a test;
+# `make check-pragmas` keeps the few allowed exclusions honest.
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+skip_covered = true
+
+[tool.mypy]
+# plone-stubs uses 3.12 syntax in its stubs; ruff's py310 target keeps
+# this package's own code 3.10-compatible.
+python_version = "3.12"
+files = ["src"]
+# Native namespace: resolve modules as collective.polls.*, not polls.*.
+mypy_path = "src"
+explicit_package_bases = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+# Understands zope.interface declarations (methods without self).
+plugins = ["mypy_zope:plugin"]

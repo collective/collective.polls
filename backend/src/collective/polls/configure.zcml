@@ -19,6 +19,7 @@
   <include package=".controlpanels" />
   <include package=".indexers" />
   <include package=".serializers" />
+  <include package=".subscribers" />
   <include package=".vocabularies" />
 
   <!-- -*- extra stuff goes here -*- -->
@@ -29,17 +30,7 @@
       name="collective.polls"
       />
 
-  <subscriber
-      for=".content.poll.IPoll
-           Products.CMFCore.interfaces.IActionSucceededEvent"
-      handler=".subscribers.fix_permissions"
-      />
-
-  <subscriber
-      for=".content.poll.IPoll
-           Products.CMFCore.interfaces.IActionSucceededEvent"
-      handler=".subscribers.remove_votes"
-      />
+  <adapter factory=".votes.PollVotes" />
 
   <class class=".content.poll.Poll">
     <implements interface="z3c.caching.interfaces.IPurgeable" />

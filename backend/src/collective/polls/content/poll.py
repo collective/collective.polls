@@ -1,36 +1,51 @@
+"""The Poll content type."""
+
+from __future__ import annotations
+
 from collective.polls import _
+from collective.polls.config import ANONYMOUS_PREFIX
 from collective.polls.config import COOKIE_KEY
-from collective.polls.config import MEMBERS_ANNO_KEY
+from collective.polls.config import COOKIE_MAX_AGE
 from collective.polls.config import PERMISSION_VOTE
-from collective.polls.config import VOTE_ANNO_KEY
+from collective.polls.interfaces import IPollVotes
+from collective.polls.interfaces import PollOptionDict
+from collective.polls.options import DuplicateOptionId
+from collective.polls.options import normalize_options
+from collective.polls.options import OPTIONS_SCHEMA
 from collective.polls.utility import IPolls
 from plone import api
 from plone.dexterity.content import Item
+from plone.schema import JSONField
 from plone.supermodel import model
+from typing import Any
+from typing import TYPE_CHECKING
 from zope import schema
-from zope.annotation.interfaces import IAnnotations
-from zope.component import queryUtility
+from zope.component import getUtility
 from zope.event import notify
 from zope.interface import implementer
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.lifecycleevent import ObjectModifiedEvent
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
 
 
-graph_options = SimpleVocabulary([
-    SimpleTerm(value="bar", title=_("Bar Chart")),
-    SimpleTerm(value="pie", title=_("Pie Chart")),
-    SimpleTerm(value="numbers", title=_("Numbers Only")),
-])
+if TYPE_CHECKING:
+    from ZPublisher.HTTPRequest import HTTPRequest
 
 
-class InsuficientOptions(Invalid):
-    __doc__ = _("Not enought options provided")
+class InsufficientOptions(Invalid):
+    """A poll needs at least two options."""
+
+    __doc__ = _("Not enough options provided")
 
 
-# TODO: move to interfaces module
+#: Misspelled name kept for code that imports it.
+InsuficientOptions = InsufficientOptions
+
+
+class DuplicateOptions(Invalid):
+    """Two options of a poll share an id."""
+
+
 class IPoll(model.Schema):
     """A Poll in a Plone site."""
 
@@ -38,17 +53,11 @@ class IPoll(model.Schema):
         title=_("Allow anonymous"),
         description=_(
             "Allow not logged in users to vote. "
-            "The parent folder of this poll should be published before opeining "
+            "The parent folder of this poll should be published before opening "
             "the poll for this field to take effect"
         ),
         default=True,
     )
-
-    # multivalue = schema.Bool(
-    #    title = _(u"Multivalue"),
-    #    description = _(u"Voters can choose several answers at the same "
-    #                     "time."),
-    # )
 
     show_results = schema.Bool(
         title=_("Show partial results"),
@@ -61,134 +70,125 @@ class IPoll(model.Schema):
         description=_("Format to show the results."),
         default="bar",
         required=True,
-        source=graph_options,
+        vocabulary="collective.polls.ResultsGraph",
     )
 
-    options = schema.List(
+    options = JSONField(
         title=_("Available options"),
-        value_type=schema.TextLine(),
-        default=[],
+        schema=OPTIONS_SCHEMA,
+        widget="poll_options",
+        defaultFactory=list,
         required=True,
     )
 
     @invariant
-    def validate_options(data):
-        """Validate options."""
-        options = data.options
-        descriptions = options and list(options)
-        if len(descriptions) < 2:
-            raise InsuficientOptions(
+    def validate_options(data: Any) -> None:
+        """Require at least two options, with distinct ids.
+
+        :param data: The object or form data being validated.
+        :raises InsufficientOptions: With fewer than two options.
+        :raises DuplicateOptions: When two options share an id.
+        """
+        if len(data.options or []) < 2:
+            raise InsufficientOptions(
                 _("You need to provide at least two options for a poll.")
             )
+        try:
+            normalize_options(data.options)
+        except DuplicateOptionId:
+            raise DuplicateOptions(_("Two options cannot share an id.")) from None
 
 
-@implementer(IPoll)
+# IPoll extends plone.supermodel's model.Schema; mypy-zope does not recognize
+# the class plone-stubs declares for it as an interface.
+@implementer(IPoll)  # type: ignore[misc]
 class Poll(Item):
     """A Poll in a Plone site."""
 
-    __ac_permissions__ = ((PERMISSION_VOTE, ("setVote", "_setVoter")),)
+    # Declaring the vote permission on the class is what makes it a valid
+    # permission on a poll: without it, ``manage_permission`` and
+    # ``rolesOfPermission`` reject it, and the workflow cannot map it.
+    __ac_permissions__ = ((PERMISSION_VOTE, ("setVote",)),)
 
-    @property
-    def annotations(self):
-        return IAnnotations(self)
+    def getOptions(self) -> list[PollOptionDict]:
+        """Return the options of this poll.
 
-    @property
-    def utility(self):
-        utility = queryUtility(IPolls, name="collective.polls")
-        return utility
+        :returns: One ``{"option_id": int, "description": str}`` per option.
+        """
+        return self.options or []
 
-    def getOptions(self):
-        """Return available options."""
-        options = self.options
-        return options
+    def getResults(self) -> list[tuple[str, int, float]]:
+        """Return the results so far.
 
-    def _getVotes(self):
-        """Return votes in a dict format."""
-        votes = {"options": [], "total": 0}
-        for option in self.getOptions():
-            index = option.get("option_id")
-            description = option.get("description")
-            option_votes = self.annotations.get(VOTE_ANNO_KEY % index, 0)
-            votes["options"].append({
-                "description": description,
-                "votes": option_votes,
-                "percentage": 0.0,
-            })
-            votes["total"] = votes["total"] + option_votes
-        for option in votes["options"]:
-            if option["votes"]:
-                option["percentage"] = option["votes"] / votes["total"]
-        return votes
-
-    def getResults(self):
-        """Return results so far."""
-        votes = self._getVotes()
-        # Bars show wrong when there are no vote
-        if votes["total"] == 0:
+        :returns: ``(description, votes, fraction)`` per option, in option
+            order; an empty list while nobody voted.
+        """
+        counts = IPollVotes(self).counts()
+        total = sum(counts.values())
+        if total == 0:
             return []
-        all_results = []
-        for item in votes["options"]:
-            all_results.append((item["description"], item["votes"], item["percentage"]))
-        return all_results
+        return [
+            (
+                option["description"],
+                counts[option["option_id"]],
+                counts[option["option_id"]] / total,
+            )
+            for option in self.getOptions()
+        ]
 
-    def _validateVote(self, options=None):
-        """Check if passed options are available here."""
-        available_options = [o["option_id"] for o in self.getOptions()]
-        if isinstance(options, list):
-            # TODO: Allow multiple options
-            # multivalue = self.multivalue
-            return False
-        else:
-            return options in available_options
+    def voters(self) -> list[str]:
+        """Return the ids of everyone who voted.
 
-    def _setVoter(self, request=None):
-        """Mark this user as a voter."""
-        utility = self.utility
-        annotations = self.annotations
-        voters = self.voters()
-        member = utility.member
-        member_id = member.getId()
-        if not member_id and request:
-            cookie = COOKIE_KEY + api.content.get_uuid(self)
-            expires = "Wed, 19 Feb 2020 14:28:00 GMT"  # XXX: why hardcoded?
-            vote_id = str(utility.anonymous_vote_id())
-            request.response[cookie] = vote_id
-            request.response.setCookie(cookie, vote_id, path="/", expires=expires)
-            member_id = "Anonymous-" + vote_id
-
-        if member_id:
-            voters.append(member_id)
-            annotations[MEMBERS_ANNO_KEY] = voters
-            return True
-
-    def voters(self):
-        annotations = self.annotations
-        voters = annotations.get(MEMBERS_ANNO_KEY, [])
-        return voters
+        :returns: Member ids, and ``Anonymous-<id>`` for anonymous voters,
+            sorted.
+        """
+        return IPollVotes(self).voters()
 
     @property
-    def total_votes(self):
-        """Return the number of votes so far."""
-        votes = self._getVotes()
-        return votes["total"]
+    def total_votes(self) -> int:
+        """Number of votes so far."""
+        return IPollVotes(self).total()
 
-    def setVote(self, options=None, request=None):
-        """Set a vote on this poll."""
-        annotations = self.annotations
-        utility = self.utility
-        if not utility.allowed_to_vote(self, request):
+    def _anonymous_voter(self, request: Any) -> str:
+        """Give an anonymous voter a random id, sent back in a cookie.
+
+        The cookie is how the voter is recognized next time. It is readable
+        by scripts on purpose: the browser checks it to know whether the
+        visitor voted, which keeps the poll's own responses cacheable.
+
+        :param request: Request whose response carries the cookie. Never
+            ``None`` here: ``allowed_to_vote`` refuses an anonymous voter
+            without a request, since it cannot tell whether they voted.
+        :returns: The voter id to record.
+        """
+        utility = getUtility(IPolls, name="collective.polls")
+        vote_id = utility.anonymous_vote_id()
+        request.response.setCookie(
+            COOKIE_KEY + api.content.get_uuid(self),
+            vote_id,
+            path="/",
+            max_age=COOKIE_MAX_AGE,
+            same_site="Lax",
+            secure=request.get("SERVER_URL", "").startswith("https://"),
+        )
+        return f"{ANONYMOUS_PREFIX}{vote_id}"
+
+    def setVote(self, option: Any = None, request: HTTPRequest | None = None) -> bool:
+        """Vote in this poll as the current user.
+
+        :param option: Id of the option voted for.
+        :param request: Request carrying, and receiving, the anonymous cookie.
+        :returns: ``True`` when the vote was counted; ``False`` for anything
+            that is not the id of one of the options.
+        :raises Unauthorized: Without the vote permission.
+        :raises AlreadyVoted: When the caller already voted, or is anonymous
+            and there is no request to tell by.
+        """
+        getUtility(IPolls, name="collective.polls").allowed_to_vote(self, request)
+        option_ids = [o["option_id"] for o in self.getOptions()]
+        if isinstance(option, bool) or option not in option_ids:
             return False
-        if not self._validateVote(options):
-            return False
-        if not isinstance(options, list):
-            options = [options]
-        if not self._setVoter(request):
-            # We failed to set voter, so we will not compute its votes
-            return False
-        # set vote in annotation storage
-        for option in options:
-            vote_key = VOTE_ANNO_KEY % option
-            votes = annotations.get(vote_key, 0)
-            annotations[vote_key] = votes + 1
+        voter_id = api.user.get_current().getId() or self._anonymous_voter(request)
+        IPollVotes(self).register(option, voter_id)
         notify(ObjectModifiedEvent(self))
         return True

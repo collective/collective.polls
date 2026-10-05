@@ -1,0 +1,29 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <!-- Options -->
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".options.normalize_poll_options"
+      />
+
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".options.normalize_poll_options"
+      />
+
+  <!-- Workflow -->
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           Products.CMFCore.interfaces.IActionSucceededEvent"
+      handler=".workflow.fix_permissions"
+      />
+
+  <subscriber
+      for="collective.polls.content.poll.IPoll
+           Products.CMFCore.interfaces.IActionSucceededEvent"
+      handler=".workflow.remove_votes"
+      />
+
+</configure>

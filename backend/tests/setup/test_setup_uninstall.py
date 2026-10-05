@@ -5,7 +5,7 @@ import pytest
 
 class TestSetupUninstall:
     @pytest.fixture(autouse=True)
-    def uninstalled(self, installer):
+    def uninstalled(self, portal, installer):
         installer.uninstall_product(PACKAGE_NAME)
 
     def test_addon_uninstalled(self, installer):

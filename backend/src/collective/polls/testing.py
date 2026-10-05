@@ -5,6 +5,8 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.testing.zope import WSGI_SERVER_FIXTURE
+from Products.CMFPlone.Portal import PloneSite
+from zope.configuration.config import ConfigurationMachine
 
 import collective.polls
 
@@ -12,7 +14,9 @@ import collective.polls
 class Layer(PloneSandboxLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
-    def setUpZope(self, app, configurationContext):
+    def setUpZope(
+        self, app: object, configurationContext: ConfigurationMachine
+    ) -> None:
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
@@ -21,7 +25,7 @@ class Layer(PloneSandboxLayer):
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=collective.polls)
 
-    def setUpPloneSite(self, portal):
+    def setUpPloneSite(self, portal: PloneSite) -> None:
         applyProfile(portal, "collective.polls:default")
 
 

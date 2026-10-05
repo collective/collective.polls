@@ -43,7 +43,7 @@ BIN_FOLDER=$(VENV_FOLDER)/bin
 # Environment variables to be exported
 export PYTHONWARNINGS := ignore
 export DOCKER_BUILDKIT := 1
-export PYTHON_VERSION := 3.11
+export PYTHON_VERSION := 3.13
 export PLONE_VERSION := $(shell echo '$(REPOSITORY_SETTINGS)' | jq -r '.backend.base_package_version')
 
 ifdef CI
@@ -75,6 +75,11 @@ requirements-mxdev.txt: pyproject.toml mx.ini ## Generate constraints file
 	@echo "$(GREEN)==> Generate constraints file$(RESET)"
 	@echo '-c https://dist.plone.org/release/$(PLONE_VERSION)/constraints.txt' > requirements.txt
 	@uvx 'mxdev[uv]' -c mx.ini
+	@# plone-stubs is not on PyPI; install from git only on Python >= 3.12.
+	@# The marker has to live here (not in pyproject.toml or mx.ini), since
+	@# uv pip install does not honor [tool.uv.sources] when managed = false,
+	@# and mxdev sections do not support PEP 508 markers per section.
+	@echo "plone-stubs @ git+https://github.com/plone/plone-stubs.git ; python_version >= '3.12'" >> requirements-mxdev.txt
 
 $(VENV_FOLDER): requirements-mxdev.txt ## Install dependencies
 	@echo "$(GREEN)==> Install environment$(RESET)"
@@ -155,6 +160,16 @@ test: $(VENV_FOLDER) ## run tests
 .PHONY: test-coverage
 test-coverage: $(VENV_FOLDER) ## run tests with coverage
 	@$(BIN_FOLDER)/pytest --cov=$(PACKAGE_NAME) --cov-report term-missing
+
+.PHONY: check-pragmas
+check-pragmas: ## Every coverage pragma carries a reason on the same line
+	@echo "$(GREEN)==> Check coverage pragmas$(RESET)"
+	@$(BIN_FOLDER)/python scripts/check_pragmas.py
+
+.PHONY: typecheck
+typecheck: ## Check type annotations with mypy
+	@echo "$(GREEN)==> Type check$(RESET)"
+	@$(BIN_FOLDER)/mypy --config-file $(BACKEND_FOLDER)/pyproject.toml
 
 # Build Docker images
 .PHONY: build-image

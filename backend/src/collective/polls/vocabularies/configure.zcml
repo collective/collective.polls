@@ -1,5 +1,10 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
+  <utility
+      name="collective.polls.ResultsGraph"
+      component=".results_graph.results_graph_vocabulary"
+      />
+
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>
