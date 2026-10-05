@@ -1,0 +1,81 @@
+{
+  "@id": "/all-polls/favorite-ship",
+  "@type": "collective.polls.poll",
+  "UID": "b36771d931244aa591dff3df79238553",
+  "allow_anonymous": true,
+  "allow_discussion": null,
+  "created": "2026-10-05T16:09:37+00:00",
+  "description": "Please, tell us which is your favorite ship",
+  "exclude_from_nav": false,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "favorite-ship",
+  "is_folderish": true,
+  "language": "##DEFAULT##",
+  "layout": "view",
+  "legend": null,
+  "lock": {},
+  "max_choices": 1,
+  "modified": "2026-10-05T16:13:18+00:00",
+  "options": [
+    {
+      "description": "NCC - 1701",
+      "option_id": 0
+    },
+    {
+      "description": "NCC - 1701 - A",
+      "option_id": 1
+    },
+    {
+      "description": "NCC - 1701 - B",
+      "option_id": 2
+    },
+    {
+      "description": "NCC - 1701 - C",
+      "option_id": 3
+    },
+    {
+      "description": "NCC - 1701 - D",
+      "option_id": 4
+    },
+    {
+      "description": "NCC - 1701 - E",
+      "option_id": 5
+    },
+    {
+      "description": "NCC - 1701 - F",
+      "option_id": 6
+    },
+    {
+      "description": "NCC - 1701 - G",
+      "option_id": 7
+    }
+  ],
+  "preview_caption_link": null,
+  "results_graph": "bar",
+  "review_state": "open",
+  "show_results": false,
+  "title": "Favorite Ship",
+  "type_title": "Poll",
+  "version": "current",
+  "workflow_history": {
+    "poll_workflow": [
+      {
+        "action": null,
+        "actor": "admin",
+        "comments": "",
+        "review_state": "private",
+        "time": "2026-10-05T16:09:37+00:00"
+      },
+      {
+        "action": "open",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "open",
+        "time": "2026-10-05T16:13:18+00:00"
+      }
+    ]
+  },
+  "working_copy": null,
+  "working_copy_of": null
+}

@@ -38,6 +38,7 @@
       "ecfe183b-1d44-48f9-8eac-5de33884c7f5"
     ]
   },
+  "changeNote": "",
   "contributors": [],
   "created": "2024-05-27T03:23:26+00:00",
   "creators": [
@@ -49,7 +50,6 @@
   "expires": null,
   "exportimport.constrains": {},
   "exportimport.conversation": [],
-  "exportimport.versions": {},
   "id": "images",
   "is_folderish": true,
   "language": "##DEFAULT##",
@@ -59,22 +59,15 @@
     "stealable": true
   },
   "modified": "2024-05-27T03:26:27+00:00",
-  "parent": {
-    "@id": "/",
-    "@type": "Plone Site",
-    "UID": "plone_site_root",
-    "description": "",
-    "title": "Project Title",
-    "type_title": "Plone Site"
-  },
-  "preview_caption": null,
-  "preview_image": null,
+  "nav_title": null,
+  "preview_caption_link": null,
   "review_state": "published",
   "rights": "",
   "subjects": [],
   "title": "Images",
   "type_title": "Page",
   "version": "current",
+  "versioning_enabled": true,
   "workflow_history": {
     "simple_publication_workflow": [
       {

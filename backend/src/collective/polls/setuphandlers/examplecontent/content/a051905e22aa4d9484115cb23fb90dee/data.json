@@ -1,0 +1,99 @@
+{
+  "@id": "/all-polls/choose-a-captain",
+  "@type": "collective.polls.poll",
+  "UID": "a051905e22aa4d9484115cb23fb90dee",
+  "allow_anonymous": true,
+  "allow_discussion": null,
+  "collective.polls.votes": {
+    "counts": {
+      "0": 2,
+      "1": 1,
+      "3": 1
+    },
+    "voters": [
+      "Anonymous-BpK40OHrGITVYoM1bzh1hw",
+      "Anonymous-K7CJIwGuGWCdmcAV7gkADg",
+      "Anonymous-SR3uK5SSsImBZ2EHPLTfmw",
+      "Anonymous-u_D9RKHqdJnbm72_myHetw"
+    ]
+  },
+  "created": "2026-10-05T15:44:27+00:00",
+  "description": "Which captain would you like to have on your ship?",
+  "exclude_from_nav": false,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "choose-a-captain",
+  "is_folderish": true,
+  "language": "##DEFAULT##",
+  "layout": "view",
+  "legend": null,
+  "lock": {},
+  "max_choices": 1,
+  "modified": "2026-10-05T16:15:11+00:00",
+  "options": [
+    {
+      "description": "Jean Luc Picard",
+      "option_id": 0
+    },
+    {
+      "description": "James T. Kirk",
+      "option_id": 1
+    },
+    {
+      "description": "Jonathan Archer",
+      "option_id": 2
+    },
+    {
+      "description": "Christopher Pike",
+      "option_id": 3
+    }
+  ],
+  "preview_caption_link": null,
+  "results_graph": "pie",
+  "review_state": "closed",
+  "show_results": false,
+  "title": "Choose a Captain",
+  "type_title": "Poll",
+  "version": "current",
+  "workflow_history": {
+    "poll_workflow": [
+      {
+        "action": null,
+        "actor": "admin",
+        "comments": "",
+        "review_state": "private",
+        "time": "2026-10-05T15:44:27+00:00"
+      },
+      {
+        "action": "open",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "open",
+        "time": "2026-10-05T15:44:42+00:00"
+      },
+      {
+        "action": "close",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "closed",
+        "time": "2026-10-05T16:14:30+00:00"
+      },
+      {
+        "action": "open",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "open",
+        "time": "2026-10-05T16:14:32+00:00"
+      },
+      {
+        "action": "close",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "closed",
+        "time": "2026-10-05T16:15:19+00:00"
+      }
+    ]
+  },
+  "working_copy": null,
+  "working_copy_of": null
+}

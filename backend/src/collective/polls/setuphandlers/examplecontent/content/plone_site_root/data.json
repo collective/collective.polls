@@ -4,264 +4,192 @@
   "UID": "plone_site_root",
   "allow_discussion": null,
   "blocks": {
-    "47c92ffe-c201-493c-97c9-a2d4e0beab69": {
-      "@type": "slate",
-      "plaintext": "Plone is a powerful content management system built on a rock-solid application stack written in the Python and JavaScript programming languages.",
-      "value": [
-        {
-          "children": [
-            {
-              "text": "Plone is a powerful content management system built on a rock-solid application stack written in the "
-            },
-            {
-              "children": [
-                {
-                  "text": "Python"
-                }
-              ],
-              "type": "em"
-            },
-            {
-              "text": " and "
-            },
-            {
-              "children": [
-                {
-                  "text": "JavaScript"
-                }
-              ],
-              "type": "em"
-            },
-            {
-              "text": " programming languages."
-            }
-          ],
-          "type": "p"
-        }
-      ]
+    "0779b6fb-1462-4bbb-80d5-3a968e4b8196": {
+      "@type": "slate"
+    },
+    "114ffc19-3866-49e8-bdb9-26b024f9f2f5": {
+      "@type": "poll",
+      "header": "Latest poll",
+      "link_poll": true,
+      "mode": "latest",
+      "show_closed": false,
+      "show_total": true
+    },
+    "51c9cf3d-3907-4a28-ba95-f5a08961c341": {
+      "@type": "slate"
     },
     "5f31e9e4-173f-4ec1-ab48-64e9e2789b76": {
       "@type": "title"
     },
-    "68357972-bd25-47e2-a098-c7932a923182": {
-      "@type": "image",
-      "alt": "Plone Foundation Logo",
-      "href": [
-        {
-          "@id": "https://plone.org/foundation",
-          "title": "plone.org/foundation"
-        }
-      ],
-      "image_field": "image",
-      "url": "resolveuid/a58ccead718140c1baa98d43595fc3e6"
+    "93b201b7-74cf-45f2-83e8-0dd98088480f": {
+      "@type": "description"
     },
-    "ae41d44d-c4b1-426c-acf6-2e28cb9a97a0": {
-      "@type": "slate",
-      "plaintext": "Find out more about Plone",
-      "value": [
-        {
-          "children": [
+    "a69cee94-e8bc-43b5-98ae-982d432adcb0": {
+      "@type": "gridBlock",
+      "blocks": {
+        "0b31d872-7444-41f0-808f-6727f2535cec": {
+          "@type": "poll",
+          "link_poll": true,
+          "mode": "latest",
+          "show_closed": false,
+          "show_total": true
+        },
+        "5719b029-fd70-454c-a52e-b525fb3da5f0": {
+          "@type": "poll",
+          "link_poll": true,
+          "mode": "chosen",
+          "poll": [
             {
-              "text": "Find out more about Plone"
+              "@id": "resolveuid/a051905e22aa4d9484115cb23fb90dee",
+              "@type": "collective.polls.poll",
+              "CreationDate": "2026-10-05T12:44:27-03:00",
+              "Creator": "admin",
+              "Date": "2026-10-05T13:15:11-03:00",
+              "Description": "Which captain would you like to have on your ship?",
+              "EffectiveDate": "None",
+              "ExpirationDate": "None",
+              "ModificationDate": "2026-10-05T13:15:11-03:00",
+              "Subject": [],
+              "Title": "Choose a Captain",
+              "Type": "Poll",
+              "UID": "a051905e22aa4d9484115cb23fb90dee",
+              "block_types": null,
+              "cmf_uid": null,
+              "created": "2026-10-05T15:44:27+00:00",
+              "description": "Which captain would you like to have on your ship?",
+              "effective": "1969-12-31T03:00:00+00:00",
+              "end": null,
+              "exclude_from_nav": false,
+              "expires": "2499-12-31T03:00:00+00:00",
+              "getIcon": null,
+              "getId": "choose-a-captain",
+              "getObjSize": "0 KB",
+              "getPath": "/Plone/all-polls/choose-a-captain",
+              "getRemoteUrl": null,
+              "getURL": "http://localhost:3000/all-polls/choose-a-captain",
+              "hasPreviewImage": null,
+              "head_title": null,
+              "id": "choose-a-captain",
+              "image_field": "preview_image_link",
+              "is_folderish": true,
+              "listCreators": [
+                "admin"
+              ],
+              "location": null,
+              "mime_type": "text/plain",
+              "modified": "2026-10-05T16:15:11+00:00",
+              "nav_title": null,
+              "portal_type": "collective.polls.poll",
+              "review_state": "closed",
+              "start": null,
+              "sync_uid": null,
+              "title": "Choose a Captain",
+              "type_title": "Poll"
             }
           ],
-          "type": "h3"
-        }
-      ]
-    },
-    "d9707a27-2565-4d7d-9daa-6c61d60ce8fd": {
-      "@type": "slate",
-      "plaintext": " The features of Plone   Plone Documentation   Plone Training   Plone Community Forum   Add-ons for Plone (backend)   Add-ons for Volto (frontend) ",
-      "value": [
-        {
-          "children": [
+          "show_closed": false,
+          "show_total": true
+        },
+        "cc9f4b03-8c5c-4e90-bece-346ca0bf3b82": {
+          "@type": "poll",
+          "link_poll": true,
+          "mode": "chosen",
+          "poll": [
             {
-              "children": [
-                {
-                  "text": ""
-                },
-                {
-                  "children": [
-                    {
-                      "text": "The features of Plone"
-                    }
-                  ],
-                  "data": {
-                    "url": "https://plone.org/why-plone/features"
-                  },
-                  "type": "link"
-                },
-                {
-                  "text": ""
-                }
+              "@id": "resolveuid/b36771d931244aa591dff3df79238553",
+              "@type": "collective.polls.poll",
+              "CreationDate": "2026-10-05T13:09:37-03:00",
+              "Creator": "admin",
+              "Date": "2026-10-05T13:13:18-03:00",
+              "Description": "Please, tell us which is your favorite ship",
+              "EffectiveDate": "None",
+              "ExpirationDate": "None",
+              "ModificationDate": "2026-10-05T13:13:18-03:00",
+              "Subject": [],
+              "Title": "Favorite Ship",
+              "Type": "Poll",
+              "UID": "b36771d931244aa591dff3df79238553",
+              "block_types": null,
+              "cmf_uid": null,
+              "created": "2026-10-05T16:09:37+00:00",
+              "description": "Please, tell us which is your favorite ship",
+              "effective": "1969-12-31T03:00:00+00:00",
+              "end": null,
+              "exclude_from_nav": false,
+              "expires": "2499-12-31T03:00:00+00:00",
+              "getIcon": null,
+              "getId": "favorite-ship",
+              "getObjSize": "0 KB",
+              "getPath": "/Plone/all-polls/favorite-ship",
+              "getRemoteUrl": null,
+              "getURL": "http://localhost:3000/all-polls/favorite-ship",
+              "hasPreviewImage": null,
+              "head_title": null,
+              "id": "favorite-ship",
+              "image_field": "preview_image_link",
+              "is_folderish": true,
+              "listCreators": [
+                "admin"
               ],
-              "type": "li"
-            },
-            {
-              "children": [
-                {
-                  "text": ""
-                },
-                {
-                  "children": [
-                    {
-                      "text": "Plone Documentation"
-                    }
-                  ],
-                  "data": {
-                    "url": "https://docs.plone.org/"
-                  },
-                  "type": "link"
-                },
-                {
-                  "text": ""
-                }
-              ],
-              "type": "li"
-            },
-            {
-              "children": [
-                {
-                  "text": ""
-                },
-                {
-                  "children": [
-                    {
-                      "text": "Plone Training"
-                    }
-                  ],
-                  "data": {
-                    "url": "https://training.plone.org/"
-                  },
-                  "type": "link"
-                },
-                {
-                  "text": ""
-                }
-              ],
-              "type": "li"
-            },
-            {
-              "children": [
-                {
-                  "text": ""
-                },
-                {
-                  "children": [
-                    {
-                      "text": "Plone Community Forum"
-                    }
-                  ],
-                  "data": {
-                    "url": "https://community.plone.org/"
-                  },
-                  "type": "link"
-                },
-                {
-                  "text": ""
-                }
-              ],
-              "type": "li"
-            },
-            {
-              "children": [
-                {
-                  "text": ""
-                },
-                {
-                  "children": [
-                    {
-                      "text": "Add-ons for Plone (backend)"
-                    }
-                  ],
-                  "data": {
-                    "url": "https://github.com/collective/awesome-plone#readme"
-                  },
-                  "type": "link"
-                },
-                {
-                  "text": ""
-                }
-              ],
-              "type": "li"
-            },
-            {
-              "children": [
-                {
-                  "text": ""
-                },
-                {
-                  "children": [
-                    {
-                      "text": "Add-ons for Volto (frontend)"
-                    }
-                  ],
-                  "data": {
-                    "url": "https://github.com/collective/awesome-volto#readme"
-                  },
-                  "type": "link"
-                },
-                {
-                  "text": ""
-                }
-              ],
-              "type": "li"
+              "location": null,
+              "mime_type": "text/plain",
+              "modified": "2026-10-05T16:13:18+00:00",
+              "nav_title": null,
+              "portal_type": "collective.polls.poll",
+              "review_state": "open",
+              "start": null,
+              "sync_uid": null,
+              "title": "Favorite Ship",
+              "type_title": "Poll"
             }
           ],
-          "type": "ul"
+          "show_closed": false,
+          "show_total": true
         }
-      ]
-    },
-    "e5ace182-3746-472c-ad81-696425a2b161": {
-      "@type": "slate",
-      "plaintext": "Welcome to your new Plone site!",
-      "value": [
-        {
-          "children": [
-            {
-              "text": "Welcome to your new Plone site!"
-            }
-          ],
-          "type": "h2"
-        }
-      ]
+      },
+      "blocks_layout": {
+        "items": [
+          "0b31d872-7444-41f0-808f-6727f2535cec",
+          "cc9f4b03-8c5c-4e90-bece-346ca0bf3b82",
+          "5719b029-fd70-454c-a52e-b525fb3da5f0"
+        ]
+      }
     }
   },
   "blocks_layout": {
     "items": [
       "5f31e9e4-173f-4ec1-ab48-64e9e2789b76",
-      "e5ace182-3746-472c-ad81-696425a2b161",
-      "ae41d44d-c4b1-426c-acf6-2e28cb9a97a0",
-      "47c92ffe-c201-493c-97c9-a2d4e0beab69",
-      "d9707a27-2565-4d7d-9daa-6c61d60ce8fd",
-      "68357972-bd25-47e2-a098-c7932a923182"
+      "93b201b7-74cf-45f2-83e8-0dd98088480f",
+      "a69cee94-e8bc-43b5-98ae-982d432adcb0",
+      "0779b6fb-1462-4bbb-80d5-3a968e4b8196",
+      "114ffc19-3866-49e8-bdb9-26b024f9f2f5",
+      "51c9cf3d-3907-4a28-ba95-f5a08961c341"
     ]
   },
   "contributors": [],
   "creators": [
     "admin"
   ],
-  "description": "",
+  "description": "Showcase of collective.polls and @plone-collective/volto-polls",
   "effective": null,
-  "exclude_from_nav": false,
   "expires": null,
   "exportimport.constrains": {},
   "exportimport.conversation": [],
-  "exportimport.versions": {},
   "id": "Plone",
   "is_folderish": true,
-  "items_total": 0,
+  "items_total": 2,
   "language": "##DEFAULT##",
+  "layout": "document_view",
   "lock": {
     "locked": false,
     "stealable": true
   },
-  "parent": {},
   "review_state": null,
   "rights": "",
   "subjects": [],
-  "table_of_contents": null,
-  "title": "Project Title",
+  "title": "Polls for Plone",
   "type_title": "Plone Site",
-  "workflow_history": {}
+  "workflow_history": {},
+  "working_copy": null,
+  "working_copy_of": null
 }

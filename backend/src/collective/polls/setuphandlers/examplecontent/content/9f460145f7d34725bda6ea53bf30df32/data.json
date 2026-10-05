@@ -1,10 +1,10 @@
 {
-  "@id": "/images/plone-foundation.png",
+  "@id": "/all-polls/away-team/crew.jpg",
   "@type": "Image",
-  "UID": "a58ccead718140c1baa98d43595fc3e6",
+  "UID": "9f460145f7d34725bda6ea53bf30df32",
   "allow_discussion": null,
   "contributors": [],
-  "created": "2024-05-27T03:23:37+00:00",
+  "created": "2026-10-05T17:38:37+00:00",
   "creators": [
     "admin"
   ],
@@ -13,26 +13,24 @@
   "expires": null,
   "exportimport.constrains": {},
   "exportimport.conversation": [],
-  "id": "plone-foundation.png",
+  "id": "crew.jpg",
   "image": {
-    "blob_path": "a58ccead718140c1baa98d43595fc3e6/image/plone-foundation.png",
-    "content-type": "image/png",
-    "filename": "plone-foundation.png",
-    "height": 439,
-    "size": 50737,
-    "width": 2000
+    "blob_path": "9f460145f7d34725bda6ea53bf30df32/image/crew.jpg",
+    "content-type": "image/jpeg",
+    "filename": "crew.jpg",
+    "height": 375,
+    "size": 67548,
+    "width": 500
   },
   "is_folderish": false,
   "language": "##DEFAULT##",
   "layout": "image_view",
   "lock": {},
-  "modified": "2024-05-27T03:24:00+00:00",
+  "modified": "2026-10-05T17:38:37+00:00",
   "review_state": null,
   "rights": "",
-  "subjects": [
-    "Plone"
-  ],
-  "title": "Plone Foundation Logo",
+  "subjects": [],
+  "title": "crew.jpg",
   "type_title": "Image",
   "version": "current",
   "workflow_history": {},

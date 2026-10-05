@@ -1,0 +1,134 @@
+{
+  "@id": "/all-polls",
+  "@type": "Document",
+  "UID": "025cf9356a7142f1a120418c2f1362af",
+  "allow_discussion": null,
+  "blocks": {
+    "42e8e388-93f6-4238-a0b5-2952ae1c4ab8": {
+      "@type": "listing",
+      "headline": "Open Polls",
+      "headlineTag": "h2",
+      "querystring": {
+        "query": [
+          {
+            "i": "portal_type",
+            "o": "plone.app.querystring.operation.selection.any",
+            "v": [
+              "collective.polls.poll"
+            ]
+          },
+          {
+            "i": "review_state",
+            "o": "plone.app.querystring.operation.selection.any",
+            "v": [
+              "open"
+            ]
+          }
+        ],
+        "sort_on": "created",
+        "sort_order": "descending",
+        "sort_order_boolean": true
+      },
+      "variation": "summary"
+    },
+    "704059b3-bc85-4e3d-8667-d54af38a2a55": {
+      "@type": "listing",
+      "headline": "Previous Polls",
+      "headlineTag": "h2",
+      "querystring": {
+        "query": [
+          {
+            "i": "portal_type",
+            "o": "plone.app.querystring.operation.selection.any",
+            "v": [
+              "collective.polls.poll"
+            ]
+          },
+          {
+            "i": "review_state",
+            "o": "plone.app.querystring.operation.selection.any",
+            "v": [
+              "closed"
+            ]
+          }
+        ],
+        "sort_on": "created",
+        "sort_order": "descending",
+        "sort_order_boolean": true
+      },
+      "variation": "summary"
+    },
+    "85e51fdb-cac4-43df-abdb-c092810d9486": {
+      "@type": "title"
+    },
+    "e24b4ba8-d905-48b1-a84b-650d30701a69": {
+      "@type": "description"
+    }
+  },
+  "blocks_layout": {
+    "items": [
+      "85e51fdb-cac4-43df-abdb-c092810d9486",
+      "e24b4ba8-d905-48b1-a84b-650d30701a69",
+      "42e8e388-93f6-4238-a0b5-2952ae1c4ab8",
+      "704059b3-bc85-4e3d-8667-d54af38a2a55"
+    ]
+  },
+  "changeNote": "",
+  "contributors": [],
+  "created": "2026-10-05T15:45:39+00:00",
+  "creators": [
+    "admin"
+  ],
+  "description": "List of all polls we have on this site",
+  "effective": "2026-10-05T16:06:00+00:00",
+  "exclude_from_nav": false,
+  "expires": null,
+  "exportimport.constrains": {
+    "immediately_addable_types": [
+      "collective.polls.poll"
+    ],
+    "locally_allowed_types": [
+      "Image",
+      "collective.polls.poll"
+    ]
+  },
+  "exportimport.conversation": [],
+  "id": "all-polls",
+  "is_folderish": true,
+  "language": "##DEFAULT##",
+  "layout": "document_view",
+  "lock": {
+    "locked": false,
+    "stealable": true
+  },
+  "modified": "2026-10-05T17:36:39+00:00",
+  "nav_title": null,
+  "preview_caption_link": null,
+  "review_state": "published",
+  "rights": "",
+  "subjects": [],
+  "title": "All Polls",
+  "type_title": "Page",
+  "version": "current",
+  "versioning_enabled": true,
+  "workflow_history": {
+    "simple_publication_workflow": [
+      {
+        "action": null,
+        "actor": "admin",
+        "comments": "",
+        "review_state": "private",
+        "time": "2026-10-05T15:45:39+00:00"
+      },
+      {
+        "action": "publish",
+        "actor": "admin",
+        "comments": "",
+        "review_state": "published",
+        "time": "2026-10-05T16:06:24+00:00"
+      }
+    ]
+  },
+  "working_copy": null,
+  "working_copy_of": null
+}

@@ -1,15 +1,134 @@
 {
   "__version__": "1.0.0",
   "_blob_files_": [
+    "9f460145f7d34725bda6ea53bf30df32/image/crew.jpg",
+    "0c8597897e5f4219b124dbdfbb044bbd/image/captains.jpg",
+    "68da393ea300463bb198a942a21c6119/image/ncc-1701-d.jpg",
     "a58ccead718140c1baa98d43595fc3e6/image/plone-foundation.png"
   ],
   "_data_files_": [
     "plone_site_root/data.json",
+    "025cf9356a7142f1a120418c2f1362af/data.json",
+    "817c5edd64fb423289e7e86f82f78670/data.json",
+    "9f460145f7d34725bda6ea53bf30df32/data.json",
+    "a051905e22aa4d9484115cb23fb90dee/data.json",
+    "0c8597897e5f4219b124dbdfbb044bbd/data.json",
+    "b36771d931244aa591dff3df79238553/data.json",
+    "68da393ea300463bb198a942a21c6119/data.json",
     "a720393b3c0240e5bd27c43fcd2cfd1e/data.json",
     "a58ccead718140c1baa98d43595fc3e6/data.json"
   ],
   "default_page": {},
+  "local_permissions": {
+    "025cf9356a7142f1a120418c2f1362af": {},
+    "0c8597897e5f4219b124dbdfbb044bbd": {},
+    "68da393ea300463bb198a942a21c6119": {},
+    "817c5edd64fb423289e7e86f82f78670": {},
+    "9f460145f7d34725bda6ea53bf30df32": {},
+    "a051905e22aa4d9484115cb23fb90dee": {},
+    "a58ccead718140c1baa98d43595fc3e6": {},
+    "a720393b3c0240e5bd27c43fcd2cfd1e": {},
+    "b36771d931244aa591dff3df79238553": {},
+    "plone_site_root": {
+      "Add portal member": {
+        "acquire": false,
+        "roles": [
+          "Manager",
+          "Site Administrator",
+          "Owner"
+        ]
+      },
+      "Content rules: Manage rules": {
+        "acquire": false,
+        "roles": [
+          "Manager",
+          "Site Administrator"
+        ]
+      },
+      "Set own password": {
+        "acquire": false,
+        "roles": [
+          "Authenticated",
+          "Manager",
+          "Site Administrator"
+        ]
+      },
+      "Set own properties": {
+        "acquire": false,
+        "roles": [
+          "Authenticated",
+          "Manager",
+          "Site Administrator"
+        ]
+      },
+      "Show Toolbar": {
+        "acquire": false,
+        "roles": [
+          "Authenticated"
+        ]
+      },
+      "collective.polls: Vote": {
+        "acquire": false,
+        "roles": []
+      },
+      "plone.resource: Export ZIP file": {
+        "acquire": false,
+        "roles": [
+          "Manager"
+        ]
+      },
+      "plone.resourceeditor: Manage Sources": {
+        "acquire": false,
+        "roles": [
+          "Manager",
+          "Site Administrator"
+        ]
+      }
+    }
+  },
   "local_roles": {
+    "025cf9356a7142f1a120418c2f1362af": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "0c8597897e5f4219b124dbdfbb044bbd": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "68da393ea300463bb198a942a21c6119": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "817c5edd64fb423289e7e86f82f78670": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "9f460145f7d34725bda6ea53bf30df32": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "a051905e22aa4d9484115cb23fb90dee": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
     "a58ccead718140c1baa98d43595fc3e6": {
       "local_roles": {
         "admin": [
@@ -18,6 +137,13 @@
       }
     },
     "a720393b3c0240e5bd27c43fcd2cfd1e": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "b36771d931244aa591dff3df79238553": {
       "local_roles": {
         "admin": [
           "Owner"
@@ -33,8 +159,15 @@
     }
   },
   "ordering": {
+    "025cf9356a7142f1a120418c2f1362af": 42,
+    "0c8597897e5f4219b124dbdfbb044bbd": 0,
+    "68da393ea300463bb198a942a21c6119": 0,
+    "817c5edd64fb423289e7e86f82f78670": 2,
+    "9f460145f7d34725bda6ea53bf30df32": 0,
+    "a051905e22aa4d9484115cb23fb90dee": 0,
     "a58ccead718140c1baa98d43595fc3e6": 0,
-    "a720393b3c0240e5bd27c43fcd2cfd1e": 42
+    "a720393b3c0240e5bd27c43fcd2cfd1e": 41,
+    "b36771d931244aa591dff3df79238553": 1
   },
   "relations": []
 }
