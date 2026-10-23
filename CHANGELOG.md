@@ -7,6 +7,42 @@
 -->
 
 <!-- towncrier release notes start -->
+## 3.0.0a2 (2026-10-23)
+
+### Backend
+
+
+#### Breaking
+
+- Changed the "Show partial results" field from a checkbox to a choice: "Only when the poll is closed", "After voting" or "Always, even before voting". `@poll` answers `show_results` as `never`, `after_vote` or `always` instead of a boolean, and with `always` it gives everyone the results while the poll is open. Run the upgrade step to profile version 3001: it converts every poll, checked to "After voting" and unchecked to "Only when the poll is closed". @ericof [#143](https://github.com/collective/collective.polls/issues/143)
+
+
+#### Feature
+
+- Added a "Closing date" field to polls. Once it passes, the poll takes no more votes and shows its results to everyone, though it stays open until a reviewer closes it. `@vote` answers `403` with the `PollClosed` error, and `@poll` reports the date as `close_date` and whether it passed as `expired`. @ericof [#142](https://github.com/collective/collective.polls/issues/142)
+
+
+
+### Frontend
+
+
+#### Feature
+
+- Showed when voting closes on polls with a closing date, and showed a poll past that date as closed, with its final results and no vote form. @ericof [#142](https://github.com/collective/collective.polls/issues/142)
+- Added the "Show" setting to the Poll block: "Only the results" shows a poll's results apart from its vote, once the visitor may see them, and otherwise says when they will show. A poll that always shows its results lets visitors look at them before voting. @ericof [#143](https://github.com/collective/collective.polls/issues/143)
+
+
+
+### Project
+
+
+#### Documentation
+
+- Documented the closing date of a poll. @ericof [#142](https://github.com/collective/collective.polls/issues/142)
+- Documented the "Show partial results" choices, showing a poll's results apart from its vote, and the upgrade step to 3001. @ericof [#143](https://github.com/collective/collective.polls/issues/143)
+
+
+
 ## 3.0.0a1 (2026-10-05)
 
 ### Backend

@@ -8,6 +8,14 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0-alpha.2 (2026-10-23)
+
+
+### Feature
+
+- Showed when voting closes on polls with a closing date, and showed a poll past that date as closed, with its final results and no vote form. @ericof [#142](https://github.com/collective/collective.polls/issues/142)
+- Added the "Show" setting to the Poll block: "Only the results" shows a poll's results apart from its vote, once the visitor may see them, and otherwise says when they will show. A poll that always shows its results lets visitors look at them before voting. @ericof [#143](https://github.com/collective/collective.polls/issues/143)
+
 ## 3.0.0-alpha.1 (2026-10-05)
 
 

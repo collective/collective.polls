@@ -1,1 +1,0 @@
-Added the "Show" setting to the Poll block: "Only the results" shows a poll's results apart from its vote, once the visitor may see them, and otherwise says when they will show. A poll that always shows its results lets visitors look at them before voting. @ericof

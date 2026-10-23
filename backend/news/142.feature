@@ -1,1 +1,0 @@
-Added a "Closing date" field to polls. Once it passes, the poll takes no more votes and shows its results to everyone, though it stays open until a reviewer closes it. `@vote` answers `403` with the `PollClosed` error, and `@poll` reports the date as `close_date` and whether it passed as `expired`. @ericof
