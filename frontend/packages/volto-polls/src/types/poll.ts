@@ -53,6 +53,13 @@ export interface PollState {
   legend: string | null;
   /** Show the options in a random order to each voter. */
   shuffle_options: boolean;
+  /** When voting ends, ISO 8601 in UTC; `null` when closed by hand only. */
+  close_date: string | null;
+  /**
+   * The closing date has passed: no more votes, and results for everyone,
+   * though `state` may still be `open`.
+   */
+  expired: boolean;
   /** The caller holds the vote permission. Says nothing about having voted. */
   can_vote: boolean;
   /** `null` for anonymous callers: the browser answers from the cookie. */
@@ -75,6 +82,7 @@ export interface PollContent extends Content {
   max_choices?: number;
   legend?: string | null;
   shuffle_options?: boolean;
+  close_date?: string | null;
   allow_anonymous: boolean;
   show_results: Term | ShowResults | null;
   results_graph: Term | ResultsGraph | null;

@@ -37,6 +37,8 @@ It needs the `View` permission on the poll.
   "max_choices": 1,
   "legend": null,
   "shuffle_options": false,
+  "close_date": null,
+  "expired": false,
   "can_vote": true,
   "has_voted": true,
   "total_votes": 3,
@@ -60,6 +62,8 @@ It needs the `View` permission on the poll.
 | `max_choices` | integer | How many options a voter can pick. |
 | `legend` | string or `null` | The poll's legend, `null` when empty. |
 | `shuffle_options` | boolean | The poll's setting. The service never shuffles: clients do. |
+| `close_date` | string or `null` | When voting ends, in ISO 8601 and UTC, such as `2026-11-30T18:00:00+00:00`. `null` for a poll without a closing date. |
+| `expired` | boolean | `true` once the closing date has passed, even while `state` is still `open`. |
 | `can_vote` | boolean | The current user holds the vote permission on the poll. |
 | `has_voted` | boolean or `null` | Whether the current member voted. Always `null` for anonymous callers, see {ref}`rest-caching`. |
 | `total_votes` | integer or `null` | Votes so far: one per voter. `null` when the caller may not see the results. |
@@ -67,7 +71,7 @@ It needs the `View` permission on the poll.
 
 The results are part of the answer when one of these is true.
 
--   The poll is closed.
+-   The poll is closed, or open and past its closing date.
 -   The caller can review the poll.
 -   The poll is open and `show_results` is `always`.
 -   The poll is open, `show_results` is `after_vote`, and the caller voted or is anonymous.
@@ -107,6 +111,7 @@ The service's own errors answer a body with a type and a message, translated to 
 |---|---|---|
 | `400` | `BadRequest` | The body is not a JSON object with exactly one of `option_id` or `option_ids`, holding integers. |
 | `400` | `BadRequest` | An id is not one of the poll's options, a list repeats an id, or it picks more than `max_choices` options. |
+| `403` | `PollClosed` | The poll's closing date has passed. |
 | `403` | `AlreadyVoted` | The caller already voted in this poll. |
 
 A caller without the vote permission never reaches the service: the poll is not open, or it does not accept anonymous votes.
@@ -125,3 +130,4 @@ A caller without the vote permission never reaches the service: the poll is not 
 The answer to anonymous callers is the same for everyone, so shared caches can keep it for two minutes.
 It never says whether the caller voted: the client reads the voting cookie instead.
 A request with a matching `If-None-Match` header gets `304 Not Modified`.
+The entity tag changes with each vote, each workflow transition, and when the closing date passes.

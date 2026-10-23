@@ -38,6 +38,9 @@ single choice poll
 multiple choice poll
     A poll whose voters pick from one option up to its **Number of options a voter can pick**.
 
+closing date
+    The date and time a poll stops taking votes and shows its final results to everyone, while its workflow state stays *Open*.
+
 partial results
     The results of a poll while it is still open.
     The poll's **Show partial results** setting decides who sees them: nobody but reviewers, voters, or everyone.

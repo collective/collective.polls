@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import PollDeadline from '../PollDeadline/PollDeadline';
 import PollForm from '../PollForm/PollForm';
 import PollResults from '../PollResults/PollResults';
 import PollStatus, { type PollStatusKind } from '../PollStatus/PollStatus';
@@ -47,6 +48,15 @@ export interface PollProps {
 }
 
 /**
+ * Whether voting in a poll has ended: it is closed, or past its closing date.
+ *
+ * @param poll The poll's state.
+ */
+export function votingEnded(poll: PollState): boolean {
+  return poll.state === 'closed' || (poll.state === 'open' && poll.expired);
+}
+
+/**
  * Which messages a poll shows.
  *
  * @param poll The poll's state.
@@ -61,19 +71,24 @@ export function statusKinds(
   voteError: PollError | null = null,
 ): PollStatusKind[] {
   const kinds: PollStatusKind[] = [];
+  // A vote refused because the closing date passed after the poll was
+  // fetched: the poll is closed, which says it all.
+  const refusedAsClosed = voteError?.type === 'PollClosed';
+  const ended = votingEnded(poll) || refusedAsClosed;
   if (voteError) {
-    kinds.push(
-      voteError.type === 'AlreadyVoted' ? 'alreadyVoted' : 'voteFailed',
-    );
+    if (!refusedAsClosed)
+      kinds.push(
+        voteError.type === 'AlreadyVoted' ? 'alreadyVoted' : 'voteFailed',
+      );
   } else if (justVoted) {
     kinds.push('thanks');
-  } else if (hasVoted && poll.state === 'open') {
+  } else if (hasVoted && !ended && poll.state === 'open') {
     kinds.push('alreadyVoted');
   }
-  if (poll.state === 'closed') kinds.push('closed');
+  if (ended) kinds.push('closed');
   if (poll.state === 'private' || poll.state === 'pending')
     kinds.push('notOpen');
-  if (poll.state === 'open' && !poll.can_vote && !hasVoted)
+  if (poll.state === 'open' && !ended && !poll.can_vote && !hasVoted)
     kinds.push('notAllowed');
   if (poll.anonymous_blocked) kinds.push('anonymousBlocked');
   return kinds;
@@ -89,7 +104,7 @@ export function resultsStatusKinds(
   poll: PollState,
   shown: boolean,
 ): PollStatusKind[] {
-  if (poll.state === 'closed') return ['closed'];
+  if (votingEnded(poll)) return ['closed'];
   if (poll.state === 'private' || poll.state === 'pending') return ['notOpen'];
   if (shown) return [];
   return [
@@ -121,8 +136,17 @@ export const Poll = ({
   display = 'poll',
 }: PollProps) => {
   const intl = useIntl();
-  const { poll, error, vote, voting, voteError, hasVoted, canVoteNow } =
-    usePoll(path);
+  const {
+    poll,
+    error,
+    vote,
+    voting,
+    voteError,
+    hasVoted,
+    canVoteNow: canVote,
+  } = usePoll(path);
+  // The closing date passed after the poll was fetched.
+  const canVoteNow = canVote && voteError?.type !== 'PollClosed';
   const [justVoted, setJustVoted] = useState(false);
   const [peek, setPeek] = useState(false);
   // Shuffled once here, not in the form: showing the results and coming
@@ -172,6 +196,9 @@ export const Poll = ({
         </p>
       )}
       <PollStatus kinds={kinds} />
+      {poll?.close_date && !poll.expired && poll.state !== 'closed' && (
+        <PollDeadline closeDate={poll.close_date} />
+      )}
       {showForm && poll && (
         <PollForm
           options={options}
@@ -208,7 +235,7 @@ export const Poll = ({
         <PollResults
           results={results}
           graph={poll.results_graph}
-          closed={poll.state === 'closed'}
+          closed={votingEnded(poll)}
           multipleChoice={poll.max_choices > 1}
         />
       )}

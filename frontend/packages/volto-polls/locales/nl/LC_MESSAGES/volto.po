@@ -207,6 +207,11 @@ msgstr ""
 msgid "Votes"
 msgstr ""
 
+#. Default: "Voting closes on {date}."
+#: components/PollDeadline/PollDeadline
+msgid "Voting closes on {date}."
+msgstr ""
+
 #. Default: "When no poll is open, show the results of the latest closed one instead."
 #: components/Blocks/Poll/schema
 msgid "When no poll is open, show the results of the latest closed one instead."

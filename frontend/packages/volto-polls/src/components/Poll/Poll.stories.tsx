@@ -7,6 +7,8 @@ import { recordingStore } from '../../testing/store';
 import closed from '../../__fixtures__/closed.json';
 import open from '../../__fixtures__/open.json';
 import openAlways from '../../__fixtures__/open-always.json';
+import openClosing from '../../__fixtures__/open-closing.json';
+import openExpired from '../../__fixtures__/open-expired.json';
 import multiple from '../../__fixtures__/open-multiple.json';
 import openAnonymousBlocked from '../../__fixtures__/open-anonymous-blocked.json';
 import openVoted from '../../__fixtures__/open-voted.json';
@@ -62,6 +64,13 @@ export const Voted: Story = {
 export const Closed: Story = {
   args: { showTotal: true },
   decorators: [withPoll(closed)],
+};
+/** Voting ends at the poll's closing date. */
+export const ClosingDate: Story = { decorators: [withPoll(openClosing)] };
+/** Past its closing date, a poll reads as closed while still open. */
+export const PastClosingDate: Story = {
+  args: { showTotal: true },
+  decorators: [withPoll(openExpired)],
 };
 export const NotOpen: Story = { decorators: [withPoll(privatePoll)] };
 /** Up to two choices, under the poll's own legend, in a random order. */

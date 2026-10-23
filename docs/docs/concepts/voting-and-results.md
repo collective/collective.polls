@@ -22,6 +22,21 @@ This is why the order matters: publish the folder, then open the poll.
 A poll opened inside a private folder stays closed to anonymous visitors even after the folder is published, until the poll is opened again.
 The `@poll` service reports that case as `anonymous_blocked`.
 
+(concepts-closing-date)=
+
+## Closing date
+
+A poll can end voting on its own, at its **Closing date**.
+From that moment it takes no more votes, and everyone sees its final results, as if it were closed.
+Until then, the poll says when voting closes.
+
+Its workflow state does not change: the poll stays *Open* until a reviewer closes it.
+Plone has no scheduler to run the transition at a given time, so the add-on checks the date whenever someone reads the poll or votes in it.
+The `@poll` service reports the date as `close_date`, and whether it has passed as `expired`.
+
+Closing the poll by hand still matters: it moves the poll to *Closed*, which removes the vote permission and lets an export carry the poll's votes.
+A poll found as the latest open one is also still found after its closing date, until it is closed.
+
 ## Voting once
 
 Each poll records who voted, and refuses a second vote from the same voter.
@@ -55,7 +70,7 @@ That is why a multiple choice poll set to a pie chart shows bars: a pie shows pa
 
 | Who | Sees the results |
 |---|---|
-| Everyone, once the poll is closed | Always |
+| Everyone, once the poll is closed or past its closing date | Always |
 | Reviewers and managers | Always, in any state |
 | Voters, while the poll is open | When **Show partial results** is **After voting** or **Always, even before voting** |
 | Visitors who did not vote, while the poll is open | Only when **Show partial results** is **Always, even before voting** |

@@ -108,6 +108,7 @@ class TestFieldsets:
                 "legend",
                 "options",
                 "shuffle_options",
+                "close_date",
             ],
             "results": ["show_results", "results_graph"],
         }

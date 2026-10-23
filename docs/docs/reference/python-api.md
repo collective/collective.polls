@@ -27,7 +27,7 @@ polls = getUtility(IPolls, name="collective.polls")
 | `voted_in_a_poll(poll, request=None)` | Whether the current user voted. Anonymous users are recognized by their cookie, so they need the request. |
 | `allowed_to_edit(poll)` | Whether the current user holds `Modify portal content` on the poll. |
 | `allowed_to_view(poll)` | Whether the current user holds `View` on the poll. |
-| `allowed_to_vote(poll, request=None)` | `True` when the current user may vote. Raises `Unauthorized` without the vote permission, and `AlreadyVoted` after a vote. |
+| `allowed_to_vote(poll, request=None)` | `True` when the current user may vote. Raises `Unauthorized` without the vote permission, `PollClosed` past the poll's closing date, and `AlreadyVoted` after a vote. |
 | `anonymous_vote_id()` | A new random id for an anonymous vote. |
 
 ## The `IPollVotes` adapter
@@ -65,13 +65,16 @@ To vote as the current user, with the permission checks and the anonymous cookie
 |---|---|
 | `getOptions()` | The options, as `{"option_id", "description"}` dictionaries. |
 | `getResults()` | `(description, votes, fraction)` for each option, or an empty list before the first vote. |
-| `setVote(option, request=None)` | Votes as the current user, for one option id or a list of them. Returns `False` for an invalid choice. Raises `Unauthorized` or `AlreadyVoted`, like `IPolls.allowed_to_vote`. |
+| `setVote(option, request=None)` | Votes as the current user, for one option id or a list of them. Returns `False` for an invalid choice. Raises `Unauthorized`, `PollClosed` or `AlreadyVoted`, like `IPolls.allowed_to_vote`. |
 | `voters()` | Same as `IPollVotes.voters()`. |
 | `multiple_choice` | Whether a voter can pick more than one option. |
 | `total_votes` | Votes so far: one per voter. |
+| `closes_at()` | The closing date, timezone aware, or `None`. A date stored without a timezone is read as UTC. |
+| `expired` | Whether the closing date has passed. |
 
 ## Exceptions
 
 | Exception | Module | Raised |
 |---|---|---|
 | `AlreadyVoted` | `collective.polls.interfaces` | For a second vote by the same voter. A subclass of `AccessControl.Unauthorized`. |
+| `PollClosed` | `collective.polls.interfaces` | For a vote after the poll's closing date. A subclass of `AccessControl.Unauthorized`. |

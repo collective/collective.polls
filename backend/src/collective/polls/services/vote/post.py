@@ -2,6 +2,7 @@
 
 from collective.polls import _
 from collective.polls.interfaces import AlreadyVoted
+from collective.polls.interfaces import PollClosed
 from collective.polls.interfaces import PollStateDict
 from collective.polls.services import PollService
 from collective.polls.services import PRIVATE_CACHE_CONTROL
@@ -81,6 +82,8 @@ class VotePost(PollService):
             )
         try:
             voted = self.context.setVote(option_ids, self.request)
+        except PollClosed:
+            return self._error(403, "PollClosed", _("This poll is closed."))
         except AlreadyVoted:
             return self._error(
                 403, "AlreadyVoted", _("You already voted in this poll.")

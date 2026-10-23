@@ -8,6 +8,8 @@ from . import EXAMPLES
 from . import SCHEMA
 from . import THREE_OPTIONS
 from copy import deepcopy
+from datetime import datetime
+from datetime import timezone
 
 import json
 import jsonschema
@@ -30,6 +32,23 @@ SCENARIOS = {
     ),
     # A member who has not voted sees the results.
     "open-always": ("member", {"voters": VOTERS, "show_results": "always"}),
+    # Voting ends in the future: nothing changes until then.
+    "open-closing": (
+        "member",
+        {
+            "voters": VOTERS,
+            "close_date": datetime(2099, 12, 31, 23, 0, tzinfo=timezone.utc),
+        },
+    ),
+    # Past its closing date: still open, but no more votes, and results
+    # for everyone.
+    "open-expired": (
+        "member",
+        {
+            "voters": VOTERS,
+            "close_date": datetime(2026, 1, 1, 12, 0, tzinfo=timezone.utc),
+        },
+    ),
     "open-anonymous": ("anonymous", {"voters": VOTERS}),
     # Only editors see a poll in an unpublished folder.
     "open-anonymous-blocked": ("manager", {"container": "hidden"}),
@@ -86,6 +105,8 @@ def test_real(name, make_poll, session_for):
         {"max_choices": 0},
         {"legend": ""},
         {"shuffle_options": None},
+        {"close_date": 1767268800},
+        {"expired": None},
     ],
     ids=[
         "state",
@@ -96,6 +117,8 @@ def test_real(name, make_poll, session_for):
         "max-choices",
         "empty-legend",
         "shuffle-null",
+        "close-date-number",
+        "expired-null",
     ],
 )
 def test_schema_rejects(change):

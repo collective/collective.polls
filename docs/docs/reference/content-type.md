@@ -30,6 +30,7 @@ The title is the poll's question, and the description is shown below it.
 | `legend` | Legend | Text line | empty | Shown above the options. When empty, the form shows *Select one option* or *Select up to N options*. |
 | `options` | Available options | JSON list | empty | The options, see {ref}`reference-options`. |
 | `shuffle_options` | Shuffle options | Boolean | `false` | Shows the options in a random order to each voter. |
+| `close_date` | Closing date | Date and time | empty | When voting ends, see {ref}`concepts-closing-date`. Leave empty to close the poll by hand only. |
 
 ```{image} /_static/screens/poll-add-voting.png
 :alt: The Voting tab of the form that adds a poll, with the options widget

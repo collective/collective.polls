@@ -11,6 +11,8 @@ import closed from '../../__fixtures__/closed.json';
 import noVotes from '../../__fixtures__/no-votes.json';
 import open from '../../__fixtures__/open.json';
 import openAlways from '../../__fixtures__/open-always.json';
+import openClosing from '../../__fixtures__/open-closing.json';
+import openExpired from '../../__fixtures__/open-expired.json';
 import multiple from '../../__fixtures__/open-multiple.json';
 import openAnonymous from '../../__fixtures__/open-anonymous.json';
 import openAnonymousBlocked from '../../__fixtures__/open-anonymous-blocked.json';
@@ -331,6 +333,40 @@ describe('Poll', () => {
     expect(getAllByRole('checkbox')).toHaveLength(3);
   });
 
+  it('says when voting closes, while it is open', () => {
+    const { form, container, kinds } = setup({}, entry(openClosing));
+    expect(form()).not.toBeNull();
+    expect(container.querySelector('.poll-deadline')).not.toBeNull();
+    expect(kinds()).toEqual([]);
+  });
+
+  it('says nothing of a closing date on a poll without one', () => {
+    const { container } = setup({}, entry(open));
+    expect(container.querySelector('.poll-deadline')).toBeNull();
+  });
+
+  it('shows a poll past its closing date as closed, with final results', () => {
+    const { form, results, kinds, container, getByRole, queryByRole } = setup(
+      {},
+      entry(openExpired),
+    );
+    expect(form()).toBeNull();
+    expect(results()).not.toBeNull();
+    expect(getByRole('heading', { name: 'Results' })).toBeTruthy();
+    expect(queryByRole('button', { name: 'Show partial results' })).toBeNull();
+    expect(kinds()).toEqual(['closed']);
+    expect(container.querySelector('.poll-deadline')).toBeNull();
+  });
+
+  it('closes the vote when it was refused for the closing date', () => {
+    const { form, kinds } = setup(
+      {},
+      entry(openClosing, { voteError: { status: 403, type: 'PollClosed' } }),
+    );
+    expect(form()).toBeNull();
+    expect(kinds()).toEqual(['closed']);
+  });
+
   it('says so when the poll cannot be read', () => {
     const { kinds, form } = setup(
       { fallbackOptions: open.options },
@@ -427,6 +463,12 @@ describe('Poll showing only the results', () => {
     expect(kinds()).toEqual(['closed']);
   });
 
+  it('shows the final results past the closing date', () => {
+    const { results, kinds } = setup({ display }, entry(openExpired));
+    expect(results()).not.toBeNull();
+    expect(kinds()).toEqual(['closed']);
+  });
+
   it('shows neither options nor results before the poll opens', () => {
     const { form, results, kinds } = setup({ display }, entry(privatePoll));
     expect(form()).toBeNull();
@@ -460,6 +502,12 @@ describe('resultsStatusKinds', () => {
       ['resultsWhenClosed'],
     ],
     ['closed', { ...poll, state: 'closed' }, true, ['closed']],
+    [
+      'closed past the closing date',
+      { ...poll, expired: true },
+      true,
+      ['closed'],
+    ],
     ['not open', { ...poll, state: 'pending' }, false, ['notOpen']],
   ] as [string, PollState, boolean, string[]][])(
     '%s',
@@ -515,6 +563,30 @@ describe('statusKinds', () => {
       false,
       null,
       ['notOpen'],
+    ],
+    [
+      'closed past the closing date, without "already voted"',
+      { ...poll, expired: true },
+      true,
+      false,
+      null,
+      ['closed'],
+    ],
+    [
+      'closed past the closing date, not "not allowed"',
+      { ...poll, expired: true, can_vote: false },
+      false,
+      false,
+      null,
+      ['closed'],
+    ],
+    [
+      'closed on a vote refused for the closing date',
+      poll,
+      false,
+      true,
+      error('PollClosed'),
+      ['closed'],
     ],
   ] as [string, PollState, boolean, boolean, PollError | null, string[]][])(
     '%s',

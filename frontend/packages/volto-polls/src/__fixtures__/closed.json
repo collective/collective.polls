@@ -19,6 +19,8 @@
   "max_choices": 1,
   "legend": null,
   "shuffle_options": false,
+  "close_date": null,
+  "expired": false,
   "can_vote": false,
   "has_voted": null,
   "total_votes": 3,

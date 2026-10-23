@@ -23,6 +23,8 @@
   "max_choices": 2,
   "legend": "Pick your favourite colours",
   "shuffle_options": true,
+  "close_date": null,
+  "expired": false,
   "can_vote": true,
   "has_voted": true,
   "total_votes": 3,

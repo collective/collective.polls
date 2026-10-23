@@ -25,7 +25,7 @@ export interface UsePollResult {
   voteError: PollError | null;
   /** From the backend for members, from the cookie for anonymous visitors. */
   hasVoted: boolean;
-  /** Open, the user may vote, and has not voted yet. */
+  /** Open and not expired, the user may vote, and has not voted yet. */
   canVoteNow: boolean;
 }
 
@@ -68,7 +68,11 @@ export function usePoll(path: string): UsePollResult {
   const hasVoted =
     typeof poll?.has_voted === 'boolean' ? poll.has_voted : cookieVoted;
   const canVoteNow = Boolean(
-    poll && poll.can_vote && !hasVoted && poll.state === 'open',
+    poll &&
+      poll.can_vote &&
+      !hasVoted &&
+      poll.state === 'open' &&
+      !poll.expired,
   );
 
   return {
