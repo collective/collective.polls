@@ -28,6 +28,6 @@ Both are safe to run more than once, and never drop vote data.
 
 | Step | What it does |
 |---|---|
-| Turn show_results into a choice | Stores **After voting** in each poll whose **Show partial results** was checked, and **Only when the poll is closed** where it was not. |
+| Turn `show_results` into a choice | Stores **After voting** in each poll whose **Show partial results** was checked, and **Only when the poll is closed** where it was not. |
 
 See {doc}`/how-to-guides/install/upgrade` to run them.
