@@ -24,7 +24,7 @@ class TestPollSchema:
         "field,value",
         [
             ("allow_anonymous", True),
-            ("show_results", True),
+            ("show_results", "after_vote"),
             ("results_graph", "bar"),
             ("options", []),
             ("max_choices", 1),
@@ -39,6 +39,10 @@ class TestPollSchema:
     def test_results_graph_vocabulary(self):
         """``results_graph`` uses the named vocabulary."""
         assert IPoll["results_graph"].vocabularyName == "collective.polls.ResultsGraph"
+
+    def test_show_results_vocabulary(self):
+        """``show_results`` uses the named vocabulary."""
+        assert IPoll["show_results"].vocabularyName == "collective.polls.ShowResults"
 
     def test_misspelled_exception_name(self):
         """The legacy name still refers to the same class."""

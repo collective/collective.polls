@@ -4,7 +4,7 @@
   "state": "open",
   "allow_anonymous": true,
   "anonymous_blocked": false,
-  "show_results": false,
+  "show_results": "never",
   "results_graph": "bar",
   "options": [
     {

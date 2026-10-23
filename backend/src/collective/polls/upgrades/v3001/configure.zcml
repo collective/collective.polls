@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    >
+
+  <genericsetup:upgradeSteps
+      profile="collective.polls:default"
+      source="3000"
+      destination="3001"
+      >
+    <genericsetup:upgradeStep
+        title="Turn show_results into a choice"
+        handler=".show_results.convert_show_results"
+        />
+  </genericsetup:upgradeSteps>
+
+</configure>

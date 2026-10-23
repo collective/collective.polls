@@ -40,7 +40,7 @@ So the poll goes into a published folder.
     -   Keep **Number of options a voter can pick** at `1`.
     -   Under **Available options**, add three options: `Apple`, `Banana`, and `Cherry`.
 4.  Open the **Results** fieldset.
-    -   Keep **Show partial results** checked.
+    -   Keep **Show partial results** at **After voting**.
     -   Set **Graph** to **Pie Chart**.
 5.  Save the poll.
 

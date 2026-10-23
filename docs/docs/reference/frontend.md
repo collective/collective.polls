@@ -30,6 +30,7 @@ See {doc}`/how-to-guides/customize-the-frontend` to replace them.
 | `fallbackOptions` | list | Options to show until the poll's state arrives, such as when rendering on the server. |
 | `fallbackMaxChoices` | number | How many options a voter can pick, until the poll's state arrives. |
 | `fallbackLegend` | string or `null` | The legend, until the poll's state arrives. |
+| `display` | `poll` or `results` | `results` shows only the results, once the user may see them, and otherwise says when they will show. Defaults to `poll`. |
 
 ## `PollResultsGraph`
 

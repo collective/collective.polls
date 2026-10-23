@@ -5,6 +5,11 @@
       component=".results_graph.results_graph_vocabulary"
       />
 
+  <utility
+      name="collective.polls.ShowResults"
+      component=".show_results.show_results_vocabulary"
+      />
+
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>

@@ -34,6 +34,17 @@ const messages = defineMessages({
     id: 'Add a link to the poll',
     defaultMessage: 'Add a link to the poll',
   },
+  display: { id: 'Show', defaultMessage: 'Show' },
+  displayDescription: {
+    id: 'Show only the results to place them apart from the vote. They appear when the poll lets the visitor see them.',
+    defaultMessage:
+      'Show only the results to place them apart from the vote. They appear when the poll lets the visitor see them.',
+  },
+  displayPoll: { id: 'The poll', defaultMessage: 'The poll' },
+  displayResults: {
+    id: 'Only the results',
+    defaultMessage: 'Only the results',
+  },
 });
 
 export interface PollBlockSchemaProps {
@@ -61,6 +72,7 @@ export const PollBlockSchema = ({
         fields: [
           'mode',
           ...(chosen ? ['poll'] : ['show_closed']),
+          'display',
           'header',
           'show_total',
           'link_poll',
@@ -87,6 +99,16 @@ export const PollBlockSchema = ({
         // makes Volto's object browser refuse the first pick: it compares
         // the size against the length of `{}` while nothing is picked.
         selectableTypes: [POLL_TYPE],
+      },
+      display: {
+        title: intl.formatMessage(messages.display),
+        description: intl.formatMessage(messages.displayDescription),
+        choices: [
+          ['poll', intl.formatMessage(messages.displayPoll)],
+          ['results', intl.formatMessage(messages.displayResults)],
+        ],
+        default: 'poll',
+        noValueOption: false,
       },
       header: {
         title: intl.formatMessage(messages.header),

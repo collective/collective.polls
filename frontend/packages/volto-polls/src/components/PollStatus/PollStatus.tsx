@@ -36,6 +36,14 @@ const messages = defineMessages({
     id: 'Nothing to see here',
     defaultMessage: 'Nothing to see here',
   },
+  resultsAfterVote: {
+    id: 'The results will be shown after you vote.',
+    defaultMessage: 'The results will be shown after you vote.',
+  },
+  resultsWhenClosed: {
+    id: 'The results will be shown when the poll is closed.',
+    defaultMessage: 'The results will be shown when the poll is closed.',
+  },
 });
 
 /** Every message a poll can show. */
@@ -50,6 +58,8 @@ const LEVELS: Record<PollStatusKind, 'info' | 'warning' | 'error'> = {
   anonymousBlocked: 'warning',
   voteFailed: 'error',
   unavailable: 'info',
+  resultsAfterVote: 'info',
+  resultsWhenClosed: 'info',
 };
 
 export interface PollStatusProps {

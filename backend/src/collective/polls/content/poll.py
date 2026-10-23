@@ -101,10 +101,15 @@ class IPoll(model.Schema):
         required=False,
     )
 
-    show_results = schema.Bool(
+    show_results = schema.Choice(
         title=_("Show partial results"),
-        description=_("Show partial results after a voter has already voted."),
-        default=True,
+        description=_(
+            "When the results show while the poll is open. Once it is closed, "
+            "everyone sees them."
+        ),
+        default="after_vote",
+        required=True,
+        vocabulary="collective.polls.ShowResults",
     )
 
     results_graph = schema.Choice(

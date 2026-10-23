@@ -22,6 +22,7 @@ myst:
 | `mode` | Which poll | `latest` | `latest` for the latest opened poll, `chosen` for a poll the editor picks. |
 | `poll` | Chosen poll | none | The picked poll, when `mode` is `chosen`. Only polls can be picked. |
 | `show_closed` | Show closed polls | `false` | When `mode` is `latest` and no poll is open, show the latest closed poll. |
+| `display` | Show | `poll` | `poll` for the whole poll, `results` for only its results, shown once the visitor may see them. |
 | `header` | Header | empty | A heading above the poll. |
 | `show_total` | Show total votes | `true` | Show the number of votes so far, when the visitor may see the results. |
 | `link_poll` | Add a link to the poll | `true` | Link the question to the poll. |

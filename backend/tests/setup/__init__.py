@@ -9,7 +9,7 @@ from collective.polls import PACKAGE_NAME
 PROFILE = f"{PACKAGE_NAME}:default"
 
 #: Version of the default profile; bump it together with metadata.xml.
-PROFILE_VERSION = "3000"
+PROFILE_VERSION = "3001"
 
 ADD_POLL = "collective.polls: Add poll"
 CLOSE_POLL = "collective.polls: Close poll"

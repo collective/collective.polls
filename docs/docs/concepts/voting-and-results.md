@@ -57,8 +57,8 @@ That is why a multiple choice poll set to a pie chart shows bars: a pie shows pa
 |---|---|
 | Everyone, once the poll is closed | Always |
 | Reviewers and managers | Always, in any state |
-| Voters, while the poll is open | Only when **Show partial results** is on |
-| Members who did not vote | Not while the poll is open |
+| Voters, while the poll is open | When **Show partial results** is **After voting** or **Always, even before voting** |
+| Visitors who did not vote, while the poll is open | Only when **Show partial results** is **Always, even before voting** |
 
 ```{image} /_static/screens/poll-closed-results.png
 :alt: A closed poll, Choose a Captain, saying This poll is closed above its results as a pie chart
@@ -71,3 +71,9 @@ That answer cannot say whether a particular visitor voted.
 It includes the results whenever a voter would see them, and the browser decides, from the cookie, whether to show the results or the vote form.
 
 Members get an answer of their own, which says whether they voted and is never cached.
+
+## Showing the results apart from the vote
+
+A Poll block can show only the results of a poll, so a page can show the vote in one place and the results in another.
+That block follows the same rules: it shows the results once the visitor may see them, and otherwise says when they will show.
+With **Always, even before voting**, it shows them to everyone from the moment the poll opens.

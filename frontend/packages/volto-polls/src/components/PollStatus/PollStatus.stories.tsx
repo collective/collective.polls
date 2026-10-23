@@ -31,3 +31,9 @@ export const AnonymousBlocked: Story = {
 };
 export const VoteFailed: Story = { args: { kinds: ['voteFailed'] } };
 export const Unavailable: Story = { args: { kinds: ['unavailable'] } };
+export const ResultsAfterVote: Story = {
+  args: { kinds: ['resultsAfterVote'] },
+};
+export const ResultsWhenClosed: Story = {
+  args: { kinds: ['resultsWhenClosed'] },
+};

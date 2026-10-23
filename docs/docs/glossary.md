@@ -40,7 +40,7 @@ multiple choice poll
 
 partial results
     The results of a poll while it is still open.
-    Voters see them when the poll's **Show partial results** setting is on.
+    The poll's **Show partial results** setting decides who sees them: nobody but reviewers, voters, or everyone.
 
 Poll block
     A Volto block that shows a poll in any page, either the latest open one or one the editor picks.

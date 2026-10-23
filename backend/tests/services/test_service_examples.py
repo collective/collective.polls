@@ -26,8 +26,10 @@ SCENARIOS = {
     "open-voted": ("voter", {"voters": VOTERS}),
     "open-voted-hidden-results": (
         "voter",
-        {"voters": VOTERS, "show_results": False},
+        {"voters": VOTERS, "show_results": "never"},
     ),
+    # A member who has not voted sees the results.
+    "open-always": ("member", {"voters": VOTERS, "show_results": "always"}),
     "open-anonymous": ("anonymous", {"voters": VOTERS}),
     # Only editors see a poll in an unpublished folder.
     "open-anonymous-blocked": ("manager", {"container": "hidden"}),

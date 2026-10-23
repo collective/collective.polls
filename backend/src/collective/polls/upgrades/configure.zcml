@@ -4,6 +4,7 @@
     >
 
   <include package=".v3000" />
+  <include package=".v3001" />
 
   <!-- -*- extra stuff goes here -*- -->
 

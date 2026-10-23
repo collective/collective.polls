@@ -52,7 +52,8 @@ PollStateDict = TypedDict(
         "state": str,
         "allow_anonymous": bool,
         "anonymous_blocked": bool,
-        "show_results": bool,
+        #: ``never``, ``after_vote`` or ``always``.
+        "show_results": str,
         "results_graph": str,
         "options": list[PollOptionDict],
         "max_choices": int,

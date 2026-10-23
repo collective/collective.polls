@@ -39,7 +39,7 @@ The title is the poll's question, and the description is shown below it.
 
 | Field | Title | Type | Default | Description |
 |---|---|---|---|---|
-| `show_results` | Show partial results | Boolean | `true` | Lets voters see the results while the poll is open, once they voted. |
+| `show_results` | Show partial results | Choice | `after_vote` | Who sees the results while the poll is open: `never` (Only when the poll is closed), `after_vote` (After voting), or `always` (Always, even before voting). The vocabulary is `collective.polls.ShowResults`. |
 | `results_graph` | Graph | Choice | `bar` | How to draw the results: `bar` (Bar Chart), `pie` (Pie Chart), or `numbers` (Numbers Only). The vocabulary is `collective.polls.ResultsGraph`. |
 
 ```{image} /_static/screens/poll-add-results.png

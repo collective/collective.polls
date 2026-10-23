@@ -2,7 +2,7 @@ import React from 'react';
 import { afterEach, describe, it, expect, vi } from 'vitest';
 import { act, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import Poll, { statusKinds } from './Poll';
+import Poll, { resultsStatusKinds, statusKinds } from './Poll';
 import { recordingStore } from '../../testing/store';
 import { renderInVolto } from '../../testing/render';
 import { VOTE_POLL } from '../../constants/ActionTypes';
@@ -10,6 +10,7 @@ import type { PollError, PollState } from '../../types/poll';
 import closed from '../../__fixtures__/closed.json';
 import noVotes from '../../__fixtures__/no-votes.json';
 import open from '../../__fixtures__/open.json';
+import openAlways from '../../__fixtures__/open-always.json';
 import multiple from '../../__fixtures__/open-multiple.json';
 import openAnonymous from '../../__fixtures__/open-anonymous.json';
 import openAnonymousBlocked from '../../__fixtures__/open-anonymous-blocked.json';
@@ -143,6 +144,26 @@ describe('Poll', () => {
     expect(results()).not.toBeNull();
     fireEvent.click(getByRole('button', { name: 'Vote' }));
     expect(form()).not.toBeNull();
+  });
+
+  it('lets a member look at the results before voting when always shown', () => {
+    const { form, results, getByRole } = setup({}, entry(openAlways));
+    expect(form()).not.toBeNull();
+    expect(results()).toBeNull();
+    fireEvent.click(getByRole('button', { name: 'Show partial results' }));
+    expect(results()).not.toBeNull();
+  });
+
+  it('lets an anonymous visitor look before voting when always shown', () => {
+    const data = { ...openAnonymous, show_results: 'always' };
+    const { form, getByRole } = setup({}, entry(data));
+    expect(form()).not.toBeNull();
+    expect(getByRole('button', { name: 'Show partial results' })).toBeTruthy();
+  });
+
+  it('offers an anonymous visitor no peek at results shown after voting', () => {
+    const { queryByRole } = setup({}, entry(openAnonymous));
+    expect(queryByRole('button', { name: 'Show partial results' })).toBeNull();
   });
 
   it('offers no peek at a poll without votes', () => {
@@ -347,6 +368,105 @@ describe('Poll', () => {
     expect(queryByRole('link')).toBeNull();
     expect(container.querySelector('.poll-total-votes')).toBeNull();
   });
+});
+
+describe('Poll showing only the results', () => {
+  const display = 'results' as const;
+
+  afterEach(() => {
+    document.cookie = `collective.poll.${openAnonymous.uid}=; max-age=0; path=/`;
+  });
+
+  it('shows a member who voted the results, without the form', () => {
+    const { form, results, kinds, queryByRole } = setup(
+      { display },
+      entry(openVoted),
+    );
+    expect(form()).toBeNull();
+    expect(results()).not.toBeNull();
+    expect(kinds()).toEqual([]);
+    expect(queryByRole('button')).toBeNull();
+  });
+
+  it('shows a member who did not vote the results when always shown', () => {
+    const { form, results, kinds } = setup({ display }, entry(openAlways));
+    expect(form()).toBeNull();
+    expect(results()).not.toBeNull();
+    expect(kinds()).toEqual([]);
+  });
+
+  it('tells a member who did not vote when the results will show', () => {
+    const { form, results, kinds } = setup({ display }, entry(open));
+    expect(form()).toBeNull();
+    expect(results()).toBeNull();
+    expect(kinds()).toEqual(['resultsAfterVote']);
+  });
+
+  it('hides the results from an anonymous visitor until they vote', () => {
+    const { results, kinds } = setup({ display }, entry(openAnonymous));
+    expect(results()).toBeNull();
+    expect(kinds()).toEqual(['resultsAfterVote']);
+  });
+
+  it('shows an anonymous visitor with the cookie the results', () => {
+    document.cookie = `collective.poll.${openAnonymous.uid}=xyz; path=/`;
+    const { results, kinds } = setup({ display }, entry(openAnonymous));
+    expect(results()).not.toBeNull();
+    expect(kinds()).toEqual([]);
+  });
+
+  it('says the results wait for the poll to close', () => {
+    const { results, kinds } = setup({ display }, entry(openVotedHidden));
+    expect(results()).toBeNull();
+    expect(kinds()).toEqual(['resultsWhenClosed']);
+  });
+
+  it('shows the final results of a closed poll', () => {
+    const { results, kinds } = setup({ display }, entry(closed));
+    expect(results()).not.toBeNull();
+    expect(kinds()).toEqual(['closed']);
+  });
+
+  it('shows neither options nor results before the poll opens', () => {
+    const { form, results, kinds } = setup({ display }, entry(privatePoll));
+    expect(form()).toBeNull();
+    expect(results()).toBeNull();
+    expect(kinds()).toEqual(['notOpen']);
+  });
+
+  it('shows no fallback options while loading', () => {
+    const { form } = setup({ display, fallbackOptions: open.options });
+    expect(form()).toBeNull();
+  });
+
+  it('shows the total with the results', () => {
+    const { container } = setup({ display, showTotal: true }, entry(openVoted));
+    expect(container.querySelector('.poll-total-votes')?.textContent).toBe(
+      'Total votes: 3',
+    );
+  });
+});
+
+describe('resultsStatusKinds', () => {
+  const poll = open as PollState;
+
+  it.each([
+    ['nothing while shown', poll, true, []],
+    ['after voting', poll, false, ['resultsAfterVote']],
+    [
+      'when closed, for a poll never showing them',
+      { ...poll, show_results: 'never' },
+      false,
+      ['resultsWhenClosed'],
+    ],
+    ['closed', { ...poll, state: 'closed' }, true, ['closed']],
+    ['not open', { ...poll, state: 'pending' }, false, ['notOpen']],
+  ] as [string, PollState, boolean, string[]][])(
+    '%s',
+    (_name, data, shown, expected) => {
+      expect(resultsStatusKinds(data, shown)).toEqual(expected);
+    },
+  );
 });
 
 describe('statusKinds', () => {

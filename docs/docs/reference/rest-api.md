@@ -28,7 +28,7 @@ It needs the `View` permission on the poll.
   "state": "open",
   "allow_anonymous": true,
   "anonymous_blocked": false,
-  "show_results": true,
+  "show_results": "after_vote",
   "results_graph": "bar",
   "options": [
     {"option_id": 0, "description": "Yes"},
@@ -54,7 +54,7 @@ It needs the `View` permission on the poll.
 | `state` | string | The workflow state: `private`, `pending`, `open`, or `closed`. |
 | `allow_anonymous` | boolean | The poll's setting. |
 | `anonymous_blocked` | boolean | `true` for an open poll that allows anonymous votes, when anonymous visitors still cannot vote in it. |
-| `show_results` | boolean | The poll's setting. |
+| `show_results` | string | The poll's setting: `never`, `after_vote`, or `always`. |
 | `results_graph` | string | `bar`, `pie`, or `numbers`. |
 | `options` | list | The options, in the poll's order. |
 | `max_choices` | integer | How many options a voter can pick. |
@@ -69,7 +69,8 @@ The results are part of the answer when one of these is true.
 
 -   The poll is closed.
 -   The caller can review the poll.
--   The poll is open and shows partial results, and the caller voted or is anonymous.
+-   The poll is open and `show_results` is `always`.
+-   The poll is open, `show_results` is `after_vote`, and the caller voted or is anonymous.
 
 ## Vote: `POST @vote`
 

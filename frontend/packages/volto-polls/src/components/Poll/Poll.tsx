@@ -5,6 +5,7 @@ import PollForm from '../PollForm/PollForm';
 import PollResults from '../PollResults/PollResults';
 import PollStatus, { type PollStatusKind } from '../PollStatus/PollStatus';
 import TotalVotes from '../TotalVotes/TotalVotes';
+import { resultsAllowed } from '../../helpers/results';
 import useOptionOrder from '../../hooks/useOptionOrder';
 import usePoll from '../../hooks/usePoll';
 import type { PollError, PollOption, PollState } from '../../types/poll';
@@ -38,6 +39,11 @@ export interface PollProps {
   fallbackMaxChoices?: number;
   /** The legend above the options, until the poll's state arrives. */
   fallbackLegend?: string | null;
+  /**
+   * `results` shows only the results, once the user may see them, and says
+   * when they will show otherwise; the vote happens elsewhere.
+   */
+  display?: 'poll' | 'results';
 }
 
 /**
@@ -74,8 +80,29 @@ export function statusKinds(
 }
 
 /**
+ * Which messages a poll shows when it displays only its results.
+ *
+ * @param poll The poll's state.
+ * @param shown The results are on display.
+ */
+export function resultsStatusKinds(
+  poll: PollState,
+  shown: boolean,
+): PollStatusKind[] {
+  if (poll.state === 'closed') return ['closed'];
+  if (poll.state === 'private' || poll.state === 'pending') return ['notOpen'];
+  if (shown) return [];
+  return [
+    poll.show_results === 'after_vote'
+      ? 'resultsAfterVote'
+      : 'resultsWhenClosed',
+  ];
+}
+
+/**
  * A poll: the vote form while the user can vote, only the options while
- * the poll is not open yet, the results otherwise.
+ * the poll is not open yet, the results otherwise. With `display` set to
+ * `results`, only the results.
  *
  * It fetches the poll's state for the current user in the browser, so the
  * server renders only the question and, given `fallbackOptions`, the
@@ -91,6 +118,7 @@ export const Poll = ({
   fallbackOptions,
   fallbackMaxChoices,
   fallbackLegend,
+  display = 'poll',
 }: PollProps) => {
   const intl = useIntl();
   const { poll, error, vote, voting, voteError, hasVoted, canVoteNow } =
@@ -110,22 +138,23 @@ export const Poll = ({
     setPeek(false);
   };
 
+  const resultsOnly = display === 'results';
   const results = poll?.results ?? null;
-  // Someone who could see the results before voting, such as a reviewer.
-  const canPeek = Boolean(
-    poll &&
-      canVoteNow &&
-      poll.has_voted === false &&
-      results &&
-      (poll.total_votes ?? 0) > 0,
-  );
   // Not open yet: show what will be asked, not results nobody voted for.
   const notOpen = poll?.state === 'private' || poll?.state === 'pending';
-  const showForm = poll ? canVoteNow && !(canPeek && peek) : false;
+  const allowed = Boolean(poll && !notOpen && resultsAllowed(poll, canVoteNow));
+  // Someone who may see the results before voting: a reviewer, or anyone
+  // when the poll always shows them.
+  const canPeek =
+    !resultsOnly && allowed && canVoteNow && (poll?.total_votes ?? 0) > 0;
+  const showForm =
+    poll && !resultsOnly ? canVoteNow && !(canPeek && peek) : false;
   const showResults =
-    !notOpen && Boolean(results) && (!canVoteNow || (canPeek && peek));
+    allowed && (resultsOnly || !canVoteNow || (canPeek && peek));
   const kinds: PollStatusKind[] = poll
-    ? statusKinds(poll, hasVoted, justVoted, voteError)
+    ? resultsOnly
+      ? resultsStatusKinds(poll, showResults)
+      : statusKinds(poll, hasVoted, justVoted, voteError)
     : error
       ? ['unavailable']
       : [];
@@ -153,7 +182,7 @@ export const Poll = ({
           legend={poll.legend}
         />
       )}
-      {notOpen && poll && (
+      {notOpen && poll && !resultsOnly && (
         <PollForm
           options={options}
           onVote={() => undefined}
@@ -162,15 +191,19 @@ export const Poll = ({
           legend={poll.legend}
         />
       )}
-      {!poll && !error && fallbackOptions && fallbackOptions.length > 0 && (
-        <PollForm
-          options={fallbackOptions}
-          onVote={() => undefined}
-          maxChoices={fallbackMaxChoices}
-          disabled
-          legend={fallbackLegend}
-        />
-      )}
+      {!poll &&
+        !error &&
+        !resultsOnly &&
+        fallbackOptions &&
+        fallbackOptions.length > 0 && (
+          <PollForm
+            options={fallbackOptions}
+            onVote={() => undefined}
+            maxChoices={fallbackMaxChoices}
+            disabled
+            legend={fallbackLegend}
+          />
+        )}
       {showResults && poll && results && (
         <PollResults
           results={results}

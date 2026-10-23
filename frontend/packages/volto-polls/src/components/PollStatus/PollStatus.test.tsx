@@ -11,6 +11,12 @@ const KINDS: [PollStatusKind, string, string][] = [
   ['anonymousBlocked', "Anonymous user won't be able to vote", 'warning'],
   ['voteFailed', 'Your vote could not be registered.', 'error'],
   ['unavailable', 'Nothing to see here', 'info'],
+  ['resultsAfterVote', 'The results will be shown after you vote.', 'info'],
+  [
+    'resultsWhenClosed',
+    'The results will be shown when the poll is closed.',
+    'info',
+  ],
 ];
 
 describe('PollStatus', () => {

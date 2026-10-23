@@ -7,6 +7,9 @@ from collective.polls.interfaces import IPollVotes
 from collective.polls.interfaces import ISerializePollState
 from collective.polls.interfaces import PollResultDict
 from collective.polls.interfaces import PollStateDict
+from collective.polls.vocabularies.show_results import AFTER_VOTE
+from collective.polls.vocabularies.show_results import ALWAYS
+from collective.polls.vocabularies.show_results import show_results_choice
 from plone import api
 from zope.component import adapter
 from zope.interface import implementer
@@ -18,11 +21,12 @@ def results_visible(poll: Poll, has_voted: bool | None) -> bool:
     """Decide whether the current user gets the results of a poll.
 
     Closed polls show their results to everyone, and reviewers always see
-    them. While a poll is open, ``show_results`` lets people who voted see
-    them. Anonymous callers (``has_voted`` is ``None``) get them on the same
-    terms as voters: their answer must not depend on who asks, so it can be
-    cached, and the browser hides the numbers until the visitor's cookie
-    says they voted.
+    them. While a poll is open, ``show_results`` decides: ``never``, only
+    reviewers; ``after_vote``, people who voted; ``always``, everyone.
+    Anonymous callers (``has_voted`` is ``None``) get them on the same terms
+    as voters: their answer must not depend on who asks, so it can be
+    cached, and with ``after_vote`` the browser hides the numbers until the
+    visitor's cookie says they voted.
 
     :param poll: The poll.
     :param has_voted: Whether the caller voted; ``None`` for anonymous.
@@ -33,7 +37,12 @@ def results_visible(poll: Poll, has_voted: bool | None) -> bool:
         return True
     if api.user.has_permission("Review portal content", obj=poll):
         return True
-    return state == "open" and poll.show_results and has_voted is not False
+    if state != "open":
+        return False
+    choice = show_results_choice(poll.show_results)
+    if choice == ALWAYS:
+        return True
+    return choice == AFTER_VOTE and has_voted is not False
 
 
 def anonymous_blocked(poll: Poll, state: str) -> bool:
@@ -121,7 +130,7 @@ class PollStateSerializer:
             "state": state,
             "allow_anonymous": bool(poll.allow_anonymous),
             "anonymous_blocked": anonymous_blocked(poll, state),
-            "show_results": bool(poll.show_results),
+            "show_results": show_results_choice(poll.show_results),
             "results_graph": poll.results_graph,
             "options": poll.getOptions(),
             "max_choices": poll.max_choices or 1,

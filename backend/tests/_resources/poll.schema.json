@@ -28,7 +28,7 @@
     "state": {"enum": ["private", "pending", "open", "closed"]},
     "allow_anonymous": {"type": "boolean"},
     "anonymous_blocked": {"type": "boolean"},
-    "show_results": {"type": "boolean"},
+    "show_results": {"enum": ["never", "after_vote", "always"]},
     "results_graph": {"enum": ["bar", "pie", "numbers"]},
     "options": {
       "type": "array",
