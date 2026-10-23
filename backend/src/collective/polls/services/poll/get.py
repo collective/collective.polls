@@ -34,13 +34,15 @@ class PollGet(PollService):
         """Return the entity tag of the anonymous answer.
 
         Votes change ``modified``; workflow transitions may not, and they
-        change what the answer says, so the state is part of the tag.
+        change what the answer says, so the state is part of the tag. So is
+        passing the closing date, which changes nothing stored at all.
 
         :returns: A quoted entity tag.
         """
         modified = self.context.modified().timeTime()
         state = api.content.get_state(self.context)
-        return f'"{modified}-{state}"'
+        expired = "-expired" if self.context.expired else ""
+        return f'"{modified}-{state}{expired}"'
 
     def reply(self) -> PollStateDict | object:
         """Return the state of the poll, as seen by the current user.

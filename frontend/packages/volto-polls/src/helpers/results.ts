@@ -3,10 +3,29 @@
  * @module helpers/results
  */
 
-import type { PollResult } from '../types/poll';
+import type { PollResult, PollState } from '../types/poll';
 
 /** How many chart colors the theme declares. */
 export const COLOR_COUNT = 8;
+
+/**
+ * Whether the user may see a poll's results, if they asked for them.
+ *
+ * Someone who cannot vote now sees whatever results the backend sent.
+ * Someone who still can sees them only when the backend sent them on
+ * purpose: to a member whose answer says they did not vote, such as a
+ * reviewer, or for a poll that always shows them. Otherwise they are the
+ * results an anonymous visitor gets for later, once the cookie says they
+ * voted.
+ *
+ * @param poll The poll's state.
+ * @param canVoteNow The user may vote, and has not voted yet.
+ */
+export function resultsAllowed(poll: PollState, canVoteNow: boolean): boolean {
+  if (!poll.results) return false;
+  if (!canVoteNow) return true;
+  return poll.has_voted === false || poll.show_results === 'always';
+}
 
 /**
  * Round each option's share, as the backend reports it, to whole percents.

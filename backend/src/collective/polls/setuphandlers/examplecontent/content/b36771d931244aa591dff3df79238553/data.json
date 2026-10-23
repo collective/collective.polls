@@ -54,7 +54,7 @@
   "preview_caption_link": null,
   "results_graph": "bar",
   "review_state": "open",
-  "show_results": false,
+  "show_results": "never",
   "title": "Favorite Ship",
   "type_title": "Poll",
   "version": "current",

@@ -59,6 +59,7 @@ export const PollBlockView = ({
         showTotal={data.show_total ?? true}
         linkToPoll={data.link_poll ?? true}
         interactive={!isEditMode}
+        display={data.display ?? 'poll'}
       />
     </div>
   );

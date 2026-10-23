@@ -4,7 +4,7 @@
   "state": "open",
   "allow_anonymous": true,
   "anonymous_blocked": false,
-  "show_results": true,
+  "show_results": "after_vote",
   "results_graph": "bar",
   "options": [
     {
@@ -23,6 +23,8 @@
   "max_choices": 2,
   "legend": "Pick your favourite colours",
   "shuffle_options": true,
+  "close_date": null,
+  "expired": false,
   "can_vote": true,
   "has_voted": true,
   "total_votes": 3,

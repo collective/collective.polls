@@ -82,6 +82,17 @@ export const Chosen: Story = {
   },
   decorators: [withSite('/a-poll')],
 };
+/** Only the results of a closed poll, as placed apart from the vote. */
+export const ResultsOnly: Story = {
+  args: {
+    data: {
+      mode: 'chosen',
+      poll: [{ '@id': '/old-poll', title: 'An old poll' }],
+      display: 'results',
+    },
+  },
+  decorators: [withSite('/a-poll')],
+};
 export const EmptyInTheEditor: Story = {
   args: { data: {}, isEditMode: true },
   decorators: [withSite(null)],

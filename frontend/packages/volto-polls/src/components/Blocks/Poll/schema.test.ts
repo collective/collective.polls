@@ -13,6 +13,7 @@ describe('PollBlockSchema', () => {
     expect(schema.fieldsets[0].fields).toEqual([
       'mode',
       'show_closed',
+      'display',
       'header',
       'show_total',
       'link_poll',
@@ -24,6 +25,7 @@ describe('PollBlockSchema', () => {
     expect(schema.fieldsets[0].fields).toEqual([
       'mode',
       'poll',
+      'display',
       'header',
       'show_total',
       'link_poll',
@@ -44,5 +46,14 @@ describe('PollBlockSchema', () => {
     expect(properties.show_total.default).toBe(true);
     expect(properties.show_closed.default).toBe(false);
     expect(properties.link_poll.default).toBe(true);
+  });
+
+  it('shows the whole poll by default, or only its results', () => {
+    const { display } = PollBlockSchema({ intl }).properties;
+    expect(display.default).toBe('poll');
+    expect(display.choices.map(([value]: [string]) => value)).toEqual([
+      'poll',
+      'results',
+    ]);
   });
 });

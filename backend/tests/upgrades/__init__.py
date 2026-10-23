@@ -1,4 +1,4 @@
-"""The upgrade from 2.x to 3000."""
+"""The upgrades from 2.x to 3000, and on to the current version."""
 
 from collective.polls.config import PORTAL_TYPE
 
@@ -10,4 +10,7 @@ SOURCE = "7"
 
 DESTINATION = "3000"
 
-__all__ = ["DESTINATION", "PORTAL_TYPE", "PROFILE", "SOURCE"]
+#: Profile version of the current code.
+LATEST = "3001"
+
+__all__ = ["DESTINATION", "LATEST", "PORTAL_TYPE", "PROFILE", "SOURCE"]

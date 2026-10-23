@@ -13,6 +13,12 @@ export type PollWorkflowState = 'private' | 'pending' | 'open' | 'closed';
 /** How a poll shows its results. */
 export type ResultsGraph = 'bar' | 'pie' | 'numbers';
 
+/**
+ * When an open poll shows its partial results: to nobody but reviewers, to
+ * people who voted, or to everyone. Closed polls show them to everyone.
+ */
+export type ShowResults = 'never' | 'after_vote' | 'always';
+
 /** One option of a poll. */
 export interface PollOption {
   /** Stable id; votes are counted by it. Missing only before saving. */
@@ -38,7 +44,7 @@ export interface PollState {
   allow_anonymous: boolean;
   /** Open, meant for anonymous votes, but anonymous visitors cannot vote. */
   anonymous_blocked: boolean;
-  show_results: boolean;
+  show_results: ShowResults;
   results_graph: ResultsGraph;
   options: PollOption[];
   /** How many options a voter can pick; more than 1 is multiple choice. */
@@ -47,6 +53,13 @@ export interface PollState {
   legend: string | null;
   /** Show the options in a random order to each voter. */
   shuffle_options: boolean;
+  /** When voting ends, ISO 8601 in UTC; `null` when closed by hand only. */
+  close_date: string | null;
+  /**
+   * The closing date has passed: no more votes, and results for everyone,
+   * though `state` may still be `open`.
+   */
+  expired: boolean;
   /** The caller holds the vote permission. Says nothing about having voted. */
   can_vote: boolean;
   /** `null` for anonymous callers: the browser answers from the cookie. */
@@ -69,8 +82,9 @@ export interface PollContent extends Content {
   max_choices?: number;
   legend?: string | null;
   shuffle_options?: boolean;
+  close_date?: string | null;
   allow_anonymous: boolean;
-  show_results: boolean;
+  show_results: Term | ShowResults | null;
   results_graph: Term | ResultsGraph | null;
 }
 
@@ -92,6 +106,8 @@ export interface PollBlockData {
   /** With no open poll to show, show the newest closed one instead. */
   show_closed?: boolean;
   link_poll?: boolean;
+  /** Show the whole poll, or only its results, as the poll allows them. */
+  display?: 'poll' | 'results';
 }
 
 /** Why a request about a poll failed. */

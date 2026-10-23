@@ -6,6 +6,9 @@ import Poll from './Poll';
 import { recordingStore } from '../../testing/store';
 import closed from '../../__fixtures__/closed.json';
 import open from '../../__fixtures__/open.json';
+import openAlways from '../../__fixtures__/open-always.json';
+import openClosing from '../../__fixtures__/open-closing.json';
+import openExpired from '../../__fixtures__/open-expired.json';
 import multiple from '../../__fixtures__/open-multiple.json';
 import openAnonymousBlocked from '../../__fixtures__/open-anonymous-blocked.json';
 import openVoted from '../../__fixtures__/open-voted.json';
@@ -62,6 +65,13 @@ export const Closed: Story = {
   args: { showTotal: true },
   decorators: [withPoll(closed)],
 };
+/** Voting ends at the poll's closing date. */
+export const ClosingDate: Story = { decorators: [withPoll(openClosing)] };
+/** Past its closing date, a poll reads as closed while still open. */
+export const PastClosingDate: Story = {
+  args: { showTotal: true },
+  decorators: [withPoll(openExpired)],
+};
 export const NotOpen: Story = { decorators: [withPoll(privatePoll)] };
 /** Up to two choices, under the poll's own legend, in a random order. */
 export const MultipleChoice: Story = {
@@ -86,6 +96,20 @@ export const AnonymousBlocked: Story = {
 /** A reviewer can look at the partial results before voting. */
 export const ReviewerBeforeVoting: Story = {
   decorators: [withPoll({ ...openVoted, has_voted: false })],
+};
+/** A poll that always shows its results: anyone can look before voting. */
+export const AlwaysShowsResults: Story = {
+  decorators: [withPoll(openAlways)],
+};
+/** Only the results, as a block placed apart from the vote shows them. */
+export const ResultsOnly: Story = {
+  args: { display: 'results', showTotal: true },
+  decorators: [withPoll(openVoted)],
+};
+/** Only the results, before the visitor may see them. */
+export const ResultsOnlyNotYet: Story = {
+  args: { display: 'results' },
+  decorators: [withPoll(open)],
 };
 export const VoteFailed: Story = {
   decorators: [withPoll(open, { voteError: { status: 500 } })],

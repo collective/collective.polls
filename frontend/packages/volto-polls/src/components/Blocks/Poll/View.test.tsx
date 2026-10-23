@@ -70,7 +70,16 @@ describe('PollBlockView', () => {
       showTotal: true,
       linkToPoll: true,
       interactive: true,
+      display: 'poll',
     });
+  });
+
+  it('shows only the results when asked to', () => {
+    const { props } = setup(
+      { display: 'results' },
+      { '/en|open': found('/en/a-poll', 'A poll') },
+    );
+    expect(props()).toMatchObject({ path: '/en/a-poll', display: 'results' });
   });
 
   it('falls back to the latest closed poll when asked to', () => {

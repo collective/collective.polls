@@ -13,6 +13,8 @@ from collective.polls.options import DuplicateOptionId
 from collective.polls.options import normalize_options
 from collective.polls.options import OPTIONS_SCHEMA
 from collective.polls.utility import IPolls
+from datetime import datetime
+from datetime import timezone
 from plone import api
 from plone.dexterity.content import Container
 from plone.schema import JSONField
@@ -63,6 +65,7 @@ class IPoll(model.Schema):
             "legend",
             "options",
             "shuffle_options",
+            "close_date",
         ],
     )
     fieldset(
@@ -101,10 +104,15 @@ class IPoll(model.Schema):
         required=False,
     )
 
-    show_results = schema.Bool(
+    show_results = schema.Choice(
         title=_("Show partial results"),
-        description=_("Show partial results after a voter has already voted."),
-        default=True,
+        description=_(
+            "When the results show while the poll is open. Once it is closed, "
+            "everyone sees them."
+        ),
+        default="after_vote",
+        required=True,
+        vocabulary="collective.polls.ShowResults",
     )
 
     results_graph = schema.Choice(
@@ -130,6 +138,14 @@ class IPoll(model.Schema):
             "position does not favor any of them."
         ),
         default=False,
+    )
+
+    close_date = schema.Datetime(
+        title=_("Closing date"),
+        description=_(
+            "Voting ends at this date and time. Leave empty to close the poll by hand."
+        ),
+        required=False,
     )
 
     @invariant
@@ -178,6 +194,29 @@ class Poll(Container):
         :returns: One ``{"option_id": int, "description": str}`` per option.
         """
         return self.options or []
+
+    def closes_at(self) -> datetime | None:
+        """Return when voting ends, if the poll has a closing date.
+
+        :returns: The closing date, timezone aware; a date stored without a
+            timezone is read as UTC. ``None`` without one.
+        """
+        close_date = getattr(self, "close_date", None)
+        if close_date is None:
+            return None
+        if close_date.tzinfo is None:
+            return close_date.replace(tzinfo=timezone.utc)
+        return close_date
+
+    @property
+    def expired(self) -> bool:
+        """Whether the closing date has passed.
+
+        An expired poll takes no more votes and shows its results to
+        everyone, as a closed one does, even while it is still open.
+        """
+        closes_at = self.closes_at()
+        return closes_at is not None and datetime.now(timezone.utc) >= closes_at
 
     @property
     def multiple_choice(self) -> bool:
@@ -275,6 +314,7 @@ class Poll(Container):
         :returns: ``True`` when the vote was counted; ``False`` for anything
             that is not such an id or list of ids.
         :raises Unauthorized: Without the vote permission.
+        :raises PollClosed: After the poll's closing date.
         :raises AlreadyVoted: When the caller already voted, or is anonymous
             and there is no request to tell by.
         """

@@ -19,6 +19,13 @@ class AlreadyVoted(Unauthorized):
     """
 
 
+class PollClosed(Unauthorized):
+    """The poll's closing date has passed, so it takes no more votes.
+
+    A subclass of ``Unauthorized``, like :class:`AlreadyVoted`.
+    """
+
+
 class _PollOptionBase(TypedDict):
     description: str
 
@@ -52,12 +59,16 @@ PollStateDict = TypedDict(
         "state": str,
         "allow_anonymous": bool,
         "anonymous_blocked": bool,
-        "show_results": bool,
+        #: ``never``, ``after_vote`` or ``always``.
+        "show_results": str,
         "results_graph": str,
         "options": list[PollOptionDict],
         "max_choices": int,
         "legend": str | None,
         "shuffle_options": bool,
+        #: ISO 8601, in UTC; ``None`` for a poll closed by hand only.
+        "close_date": str | None,
+        "expired": bool,
         "can_vote": bool,
         "has_voted": bool | None,
         "total_votes": int | None,

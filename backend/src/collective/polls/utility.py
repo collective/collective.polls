@@ -14,6 +14,7 @@ from collective.polls.config import PERMISSION_VOTE
 from collective.polls.config import PORTAL_TYPE
 from collective.polls.interfaces import AlreadyVoted
 from collective.polls.interfaces import IPollVotes
+from collective.polls.interfaces import PollClosed
 from plone import api
 from typing import Any
 from typing import TYPE_CHECKING
@@ -143,11 +144,15 @@ class Polls:
         :param request: Request carrying the anonymous voting cookie.
         :returns: ``True``; every other case raises.
         :raises Unauthorized: Without the vote permission.
+        :raises PollClosed: After the poll's closing date; a subclass of
+            ``Unauthorized``.
         :raises AlreadyVoted: After voting, or when it cannot be told; a
             subclass of ``Unauthorized``.
         """
         if not api.user.has_permission(PERMISSION_VOTE, obj=poll):
             raise Unauthorized
+        if poll.expired:
+            raise PollClosed
         if self.voted_in_a_poll(poll, request):
             raise AlreadyVoted
         return True

@@ -30,6 +30,7 @@ The title is the poll's question, and the description is shown below it.
 | `legend` | Legend | Text line | empty | Shown above the options. When empty, the form shows *Select one option* or *Select up to N options*. |
 | `options` | Available options | JSON list | empty | The options, see {ref}`reference-options`. |
 | `shuffle_options` | Shuffle options | Boolean | `false` | Shows the options in a random order to each voter. |
+| `close_date` | Closing date | Date and time | empty | When voting ends, see {ref}`concepts-closing-date`. Leave empty to close the poll by hand only. |
 
 ```{image} /_static/screens/poll-add-voting.png
 :alt: The Voting tab of the form that adds a poll, with the options widget
@@ -39,7 +40,7 @@ The title is the poll's question, and the description is shown below it.
 
 | Field | Title | Type | Default | Description |
 |---|---|---|---|---|
-| `show_results` | Show partial results | Boolean | `true` | Lets voters see the results while the poll is open, once they voted. |
+| `show_results` | Show partial results | Choice | `after_vote` | Who sees the results while the poll is open: `never` (Only when the poll is closed), `after_vote` (After voting), or `always` (Always, even before voting). The vocabulary is `collective.polls.ShowResults`. |
 | `results_graph` | Graph | Choice | `bar` | How to draw the results: `bar` (Bar Chart), `pie` (Pie Chart), or `numbers` (Numbers Only). The vocabulary is `collective.polls.ResultsGraph`. |
 
 ```{image} /_static/screens/poll-add-results.png

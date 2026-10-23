@@ -51,7 +51,7 @@
   "preview_caption_link": null,
   "results_graph": "pie",
   "review_state": "closed",
-  "show_results": false,
+  "show_results": "never",
   "title": "Choose a Captain",
   "type_title": "Poll",
   "version": "current",

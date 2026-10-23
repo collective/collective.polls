@@ -3,9 +3,14 @@ import {
   COLOR_COUNT,
   formatPercent,
   optionColor,
+  resultsAllowed,
   wholePercents,
 } from './results';
-import type { PollResult } from '../types/poll';
+import type { PollResult, PollState } from '../types/poll';
+import open from '../__fixtures__/open.json';
+import openAlways from '../__fixtures__/open-always.json';
+import openAnonymous from '../__fixtures__/open-anonymous.json';
+import openVoted from '../__fixtures__/open-voted.json';
 
 /** Single choice results: each share is of all the votes. */
 function results(...votes: number[]): PollResult[] {
@@ -94,5 +99,28 @@ describe('optionColor', () => {
     expect(optionColor(COLOR_COUNT - 1)).toBe(
       `var(--polls-color-${COLOR_COUNT})`,
     );
+  });
+});
+
+describe('resultsAllowed', () => {
+  it.each([
+    ['none sent', open, false, false],
+    ['sent to someone who cannot vote now', openVoted, false, true],
+    ['sent to a member who did not vote', openAlways, true, true],
+    [
+      'sent to a reviewer before voting',
+      { ...openVoted, has_voted: false },
+      true,
+      true,
+    ],
+    ['sent for later to an anonymous visitor', openAnonymous, true, false],
+    [
+      'always shown, to an anonymous visitor',
+      { ...openAnonymous, show_results: 'always' },
+      true,
+      true,
+    ],
+  ])('%s', (_name, poll, canVoteNow, expected) => {
+    expect(resultsAllowed(poll as PollState, canVoteNow)).toBe(expected);
   });
 });

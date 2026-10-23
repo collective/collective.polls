@@ -37,6 +37,20 @@ It shows nothing to visitors when there is no poll to show.
 
 The block keeps showing that poll in any state the visitor can see: its options while it is not open yet, the vote form while it is open, and its results once it is closed.
 
+## Show the results apart from the vote
+
+Use this to show the vote in one place and its results in another, such as the poll on one page and its results on the home page.
+
+1.  Edit the poll, and in its **Results** fieldset set **Show partial results** to **Always, even before voting**.
+    With **After voting**, visitors see the results only once they voted.
+2.  Edit the page, and add a **Poll** block.
+3.  Pick the poll, as above, or keep **Latest opened poll**.
+4.  Set **Show** to **Only the results**.
+5.  Save the page.
+
+The block shows no vote form.
+Before visitors may see the results, it says when they will show.
+
 ## Adjust what the block shows
 
 | Setting | Effect |

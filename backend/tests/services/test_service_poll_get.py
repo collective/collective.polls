@@ -56,7 +56,7 @@ class TestPayload:
             {"option_id": 1, "description": "No"},
         ]
         assert data["allow_anonymous"] is True
-        assert data["show_results"] is True
+        assert data["show_results"] == "after_vote"
         assert data["results_graph"] == "bar"
 
     @pytest.mark.parametrize(
@@ -86,14 +86,44 @@ class TestPayload:
             ("reviewer", RESULTS),
         ],
     )
-    def test_open_results_hidden(self, username, results):
-        self.make_poll(voters=VOTERS, show_results=False)
+    def test_open_results_never(self, username, results):
+        self.make_poll(voters=VOTERS, show_results="never")
         data = self.get(username)
-        assert data["show_results"] is False
+        assert data["show_results"] == "never"
+        assert data["results"] == results
+
+    @pytest.mark.parametrize("username", ["anonymous", "member", "voter", "reviewer"])
+    def test_open_results_always(self, username):
+        """Everyone sees the results, voted or not."""
+        self.make_poll(voters=VOTERS, show_results="always")
+        data = self.get(username)
+        assert data["show_results"] == "always"
+        assert data["results"] == RESULTS
+        assert data["total_votes"] == 3
+
+    @pytest.mark.parametrize("show_results", ["never", "after_vote", "always"])
+    @pytest.mark.parametrize("state", ["private", "pending"])
+    def test_not_open_results_hidden(self, state, show_results):
+        """Before opening, only reviewers see results, whatever the setting."""
+        self.make_poll(state=state, show_results=show_results)
+        response = self.session_for("manager").get("polls/poll/@poll")
+        assert response.json()["results"] == NO_RESULTS
+
+    @pytest.mark.parametrize(
+        "stored,expected,results",
+        [(True, "after_vote", RESULTS), (False, "never", None)],
+    )
+    def test_legacy_bool(self, stored, expected, results, reload):
+        """A poll still holding the 3.0.0a1 Bool answers with the choice."""
+        poll = self.make_poll(voters=VOTERS)
+        reload(poll).show_results = stored
+        transaction.commit()
+        data = self.get("voter")
+        assert data["show_results"] == expected
         assert data["results"] == results
 
     @pytest.mark.parametrize("username", ["anonymous", "member", "voter"])
-    @pytest.mark.parametrize("show_results", [True, False])
+    @pytest.mark.parametrize("show_results", ["never", "after_vote", "always"])
     def test_closed(self, username, show_results):
         """Closed polls show their results to everyone."""
         self.make_poll(state="closed", voters=VOTERS, show_results=show_results)

@@ -71,6 +71,11 @@ msgstr "Mover opção para cima"
 msgid "Nothing to see here"
 msgstr "Nada para ver aqui"
 
+#. Default: "Only the results"
+#: components/Blocks/Poll/schema
+msgid "Only the results"
+msgstr "Somente os resultados"
+
 #. Default: "Option"
 #: components/ResultsNumbers/ResultsNumbers
 msgid "Option"
@@ -121,10 +126,20 @@ msgstr "Escolha até {count} opções"
 msgid "Settings"
 msgstr "Configurações"
 
+#. Default: "Show"
+#: components/Blocks/Poll/schema
+msgid "Show"
+msgstr "Mostrar"
+
 #. Default: "Show closed polls"
 #: components/Blocks/Poll/schema
 msgid "Show closed polls"
 msgstr "Exibir enquetes encerradas"
+
+#. Default: "Show only the results to place them apart from the vote. They appear when the poll lets the visitor see them."
+#: components/Blocks/Poll/schema
+msgid "Show only the results to place them apart from the vote. They appear when the poll lets the visitor see them."
+msgstr "Mostre somente os resultados para exibi-los separados da votação. Eles aparecem quando a enquete permite que o visitante os veja."
 
 #. Default: "Show partial results"
 #: components/Poll/Poll
@@ -150,6 +165,21 @@ msgstr "Obrigado pelo seu voto"
 #: components/Blocks/Poll/schema
 msgid "The header for the block. Leave empty for none."
 msgstr "O título do bloco. Deixe vazio para não exibir."
+
+#. Default: "The poll"
+#: components/Blocks/Poll/schema
+msgid "The poll"
+msgstr "A enquete"
+
+#. Default: "The results will be shown after you vote."
+#: components/PollStatus/PollStatus
+msgid "The results will be shown after you vote."
+msgstr "Os resultados serão exibidos depois que você votar."
+
+#. Default: "The results will be shown when the poll is closed."
+#: components/PollStatus/PollStatus
+msgid "The results will be shown when the poll is closed."
+msgstr "Os resultados serão exibidos quando a enquete for encerrada."
 
 #. Default: "There is no poll to show."
 #: components/Blocks/Poll/View
@@ -181,6 +211,11 @@ msgstr "Votar"
 #: components/ResultsNumbers/ResultsNumbers
 msgid "Votes"
 msgstr "Votos"
+
+#. Default: "Voting closes on {date}."
+#: components/PollDeadline/PollDeadline
+msgid "Voting closes on {date}."
+msgstr "A votação termina em {date}."
 
 #. Default: "When no poll is open, show the results of the latest closed one instead."
 #: components/Blocks/Poll/schema

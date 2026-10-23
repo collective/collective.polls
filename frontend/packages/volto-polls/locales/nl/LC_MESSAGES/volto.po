@@ -66,6 +66,11 @@ msgstr ""
 msgid "Nothing to see here"
 msgstr "Niets te zien"
 
+#. Default: "Only the results"
+#: components/Blocks/Poll/schema
+msgid "Only the results"
+msgstr ""
+
 #. Default: "Option"
 #: components/ResultsNumbers/ResultsNumbers
 msgid "Option"
@@ -116,10 +121,20 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#. Default: "Show"
+#: components/Blocks/Poll/schema
+msgid "Show"
+msgstr ""
+
 #. Default: "Show closed polls"
 #: components/Blocks/Poll/schema
 msgid "Show closed polls"
 msgstr "Toon gesloten enquêtes"
+
+#. Default: "Show only the results to place them apart from the vote. They appear when the poll lets the visitor see them."
+#: components/Blocks/Poll/schema
+msgid "Show only the results to place them apart from the vote. They appear when the poll lets the visitor see them."
+msgstr ""
 
 #. Default: "Show partial results"
 #: components/Poll/Poll
@@ -144,6 +159,21 @@ msgstr "Hartelijk dank voor uw stem"
 #. Default: "The header for the block. Leave empty for none."
 #: components/Blocks/Poll/schema
 msgid "The header for the block. Leave empty for none."
+msgstr ""
+
+#. Default: "The poll"
+#: components/Blocks/Poll/schema
+msgid "The poll"
+msgstr ""
+
+#. Default: "The results will be shown after you vote."
+#: components/PollStatus/PollStatus
+msgid "The results will be shown after you vote."
+msgstr ""
+
+#. Default: "The results will be shown when the poll is closed."
+#: components/PollStatus/PollStatus
+msgid "The results will be shown when the poll is closed."
 msgstr ""
 
 #. Default: "There is no poll to show."
@@ -175,6 +205,11 @@ msgstr ""
 #. Default: "Votes"
 #: components/ResultsNumbers/ResultsNumbers
 msgid "Votes"
+msgstr ""
+
+#. Default: "Voting closes on {date}."
+#: components/PollDeadline/PollDeadline
+msgid "Voting closes on {date}."
 msgstr ""
 
 #. Default: "When no poll is open, show the results of the latest closed one instead."

@@ -7,6 +7,10 @@ from collective.polls.interfaces import IPollVotes
 from collective.polls.interfaces import ISerializePollState
 from collective.polls.interfaces import PollResultDict
 from collective.polls.interfaces import PollStateDict
+from collective.polls.vocabularies.show_results import AFTER_VOTE
+from collective.polls.vocabularies.show_results import ALWAYS
+from collective.polls.vocabularies.show_results import show_results_choice
+from datetime import timezone
 from plone import api
 from zope.component import adapter
 from zope.interface import implementer
@@ -17,23 +21,30 @@ from ZPublisher.HTTPRequest import HTTPRequest
 def results_visible(poll: Poll, has_voted: bool | None) -> bool:
     """Decide whether the current user gets the results of a poll.
 
-    Closed polls show their results to everyone, and reviewers always see
-    them. While a poll is open, ``show_results`` lets people who voted see
-    them. Anonymous callers (``has_voted`` is ``None``) get them on the same
-    terms as voters: their answer must not depend on who asks, so it can be
-    cached, and the browser hides the numbers until the visitor's cookie
-    says they voted.
+    Closed polls, and open ones past their closing date, show their
+    results to everyone, and reviewers always see them. While a poll is
+    open, ``show_results`` decides: ``never``, only reviewers;
+    ``after_vote``, people who voted; ``always``, everyone.
+    Anonymous callers (``has_voted`` is ``None``) get them on the same terms
+    as voters: their answer must not depend on who asks, so it can be
+    cached, and with ``after_vote`` the browser hides the numbers until the
+    visitor's cookie says they voted.
 
     :param poll: The poll.
     :param has_voted: Whether the caller voted; ``None`` for anonymous.
     :returns: ``True`` when the results are part of the answer.
     """
     state = api.content.get_state(poll)
-    if state == "closed":
+    if state == "closed" or (state == "open" and poll.expired):
         return True
     if api.user.has_permission("Review portal content", obj=poll):
         return True
-    return state == "open" and poll.show_results and has_voted is not False
+    if state != "open":
+        return False
+    choice = show_results_choice(poll.show_results)
+    if choice == ALWAYS:
+        return True
+    return choice == AFTER_VOTE and has_voted is not False
 
 
 def anonymous_blocked(poll: Poll, state: str) -> bool:
@@ -46,9 +57,9 @@ def anonymous_blocked(poll: Poll, state: str) -> bool:
     :param poll: The poll.
     :param state: The poll's workflow state.
     :returns: ``True`` for an open poll allowing anonymous votes that
-        Anonymous cannot vote in.
+        Anonymous cannot vote in, until its closing date.
     """
-    if state != "open" or not poll.allow_anonymous:
+    if state != "open" or not poll.allow_anonymous or poll.expired:
         return False
     roles = [
         r["name"] for r in poll.rolesOfPermission(PERMISSION_VOTE) if r["selected"]
@@ -115,18 +126,23 @@ class PollStateSerializer:
         if has_voted is None:
             has_voted = self._has_voted()
         visible = results_visible(poll, has_voted)
+        closes_at = poll.closes_at()
         return {
             "@id": f"{poll.absolute_url()}/@poll",
             "uid": api.content.get_uuid(poll),
             "state": state,
             "allow_anonymous": bool(poll.allow_anonymous),
             "anonymous_blocked": anonymous_blocked(poll, state),
-            "show_results": bool(poll.show_results),
+            "show_results": show_results_choice(poll.show_results),
             "results_graph": poll.results_graph,
             "options": poll.getOptions(),
             "max_choices": poll.max_choices or 1,
             "legend": poll.legend or None,
             "shuffle_options": bool(poll.shuffle_options),
+            "close_date": (
+                closes_at.astimezone(timezone.utc).isoformat() if closes_at else None
+            ),
+            "expired": poll.expired,
             "can_vote": bool(api.user.has_permission(PERMISSION_VOTE, obj=poll)),
             "has_voted": has_voted,
             "total_votes": poll.total_votes if visible else None,

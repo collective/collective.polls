@@ -9,6 +9,8 @@ import open from '../__fixtures__/open.json';
 import openAnonymous from '../__fixtures__/open-anonymous.json';
 import openVoted from '../__fixtures__/open-voted.json';
 import closed from '../__fixtures__/closed.json';
+import openClosing from '../__fixtures__/open-closing.json';
+import openExpired from '../__fixtures__/open-expired.json';
 
 function entry(data: unknown) {
   return {
@@ -91,6 +93,16 @@ describe('usePoll', () => {
 
   it('does not offer a vote in a closed poll', () => {
     const { result } = setup('/a-poll', closed);
+    expect(result.current.canVoteNow).toBe(false);
+  });
+
+  it('offers a vote until the closing date', () => {
+    const { result } = setup('/a-poll', openClosing);
+    expect(result.current.canVoteNow).toBe(true);
+  });
+
+  it('does not offer a vote past the closing date', () => {
+    const { result } = setup('/a-poll', openExpired);
     expect(result.current.canVoteNow).toBe(false);
   });
 
