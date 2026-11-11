@@ -248,12 +248,12 @@ acceptance-images-build: ## Build Acceptance frontend/backend images
 .PHONY: acceptance-frontend-container-start
 acceptance-frontend-container-start:
 	@echo "Start acceptance frontend"
-	@docker run --rm -p 3000:3000 --name $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend-acceptance --link $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend-acceptance:backend -e RAZZLE_API_PATH=http://localhost:55001/plone -e RAZZLE_INTERNAL_API_PATH=http://backend:55001/plone -d $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend:acceptance
+	@docker run --rm -p 3000:3000 --name $(PROJECT_NAME)-frontend-acceptance --link $(PROJECT_NAME)-backend-acceptance:backend -e RAZZLE_API_PATH=http://localhost:55001/plone -e RAZZLE_INTERNAL_API_PATH=http://backend:55001/plone -d $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend:acceptance
 
 .PHONY: acceptance-backend-container-start
 acceptance-backend-container-start:
 	@echo "Start acceptance backend"
-	@docker run --rm -p 55001:55001 --name $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend-acceptance -d $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend:acceptance
+	@docker run --rm -p 55001:55001 --name $(PROJECT_NAME)-backend-acceptance -d $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend:acceptance
 
 .PHONY: acceptance-containers-start
 acceptance-containers-start: ## Start Acceptance containers
@@ -263,8 +263,8 @@ acceptance-containers-start: ## Start Acceptance containers
 .PHONY: acceptance-containers-stop
 acceptance-containers-stop: ## Stop Acceptance containers
 	@echo "Stop acceptance containers"
-	@docker stop $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)frontend-acceptance
-	@docker stop $(IMAGE_NAME_PREFIX_WITH_SEPARATOR)backend-acceptance
+	@docker stop $(PROJECT_NAME)-frontend-acceptance
+	@docker stop $(PROJECT_NAME)-backend-acceptance
 
 .PHONY: ci-acceptance-test
 ci-acceptance-test:
