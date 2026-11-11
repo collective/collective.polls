@@ -8,6 +8,19 @@
 
 <!-- towncrier release notes start -->
 
+## 3.0.0-alpha.3 (2026-11-11)
+
+
+### Internal
+
+- Ported the acceptance tests from Cypress to Playwright. @ericof [#147](https://github.com/collective/collective.polls/issues/147)
+- Upgraded the development Volto from 19.4.1 to 19.7.0. @ericof 
+
+
+### Documentation
+
+- Documented the poll block for the `@blocks-schema` endpoint, and read the block's sidebar schema from its block configuration. @ericof [#146](https://github.com/collective/collective.polls/issues/146)
+
 ## 3.0.0-alpha.2 (2026-10-23)
 
 

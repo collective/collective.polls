@@ -5,7 +5,7 @@ from zope.i18nmessageid import MessageFactory
 import logging
 
 
-__version__ = "3.0.0a2"
+__version__ = "3.0.0a3"
 
 PACKAGE_NAME = "collective.polls"
 
