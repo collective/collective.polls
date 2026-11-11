@@ -6,7 +6,7 @@
     "email": "frapell@ravvit.net",
     "use_prerelease_versions": false,
     "plone_version": "6.2.2",
-    "volto_version": "19.4.1",
+    "volto_version": "19.7.0",
     "python_package_name": "collective.polls",
     "npm_package_name": "@plone-collective/volto-polls",
     "github_organization": "collective",

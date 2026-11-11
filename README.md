@@ -67,7 +67,7 @@ uv add collective.polls
 
 ### Frontend
 
-Add `@plone-collective/volto-polls` to your Volto project.
+Add `@plone-collective/volto-polls` to your Volto project. It needs Volto 19.6.0 or later: that release adds the `@blocks-schema` endpoint, which reads the block documentation shipped with the poll block. On an older Volto that documentation is simply ignored.
 
 ```shell
 pnpm add @plone-collective/volto-polls
@@ -201,6 +201,15 @@ make lint
 | frontend | Stylelint | Check Styles (css, less, sass) formatting  | [`frontend/.stylelintrc`](./frontend/.stylelintrc) |
 
 Linters can be run individually within the `backend` or `frontend` folders.
+
+### Acceptance tests
+
+The acceptance tests in `frontend/acceptance` run with [Playwright](https://playwright.dev/) against the acceptance backend and a running Volto frontend. Install the browser once, then run the tests in the interactive UI, or headless as CI does.
+
+```shell
+make -C frontend install-acceptance
+make acceptance-test
+```
 
 ## Internationalization 🌐
 
