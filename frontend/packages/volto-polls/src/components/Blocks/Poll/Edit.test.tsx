@@ -13,10 +13,13 @@ vi.mock('@plone/volto/components/manage/Sidebar/SidebarPortal', () => ({
   }) => (selected ? <div data-testid="sidebar">{children}</div> : null),
 }));
 
+const formProps = vi.hoisted(() => ({ seen: {} as Record<string, unknown> }));
+
 vi.mock('./Data', () => ({
-  default: ({ block }: { block: string }) => (
-    <div data-testid="data-form" data-block={block} />
-  ),
+  default: (props: { block: string; [key: string]: unknown }) => {
+    formProps.seen = props;
+    return <div data-testid="data-form" data-block={props.block} />;
+  },
 }));
 
 vi.mock('./View', () => ({
@@ -46,5 +49,26 @@ describe('PollBlockEdit', () => {
     expect(renderEdit(false).queryByTestId('sidebar')).toBeNull();
     const { getByTestId } = renderEdit(true);
     expect(getByTestId('data-form').getAttribute('data-block')).toBe('b1');
+  });
+
+  it('hands the sidebar form the props Volto gives the block', () => {
+    const blocksErrors = { b1: {} };
+    const blocksConfig = { poll: {} };
+    render(
+      <PollBlockEdit
+        data={{ '@type': 'poll' }}
+        block="b1"
+        selected
+        onChangeBlock={vi.fn()}
+        blocksConfig={blocksConfig}
+        blocksErrors={blocksErrors}
+        contentType="Document"
+        navRoot={{ '@id': '/site' }}
+      />,
+    );
+    expect(formProps.seen.blocksConfig).toBe(blocksConfig);
+    expect(formProps.seen.blocksErrors).toBe(blocksErrors);
+    expect(formProps.seen.contentType).toBe('Document');
+    expect(formProps.seen.navRoot).toEqual({ '@id': '/site' });
   });
 });

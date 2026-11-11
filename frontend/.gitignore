@@ -2,7 +2,8 @@
 .settings/
 .vscode
 *~
-acceptance/cypress/videos/
+/playwright-report
+/test-results
 acceptance/node_modules
 .storybook-build
 build

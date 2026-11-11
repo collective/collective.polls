@@ -20,6 +20,8 @@
     "build:deps": "pnpm --filter @plone/registry --filter @plone/components build",
     "i18n": "pnpm --filter @plone-collective/volto-polls i18n && VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto i18n",
     "test": "pnpm --filter @plone-collective/volto-polls exec vitest --passWithNoTests",
+    "test:acceptance": "playwright test",
+    "test:acceptance:ui": "playwright test --ui",
     "lint": "VOLTOCONFIG=$(pwd)/volto.config.js eslint --max-warnings=0 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "VOLTOCONFIG=$(pwd)/volto.config.js eslint --fix 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
     "prettier": "prettier --check 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
@@ -44,15 +46,16 @@
   "pnpm": {
     "overrides": {
       "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
-      "react-refresh": "^0.14.2"
+      "react-refresh": "^0.14.2",
+      "webpack": "catalog:"
     },
     "ignoredBuiltDependencies": [
-      "@parcel/watcher"
+      "@parcel/watcher",
+      "cypress"
     ],
     "onlyBuiltDependencies": [
       "core-js",
       "core-js-pure",
-      "cypress",
       "es5-ext",
       "esbuild",
       "lightningcss-cli",

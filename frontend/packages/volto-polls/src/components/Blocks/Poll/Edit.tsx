@@ -1,33 +1,28 @@
 import React from 'react';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
-import PollBlockDataForm from './Data';
+import PollBlockDataForm, { type PollBlockDataProps } from './Data';
 import PollBlockView from './View';
-import type { PollBlockData } from '../../../types/poll';
 
-export interface PollBlockEditProps {
-  data: PollBlockData;
-  block: string;
+export interface PollBlockEditProps extends PollBlockDataProps {
   selected: boolean;
-  onChangeBlock: (id: string, data: PollBlockData) => void;
 }
 
-/** The poll block in the editor: the poll, without voting, and its settings. */
-export const PollBlockEdit = ({
-  data,
-  block,
-  selected,
-  onChangeBlock,
-}: PollBlockEditProps) => (
-  <>
-    <PollBlockView data={data} isEditMode />
-    <SidebarPortal selected={selected}>
-      <PollBlockDataForm
-        data={data}
-        block={block}
-        onChangeBlock={onChangeBlock}
-      />
-    </SidebarPortal>
-  </>
-);
+/**
+ * The poll block in the editor: the poll, without voting, and its settings.
+ *
+ * Every prop Volto gives the block reaches its sidebar form, as core does
+ * with its own forms.
+ */
+export const PollBlockEdit = (props: PollBlockEditProps) => {
+  const { data, selected } = props;
+  return (
+    <>
+      <PollBlockView data={data} isEditMode />
+      <SidebarPortal selected={selected}>
+        <PollBlockDataForm {...props} />
+      </SidebarPortal>
+    </>
+  );
+};
 
 export default PollBlockEdit;

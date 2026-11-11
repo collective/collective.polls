@@ -13,6 +13,7 @@ on:
       - "*.md"
       - "*.toml"
       - "docker-compose*"
+      - "Makefile"
 
   workflow_dispatch:
 
@@ -65,6 +66,15 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+  acceptance:
+    name: "Acceptance tests"
+    uses: ./.github/workflows/acceptance.yml
+    needs:
+        - config
+    with:
+        node-version: ${{ needs.config.outputs.node-version }}
+    if: ${{ needs.config.outputs.frontend == 'true' }}
 
   storybook:
     name: "Storybook"
